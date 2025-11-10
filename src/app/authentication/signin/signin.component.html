@@ -1,54 +1,220 @@
-<main class="login-wrapper">
-  <div class="background-image" [style.backgroundImage]="'url(' + backgroundImages[currentImageIndex] + ')'"
-    [@backgroundFade]="'visible'">
-  </div>
+<div class="signin-container">
+  <!-- Background blur effects -->
+  <div class="blur-effect blur-effect-1"></div>
+  <div class="blur-effect blur-effect-2"></div>
 
-  <div class="login-card">
-    <img src="assets/images/logo-yellow.png" alt="exitojuntos" class="signin-logo mb-3">
-    <form class="validate-form" [formGroup]="authLogin" (ngSubmit)="loginSubmitted()">
-      <div class="login-input-group">
+  <!-- Stars background -->
+  <div class="stars-background"></div>
 
-        <input id="email" type="email" formControlName="email" placeholder="{{username}}" required="required" />
-        <i class="bi bi-person"></i>
-        <div class="form-text text-danger fw-bold" *ngIf="Email.errors?.['email'] && (Email.dirty || Email.touched)">
-          {{ userNameErrorMessage }}
+  <div class="signin-content">
+    <!-- Left section - Branding -->
+    <div class="left-section">
+      <div class="branding-content">
+        <h1 class="brand-title">ÉXITO JUNTOS</h1>
+        <div class="brand-underline"></div>
+        <p class="brand-subtitle">Unidos en el camino al éxito</p>
+
+        <div class="features-list">
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="#FFB800" stroke-width="2" />
+                <path d="M8 12L11 15L16 9" stroke="#FFB800" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="feature-text">
+              <h3>Trading Profesional</h3>
+              <p>Herramientas avanzadas para traders experimentados</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="#FFB800" stroke-width="2" />
+                <path d="M8 12L11 15L16 9" stroke="#FFB800" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="feature-text">
+              <h3>Análisis en Tiempo Real</h3>
+              <p>Datos actualizados al instante para tomar mejores decisiones</p>
+            </div>
+          </div>
+
+          <div class="feature-item">
+            <div class="feature-icon">
+              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="12" cy="12" r="10" stroke="#FFB800" stroke-width="2" />
+                <path d="M8 12L11 15L16 9" stroke="#FFB800" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="feature-text">
+              <h3>Seguridad Garantizada</h3>
+              <p>Tu información y capital protegidos con los más altos estándares</p>
+            </div>
+          </div>
         </div>
-        <div class="form-text text-danger fw-bold" *ngIf="Email.errors?.['required'] && (Email.dirty || Email.touched)">
-          {{ userNameIsRequerid }}
+
+        <div class="footer-branding">
+          <span class="footer-text">ÉXITO JUNTOS</span>
+          <div class="footer-icon">
+            <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="4" y="4" width="24" height="24" rx="4" stroke="#FFB800" stroke-width="2" />
+              <path d="M12 16L15 19L20 13" stroke="#FFB800" stroke-width="2" stroke-linecap="round"
+                stroke-linejoin="round" />
+            </svg>
+          </div>
         </div>
       </div>
-      <div class="login-input-group">
-        <input [type]="showPassword ? 'text' : 'password'" id="pwd" formControlName="pwd" placeholder="{{ password }}"
-          required="required" />
-        <i class="bi bi-key"></i>
+    </div>
 
-        <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
-          <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
-        </button>
-
-        <div class="form-text text-danger fw-bold"
-          *ngIf="Pwd.errors?.['minlength'] || Pwd.errors?.['maxlength'] && (Pwd.dirty || Pwd.touched)">
-          {{ passwordErrorMessage }}
+    <!-- Right section - Login Form -->
+    <div class="right-section">
+      <div class="login-card">
+        <!-- Logo Icon -->
+        <div class="login-logo">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="32" r="30" fill="#FFB800" />
+            <path
+              d="M32 16C23.163 16 16 23.163 16 32C16 40.837 23.163 48 32 48C40.837 48 48 40.837 48 32C48 23.163 40.837 16 32 16ZM28 36L22 30L24.41 27.59L28 31.17L39.59 19.58L42 22L28 36Z"
+              fill="white" />
+          </svg>
         </div>
-        <div class="form-text text-danger fw-bold" *ngIf="Pwd.errors?.['required'] && (Pwd.dirty || Pwd.touched)">
-          {{ passwordIsRequerid }}
-        </div>
-      </div>
 
-      <div class="container-login-button">
-        <button class="login-button" type="submit" [disabled]="loading">
-          <output *ngIf="loading" class="spinner-border spinner-border-sm">
-            <span class="sr-only">Loading...</span>
-          </output>
-          {{ signin }}
-        </button>
+        <h2 class="login-title">Iniciar Sesión</h2>
+        <p class="login-subtitle">Accede a tu cuenta de trading</p>
+
+        <form [formGroup]="authLogin" (ngSubmit)="loginSubmitted()" class="login-form">
+          <!-- Email Field -->
+          <div class="form-group">
+            <label class="form-label" for="email-input">Correo Electrónico</label>
+            <div class="input-wrapper">
+              <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M3 4H17C17.55 4 18 4.45 18 5V15C18 15.55 17.55 16 17 16H3C2.45 16 2 15.55 2 15V5C2 4.45 2.45 4 3 4Z"
+                  stroke="#999" stroke-width="1.5" />
+                <path d="M18 5L10 11L2 5" stroke="#999" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+              <input type="email" id="email-input" formControlName="email" class="form-input" placeholder="tu@email.com"
+                [class.error]="submitted && f['email'].errors" />
+            </div>
+            <div *ngIf="submitted && f['email'].errors" class="error-message">
+              <span *ngIf="f['email'].errors['required']">{{ userNameIsRequerid }}</span>
+            </div>
+          </div>
+
+          <!-- Password Field -->
+          <div class="form-group">
+            <label class="form-label" for="password-input">Contraseña</label>
+            <div class="input-wrapper">
+              <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <rect x="4" y="9" width="12" height="8" rx="1" stroke="#999" stroke-width="1.5" />
+                <path d="M7 9V6C7 4.34315 8.34315 3 10 3C11.6569 3 13 4.34315 13 6V9" stroke="#999"
+                  stroke-width="1.5" />
+              </svg>
+              <input [type]="showPassword ? 'text' : 'password'" id="password-input" formControlName="pwd"
+                class="form-input" placeholder="********" [class.error]="submitted && f['pwd'].errors" />
+              <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+                <svg *ngIf="!showPassword" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M10 7C8.34 7 7 8.34 7 10C7 11.66 8.34 13 10 13C11.66 13 13 11.66 13 10C13 8.34 11.66 7 10 7ZM10 11.5C9.17 11.5 8.5 10.83 8.5 10C8.5 9.17 9.17 8.5 10 8.5C10.83 8.5 11.5 9.17 11.5 10C11.5 10.83 10.83 11.5 10 11.5Z"
+                    fill="#999" />
+                  <path
+                    d="M10 4C5 4 1.73 7.11 1 10C1.73 12.89 5 16 10 16C15 16 18.27 12.89 19 10C18.27 7.11 15 4 10 4ZM10 14.5C6.24 14.5 3.32 12.01 2.5 10C3.32 7.99 6.24 5.5 10 5.5C13.76 5.5 16.68 7.99 17.5 10C16.68 12.01 13.76 14.5 10 14.5Z"
+                    fill="#999" />
+                </svg>
+                <svg *ngIf="showPassword" width="20" height="20" viewBox="0 0 20 20" fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path d="M10 7C8.34 7 7 8.34 7 10C7 11.66 8.34 13 10 13C11.66 13 13 11.66 13 10C13 8.34 11.66 7 10 7Z"
+                    fill="#999" />
+                  <path
+                    d="M10 4C5 4 1.73 7.11 1 10C1.73 12.89 5 16 10 16C15 16 18.27 12.89 19 10C18.27 7.11 15 4 10 4ZM10 14.5C6.24 14.5 3.32 12.01 2.5 10C3.32 7.99 6.24 5.5 10 5.5C13.76 5.5 16.68 7.99 17.5 10C16.68 12.01 13.76 14.5 10 14.5Z"
+                    fill="#999" />
+                  <line x1="3" y1="3" x2="17" y2="17" stroke="#999" stroke-width="1.5" />
+                </svg>
+              </button>
+            </div>
+            <div *ngIf="submitted && f['pwd'].errors" class="error-message">
+              <span *ngIf="f['pwd'].errors['required']">{{ passwordIsRequerid }}</span>
+              <span *ngIf="f['pwd'].errors['minlength'] || f['pwd'].errors['maxlength']">{{ passwordErrorMessage
+                }}</span>
+            </div>
+          </div>
+
+          <!-- Remember me & Forgot password -->
+          <div class="form-options">
+            <label class="checkbox-label">
+              <input type="checkbox" formControlName="remeber" class="checkbox-input">
+              <span class="checkbox-text">Recordarme</span>
+            </label>
+            <a [routerLink]="['/authentication/forgot']" class="forgot-link">¿Olvidaste tu contraseña?</a>
+          </div>
+
+          <!-- Login Button -->
+          <button type="submit" class="login-button" [disabled]="loading">
+            <span *ngIf="!loading">Iniciar Sesión</span>
+            <span *ngIf="loading" class="loading-spinner">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="10" cy="10" r="8" stroke="white" stroke-width="2" stroke-opacity="0.3" />
+                <path d="M10 2C10 2 10 2 10 2C14.4183 2 18 5.58172 18 10" stroke="white" stroke-width="2"
+                  stroke-linecap="round" />
+              </svg>
+            </span>
+          </button>
+
+          <!-- Divider -->
+          <div class="divider">
+            <span>O continúa con</span>
+          </div>
+
+          <!-- Social Login Buttons -->
+          <div class="social-buttons">
+            <button type="button" class="social-button google-button">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M18.1713 8.36788H17.5V8.33329H10V11.6666H14.7096C14.0225 13.6071 12.1763 15 10 15C7.23875 15 5 12.7612 5 9.99996C5 7.23871 7.23875 4.99996 10 4.99996C11.2746 4.99996 12.4342 5.48079 13.3171 6.26621L15.6742 3.90913C14.1858 2.52204 12.195 1.66663 10 1.66663C5.39791 1.66663 1.66666 5.39788 1.66666 9.99996C1.66666 14.602 5.39791 18.3333 10 18.3333C14.6021 18.3333 18.3333 14.602 18.3333 9.99996C18.3333 9.44121 18.2758 8.89579 18.1713 8.36788Z"
+                  fill="#FFC107" />
+                <path
+                  d="M2.62749 6.12121L5.36541 8.12913C6.10624 6.29496 7.90041 4.99996 9.99999 4.99996C11.2746 4.99996 12.4342 5.48079 13.3171 6.26621L15.6742 3.90913C14.1858 2.52204 12.195 1.66663 9.99999 1.66663C6.79916 1.66663 4.02374 3.47371 2.62749 6.12121Z"
+                  fill="#FF3D00" />
+                <path
+                  d="M10 18.3333C12.1525 18.3333 14.1084 17.5095 15.5871 16.17L13.0079 13.9875C12.1431 14.6452 11.0864 15.0008 10 15C7.83255 15 5.99214 13.6179 5.29922 11.6891L2.58172 13.783C3.9603 16.4816 6.76089 18.3333 10 18.3333Z"
+                  fill="#4CAF50" />
+                <path
+                  d="M18.1713 8.36796H17.5V8.33337H10V11.6667H14.7096C14.3809 12.5902 13.7889 13.3972 13.0067 13.9879L13.0079 13.9871L15.5871 16.1696C15.4046 16.3355 18.3333 14.1667 18.3333 10C18.3333 9.44129 18.2758 8.89587 18.1713 8.36796Z"
+                  fill="#1976D2" />
+              </svg>
+              <span>Google</span>
+            </button>
+            <button type="button" class="social-button github-button">
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path fill-rule="evenodd" clip-rule="evenodd"
+                  d="M10 0C4.475 0 0 4.475 0 10C0 14.425 2.8625 18.1625 6.8375 19.4875C7.3375 19.575 7.525 19.275 7.525 19.0125C7.525 18.775 7.5125 17.9875 7.5125 17.15C5 17.6125 4.35 16.5375 4.15 15.975C4.0375 15.6875 3.55 14.8 3.125 14.5625C2.775 14.375 2.275 13.9125 3.1125 13.9C3.9 13.8875 4.4625 14.625 4.65 14.925C5.55 16.4375 6.9875 16.0125 7.5625 15.75C7.65 15.1 7.9125 14.6625 8.2 14.4125C5.975 14.1625 3.65 13.3 3.65 9.475C3.65 8.3875 4.0375 7.4875 4.675 6.7875C4.575 6.5375 4.225 5.5125 4.775 4.1375C4.775 4.1375 5.6125 3.875 7.525 5.1625C8.325 4.9375 9.175 4.825 10.025 4.825C10.875 4.825 11.725 4.9375 12.525 5.1625C14.4375 3.8625 15.275 4.1375 15.275 4.1375C15.825 5.5125 15.475 6.5375 15.375 6.7875C16.0125 7.4875 16.4 8.375 16.4 9.475C16.4 13.3125 14.0625 14.1625 11.8375 14.4125C12.2 14.725 12.5125 15.325 12.5125 16.2625C12.5125 17.6 12.5 18.675 12.5 19.0125C12.5 19.275 12.6875 19.5875 13.1875 19.4875C17.1375 18.1625 20 14.4125 20 10C20 4.475 15.525 0 10 0Z"
+                  fill="white" />
+              </svg>
+              <span>GitHub</span>
+            </button>
+          </div>
+
+          <!-- Sign up link -->
+          <div class="signup-link">
+            <span>¿No tienes una cuenta?</span>
+            <a [routerLink]="['/authentication/signup']" class="register-link">Regístrate aquí</a>
+          </div>
+        </form>
       </div>
-      <div *ngIf="error !== ''" class="alert alert-danger">
-        {{ error }}
-      </div>
-    </form>
-    <div class="forgot-password">
-      <p>Cambiar <a routerLink="/forgot">Contraseña</a></p>
     </div>
   </div>
-</main>
+
+  <!-- Footer -->
+  <div class="page-footer">
+    <p>© 2025 Trading Platform. Todos los derechos reservados.</p>
+  </div>
+</div>

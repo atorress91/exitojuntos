@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -11,14 +11,6 @@ import { TranslateService, TranslateModule } from '@ngx-translate/core';
 import { ToastrService } from 'ngx-toastr';
 import { AuthService } from 'src/app/core/service/authentication-service/auth.service';
 import { CommonModule } from '@angular/common';
-
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger,
-} from '@angular/animations';
 import { Signin } from '@app/core/models/signin-model/signin.model';
 import { LogoService } from '@app/core/service/logo-service/logo.service';
 import { DeviceDetectorService } from 'ngx-device-detector';
@@ -27,28 +19,10 @@ import { DeviceDetectorService } from 'ngx-device-detector';
   selector: 'app-signin',
   templateUrl: './signin.component.html',
   styleUrls: ['./signin.component.scss'],
-  animations: [
-    trigger('backgroundFade', [
-      state(
-        'visible',
-        style({
-          opacity: 1,
-        }),
-      ),
-      state(
-        'hidden',
-        style({
-          opacity: 0,
-        }),
-      ),
-      transition('visible => hidden', animate('1000ms ease-out')),
-      transition('hidden => visible', animate('1000ms ease-in')),
-    ]),
-  ],
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule],
 })
-export class SigninComponent implements OnInit, OnDestroy {
+export class SigninComponent implements OnInit {
   submitted = false;
   error = '';
   loading = false;
@@ -64,13 +38,6 @@ export class SigninComponent implements OnInit, OnDestroy {
   passwordErrorMessage =
     'La contraseña debe tener al menos 6 y un máximo de 15 caracteres';
   userNameErrorMessage = 'El nombre de usuario no es válido';
-  backgroundImages: string[] = [
-    '/assets/images/login-option-1.png',
-    '/assets/images/login-option-2.png',
-    '/assets/images/login-option-3.png',
-  ];
-  currentImageIndex = 0;
-  private intervalId: any;
   showPassword: boolean = false;
 
   constructor(
@@ -97,13 +64,6 @@ export class SigninComponent implements OnInit, OnDestroy {
     this.getTheme();
     this.setLabels();
     this.setErrorMessages();
-    this.startBackgroundRotation();
-  }
-
-  ngOnDestroy() {
-    if (this.intervalId) {
-      clearInterval(this.intervalId);
-    }
   }
 
   authLogin = new FormGroup({
@@ -199,13 +159,6 @@ export class SigninComponent implements OnInit, OnDestroy {
 
   getTheme() {
     this.logoUrl = this.logoService.getLogoSrc();
-  }
-
-  private startBackgroundRotation() {
-    this.intervalId = setInterval(() => {
-      this.currentImageIndex =
-        (this.currentImageIndex + 1) % this.backgroundImages.length;
-    }, 10000);
   }
 
   togglePasswordVisibility(): void {
