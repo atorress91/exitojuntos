@@ -1,0 +1,233 @@
+<ng-template #balanceInformationModal let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title">Información de balances {{userName}}</h4>
+    <button type="button" class="close" aria-label="Cerrar" (click)="modal.dismiss('Cross click')">
+      <span aria-hidden="true">&times;</span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="card">
+      <div class="row">
+        <div class="col-12 col-md-12 col-lg-12">
+          <div class="padding-20">
+            <ul ngbNav #nav="ngbNav" class="nav-tabs">
+              <li [ngbNavItem]="1">
+                <a ngbNavLink>Información Modelo (1A)</a>
+                <ng-template ngbNavContent>
+                  <div class="tab-pane">
+                    <div class="card-body">
+                      <div class="row mt-2">
+                        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                          <div class="card">
+                            <div class="card-header">
+                              <h4>Información Modelo (1A)</h4>
+                            </div>
+                            <div class="card-body">
+                              <div id="chart1">
+                                <apx-chart [series]="pieChartOptionsModel1A.series"
+                                  [chart]="pieChartOptionsModel1A.chart" [labels]="pieChartOptionsModel1A.labels"
+                                  [responsive]="pieChartOptionsModel1A.responsive"
+                                  [dataLabels]="pieChartOptionsModel1A.dataLabels"
+                                  [legend]="pieChartOptionsModel1A.legend" [colors]="pieChartOptionsModel1A.colors"
+                                  class="apex-pie-center">
+                                </apx-chart>
+                              </div>
+                              <div class="table m-t-5">
+                                <table class="table align-items-center table-row-border">
+                                  <tbody>
+                                    <tr>
+                                      <td class="col-red">
+                                        <i class="fa fa-circle col-red msr-2"></i> Por Cobrar
+                                      </td>
+                                      <td class="col-red">USD 0</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="col-blue">
+                                        <i class="fa fa-circle col-blue msr-2 "></i>Saldo de servicios
+                                      </td>
+                                      <td class="col-blue">USD {{balanceInformationModel1A.availableBalance |
+                                        truncateDecimals:2}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="col-emerald">
+                                        <i class="fa fa-circle col-emerald msr-2"></i>Total Pagado
+                                      </td>
+                                      <td class="col-emerald">USD {{balanceInformationModel1A.totalCommissionsPaid |
+                                        truncateDecimals:2}}
+                                      </td>
+                                    </tr>
+                                    <tr>
+                                      <td class="col-green">
+                                        <i class="fa fa-circle col-green msr-2 col-green"></i>Total
+                                        Adquisiciones
+                                      </td>
+                                      <td class="col-green">USD {{balanceInformationModel1A.totalAcquisitions |
+                                        truncateDecimals:2}}</td>
+                                    </tr>
+                                    <tr>
+                                      <td class="col-purple">
+                                        <i class="fa fa-circle col-purple msr-2 col-purple"></i>Saldo balance
+
+                                      </td>
+                                      <td class="col-purple">USD {{balanceInformationModel1A.reverseBalance |
+                                        truncateDecimals:2}}</td>
+                                    </tr>
+                                  </tbody>
+                                </table>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </li>
+              <li [ngbNavItem]="2">
+                <a ngbNavLink> Información Modelo (1B)</a>
+                <ng-template ngbNavContent>
+                  <div class="card-body">
+                    <div class="row mt-2">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4>Información Modelo (1B)</h4>
+                          </div>
+                          <div class="card-body">
+                            <div id="chart1">
+                              <apx-chart [series]="pieChartOptionsModel1B.series" [chart]="pieChartOptionsModel1B.chart"
+                                [labels]="pieChartOptionsModel1B.labels"
+                                [responsive]="pieChartOptionsModel1B.responsive"
+                                [dataLabels]="pieChartOptionsModel1B.dataLabels"
+                                [legend]="pieChartOptionsModel1B.legend" [colors]="pieChartOptionsModel1B.colors"
+                                class="apex-pie-center">
+                              </apx-chart>
+                            </div>
+                            <div class="table m-t-5">
+                              <table class="table align-items-center table-row-border">
+                                <tbody>
+                                  <tr>
+                                    <td class="col-red">
+                                      <i class="fa fa-circle col-red msr-2"></i> Por Cobrar
+                                    </td>
+                                    <td class="col-red">USD 0</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="col-blue">
+                                      <i class="fa fa-circle col-blue msr-2 "></i>Saldo de servicios
+                                    </td>
+                                    <td class="col-blue">USD {{balanceInformationModel1B.availableBalance |
+                                      truncateDecimals:2}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="col-emerald">
+                                      <i class="fa fa-circle col-emerald msr-2"></i>Total Pagado
+                                    </td>
+                                    <td class="col-emerald">USD {{balanceInformationModel1B.totalCommissionsPaid |
+                                      truncateDecimals:2}}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="col-green">
+                                      <i class="fa fa-circle col-green msr-2 col-green"></i>Total
+                                      Adquisiciones
+                                    </td>
+                                    <td class="col-green">USD {{balanceInformationModel1B.totalAcquisitions |
+                                      truncateDecimals:2}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="col-purple">
+                                      <i class="fa fa-circle col-purple msr-2 col-purple"></i>Saldo balance
+
+                                    </td>
+                                    <td class="col-purple">USD {{balanceInformationModel1B.reverseBalance |
+                                      truncateDecimals:2}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </li>
+              <li [ngbNavItem]="3">
+                <a ngbNavLink> Información Modelo (2)</a>
+                <ng-template ngbNavContent>
+                  <div class="card-body">
+                    <div class="row mt-2">
+                      <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                        <div class="card">
+                          <div class="card-header">
+                            <h4>{{ 'HOME-PAGE-CLIENT.INFORMATION.TEXT' | translate }} Modelo 2</h4>
+                          </div>
+                          <div class="card-body">
+                            <div id="chart1">
+                              <apx-chart [series]="pieChartOptions.series" [chart]="pieChartOptions.chart"
+                                [labels]="pieChartOptions.labels" [responsive]="pieChartOptions.responsive"
+                                [dataLabels]="pieChartOptions.dataLabels" [legend]="pieChartOptions.legend"
+                                [colors]="pieChartOptions.colors" class="apex-pie-center">
+                              </apx-chart>
+                            </div>
+                            <div class="table m-t-5">
+                              <table class="table align-items-center table-row-border">
+                                <tbody>
+                                  <tr>
+                                    <td class="col-red">
+                                      <i class="fa fa-circle col-red msr-2"></i> Por Cobrar
+                                    </td>
+                                    <td class="col-red">USD {{withdrawalBalance ?? 0}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="col-blue">
+                                      <i class="fa fa-circle col-blue msr-2 "></i>Saldo
+                                      Disponible
+                                    </td>
+                                    <td class="col-blue">USD {{ balanceInformation.availableBalance ?? 0 |
+                                      truncateDecimals:2 }}</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="col-emerald">
+                                      <i class="fa fa-circle col-emerald msr-2"></i>Total Pagado
+                                    </td>
+                                    <td class="col-emerald">USD {{balanceInformation.totalCommissionsPaid ?? 0 |
+                                      truncateDecimals:2}}
+                                    </td>
+                                  </tr>
+                                  <tr>
+                                    <td class="col-green">
+                                      <i class="fa fa-circle col-green msr-2 col-green"></i>Total
+                                      Adquisiciones
+                                    </td>
+                                    <td class="col-green">USD {{balanceInformation.totalAcquisitions ?? 0}}</td>
+                                  </tr>
+                                  <tr>
+                                    <td class="col-purple">
+                                      <i class="fa fa-circle col-purple msr-2 col-purple"></i>Saldo balance
+
+                                    </td>
+                                    <td class="col-purple">USD {{balanceInformation.reverseBalance ?? 0}}</td>
+                                  </tr>
+                                </tbody>
+                              </table>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </ng-template>
+              </li>
+            </ul>
+            <div [ngbNavOutlet]="nav" class="mt-2"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-secondary" (click)="modal.close('Close click')">Cerrar</button>
+  </div>
+</ng-template>

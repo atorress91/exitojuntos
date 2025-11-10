@@ -1,0 +1,32 @@
+[
+  {
+    "id": 0,
+    "affiliate": "Beatriz Vasquez",
+    "order": "20221101013021DX",
+    "paidMethod": "COINPAYMENTS",
+    "date": "2022-10-31 20:30:21",
+    "state": "No atendida",
+    "bank": "COINPAYMENTS",
+    "status":"No aprobada"
+  },
+  {
+    "id": 1,
+    "affiliate": "Marjorie Villalobos",
+    "order": "20221101004509CH",
+    "paidMethod": "COINPAYMENTS",
+    "date": "2022-10-31 20:00:10",
+    "state": "Atendida",
+    "bank": "COINPAYMENTS",
+    "status":"Aprobada"
+  },
+  {
+    "id": 2,
+    "affiliate": "Dolores Gil Mico",
+    "order": "20221031191144YC",
+    "paidMethod": "COINPAYMENTS",
+    "date": "2022-10-31 20:00:10",
+    "state": "Atendida",
+    "bank": "COINPAYMENTS",
+    "status":"Aprobada"
+  }
+]

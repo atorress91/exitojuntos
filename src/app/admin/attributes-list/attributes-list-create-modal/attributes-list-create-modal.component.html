@@ -1,0 +1,81 @@
+<!-- Modal Create -->
+<ng-template #attributesCreateModal let-modal>
+  <div class="modal-header createRowModal">
+    <h4 class="modal-title" id="modal-basic-title">
+      <div class="table-modal-header">
+        <div class="modal-about">
+          <div class="fw-bold p-t-10 font-17">Crear Atributo</div>
+        </div>
+      </div>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true"><i class="material-icons">close</i></span>
+    </button>
+  </div>
+  <form class="register-form" [formGroup]="createAttributeForm" [autocomplete]="off" (ngSubmit)="onAddRowSave()">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="name">
+            Nombre de Atributo
+            <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" formControlName="name" id="name" placeholder="Nombre"
+            required="required" [ngClass]="{
+              'is-invalid': submitted && create_attribute_controls.name.errors
+            }" />
+          <div *ngIf="submitted && create_attribute_controls.name.errors" class="invalid-feedback">
+            <div *ngIf="create_attribute_controls.name.errors.required">
+              El nombre es requerido.
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="description">
+            Descripción
+            <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" formControlName="description" id="description"
+            placeholder="Descripción" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label>Tipo de Atributo</label>
+          <select id="attribute_type" class="form-select form-control" formControlName="attribute_type"
+            required="required" [ngClass]="{
+              'is-invalid':
+                submitted && create_attribute_controls.attribute_type.errors
+            }">
+            <option value="">Seleccione una opción</option>
+            <option value="{{item.id}}" *ngFor="let item of attributesType">{{item.name}}</option>
+          </select>
+          <div *ngIf="submitted && create_attribute_controls.attribute_type.errors" class="invalid-feedback">
+            <div *ngIf="create_attribute_controls.attribute_type.errors.required">
+              El tipo es requerido.
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="position">
+            Posición
+            <span class="text-danger">*</span></label>
+          <input type="number" min="0" class="form-control" formControlName="position" required="required" id="position"
+            placeholder="0" [ngClass]="{
+              'is-invalid':
+                submitted && create_attribute_controls.position.errors
+            }" />
+          <div *ngIf="submitted && create_attribute_controls.position.errors" class="invalid-feedback">
+            <div *ngIf="create_attribute_controls.position.errors.required">
+              La posición es requerida.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Guardar</button>
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</ng-template>

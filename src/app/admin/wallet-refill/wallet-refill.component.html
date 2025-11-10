@@ -1,0 +1,134 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">
+        {{ 'ADMIN-ITEMS.VIRTUAL-WALLET.TEXT' | translate }}
+      </h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+    </li>
+    <li class="breadcrumb-item">
+      {{ 'WALLET-REFILL.TITLE.TEXT' | translate }}
+    </li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            {{ 'WALLET-REFILL.SUBTITLE.TEXT' | translate }}
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="table-search-area">
+                      <div>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">
+                              <i-feather name="search" style="color: #96a2b4"></i-feather>
+                            </div>
+                          </div>
+                          <input style="background-color: white" type="text" class="form-control"
+                            id="inlineFormInputGroup" (keyup)="updateFilter($event)" aria-label="Search box"
+                            placeholder="Búsqueda" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col align-self-end">
+                    <ul class="nav justify-content-end">
+                      <li class="nav-item m-2">
+
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1"
+                            value="option1" />
+                          <label class="form-check-label" for="inlineRadio1">Aprobar recarga</label>
+                        </div>
+
+                        <div class="form-check form-check-inline">
+                          <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio2"
+                            value="option2" />
+                          <label class="form-check-label" for="inlineRadio2">Negar recarga</label>
+                        </div>
+
+                      </li>
+                      <li class="nav-item m-2">
+                        <button type="button" class="btn btn-primary" (click)="processOption()">
+                          <i class="bi bi-clipboard-check"></i>
+                          Procesar
+                        </button>
+                      </li>
+                      <li class="nav-item m-2">
+                        <button type="button" class="btn btn-primary" (click)="clipBoardCopy()">
+                          <i class="bi bi-clipboard-check"></i>
+                          Copiar
+                        </button>
+                      </li>
+
+                      <li class="nav-item m-2">
+                        <button type="button" class="btn btn-primary" (click)="onPrint()">
+                          <i class="bi bi-printer"></i>
+                          Imprimir
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator"
+                  columnMode="force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10"
+                  [scrollbarH]="scrollBarHorizontal" [reorderable]="reorderable">
+                  <ngx-datatable-column name="#Orden">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.order }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Afiliado">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.affiliateId }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Crédito">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div class="col-green">
+                        {{ row.credit }}
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Método de pago">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.paymentMethod }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Banco">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                    {{row.bank}}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Soporte">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.support }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Fecha de Transacción">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.depositDate }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Fecha de Solicitud">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.date }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

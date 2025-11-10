@@ -1,0 +1,54 @@
+<main class="login-wrapper">
+  <div class="background-image" [style.backgroundImage]="'url(' + backgroundImages[currentImageIndex] + ')'"
+    [@backgroundFade]="'visible'">
+  </div>
+
+  <div class="login-card">
+    <img src="assets/images/logo-yellow.png" alt="exitojuntos" class="signin-logo mb-3">
+    <form class="validate-form" [formGroup]="authLogin" (ngSubmit)="loginSubmitted()">
+      <div class="login-input-group">
+
+        <input id="email" type="email" formControlName="email" placeholder="{{username}}" required="required" />
+        <i class="bi bi-person"></i>
+        <div class="form-text text-danger fw-bold" *ngIf="Email.errors?.['email'] && (Email.dirty || Email.touched)">
+          {{ userNameErrorMessage }}
+        </div>
+        <div class="form-text text-danger fw-bold" *ngIf="Email.errors?.['required'] && (Email.dirty || Email.touched)">
+          {{ userNameIsRequerid }}
+        </div>
+      </div>
+      <div class="login-input-group">
+        <input [type]="showPassword ? 'text' : 'password'" id="pwd" formControlName="pwd" placeholder="{{ password }}"
+          required="required" />
+        <i class="bi bi-key"></i>
+
+        <button type="button" class="toggle-password" (click)="togglePasswordVisibility()">
+          <i [class]="showPassword ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+        </button>
+
+        <div class="form-text text-danger fw-bold"
+          *ngIf="Pwd.errors?.['minlength'] || Pwd.errors?.['maxlength'] && (Pwd.dirty || Pwd.touched)">
+          {{ passwordErrorMessage }}
+        </div>
+        <div class="form-text text-danger fw-bold" *ngIf="Pwd.errors?.['required'] && (Pwd.dirty || Pwd.touched)">
+          {{ passwordIsRequerid }}
+        </div>
+      </div>
+
+      <div class="container-login-button">
+        <button class="login-button" type="submit" [disabled]="loading">
+          <output *ngIf="loading" class="spinner-border spinner-border-sm">
+            <span class="sr-only">Loading...</span>
+          </output>
+          {{ signin }}
+        </button>
+      </div>
+      <div *ngIf="error !== ''" class="alert alert-danger">
+        {{ error }}
+      </div>
+    </form>
+    <div class="forgot-password">
+      <p>Cambiar <a routerLink="/forgot">Contraseña</a></p>
+    </div>
+  </div>
+</main>

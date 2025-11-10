@@ -1,0 +1,125 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">
+        {{ 'ADMIN-ITEMS.VIRTUAL-WALLET.TEXT' | translate }}
+      </h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+    </li>
+    <li class="breadcrumb-item">
+      {{ 'BALANCE-OF-WALLET.TITLE.TEXT' | translate }}
+    </li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            {{ 'BALANCE-OF-WALLET.SUBTITLE.TEXT' | translate }}
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="table-search-area">
+                      <div>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">
+                              <i-feather name="search" style="color: #96a2b4"></i-feather>
+                            </div>
+                          </div>
+                          <input style="background-color: white" type="text" class="form-control"
+                            id="inlineFormInputGroup" (keyup)="updateFilter($event)" aria-label="Search box"
+                            placeholder="Búsqueda" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col align-self-end">
+                    <ul class="nav justify-content-end">
+                      <li class="nav-item m-2">
+                        <button type="button" class="btn btn-primary" (click)="clipBoardCopy()">
+                          <i class="bi bi-clipboard-check"></i>
+                          Copiar
+                        </button>
+                      </li>
+
+                      <li class="nav-item m-2">
+                        <button type="button" class="btn btn-primary" (click)="onPrint()">
+                          <i class="bi bi-printer"></i>
+                          Imprimir
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <ngx-datatable id="htmlTable" #table class="material" [rows]="rows"
+                  [loadingIndicator]="loadingIndicator" columnMode="force" [headerHeight]="50" [footerHeight]="50"
+                  rowHeight="auto" [limit]="10" [scrollbarH]="scrollBarHorizontal" [reorderable]="reorderable">
+                  <ngx-datatable-column name="Usuario Responsable">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.adminUserName }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Afiliado">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.affiliateUserName }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Crédito (USD)">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div class="col-green">
+                        {{ row.credit }}
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Debito (USD)">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div class="col-red">
+                        {{ row.debit }}
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Estado">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div *ngIf="row.status == true" class="badge-outline col-green">
+                        Atendido
+                      </div>
+                      <div *ngIf="row.status == false" class="badge-outline col-red">
+                        No atendido
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Concepto">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.concept }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Fecha">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.date }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="{{ 'WALLET-PAGE.DETAILS-COLUMN.TEXT' | translate }}" sortable="false">
+                    <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                      <a *ngIf="row.detail" class="msr-2 h-auto" (click)="showDetail(row.detail)">
+                        <i class="bi bi-folder2-open">Ver detalles</i>
+                      </a>
+                      <a *ngIf="!row.detail" class="msr-2 h-auto tblEditBtn">
+                        <i class="bi bi-folder2-open">{{ 'WALLET-PAGE.DETAILS-BTN.TEXT' | translate }}</i>
+                      </a>
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

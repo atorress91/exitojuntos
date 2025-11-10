@@ -1,0 +1,32 @@
+[
+  {
+    "id": 0,
+    "user": "nauzet",
+    "email": "nauzet.nieto.rosales@gmail.com",
+    "identity": "nauzet",
+    "dateRegister": "2022-10-31 20:00:10",
+    "father": "ecojavier",
+    "sponsor": "ecojavier",
+    "binarySponsor": "ecojavier"
+  },
+  {
+    "id": 1,
+    "user": "juani",
+    "email": "juanivillalon@hotmail.com",
+    "identity": "juani",
+    "dateRegister": "2022-08-06 13:27:22",
+    "father": "carlos141082",
+    "sponsor": "carlos141082",
+    "binarySponsor": "carlos141082"
+  },
+  {
+    "id": 2,
+    "user": "nachosevi",
+    "email": "nacho.orange81@gmail.com",
+    "identity": "nachosevi",
+    "dateRegister": "2022-10-31 20:00:10",
+    "father": "carlos141082",
+    "sponsor": "tortupresen1",
+    "binarySponsor": "tortupresen1"
+  }
+]

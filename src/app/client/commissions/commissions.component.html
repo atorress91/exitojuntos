@@ -1,0 +1,98 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">
+        {{ 'MENUITEMS.COMMISSIONS.TEXT' | translate }}
+      </h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+    </li>
+    <li class="breadcrumb-item">
+      {{ 'MENUITEMS.MY-COMMISSIONS.TEXT' | translate }}
+    </li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>
+              {{ 'COMMISSIONS-PAGE.COMMISSIONS-TITLE.TEXT' | translate }}
+            </h4>
+          </div>
+
+          <div class="container">
+            <div class="row">
+              <div class="col-lg-1 order-1">
+                <label for="slt-concept" class="form-label">{{
+                  'COMMISSIONS-PAGE.COMMISSIONS-LBL-CONCEPT.TEXT' | translate
+                }}</label>
+              </div>
+              <div class="col order-2">
+                <select
+                  id="slt-concept"
+                  class="form-select form-control form-control-sm"
+                >
+                  <option>
+                    {{ 'COMMISSIONS-PAGE.SLT-OPTION-BONO.TEXT' | translate }}
+                  </option>
+                  <option>
+                    {{
+                      'COMMISSIONS-PAGE.SLT-OPTION-1ERLEVEL.TEXT' | translate
+                    }}
+                  </option>
+                  <option>
+                    {{ 'COMMISSIONS-PAGE.SLT-OPTION-SHOP.TEXT' | translate }}
+                  </option>
+                  <option>
+                    {{ 'COMMISSIONS-PAGE.SLT-OPTION-ALL.TEXT' | translate }}
+                  </option>
+                </select>
+              </div>
+              <div class="col-lg-1 order-3">
+                <label for="slt-concept" class="form-label">{{
+                  'COMMISSIONS-PAGE.COMMISSIONS-LBL-PERIOD.TEXT' | translate
+                }}</label>
+              </div>
+              <div class="col order-4">
+                <select
+                  id="slt-period"
+                  class="form-select form-control form-control-sm"
+                >
+                  <option>
+                    {{ 'COMMISSIONS-PAGE.SLT-OPTION-PERIOD.TEXT' | translate }}
+                  </option>
+                </select>
+              </div>
+              <div class="w-100"></div>
+              <div class="col order-5 justify-content-end">
+                <button class="btn btn-primary" (click)="showMsj()">
+                  Consultar
+                </button>
+              </div>
+            </div>
+
+            <div class="col-12 col-md-12 col-lg-12 align-items-center">
+              <div class="">
+                <div class="card-body">
+                  <!-- <p *ngFor="let alert of alerts">
+                      <ngb-alert [type]="alert.type" (close)="close(alert)">{{ alert.message }}</ngb-alert>
+                    </p> -->
+                  <p *ngFor="let alert of alerts" class="text-center">
+                    <ngb-alert
+                      [type]="alert.type"
+                      (closed)="close(alert)"
+                      *ngIf="show"
+                      >{{ alert.message }}</ngb-alert
+                    >
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

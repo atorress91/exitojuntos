@@ -1,0 +1,127 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">
+        {{ 'MENUITEMS.PROCUREMENT-ECOPOOL.TEXT' | translate }}
+      </h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+    </li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>
+              {{
+                'ECOPOOL-PAGE.TITTLE-PAGE.TEXT'
+                  | translate
+              }}
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="table-search-area">
+                      <div>
+                        <div class="form-group">
+                          <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i-feather name="search" style="color: #96a2b4;"></i-feather>
+                              </div>
+                            </div>
+                            <input style="background-color: white;" type="text" class="form-control"
+                                   id="inlineFormInputGroup" (keyup)='updateFilter($event)' aria-label="Search box"
+                                   placeholder="{{ 'ECOPOOL-PAGE.SEARCH.TEXT' | translate }}">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator"
+                               columnMode="force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10"
+                               [scrollbarH]="scrollBarHorizontal" [reorderable]="reorderable">
+                  <ngx-datatable-column name="{{
+                      'ECOPOOL-PAGE.NUM-BILL-COLUMN.TEXT' | translate
+                    }}">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.noBill }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="{{
+                      'ECOPOOL-PAGE.DATE-INIT-COLUMN.TEXT' | translate
+                    }}">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.date }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="{{
+                      'ECOPOOL-PAGE.PACKS-COLUMN.TEXT' | translate
+                    }}">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.pack }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="{{
+                      'ECOPOOL-PAGE.AMOUNT-BASE-COLUMN.TEXT' | translate
+                    }}">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.baseAmount }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="{{
+                      'ECOPOOL-PAGE.PERCENTAGE-COLUMN.TEXT' | translate
+                    }}">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.percentage }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="{{
+                    'ECOPOOL-PAGE.PAYMENTS-COLUMN.TEXT' | translate
+                    }}">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.payment }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="{{
+                      'ECOPOOL-PAGE.STATE-COLUMN.TEXT' | translate
+                      }}">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div *ngIf="row.state == 'Activa'" class="badge-outline col-green">
+                        {{ row.state }}
+                      </div>
+                      <div *ngIf="row.state == 'Inactiva'" class="badge-outline col-red">
+                        {{ row.state }}
+                      </div>
+                      <div *ngIf="row.state == 'Pending'" class="badge-outline col-indigo">
+                        {{ row.state }}
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="{{
+                      'ECOPOOL-PAGE.DETAILS-COLUMN.TEXT' | translate
+                    }}" sortable="false">
+                    <ng-template ngx-datatable-cell-template>
+                      <a class="msr-2 h-auto tblEditBtn">
+                        <i class="bi bi-folder2-open">{{
+                            'ECOPOOL-PAGE.BTN-SEE-DETAILS.TEXT'
+                              | translate
+                          }}</i>
+                      </a>
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,60 @@
+import { InvoiceDetail } from './../invoice-detail-model/invoice-detail.model';
+export class Invoice {
+  id: number;
+  invoiceNumber: number;
+  purchaseOrderId: number;
+  affiliateId: number;
+  totalInvoice: number;
+  totalInvoiceBtc: number;
+  totalCommissionable: number;
+  totalPoints: number;
+  state: boolean;
+  status: boolean;
+  date: Date;
+  cancellationDate: Date;
+  paymentMethod: string;
+  bank: string;
+  receiptNumber: string;
+  depositDate: Date;
+  type: boolean;
+  reason: string;
+  invoiceData: string;
+  invoiceAddress: string;
+  shippingAddress: string;
+  secretKey: string;
+  btcAddress: string;
+  recurring: number;
+  createdAt: Date;
+  updatedAt: Date;
+  invoicesDetails: InvoiceDetail[];
+
+  constructor() {
+    this.id = 0;
+    this.invoiceNumber = 0;
+    this.purchaseOrderId = 0;
+    this.affiliateId = 0;
+    this.totalInvoice = 0;
+    this.totalInvoiceBtc = 0;
+    this.totalCommissionable = 0;
+    this.totalPoints = 0;
+    this.state = false;
+    this.status = false;
+    this.date = new Date();
+    this.cancellationDate = new Date();
+    this.paymentMethod = '';
+    this.bank = '';
+    this.receiptNumber = '';
+    this.depositDate = new Date();
+    this.type = false;
+    this.reason = '';
+    this.invoiceData = '';
+    this.invoiceAddress = '';
+    this.shippingAddress = '';
+    this.secretKey = '';
+    this.btcAddress = '';
+    this.recurring = 0;
+    this.createdAt = new Date();
+    this.updatedAt = new Date();
+    this.invoicesDetails = [];
+  }
+}

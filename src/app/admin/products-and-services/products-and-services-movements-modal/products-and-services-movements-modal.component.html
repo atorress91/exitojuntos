@@ -1,0 +1,76 @@
+<ng-template #movementsProductsModal let-modal>
+  <div class="modal-header movementRowModal">
+    <h4 class="modal-title" id="modal-basic-title">
+      <div class="table-modal-header">
+        <div class="modal-about">
+          <div class="fw-bold p-t-10 font-17">
+            Lista de Movimientos del Producto
+          </div>
+        </div>
+      </div>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true"><i class="material-icons">close</i></span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="col align-self-end">
+        <ul class="nav justify-content-end">
+          <li class="nav-item m-2" >
+            <button type="button" (click)="onPrint()" class="btn btn-primary">
+              <i class="bi bi-printer"></i>
+              Imprimir
+            </button>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+    <ngx-datatable #tableMovements class="material" [rows]="rows" [loadingIndicator]="loadingIndicator"
+      columnMode="force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10"
+      [scrollbarH]="scrollBarHorizontal" [reorderable]="reorderable">
+      <ngx-datatable-column name="Ingreso">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <div class="col-green">
+            {{ row.ingress }}
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Egreso">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          <div class="col-red">
+            {{ row.egress }}
+          </div>
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Soporte">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.support }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Nota">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.note }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Tipo">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.type }}
+        </ng-template>
+      </ngx-datatable-column>
+      <ngx-datatable-column name="Fecha">
+        <ng-template let-row="row" ngx-datatable-cell-template>
+          {{ row.date }}
+        </ng-template>
+      </ngx-datatable-column>
+    </ngx-datatable>
+  </div>
+
+  <div class="modal-footer">
+    <button type="button" class="btn btn-light" (click)="modal.close('Close click')">
+      Cancelar
+    </button>
+  </div>
+</ng-template>

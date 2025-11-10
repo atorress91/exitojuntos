@@ -1,0 +1,30 @@
+[{
+    "id": 0,
+    "noBill":"00637",
+    "date":"2021-05-15 10-56-03",
+    "pack":"Manually test",
+    "baseAmount":"100",
+    "percentage":"10%",
+    "payment":"USD 100",
+    "state":"Activa"
+  },
+  {
+    "id": 1,
+    "noBill":"00845",
+    "date":"2021-02-23 15-56-23",
+    "pack":"Manually test",
+    "baseAmount":"100",
+    "percentage":"10%",
+    "payment":"USD 100",
+    "state":"Activa"
+  },
+  {
+    "id": 2,
+    "noBill":"00523",
+    "date":"2021-08-23 09-35-05",
+    "pack":"Manually test",
+    "baseAmount":"100",
+    "percentage":"10%",
+    "payment":"USD 100",
+    "state":"Inactiva"
+  }]

@@ -1,0 +1,142 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">
+        {{ 'ADMIN-ITEMS.PRODUCTS-SERVICES.TEXT' | translate }}
+      </h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+    </li>
+    <li class="breadcrumb-item">
+      {{ 'ATTRIBUTES-LIST.TITLE.TEXT' | translate }}
+    </li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            {{ 'ATTRIBUTES-LIST.SUBTITLE.TEXT' | translate }}
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="table-search-area">
+                      <div class="form-group">
+                        <div class="input-group mb-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">
+                              <i-feather name="search" style="color: #96a2b4"></i-feather>
+                            </div>
+                          </div>
+                          <input style="background-color: white" type="text" class="form-control"
+                            id="inlineFormInputGroup" (keyup)="updateFilter($event)" aria-label="Search box"
+                            placeholder="Búsqueda" />
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-1">
+                    <div class="header-buttons-left">
+                      <div class="tbl-btn-style">
+                        <button (click)="
+                            createOpenModal(
+                              modalChildCreate['attributesCreateModal']
+                            )
+                          " class="btn btn-icon icon-left btn-primary rounded-button">
+                          <i class="material-icons">add</i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col align-self-end">
+                    <ul class="nav justify-content-end">
+                      <li class="nav-item m-2">
+                        <button type="button" class="btn btn-primary">
+                          <i class="bi bi-clipboard-check"></i>
+                          Copiar
+                        </button>
+                      </li>
+
+                      <li class="nav-item m-2" >
+                        <button type="button" (click)="onPrint()" class="btn btn-primary">
+                          <i class="bi bi-printer"></i>
+                          Imprimir
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator"
+                  columnMode="force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10"
+                  [scrollbarH]="scrollBarHorizontal" [reorderable]="reorderable">
+                  <ngx-datatable-column name="Nombre">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.name }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Descripción" sortable="false">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.description }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="No. Valores">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Posición">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.position }}
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="Detalles">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div ngbDropdown container="body">
+                        <button type="button" class="btn btn-outline-primary btn-sm" ngbDropdownToggle>
+                          Acciones
+                        </button>
+                        <div ngbDropdownMenu>
+                          <a ngbDropdownItem id="btn-edit" (click)="
+                              modalChildEdit.editOpenModal(
+                                modalChildEdit['attributesEditModal'],row
+                              )
+                            ">
+                            <i class="fas fa-edit"></i>
+                            <span style="margin-left: 10px">Editar</span>
+                          </a>
+                          <a ngbDropdownItem id="btn-edit" (click)="
+                              modalChildDetails.detailsOpenModal(
+                                modalChildDetails['attributesDetailsModal'],row.id
+                              )
+                            ">
+                            <i class="bi bi-eye-fill"></i>
+                            <span style="margin-left: 10px">Ver Valores</span>
+                          </a>
+
+                          <a ngbDropdownItem id="btn-delete" (click)="deleteSingleRow(row.id)">
+                            <i class="fas fa-trash-alt"></i>
+                            <span style="margin-left: 10px">Eliminar</span>
+                          </a>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-attributes-list-create-modal #modalChildCreate
+    (loadAttributesList)="loadAttributesList()"></app-attributes-list-create-modal>
+  <app-attributes-list-edit-modal #modalChildEdit></app-attributes-list-edit-modal>
+
+  <app-attributes-list-details-modal #modalChildDetails></app-attributes-list-details-modal>
+</section>

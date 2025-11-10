@@ -1,0 +1,38 @@
+<section class="ml-1">
+  <div class="row">
+    <div class="col-12">
+      <div class="text-center">
+        <h6> Realizar pago del afiliado</h6>
+        <h6> {{user?.user_name}} </h6>
+      </div>
+    </div>
+    <div class="col-12">
+      <ngb-alert [dismissible]="false" class="alert-has-icon" type="info">
+        <div class="alert-icon"><i class="far fa-lightbulb"></i></div>
+        <div class="alert-body">
+          <div class="alert-title"> Información</div>
+          <ul>
+            <li>1) Debe escanear el código QR.</li>
+            <li>2) La moneda debe ser USDT.TRC20.</li>
+            <li>3) Si no se confirma la totalidad de la membresía, automaticamente se eliminará.</li>
+          </ul>
+        </div>
+      </ngb-alert>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-12 text-center">
+      <label for="">Dirección billetera:</label>
+    </div>
+    <div class="col-12 text-center">
+      <span>{{address}}</span>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col text-center">
+      <div *ngIf="qrImageUrl">
+        <img [src]="qrImageUrl" alt="Código QR">
+      </div>
+    </div>
+  </div>
+</section>

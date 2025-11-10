@@ -1,0 +1,255 @@
+<ng-template #authorizeAffiliateEditModal let-modal>
+    <div class="modal-header editRowModal">
+        <h4 class="modal-title" id="modal-basic-title">
+            <div class="table-modal-header">
+                <div class="modal-about">
+                    <div class="fw-bold p-t-10 font-17">Detalles de Registro</div>
+                </div>
+            </div>
+        </h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">
+                <i class="material-icons">close</i>
+            </span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="panel-heading">
+                <div class="col align-self-end">
+                    <ul class="nav justify-content-end">
+                        <li class="nav-item m-2">
+                            <button id="btn-authorization" (click)="authorization()" class="btn btn-primary">
+                                <i class="bi bi-check2-circle"></i> Autorizar
+                            </button>
+                        </li>
+                        <li class="nav-item m-2">
+                            <button id="btn-send-email" (click)="sendEmail()" class="btn btn-primary">
+                                <i class="bi bi-envelope-check"></i> Reenviar correo de validacion
+                            </button>
+                        </li>
+                        <li class="nav-item m-2">
+                            <button id="btn-delete" (click)="delete()" class="btn btn-primary">
+                                <i class="bi bi-trash"></i> Eliminar
+                            </button>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xl-4 col-lg-4 col-md-4 col-sm-12">
+                <div class="form-group">
+                    <h6>Datos Principales</h6>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <label for="user_name">
+                        Usuario:
+                    </label>
+                    <br />
+                    <label id="user_name">
+                        {{ user.user_name }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="email">
+                        Correo:
+                    </label>
+                    <br />
+                    <label id="email">
+                        {{ user.email }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="identification">
+                        Nro de Identificacion:
+                    </label>
+                    <br />
+                    <label id="identification">
+                        {{ user.identification }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="sponsor">
+                        Patrocinador:
+                    </label>
+                    <br />
+                    <label id="sponsor">
+                        {{ user.sponsor }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="created_at">
+                        Fecha de Registro:
+                    </label>
+                    <br />
+                    <label id="created_at">
+                        {{ user.created_at }}
+                    </label>
+                </div>
+
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4  mb-2">
+                <div class="form-group">
+                    <h6>Datos Secundarios</h6>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <label for="name">
+                        Nombre:
+                    </label>
+                    <br />
+                    <label id="name">
+                        {{ user.name }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="last_name">
+                        Apellido:
+                    </label>
+                    <br />
+                    <label id="last_name">
+                        {{ user.last_name }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="address">
+                        Direccion:
+                    </label>
+                    <br />
+                    <label id="address">
+                        {{ user.address }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="phone">
+                        Teléfono:
+                    </label>
+                    <br />
+                    <label id="phone">
+                        {{ user.phone }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="zip_code">
+                        Código Postal:
+                    </label>
+                    <br />
+                    <label id="zip_code">
+                        {{ user.zip_code }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="country">
+                        Pais:
+                    </label>
+                    <br />
+                    <label id="country">
+                        {{ user.country }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="state_place">
+                        Estado:
+                    </label>
+                    <br />
+                    <label id="state_place">
+                        {{ user.state_place }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="user_name">
+                        Ciudad:
+                    </label>
+                    <br />
+                    <label id="city">
+                        {{ user.city }}
+                    </label>
+                </div>
+            </div>
+            <div class="col-xl-4 col-lg-4 col-md-4  mb-2">
+                <div class="form-group">
+                    <h6>Campos Adicionales</h6>
+                </div>
+                <hr />
+                <div class="form-group">
+                    <label for="birthday">
+                        Fecha de Nacimiento:
+                    </label>
+                    <br />
+                    <label id="birthday">
+                        {{ user.birthday }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="tax_id">
+                        No. de Identificación Fiscal:
+                    </label>
+                    <br />
+                    <label id="tax_id">
+                        {{ user.tax_id }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="beneficiary_name">
+                        Nombre de Beneficiario:
+                    </label>
+                    <br />
+                    <label id="beneficiary_name">
+                        {{ user.beneficiary_name }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="legal_authorized_first">
+                        Representante Legal No. 1:
+                    </label>
+                    <br />
+                    <label id="legal_authorized_first">
+                        {{ user.legal_authorized_first }}
+                    </label>
+                </div>
+                <div class="form-group">
+                    <label for="legal_authorized_second">
+                        Representante Legal No. 2:
+                    </label>
+                    <br />
+                    <label id="legal_authorized_second">
+                        {{ user.legal_authorized_second }}
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <ngx-datatable id="table" #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator"
+                columnMode="force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="12"
+                [scrollbarH]="scrollBarHorizontal" [reorderable]="reorderable">
+                <ngx-datatable-column name="METODO DE PAGO">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{ row.payment_method }}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="BANCO">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{ row.bank }}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="FECHA PAGO" sortable="false">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{ row.payment_date }}
+                    </ng-template>
+                </ngx-datatable-column>
+                <ngx-datatable-column name="SOPORTE">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                        {{ row.support }}
+                    </ng-template>
+                </ngx-datatable-column>
+            </ngx-datatable>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-light" (click)="modal.close('Close click')">
+            Cancel
+        </button>
+    </div>
+</ng-template>

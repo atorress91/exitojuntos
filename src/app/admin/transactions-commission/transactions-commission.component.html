@@ -1,0 +1,128 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">
+        {{ 'ADMIN-ITEMS.VIRTUAL-WALLET.TEXT' | translate }}
+      </h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+    </li>
+    <li class="breadcrumb-item">
+      {{ 'TRANSACTIONS-COMMISSION.TITLE.TEXT' | translate }}
+    </li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-md-6 col-lg-4 col-xl-6">
+        <div class="card">
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <h5 class="m-b-0">Total comisiones por retención:</h5>
+                <h3>
+                </h3>
+              </div>
+              <div class="col-auto">
+                <div class="bg-green text-white icon-box-style">
+                  <i class="bi bi-currency-bitcoin"></i>
+                </div>
+              </div>
+            </div>
+            <div class="m-t-30">
+              <div class="row text-center">
+                <div class="col-6 border-right">
+                  <h4 class="m-b-0 text-success">0</h4>
+                  <span class="font-14 text-muted">USD</span>
+                </div>
+                <div class="col-6">
+                  <h4 class="m-b-0 text-success">0.00000000</h4>
+                  <span class="font-14 text-muted">BTC</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            {{ 'TRANSACTIONS-COMMISSION.SUBTITLE.TEXT' | translate }}
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="table-search-area">
+                      <div>
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">
+                              <i-feather name="search" style="color: #96a2b4"></i-feather>
+                            </div>
+                          </div>
+                          <input style="background-color: white" type="text" class="form-control"
+                                 id="inlineFormInputGroup" (keyup)="updateFilter($event)" aria-label="Search box"
+                                 placeholder="Búsqueda"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col align-self-end">
+                    <ul class="nav justify-content-end">
+                      <li class="nav-item m-2">
+                        <button type="button" class="btn btn-primary" (click)="clipBoardCopy()">
+                          <i class="bi bi-clipboard-check"></i>
+                          Copiar
+                        </button>
+                      </li>
+
+                      <li class="nav-item m-2">
+                        <button type="button" class="btn btn-primary" (click)="onPrint()">
+                          <i class="bi bi-printer"></i>
+                          Imprimir
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator"
+                               columnMode="force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10"
+                               [scrollbarH]="scrollBarHorizontal" [reorderable]="reorderable">
+                  <ngx-datatable-column name="Afiliado">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Fecha">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Observación">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Monto a retirar">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Retención">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

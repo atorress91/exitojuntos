@@ -1,0 +1,26 @@
+[
+  {
+    "id": 0,
+    "user": "adminshare",
+    "rol": "administrador",
+    "name": "Share",
+    "lastName": "Evolutions",
+    "email": "shareevolutions@gmail.com"
+  },
+  {
+    "id": 1,
+    "user": "comisiones",
+    "rol": "Calcular comisiones",
+    "name": "Calcular comisiones",
+    "lastName": "",
+    "email": "shareevolutions@gmail.com"
+  },
+  {
+    "id": 2,
+    "user": "juanpablo",
+    "rol": "Darlene",
+    "name": "Juan pablo",
+    "lastName": "",
+    "email": "shareevolutions@gmail.com"
+  }
+]

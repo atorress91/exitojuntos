@@ -1,0 +1,169 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">
+        <!-- {{ 'MENUITEMS.NETWORK.TEXT' | translate }} -->
+      </h5>
+    </li>
+    <!-- <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+    </li> -->
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>
+              Resultados del EcoPool
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="table-search-area">
+                      <div>
+                        <div class="form-group">
+                          <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i-feather name="search" style="color: #96a2b4;"></i-feather>
+                              </div>
+                            </div>
+                            <input style="background-color: white;" type="text" class="form-control"
+                                   id="inlineFormInputGroup" aria-label="Search box"
+                                   placeholder="{{ 'NETWORK-PAGE.SEARCH.TEXT' | translate }}"
+                                   (keyup)="updateFilter($event)">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator"
+                               columnMode="force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10"
+                               [scrollbarH]="scrollBarHorizontal" [reorderable]="reorderable">
+                  <ngx-datatable-row-detail [rowHeight]="210" (toggle)="onDetailToggle($event)">
+                    <ng-template let-row="row" ngx-datatable-row-detail-template>
+                      <div
+                        style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; padding: 0.3rem 0.3rem 0.3rem 6rem;">
+                        <strong>Nombre afiliado:</strong>
+                        <strong>Nivel:</strong>
+                        <strong>Porcentaje Nivel:</strong>
+                        <strong>Porcentaje Compañia:</strong>
+                        <strong>Monto compañia:</strong>
+                        <strong>Monto comisión:</strong>
+                        <strong>Monto x pagar:</strong>
+                      </div>
+                      <div *ngFor="let item of row.resultEcoPoolLevels"
+                           style="display: grid; grid-template-columns: repeat(7, 1fr); gap: 10px; padding: 0.3rem 0.3rem 0.3rem 6rem;">
+                        <div>{{ item.affiliateName }}</div>
+                        <div>{{ item.level }}</div>
+                        <div>{{ item.percentageLevel }}</div>
+                        <div>{{ item.companyPercentageLevel }}</div>
+                        <div>{{ item.companyAmountLevel }}</div>
+                        <div>{{ item.commisionAmount }}</div>
+                        <div>{{ item.paymentAmount }}</div>
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-row-detail>
+                  <ngx-datatable-column [width]="50" [resizeable]="false" [sortable]="false" [draggable]="false"
+                                        [canAutoResize]="false">
+                    <ng-template let-row="row" let-expanded="expanded" ngx-datatable-cell-template>
+                      <a href="javascript:void(0)" [class.datatable-icon-right]="!expanded"
+                         [class.datatable-icon-down]="expanded" title="Expand/Collapse Row"
+                         (click)="toggleExpandRow(row)">
+                      </a>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Nombre afiliado">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.affiliateName }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Nombre Producto">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.productName }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Fecha pago">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.paymentDate }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Porcentage Diario">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.dailyPercentage }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Pack base">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.basePack }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Dias">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.daysAmount }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Monto base">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.baseAmount }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Monto compañia">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.companyAmount }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Porcentage compañia">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.companyPercentage }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Distribucion niveles">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.profitDistributedLevels }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Total percentage">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.totalPercentage }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Monto deduccion">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.deductionAmount }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Monto pago">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.paymentAmount }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Puntos">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.points }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Caso Pool">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.casePool }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Periodo Pool">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.periodPool }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

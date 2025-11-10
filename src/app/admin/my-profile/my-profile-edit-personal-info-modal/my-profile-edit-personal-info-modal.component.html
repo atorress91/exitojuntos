@@ -1,0 +1,195 @@
+<!-- Modal Create -->
+<ng-template #editPersonalInfoModal let-modal>
+  <div class="modal-header editRowModal">
+    <h4 class="modal-title" id="modal-basic-title">
+      <div class="table-modal-header">
+        <div class="modal-about">
+          <div class="fw-bold p-t-10 font-17">
+            {{ 'ADMIN-EDIT-PERSONAL-INFO-MODAL.TITLE.TEXT' | translate }}
+          </div>
+        </div>
+      </div>
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true"><i class="material-icons">close</i></span>
+    </button>
+  </div>
+  <form
+    class="register-form"
+    [formGroup]="editPersonalInfoForm"
+    [autocomplete]="off"
+    (ngSubmit)="onSaveEditInfoValues()"
+  >
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="user_name">
+            {{ 'ADMIN-EDIT-PERSONAL-INFO-MODAL.LBL-NAME.TEXT' | translate }}
+            <span class="text-danger">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="user_name"
+            autocomplete="new-user_name"
+            formControlName="user_name"
+            placeholder="Nombre"
+            required="required"
+            [ngClass]="{
+              'is-invalid':
+                submitted && edit_personal_info_controls.user_name.errors
+            }"
+          />
+          <div
+            *ngIf="submitted && edit_personal_info_controls.user_name.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="edit_personal_info_controls.user_name.errors.required">
+              {{
+                'ADMIN-EDIT-PERSONAL-INFO-MODAL.MSJ-ERROR-NAME.TEXT' | translate
+              }}
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="name"
+            >{{ 'ADMIN-EDIT-PERSONAL-INFO-MODAL.LBL-LASTNAME.TEXT' | translate
+            }}<span class="text-danger">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="last_name"
+            id="last_name"
+            placeholder="Apellidos"
+            required="required"
+            [ngClass]="{
+              'is-invalid':
+                submitted && edit_personal_info_controls.last_name.errors
+            }"
+          />
+          <div
+            *ngIf="submitted && edit_personal_info_controls.last_name.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="edit_personal_info_controls.last_name.errors.required">
+              {{
+                'ADMIN-EDIT-PERSONAL-INFO-MODAL.MSJ-ERROR-LASTNAME.TEXT'
+                  | translate
+              }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="email">
+            {{ 'ADMIN-EDIT-PERSONAL-INFO-MODAL.LBL-EMAIL.TEXT' | translate }}
+            <span class="text-danger">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="email"
+            autocomplete="email"
+            formControlName="email"
+            placeholder="Email"
+            required="required"
+            [ngClass]="{
+              'is-invalid':
+                submitted && edit_personal_info_controls.email.errors
+            }"
+          />
+          <div
+            *ngIf="submitted && edit_personal_info_controls.email.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="edit_personal_info_controls.email.errors.required">
+              {{
+                'ADMIN-EDIT-PERSONAL-INFO-MODAL.MSJ-ERROR-EMAIL.TEXT'
+                  | translate
+              }}
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="phone">
+            {{ 'ADMIN-EDIT-PERSONAL-INFO-MODAL.LBL-PHONE.TEXT' | translate
+            }}<span class="text-danger">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="phone"
+            id="phone"
+            placeholder="Teléfono"
+            required="required"
+            [ngClass]="{
+              'is-invalid':
+                submitted && edit_personal_info_controls.phone.errors
+            }"
+          />
+          <div
+            *ngIf="submitted && edit_personal_info_controls.phone.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="edit_personal_info_controls.phone.errors.required">
+              {{
+                'ADMIN-EDIT-PERSONAL-INFO-MODAL.MSJ-ERROR-PHONE.TEXT'
+                  | translate
+              }}
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="address"
+            >{{ 'ADMIN-EDIT-PERSONAL-INFO-MODAL.LBL-ADDRESS.TEXT' | translate
+            }}<span class="text-danger"></span
+          ></label>
+          <textarea
+            type="textarea"
+            class="form-control"
+            placeholder="Dirección"
+            formControlName="address"
+            id="address"
+            [ngClass]="{
+              'is-invalid':
+                submitted && edit_personal_info_controls.address.errors
+            }"
+          >
+          </textarea>
+          <div
+            *ngIf="submitted && edit_personal_info_controls.address.errors"
+            class="invalid-feedback"
+          >
+            <div *ngIf="edit_personal_info_controls.address.errors.required">
+              {{
+                'ADMIN-EDIT-PERSONAL-INFO-MODAL.MSJ-ERROR-ADDRESS.TEXT'
+                  | translate
+              }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">
+        {{ 'ADMIN-EDIT-PERSONAL-INFO-MODAL.BTN-SAVE.TEXT' | translate }}
+      </button>
+      <button
+        type="button"
+        class="btn btn-light"
+        (click)="modal.close('Close click')"
+      >
+        {{ 'ADMIN-EDIT-PERSONAL-INFO-MODAL.BTN-CANCEL.TEXT' | translate }}
+      </button>
+    </div>
+  </form>
+</ng-template>

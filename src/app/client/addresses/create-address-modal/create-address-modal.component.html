@@ -1,0 +1,186 @@
+<ng-template #createAddressModal let-modal>
+  <div class="modal-header editRowModal">
+    <h4 class="modal-title" id="modal-basic-title">
+      <div class="table-modal-header">
+        <div class="modal-about">
+          <div class="fw-bold p-t-10 font-17">
+            Crear Dirección
+          </div>
+        </div>
+      </div>
+    </h4>
+    <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+      <span aria-hidden="true"><i class="material-icons">close</i></span>
+    </button>
+  </div>
+  <form [formGroup]="createAddressGroup" (submit)="saveNewAddress()">
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="fiscal_identification">
+            Número de identificación fiscal
+            <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="fiscal_identification" autocomplete="new-user_name"
+            formControlName="fiscal_identification" placeholder="Identificación fiscal" [ngClass]="{
+            'is-invalid': submitted && create_address_controls.fiscal_identification.errors
+          }" />
+
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="address_name">
+            Nombre para la dirección
+            <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" formControlName="address_name" id="address_name"
+            placeholder="Nombre dirección" [ngClass]="{
+            'is-invalid': submitted && create_address_controls.address_name.errors
+          }" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="name">
+            Nombre
+            <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="name" autocomplete="new-user_name" formControlName="name"
+            placeholder="Nombre" [ngClass]="{
+            'is-invalid': submitted && create_address_controls.name.errors
+          }" />
+
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="lastName">
+            Apellidos
+            <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" formControlName="lastName" id="lastName" placeholder="Apellidos"
+            [ngClass]="{
+            'is-invalid': submitted && create_address_controls.lastName.errors
+          }" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="company">
+            Empresa
+            <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="company" autocomplete="new-user_name" formControlName="company"
+            placeholder="Empresa" [ngClass]="{
+            'is-invalid': submitted && create_address_controls.company.errors
+          }" />
+
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="iva_number">
+            Su número de IVA
+            <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" formControlName="iva_number" id="iva_number" placeholder="IVA"
+            [ngClass]="{
+            'is-invalid': submitted && create_address_controls.iva_number.errors
+          }" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="address">
+            Dirección
+            <span class="text-danger">*</span></label>
+          <textarea type="textarea" class="form-control" id="address" autocomplete="new-user_name"
+            formControlName="address" placeholder="Dirección" [ngClass]="{
+            'is-invalid': submitted && create_address_controls.address.errors
+          }"></textarea>
+
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="address_line_2">
+            Dirección (2)
+            <span class="text-danger">*</span></label>
+          <textarea type="textarea" class="form-control" formControlName="address_line_2" id="address_line_2"
+            placeholder="Dirección (2)" [ngClass]="{
+            'is-invalid': submitted && create_address_controls.address_line_2.errors
+          }"></textarea>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="postal_code">
+            Código postal
+            <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="postal_code" formControlName="postal_code"
+            placeholder="Código postal" [ngClass]="{
+            'is-invalid': submitted && create_address_controls.postal_code.errors
+          }" />
+
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="country">
+            País
+            <span class="text-danger">*</span></label>
+          <select type="text" class="form-control" formControlName="country" id="country" placeholder=" País" [ngClass]="{
+            'is-invalid': submitted && create_address_controls.country.errors
+          }">
+            <option value="">Seleccione una opción</option>
+          </select>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="state">
+            Provincia ó Estado
+            <span class="text-danger">*</span></label>
+          <select type="text" class="form-control" id="state" formControlName="state" placeholder="Estado" [ngClass]="{
+            'is-invalid': submitted && create_address_controls.state.errors
+          }">
+            <option value="">Seleccione una opción</option>
+          </select>
+
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="city">
+            Ciudad
+            <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" formControlName="city" id="city" placeholder="Ciudad" [ngClass]="{
+            'is-invalid': submitted && create_address_controls.city.errors
+          }" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="landline_phone">
+            Teléfono fijo
+            <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="landline_phone" formControlName="landline_phone"
+            placeholder="Teléfono fijo" [ngClass]="{
+            'is-invalid': submitted && create_address_controls.landline_phone.errors
+          }" />
+
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="mobile_phone">
+            Teléfono móvil
+            <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" formControlName="mobile_phone" id="mobile_phone"
+            placeholder="Teléfono móvil" [ngClass]="{
+            'is-invalid': submitted && create_address_controls.mobile_phone.errors
+          }" />
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="other">
+            Otro
+            <span class="text-danger">*</span></label>
+          <input type="text" class="form-control" id="other" formControlName="other" placeholder="Otro" [ngClass]="{
+            'is-invalid': submitted && create_address_controls.other.errors
+          }" />
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">
+        Guardar
+      </button>
+      <button type="button" class="btn btn-light" (click)="modal.close('Close click')">
+        Cancelar
+      </button>
+    </div>
+  </form>
+</ng-template>

@@ -1,0 +1,505 @@
+[
+  {
+    "id": 0,
+    "menu": "Inicio",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 1,
+    "menu": "Usuarios",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 2,
+    "menu": "Lista de usuarios",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 3,
+    "menu": "Lista de roles",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 4,
+    "menu": "Afiliados",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 5,
+    "menu": "Lista de Afiliados",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 6,
+    "menu": "Autorizar Afiliados",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+
+  {
+    "id": 7,
+    "menu": "Arbol Genealogico",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 8,
+    "menu": "Compras",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 9,
+    "menu": "Listado de Compras",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 10,
+    "menu": "List. Ordenes de Compra",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 11,
+    "menu": "Autorizar Compras",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 12,
+    "menu": "Registros Coinbase",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 13,
+    "menu": "Comisiones",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 14,
+    "menu": "Calcular Comisiones",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 15,
+    "menu": "Cierre de Conceptos",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 16,
+    "menu": "Cierre de Periodo",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 17,
+    "menu": "Comisiones Calculadas",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 18,
+    "menu": "Comisiones Acreditadas",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 19,
+    "menu": "Comisiones Pagadas",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 20,
+    "menu": "Incetivos por Entregar",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 21,
+    "menu": "Incentivos Entregados",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 22,
+    "menu": "Productos y Servicios",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 23,
+    "menu": "Productos",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 24,
+    "menu": "Categorias",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 25,
+    "menu": "Atributos de Productos",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 26,
+    "menu": "Pack Pasivos",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 27,
+    "menu": "Configuraciones",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 28,
+    "menu": "Plan Compensacion",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 29,
+    "menu": "Matrices",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 30,
+    "menu": "Conceptos",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 31,
+    "menu": "Calificaciones",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 32,
+    "menu": "Incentivos",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 33,
+    "menu": "Grupos de Calculo",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 34,
+    "menu": "Configuracion",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 35,
+    "menu": "Balance de Billetera",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  }, {
+    "id": 36,
+    "menu": "Recarga de Billetera",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 37,
+    "menu": "Retiro de Billetera",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 38,
+    "menu": "Pagar saldo de billetera",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 39,
+    "menu": "Comisiones de Transacciones",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 40,
+    "menu": "Parámetros de Solicitudes",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 41,
+    "menu": "Importar Afiliados",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 42,
+    "menu": "Importar Productos",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 43,
+    "menu": "Importar Compras",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 44,
+    "menu": "Importar Inventario",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 45,
+    "menu": "Tickets",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 46,
+    "menu": "Noticias",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 47,
+    "menu": "Reportes Generales",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 48,
+    "menu": "Afiliados",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  }, {
+    "id": 49,
+    "menu": "Compras",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 50,
+    "menu": "Ordenes de Compras",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 51,
+    "menu": "Inventario de Productos",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 52,
+    "menu": "Comisiones",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 53,
+    "menu": "Billetera Virtual",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 54,
+    "menu": "Pack pasivos (Inversiones)",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 55,
+    "menu": "Volumen binario",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 56,
+    "menu": "Configuración General",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 57,
+    "menu": "Formulario de Registros",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 58,
+    "menu": "Pasarelas y Bancos",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 59,
+    "menu": "Cargar archivos",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 60,
+    "menu": "Multi Idioma",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  },
+  {
+    "id": 61,
+    "menu": "Reinicio de Sistema",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  }, {
+    "id": 62,
+    "menu": "Configuración Avanzada",
+    "read": "",
+    "edit": "",
+    "created": "",
+    "delete": ""
+  }
+]
+

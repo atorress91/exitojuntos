@@ -1,0 +1,146 @@
+<div class="contact-container">
+  <div class="tree-backdrop"></div>
+  <div class="gradient-overlay"></div>
+
+  <div class="container">
+    <div class="content-wrapper">
+      <div class="info-panel">
+        <h3 class="glow-text">Contáctenos</h3>
+        <p class="info-text">Estamos aquí para ayudarte. Envíanos tu mensaje y te responderemos lo antes posible.</p>
+        <div class="contact-items">
+          <div class="contact-item">
+            <i class="bi bi-geo-alt-fill"></i>
+            <div class="item-text">
+              <strong>Ubicación</strong>
+              <p>Golfito, Costa Rica</p>
+            </div>
+          </div>
+          <div class="contact-item">
+            <i class="bi bi-envelope-fill"></i>
+            <div class="item-text">
+              <strong>Email</strong>
+              <p>support&#64;exitojuntos.net</p>
+            </div>
+          </div>
+        </div>
+        <div class="social-links">
+          <a href="https://www.instagram.com/exitojuntosproject?igsh=eGY4d3BnOGFlamhk" target="_blank"
+             rel="noopener noreferrer" class="social-icon" aria-label="Instagram">
+            <i class="bi bi-instagram"></i>
+          </a>
+          <a href="https://x.com/exitojuntosproject" target="_blank" rel="noopener noreferrer" class="social-icon x-icon"
+             aria-label="X (formerly Twitter)">
+            <i>𝕏</i>
+          </a>
+          <a href="https://t.me/+jQhYW1Gdb5oxMWRh" target="_blank" rel="noopener noreferrer" class="social-icon"
+             aria-label="Telegram">
+            <i class="bi bi-telegram"></i>
+          </a>
+          <a href="https://www.youtube.com/@exitojuntosproject" target="_blank" rel="noopener noreferrer"
+             class="social-icon" aria-label="YouTube">
+            <i class="bi bi-youtube"></i>
+          </a>
+          <a href="https://www.tiktok.com/@exitojuntosproject?_t=8pauwT4QaLG&_r=1" target="_blank"
+             rel="noopener noreferrer" class="social-icon" aria-label="TikTok">
+            <i class="bi bi-tiktok"></i>
+          </a>
+        </div>
+      </div>
+      <div class="form-panel">
+        <h2>Envíanos un mensaje</h2>
+
+        <div *ngIf="success" class="success-alert">
+          <i class="bi bi-check-circle-fill"></i>
+          ¡Mensaje enviado exitosamente! Nos pondremos en contacto pronto.
+        </div>
+
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" novalidate>
+          <div class="form-group">
+            <div class="input-wrapper">
+              <input
+                type="text"
+                id="fullName"
+                placeholder="Nombre Completo"
+                formControlName="fullName"
+                [ngClass]="{'is-invalid': submitted && contactForm.get('fullName')?.errors}"
+              >
+              <i class="bi bi-person-fill"></i>
+            </div>
+            <div *ngIf="submitted && contactForm.get('fullName')?.errors" class="error-message">
+              <i class="bi bi-exclamation-circle-fill"></i> Nombre es requerido
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <div class="input-wrapper">
+                <input
+                  type="email"
+                  id="email"
+                  placeholder="Correo Electrónico"
+                  formControlName="email"
+                  [ngClass]="{'is-invalid': submitted && contactForm.get('email')?.errors}"
+                >
+                <i class="bi bi-envelope-fill"></i>
+              </div>
+              <div *ngIf="submitted && contactForm.get('email')?.errors" class="error-message">
+                <i class="bi bi-exclamation-circle-fill"></i> Email es requerido
+              </div>
+            </div>
+
+            <div class="form-group">
+              <div class="input-wrapper">
+                <input
+                  type="tel"
+                  id="phoneNumber"
+                  placeholder="Teléfono (Opcional)"
+                  formControlName="phoneNumber"
+                  [ngClass]="{'is-invalid': submitted && contactForm.get('phoneNumber')?.errors}"
+                >
+                <i class="bi bi-telephoneNumber-fill"></i>
+              </div>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-wrapper">
+              <input
+                type="text"
+                id="subject"
+                placeholder="Asunto"
+                formControlName="subject"
+                [ngClass]="{'is-invalid': submitted && contactForm.get('subject')?.errors}"
+              >
+              <i class="bi bi-chat-left-text-fill"></i>
+            </div>
+            <div *ngIf="submitted && contactForm.get('subject')?.errors" class="error-message">
+              <i class="bi bi-exclamation-circle-fill"></i> Asunto es requerido
+            </div>
+          </div>
+
+          <div class="form-group">
+            <div class="input-wrapper">
+              <textarea
+                id="message"
+                placeholder="Tu mensaje mínimo 10 palabras"
+                formControlName="message"
+                [ngClass]="{'is-invalid': submitted && contactForm.get('message')?.errors}"
+              ></textarea>
+              <i class="bi bi-pencil-fill"></i>
+            </div>
+            <div *ngIf="submitted && contactForm.get('message')?.errors" class="error-message">
+              <i class="bi bi-exclamation-circle-fill"></i> Mensaje es requerido
+            </div>
+          </div>
+
+          <button type="submit" class="submit-button">
+            <span class="button-content">
+              <i class="bi bi-send-fill"></i>
+              Enviar Mensaje
+            </span>
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

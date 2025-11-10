@@ -1,0 +1,27 @@
+[{
+  "id": 0,
+  "date":"2023-02-02 14:08:07",
+  "concept":"Comision pasado a la billetera",
+  "credits":"USD 0.00",
+  "debits":"USD 0.00",
+  "state":"Procesado",
+  "residualsPaid":"Sin novedades"
+},
+{
+  "id": 1,
+  "date":"2023-02-02 14:08:07",
+  "concept":"1ernivel",
+  "credits":"USD 0.00",
+  "debits":"USD 0.00",
+  "state":"Procesado",
+  "residualsPaid":"Sin novedades"
+},
+{
+  "id": 2,
+  "date":"2023-02-02 14:08:07",
+  "concept":"Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  "credits":"USD 0.00",
+  "debits":"USD 0.00",
+  "state":"Procesado",
+  "residualsPaid":"Sin novedades"
+}]

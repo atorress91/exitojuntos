@@ -1,0 +1,57 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">
+        {{ 'ADMIN-ITEMS.AFFILIATES.TEXT' | translate }}
+      </h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+    </li>
+    <li class="breadcrumb-item">
+      {{ 'AFFILIATES-LIST-PAGE.TITLE.TEXT' | translate }}
+    </li>
+    <li class="breadcrumb-item">
+      {{ 'FORCED-GENEALOGICAL-TREE-PAGE.TITLE.TEXT' | translate }}
+    </li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>
+              {{ 'FORCED-GENEALOGICAL-TREE-PAGE.TITLE.TEXT' | translate }}
+            </h4>
+          </div>
+          <div class="card-body">
+            <!-- Add content here -->
+            <app-force-genealogical-tree
+              [nodeTemplate]="nodeTemplate"
+              [data]="tree"
+              #exampleChart="orgChart"
+            >
+            </app-force-genealogical-tree>
+            <ng-template #nodeTemplate let-node>
+              <div class="chart-node">
+                <img [src]="node?.image" alt="node"/>
+                <div class="name">{{ node?.name }}</div>
+                <div class="description">{{ node?.description }}</div>
+                <!-- An ugly button to fold/unfold -->
+                <button
+                      *ngIf="node.children.length"
+                      (click)="node.hideChildren = !node.hideChildren"
+                      class="tree-fold-btn"
+                      type="button"
+                      [attr.aria-label]="node.hideChildren ? 'Expand node' : 'Collapse node'"
+                    >
+                      {{ node.hideChildren ? '+' : '-' }}
+                    </button>
+                  </div>
+                </ng-template>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>

@@ -1,0 +1,218 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">Perfil</h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+    </li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12">
+        <!-- Modern Profile Card -->
+        <div class="profile-card-modern">
+          <!-- Gradient Header -->
+          <div class="profile-header-gradient">
+            <!-- Options Button -->
+            <div class="profile-options-btn">
+              <div ngbDropdown container="body">
+                <button type="button" class="btn-icon-options" ngbDropdownToggle>
+                  <i class="bi bi-three-dots-vertical"></i>
+                </button>
+                <div ngbDropdownMenu>
+                  <a ngbDropdownItem id="btn-change-password" (click)="openPasswordModal()">
+                    <i class="fa fa-key"></i>
+                    <span style="margin-left: 5px">
+                      {{
+                      'ADMIN-MY-PROFILE.LBL-CHANGE-PASSWORD.TEXT'
+                      | translate
+                      }}</span>
+                  </a>
+                  <a ngbDropdownItem id="btn-edit-question" (click)="openSecretQuestionModal()">
+                    <i class="bi bi-question-diamond-fill"></i>
+                    <span style="margin-left: 5px">{{
+                      'ADMIN-MY-PROFILE.LBL-CHANGE-SECRET-QUESTION.TEXT'
+                      | translate
+                      }}</span>
+                  </a>
+                  <a ngbDropdownItem id="btn-edit-personal-info" (click)="openEditPersonalInfoModal()">
+                    <i class="fas fa-edit"></i>
+                    <span style="margin-left: 5px">{{
+                      'ADMIN-MY-PROFILE.BTN-EDIT-PERSONAL-INFO.TEXT'
+                      | translate
+                      }}</span>
+                  </a>
+
+                  <a ngbDropdownItem id="btn-change-image-profile" (click)="openImageProfileModal()">
+                    <i class="fas fa-edit"></i>
+                    <span style="margin-left: 5px">
+                      Cambiar la foto de perfil
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Card Content -->
+          <div class="profile-card-content">
+            <!-- Profile Header Section -->
+            <div class="profile-user-section">
+              <!-- Profile Picture -->
+              <div class="profile-picture-wrapper">
+                <button type="button" class="profile-picture-btn" (click)="openImageProfileModal()"
+                  aria-label="Cambiar foto de perfil">
+                  <img alt="Foto de perfil del usuario"
+                    [src]="user.image_profile_url ? user.image_profile_url : 'assets/images/user.png'"
+                    class="profile-picture-modern" />
+                </button>
+              </div> <!-- User Info -->
+              <div class="profile-user-info">
+                <h2 class="profile-user-name">
+                  {{ user.name + ' ' + user.last_name }}
+                </h2>
+
+                <div class="profile-username">
+                  <i class="bi bi-person-circle"></i>
+                  <span>{{ '@' + user.user_name }}</span>
+                </div>
+
+                <!-- Status Badges -->
+                <div class="profile-badges">
+                  <span *ngIf="user.card_id_authorization == true" class="badge-modern badge-success">
+                    <i class="bi bi-check-circle-fill"></i>
+                    Autorizado
+                  </span>
+                  <span *ngIf="user.card_id_authorization == false" class="badge-modern badge-danger">
+                    <i class="bi bi-x-circle-fill"></i>
+                    No Autorizado
+                  </span>
+
+                  <span *ngIf="user.status == 1" class="badge-modern badge-active">
+                    Activo
+                  </span>
+                  <span *ngIf="user.status == 0" class="badge-modern badge-inactive">
+                    Inactivo
+                  </span>
+
+                  <span class="badge-modern badge-warning">
+                    <i class="bi bi-star-fill"></i>
+                    {{ grading?.name || 'Cliente' }}
+                  </span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Divider -->
+            <div class="profile-divider"></div>
+
+            <!-- Information Grid -->
+            <div class="profile-info-grid">
+              <!-- Contact Information Column -->
+              <div class="profile-info-column">
+                <h3 class="profile-section-title">Información de Contacto</h3>
+
+                <!-- Phone -->
+                <div class="profile-info-item">
+                  <div class="profile-info-icon">
+                    <i class="bi bi-telephone-fill"></i>
+                  </div>
+                  <div class="profile-info-content">
+                    <div class="profile-info-label">Teléfono</div>
+                    <div class="profile-info-value">{{ user.phone || 'No especificado' }}</div>
+                  </div>
+                </div>
+
+                <!-- Email -->
+                <div class="profile-info-item">
+                  <div class="profile-info-icon">
+                    <i class="bi bi-envelope-fill"></i>
+                  </div>
+                  <div class="profile-info-content">
+                    <div class="profile-info-label">Correo Electrónico</div>
+                    <div class="profile-info-value">{{ user.email }}</div>
+                  </div>
+                </div>
+
+                <!-- Address -->
+                <div class="profile-info-item">
+                  <div class="profile-info-icon">
+                    <i class="bi bi-geo-alt-fill"></i>
+                  </div>
+                  <div class="profile-info-content">
+                    <div class="profile-info-label">Dirección</div>
+                    <div class="profile-info-value">{{ user.address || 'No especificada' }}</div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Account Information Column -->
+              <div class="profile-info-column">
+                <h3 class="profile-section-title">Información de Cuenta</h3>
+
+                <!-- Registration Date -->
+                <div class="profile-info-item profile-info-item-tall">
+                  <div class="profile-info-icon">
+                    <i class="bi bi-calendar-check-fill"></i>
+                  </div>
+                  <div class="profile-info-content">
+                    <div class="profile-info-label">Fecha de Registro</div>
+                    <div class="profile-info-value">{{ user.created_at | date: 'dd \'de\' MMMM, yyyy' }}</div>
+                    <div class="profile-info-time">{{ user.created_at | date: 'HH:mm:ss' }}</div>
+                  </div>
+                </div>
+
+                <!-- Authorization Status -->
+                <div class="profile-info-item">
+                  <div class="profile-info-icon">
+                    <i class="bi bi-shield-check-fill"></i>
+                  </div>
+                  <div class="profile-info-content">
+                    <div class="profile-info-label">Estado de Autorización</div>
+                    <div class="profile-info-value">
+                      {{ user.card_id_authorization ? 'Autorizado' : 'No Autorizado' }}
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Grading -->
+                <div class="profile-info-item">
+                  <div class="profile-info-icon">
+                    <i class="bi bi-award-fill"></i>
+                  </div>
+                  <div class="profile-info-content">
+                    <div class="profile-info-label">Calificación</div>
+                    <div class="profile-info-value">{{ grading?.name || 'Cliente' }}</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="profile-actions">
+              <button type="button" class="btn-action btn-action-primary" (click)="openEditPersonalInfoModal()">
+                Editar Perfil
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<app-my-profile-edit-password-modal [getCurrentUser]="user"
+  #modalChildChangePassword></app-my-profile-edit-password-modal>
+
+<app-my-profile-edit-personal-info-modal #modalChildEditPersonalInfo [personalInfo]="user">
+</app-my-profile-edit-personal-info-modal>
+
+<app-edit-security-pin-modal>
+</app-edit-security-pin-modal>
+
+<app-secret-question-modal #modalChildSecretQuestion>
+</app-secret-question-modal>
+
+<app-image-profile-modal (getInfo)="getUserInfo()" #modalChildImageProfile>
+</app-image-profile-modal>

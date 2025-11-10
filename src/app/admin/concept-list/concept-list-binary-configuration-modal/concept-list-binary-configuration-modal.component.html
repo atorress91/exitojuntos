@@ -1,0 +1,36 @@
+<!-- Modal Create -->
+<ng-template #configBinaryModal let-modal>
+  <div class="modal-header createRowModal">
+    <h4 class="modal-title" id="modal-basic-title">
+      <div class="table-modal-header">
+        <div class="modal-about">
+          <div class="fw-bold p-t-10 font-17">
+            Configuración del Plan Binario
+          </div>
+        </div>
+      </div>
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true"><i class="material-icons">close</i></span>
+    </button>
+  </div>
+  <form class="register-form" [autocomplete]="off" (ngSubmit)="onAddRowSave()">
+    <div class="modal-body"></div>
+
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">Guardar</button>
+      <button
+        type="button"
+        class="btn btn-light"
+        (click)="modal.close('Close click')"
+      >
+        Cancelar
+      </button>
+    </div>
+  </form>
+</ng-template>

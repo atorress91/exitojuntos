@@ -1,0 +1,189 @@
+/* Estilos del Modal - Diseño Moderno y Profesional */
+/* Respetando el sistema de temas */
+
+/* Header mejorado con tema */
+.modal-header.editRowModal {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  border-bottom: 2px solid;
+  padding: 1.25rem 1.5rem;
+}
+
+/* Cards con sombras suaves y animación */
+.card {
+  transition: all 0.3s ease;
+  border-radius: 12px !important;
+  animation: fadeInUp 0.4s ease-out;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.12) !important;
+  }
+}
+
+.card-header {
+  border-radius: 12px 12px 0 0 !important;
+  padding: 1rem 1.25rem;
+
+  h6 {
+    font-size: 1rem;
+  }
+
+  .material-icons {
+    font-size: 24px;
+  }
+}
+
+.card-body {
+  padding: 1.5rem;
+}
+
+/* Inputs modernos con tema */
+.form-control,
+.form-select {
+  border-radius: 8px;
+  transition: all 0.3s ease;
+
+  &:focus {
+    transform: translateY(-1px);
+  }
+
+  &:hover:not(:focus) {
+    opacity: 0.9;
+  }
+}
+
+.form-control-lg {
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+}
+
+.form-select-lg {
+  padding: 0.75rem 1rem;
+  font-size: 0.95rem;
+}
+
+/* Labels con estilo respetando el tema */
+.form-label {
+  font-size: 0.875rem;
+  margin-bottom: 0.5rem;
+  letter-spacing: 0.3px;
+
+  .material-icons {
+    margin-right: 4px;
+    opacity: 0.7;
+  }
+}
+
+/* Switch personalizado */
+.custom-switch {
+  .custom-switch-indicator {
+    border-radius: 20px;
+    transition: all 0.3s ease;
+  }
+
+  .custom-switch-description {
+    font-size: 0.875rem;
+  }
+}
+
+/* Footer del modal */
+.modal-footer {
+  border-radius: 0 0 12px 12px;
+
+  .btn {
+    border-radius: 8px;
+    font-weight: 500;
+    transition: all 0.3s ease;
+    display: inline-flex;
+    align-items: center;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+  }
+}
+
+/* Animaciones para las tarjetas */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Espaciado responsive */
+@media (max-width: 768px) {
+  .modal-body {
+    padding: 1rem !important;
+  }
+
+  .card-body {
+    padding: 1rem;
+  }
+
+  .form-control-lg,
+  .form-select-lg {
+    padding: 0.625rem 0.875rem;
+    font-size: 0.9rem;
+  }
+}
+
+/* Textarea mejorado */
+textarea.form-control {
+  resize: vertical;
+  min-height: 80px;
+}
+
+/* Modal más ancho */
+::ng-deep .modal-dialog {
+  max-width: 1200px;
+}
+
+/* Scrollbar personalizado con tema */
+.modal-body {
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 10px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+
+    &:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+  }
+}
+
+/* Estado de validación mejorado - usando colores del tema */
+.form-control.ng-invalid.ng-touched {
+  border-color: var(--bs-danger, #dc3545);
+
+  &:focus {
+    border-color: var(--bs-danger, #dc3545);
+    box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.25);
+  }
+}
+
+.form-control.ng-valid.ng-touched {
+  border-color: var(--bs-success, #28a745);
+}
+
+/* Botón de cierre */
+.btn-close {
+  opacity: 0.8;
+
+  &:hover {
+    opacity: 1;
+  }
+}

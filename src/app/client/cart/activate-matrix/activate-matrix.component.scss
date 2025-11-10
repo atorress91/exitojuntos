@@ -1,0 +1,301 @@
+// Mantener estilos originales base y agregar mejoras
+
+// Loading state elegante
+.loading-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+
+  .loading-content {
+    display: flex;
+    gap: 0.5rem;
+    margin-bottom: 1rem;
+
+    .spinner-grow {
+      width: 0.75rem;
+      height: 0.75rem;
+    }
+
+    .animation-delay-200 {
+      animation-delay: 0.2s;
+    }
+
+    .animation-delay-400 {
+      animation-delay: 0.4s;
+    }
+  }
+
+  .loading-text {
+    color: #6b7280;
+    font-size: 0.875rem;
+    margin: 0;
+  }
+}
+
+// Section subtitle
+.section-subtitle {
+  font-size: 0.9rem;
+  color: #6c757d;
+  margin-bottom: 1rem;
+}
+
+// Matrices grid mejorado
+.matrices-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1rem;
+
+  @media (max-width: 768px) {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+
+.matrix-item {
+  cursor: pointer;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &:hover {
+    transform: translateY(-4px);
+  }
+
+  &.selected {
+    .matrix-card {
+      border-color: #28a745;
+      box-shadow: 0 10px 25px -5px rgba(40, 167, 69, 0.15), 0 4px 6px -2px rgba(40, 167, 69, 0.1);
+    }
+  }
+
+  .matrix-card {
+    background: white;
+    border: 2px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1.5rem;
+    height: 100%;
+    position: relative;
+    overflow: hidden;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    min-height: 220px;
+    display: flex;
+    flex-direction: column;
+
+    &:hover {
+      border-color: #007bff;
+      box-shadow: 0 10px 25px -5px rgba(0, 123, 255, 0.15), 0 4px 6px -2px rgba(0, 123, 255, 0.1);
+    }
+
+    .matrix-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 1rem;
+
+      .matrix-icon {
+        width: 48px;
+        height: 48px;
+        background: linear-gradient(135deg, #007bff, #0056b3);
+        border-radius: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        i {
+          color: white;
+          font-size: 1.25rem;
+        }
+      }
+
+      .selection-indicator {
+        font-size: 1.25rem;
+      }
+    }
+
+    .matrix-content {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+
+      .matrix-name {
+        color: #111827;
+        font-weight: 600;
+        font-size: 1.125rem;
+        margin-bottom: 1rem;
+      }
+
+      .matrix-details {
+        flex: 1;
+
+        .detail-item {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          margin-bottom: 0.75rem;
+
+          .detail-label {
+            color: #6b7280;
+            font-size: 0.875rem;
+            font-weight: 500;
+          }
+
+          .badge-type {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            border: none;
+          }
+
+          .detail-value {
+            color: #28a745;
+            font-weight: 700;
+            font-size: 1.125rem;
+          }
+        }
+      }
+    }
+
+    .status-overlay {
+      position: absolute;
+      top: 0;
+      right: 0;
+      background: #28a745;
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: 0 12px 0 12px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+  }
+}
+
+// Selection summary mejorado
+.selection-summary {
+  .summary-icon {
+    font-size: 2rem;
+  }
+
+  h6 {
+    color: #111827;
+    font-weight: 600;
+    margin-bottom: 0.25rem;
+  }
+
+  .alert {
+    border-radius: 8px;
+    padding: 1rem;
+  }
+}
+
+// Botón de activación mejorado
+.btn-activate {
+  background: linear-gradient(135deg, #28a745, #20c997);
+  border: none;
+  color: white;
+  font-weight: 600;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+
+  &:hover {
+    background: linear-gradient(135deg, #218838, #1e7e34);
+    transform: translateY(-2px);
+    box-shadow: 0 8px 20px rgba(40, 167, 69, 0.4);
+    color: white;
+  }
+
+  &:focus {
+    box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+    color: white;
+  }
+}
+
+// Empty state mejorado
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+
+  .empty-icon {
+    font-size: 4rem;
+    color: #d1d5db;
+    margin-bottom: 1.5rem;
+  }
+
+  .empty-title {
+    color: #111827;
+    font-weight: 600;
+    margin-bottom: 1rem;
+  }
+
+  .empty-description {
+    color: #6b7280;
+    margin-bottom: 2rem;
+    max-width: 400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .btn {
+    padding: 0.75rem 1.5rem;
+    font-weight: 600;
+    border-radius: 8px;
+    background: linear-gradient(135deg, #007bff, #0056b3);
+    border: none;
+    color: white;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+
+    &:hover {
+      background: linear-gradient(135deg, #0056b3, #004085);
+      transform: translateY(-2px);
+      color: white;
+    }
+  }
+}
+
+// Mantener estilos originales que funcionan bien
+#matrix-list {
+  margin-top: 1rem;
+}
+
+// Responsive adjustments
+@media (max-width: 575.98px) {
+  .matrices-grid {
+    gap: 1rem;
+  }
+
+  .matrix-item .matrix-card {
+    min-height: 200px;
+    padding: 1.25rem;
+
+    .matrix-header .matrix-icon {
+      width: 40px;
+      height: 40px;
+
+      i {
+        font-size: 1rem;
+      }
+    }
+
+    .matrix-content .matrix-name {
+      font-size: 1rem;
+    }
+  }
+}
+
+// Mantener clases originales de badges si son necesarias
+.matrix-card .badge.bg-info {
+  background-color: #17a2b8 !important;
+}
+
+.matrix-card .badge.bg-success {
+  background-color: #28a745 !important;
+}
+
+.matrix-card .badge.bg-secondary {
+  background-color: #6c757d !important;
+}

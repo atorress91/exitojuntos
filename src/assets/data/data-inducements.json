@@ -1,0 +1,18 @@
+[{
+  "id": 0,
+  "inducement":"Nemis",
+  "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  "assignmentDate":"2023-07-05 13:43:50"
+},
+{
+  "id": 1,
+  "inducement":"Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  "assignmentDate":"2023-02-02 14:08:07"
+},
+{
+  "id": 2,
+  "inducement":"Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  "description":"Lorem ipsum dolor sit amet, consectetur adipiscing elit",
+  "assignmentDate":"2023-02-06 14:32:15"
+}]

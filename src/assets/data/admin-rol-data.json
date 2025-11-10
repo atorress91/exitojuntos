@@ -1,0 +1,24 @@
+[
+  {
+    "id": 1,
+    "rol": "administrador",
+    "description": "Descripcion mas",
+    "permissions":"59",
+    "associatedUsers": "2"
+  },
+  {
+    "id": 2,
+    "rol": "SubAdministrador",
+    "description": "SubAdministrador",
+    "permissions":"29",
+    "associatedUsers": "1"
+
+  },
+  {
+    "id": 3,
+    "rol": "Afiliados",
+    "description": "Autoriza y Verifica Datos del Afiliado",
+    "permissions":"5",
+    "associatedUsers": "0"
+  }
+]

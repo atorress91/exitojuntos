@@ -1,0 +1,38 @@
+<div class="container-fluid vh-100">
+  <div class="dark-overlay-left"></div>
+  <div class="dark-overlay-right"></div>
+
+  <div class="logo-section">
+    <img src="assets/images/logo-yellow.png" alt="Logo" class="logo">
+  </div>
+
+  <div class="content-wrapper">
+    <div class="explore-section">
+      <div class="explore-content">
+        <h1 class="text-white explore-text">
+          <span>{{ 'PRODUCTS-PREVIEW.EXPLORE.LINE1' | translate }}</span><br>
+          <span>{{ 'PRODUCTS-PREVIEW.EXPLORE.LINE2' | translate }}</span><br>
+          <span>{{ 'PRODUCTS-PREVIEW.EXPLORE.LINE3' | translate }}</span><br>
+          <span class="text-exitojuntos">{{ 'PRODUCTS-PREVIEW.EXPLORE.LINE4' | translate }}</span>
+        </h1>
+      </div>
+    </div>
+
+    <div class="products-section">
+      <div class="row">
+        <div class="col-12 col-md-4" *ngFor="let item of productList;">
+          <div class="product-card">
+            <img routerLink="/signin" type="button" src="{{item.image}}" class="card-img" alt="Semilla">
+            <div class="card-footer">
+              <img src="assets/images/yellow-logo.png" class="exitojuntos-icon" alt="icon">
+              <div class="text-container">
+                <span class="product-name">{{ item.name }}</span>
+                <span class="product-price">${{ item.baseAmount }}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

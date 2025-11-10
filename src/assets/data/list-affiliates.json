@@ -1,0 +1,38 @@
+[
+  {
+    "id": 1,
+    "user": "1juanhc89",
+    "status": "Activo",
+    "affiliateMode": "Distribuidor",
+    "calification": "Activo",
+    "email": "1juanhc89@gmail.com",
+    "date": "2022-04-04 09:44:35",
+    "father": "juanga23",
+    "sponsor": "juanga23",
+    "binarySponsor": "juanga23"
+  },
+  {
+    "id": 2,
+    "user": "302940164",
+    "status": "Activo",
+    "affiliateMode": "Distribuidor",
+    "calification": "Activo",
+    "email": "lipo09@outlook.com",
+    "date": "2022-08-27 19:53:22",
+    "father": "omarmorales",
+    "sponsor": "vguerrero",
+    "binarySponsor": "gvfs1"
+  },
+  {
+    "id": 3,
+    "user": "504170189",
+    "status": "Activo",
+    "affiliateMode": "Distribuidor",
+    "calification": "Activo",
+    "email": "cordobacalderoncr@gmail.com",
+    "date": "2022-08-27 19:49:00",
+    "father": "omarmorales",
+    "sponsor": "maryu12",
+    "binarySponsor": "302940164"
+  }
+]

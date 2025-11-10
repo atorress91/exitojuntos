@@ -1,0 +1,158 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "exitojuntos": {
+      "root": "",
+      "sourceRoot": "src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "sass"
+        }
+      },
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:application",
+          "options": {
+            "outputPath": {
+              "base": "dist/main"
+            },
+            "index": "src/index.html",
+            "polyfills": [
+              "src/polyfills.ts"
+            ],
+            "tsConfig": "src/tsconfig.app.json",
+            "allowedCommonJsDependencies": [
+              "@babel/runtime/regenerator",
+              "core-js",
+              "polylabel",
+              "xlsx/dist/xlsx.core.min.js",
+              "raf",
+              "rgbcolor",
+              "jspdf-autotable",
+              "pdfmake/build/pdfmake.js",
+              "svg-gaugng e",
+              "echarts",
+
+              "chart.js",
+              "zrender/lib/svg/svg",
+              "zrender/lib/vml/vml",
+              "dragula",
+              "contra/emitter",
+              "crossvent",
+              "apexcharts",
+              "fast-deep-equal",
+              "rfdc",
+              "sweetalert2",
+              "@ckeditor/ckeditor5-build-classic"
+            ],
+            "assets": ["src/favicon.ico", "src/assets"],
+            "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "./node_modules/ngx-spinner/animations/ball-scale-multiple.css",
+              "./node_modules/bootstrap/dist/css/bootstrap.min.css",
+              "./node_modules/@swimlane/ngx-datatable/index.css",
+              "./node_modules/@swimlane/ngx-datatable/themes/material.css",
+              "./node_modules/@swimlane/ngx-datatable/assets/icons.css",
+              "./node_modules/@ng-select/ng-select/themes/default.theme.css",
+              "./node_modules/ngx-toastr/toastr.css",
+              "src/assets/scss/style.scss",
+              "./node_modules/font-awesome/css/font-awesome.css"
+            ],
+            "scripts": [
+              "./node_modules/moment/min/moment.min.js",
+              "./node_modules/chart.js/dist/chart.umd.js",
+              "./node_modules/apexcharts/dist/apexcharts.min.js",
+              "./node_modules/particles.js/particles.js"
+            ],
+            "extractLicenses": false,
+            "sourceMap": true,
+            "optimization": false,
+            "namedChunks": true,
+            "browser": "src/main.ts"
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.ts",
+                  "with": "src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "namedChunks": false,
+              "extractLicenses": true
+            },
+            "dev": {
+              "fileReplacements": [
+                {
+                  "replace": "src/environments/environment.prod.ts",
+                  "with": "src/environments/environment.ts"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "buildTarget": "exitojuntos:build"
+          },
+          "configurations": {
+            "production": {
+              "buildTarget": "exitojuntos:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "buildTarget": "exitojuntos:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "src/test.ts",
+            "polyfills": "src/polyfills.ts",
+            "tsConfig": "src/tsconfig.spec.json",
+            "karmaConfig": "src/karma.conf.js",
+            "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "src/styles.scss"
+            ],
+            "scripts": [],
+            "assets": ["src/favicon.ico", "src/assets"]
+          }
+        }
+      }
+    },
+    "exitojuntos-e2e": {
+      "root": "e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "e2e/protractor.conf.js",
+            "devServerTarget": "exitojuntos:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "exitojuntos:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "cli": {
+    "analytics": false
+  }
+}

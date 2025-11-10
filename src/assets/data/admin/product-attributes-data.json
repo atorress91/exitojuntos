@@ -1,0 +1,14 @@
+[
+  {
+    "id": 0,
+    "name": "Lista despegable"
+  },
+  {
+    "id": 1,
+    "name": "Botones de radio"
+  },
+  {
+    "id": 2,
+    "name": "Color"
+  }
+]

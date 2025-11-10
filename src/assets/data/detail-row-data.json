@@ -1,0 +1,21 @@
+[{
+    "id": 0,
+    "noFactura":"00637",
+    "fecha":"2021-05-15 10-56-03",
+    "estadoFactura":"Activa",
+    "pagado":"Pagado"
+  },
+  {
+    "id": 1,
+    "noFactura":"00845",
+    "fecha":"2021-02-23 15-56-23",
+    "estadoFactura":"Activa",
+    "pagado":"Pendiente"
+  },
+  {
+    "id": 2,
+    "noFactura":"00523",
+    "fecha":"2021-08-23 09-35-05",
+    "estadoFactura":"Inactiva",
+    "pagado":"Pagado"
+  }]

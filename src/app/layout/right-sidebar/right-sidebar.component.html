@@ -1,0 +1,30 @@
+<div class="settingSidebar" [ngClass]="isOpenSidebar ? 'showSettingPanel' : ''">
+    <a href="javascript:void(0)" class="settingPanelToggle" (click)="toggleRightSidebar()"> <i
+        class="fa fa-spin fa-cog"></i>
+    </a>
+    <div class="settingSidebar-body ps-container ps-theme-default"
+      [ngStyle]="{'position' : 'relative', 'max-height' : maxHeight+'px', 'max-width' : maxWidth+'px', 'overflow-y': 'auto'}"
+      >
+      <div class=" fade show active">
+        <div class="setting-panel-header">Setting Panel
+        </div>
+        <div class="p-15">
+          <h6 class="font-medium m-b-10">Sidebar Color</h6>
+          <div class="selectgroup selectgroup-pills sidebar-color">
+            <label class="selectgroup-item">
+              <input type="radio" name="value" value="light" [checked]="isDarTheme == false ? true : false"
+              (click)="lightThemeBtnClick()">
+              <span class="selectgroup-button selectgroup-button-icon" data-toggle="tooltip"
+                data-original-title="Light Sidebar"><i class="fas fa-sun"></i></span>
+            </label>
+            <label class="selectgroup-item">
+              <input type="radio" name="value" value="dark" [checked]="isDarTheme == true ? true : false"
+              (click)="darkThemeBtnClick()">
+              <span class="selectgroup-button selectgroup-button-icon" data-toggle="tooltip"
+                data-original-title="Dark Sidebar"><i class="fas fa-moon"></i></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

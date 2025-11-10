@@ -1,0 +1,67 @@
+export class Incentive {
+  id: number;
+  name: string;
+  description: string;
+  scope_level: number;
+  is_infinity: boolean;
+  personal_purchases: number;
+  personal_purchases_exact: boolean;
+  purchases_network: number;
+  binary_volume: number;
+  volume_points: number;
+  volume_points_network: number;
+  children_left_leg: number;
+  children_right_leg: number;
+  front_by_matrix: number;
+  front_qualif_1: number;
+  front_score_1: number;
+  front_qualif_2: number;
+  front_score_2: number;
+  front_qualif_3: number;
+  front_score_3: number;
+  exact_front_ratings: boolean;
+  leader_by_matrix: number;
+  network_leaders: number;
+  network_leaders_qualifier: number;
+  products: number;
+  affiliations: number;
+  grading: number;
+  active: number;
+  status: boolean;
+  created_at: Date;
+  updated_at: Date;
+
+  constructor() {
+    this.id = 0;
+    this.name = '';
+    this.description = '';
+    this.scope_level = 0;
+    this.is_infinity = false;
+    this.personal_purchases = 0.0;
+    this.personal_purchases_exact = false;
+    this.purchases_network = 0.0;
+    this.binary_volume = 0.0;
+    this.volume_points = 0;
+    this.volume_points_network = 0;
+    this.children_left_leg = 0;
+    this.children_right_leg = 0;
+    this.front_by_matrix = 0;
+    this.front_qualif_1 = 0;
+    this.front_score_1 = 0;
+    this.front_qualif_2 = 0;
+    this.front_score_2 = 0;
+    this.front_qualif_3 = 0;
+    this.front_score_3 = 0;
+    this.exact_front_ratings = false;
+    this.leader_by_matrix = 0;
+    this.network_leaders = 0;
+    this.network_leaders_qualifier = 0;
+    this.products = 0;
+    this.grading = 0;
+    this.affiliations = 0;
+    this.active = 0;
+    this.status = false;
+    this.created_at = new Date();
+    this.updated_at = new Date();
+  }
+}

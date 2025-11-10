@@ -1,0 +1,114 @@
+<!-- Modal Create -->
+<ng-template #calculationCreateModal let-modal>
+  <div class="modal-header createRowModal">
+    <h4 class="modal-title" id="modal-basic-title">
+      <div class="table-modal-header">
+        <div class="modal-about">
+          <div class="fw-bold p-t-10 font-17">
+            {{ 'CALCULATION-GROUPS-CREATE-MODAL.TITLE.TEXT' | translate }}
+          </div>
+        </div>
+      </div>
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true"><i class="material-icons">close</i></span>
+    </button>
+  </div>
+  <form
+    class="register-form"
+    [formGroup]="createCalculationForm"
+    [autocomplete]="off"
+    (ngSubmit)="onAddRowSave()"
+  >
+    <div class="modal-body">
+      <div class="row">
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="calculation_name">
+            {{ 'CALCULATION-GROUPS-CREATE-MODAL.LBL-NAME.TEXT' | translate }}
+            <span class="text-danger">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            id="calculation_name"
+            autocomplete="new_calculation_name"
+            formControlName="calculation_name"
+            placeholder="Nombre"
+            required="required"
+            [ngClass]="{
+              'is-invalid':
+                submitted && create_calculation_controls.calculation_name.errors
+            }"
+          />
+          <div
+            *ngIf="
+              submitted && create_calculation_controls.calculation_name.errors
+            "
+            class="invalid-feedback"
+          >
+            <div
+              *ngIf="
+                create_calculation_controls.calculation_name.errors.required
+              "
+            >
+              {{
+                'CALCULATION-GROUPS-CREATE-MODAL.MSJ-ERROR-NAME.TEXT'
+                  | translate
+              }}
+            </div>
+          </div>
+        </div>
+        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+          <label for="description">
+            {{
+              'CALCULATION-GROUPS-CREATE-MODAL.LBL-DESCRIPTION.TEXT' | translate
+            }}
+            <span class="text-danger">*</span></label
+          >
+          <input
+            type="text"
+            class="form-control"
+            formControlName="description"
+            id="description"
+            placeholder="Descripción"
+            required="required"
+            [ngClass]="{
+              'is-invalid':
+                submitted && create_calculation_controls.description.errors
+            }"
+          />
+          <div
+            *ngIf="submitted && create_calculation_controls.description.errors"
+            class="invalid-feedback"
+          >
+            <div
+              *ngIf="create_calculation_controls.description.errors.required"
+            >
+              {{
+                'CALCULATION-GROUPS-CREATE-MODAL.MSJ-ERROR-DESCRIPTION.TEXT'
+                  | translate
+              }}
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-primary">
+        {{ 'CALCULATION-GROUPS-CREATE-MODAL.BTN-SAVE.TEXT' | translate }}
+      </button>
+      <button
+        type="button"
+        class="btn btn-light"
+        (click)="modal.close('Close click')"
+      >
+        {{ 'CALCULATION-GROUPS-CREATE-MODAL.BTN-CANCEL.TEXT' | translate }}
+      </button>
+    </div>
+  </form>
+</ng-template>

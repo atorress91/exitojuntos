@@ -1,0 +1,458 @@
+<!-- Modal Create -->
+<ng-template #incentiveDetailsModal let-modal>
+  <div class="modal-header createRowModal">
+    <h4 class="modal-title" id="modal-basic-title">
+      <div class="table-modal-header">
+        <div class="modal-about">
+          <div class="fw-bold p-t-10 font-17">Detalles</div>
+        </div>
+      </div>
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true"><i class="material-icons">close</i></span>
+    </button>
+  </div>
+
+  <div class="modal-body">
+    <div class="row">
+      <div class="col">
+        <div class="padding-20">
+          <ul ngbNav #nav="ngbNav" [(activeId)]="active" class="nav-tabs">
+            <li [ngbNavItem]="1">
+              <a ngbNavLink>Datos Generales</a>
+              <ng-template ngbNavContent>
+                <div class="tab-pane">
+                  <div class="row text-center">
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                          <div class="mt-3">
+                            <span class="float-start">
+                              Nombre de Incentivo
+                            </span>
+                          </div>
+                          <div class="mt-3">
+                            <span class="float-end text-muted">
+                              {{ incentive.name }}
+                            </span>
+                          </div>
+                        </div>
+
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                          <div class="mt-3">
+                            <span class="float-start"> Descripción </span>
+                          </div>
+                          <div class="mt-3">
+                            <span class="float-end text-muted">
+                              {{ incentive.description }}</span
+                            >
+                          </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                          <div class="mt-3">
+                            <span class="float-start"> Calificación</span>
+                          </div>
+                          <div class="mt-3">
+                            <span class="float-end text-muted">
+                              <div *ngFor="let item of calificationList">
+                                <div *ngIf="incentive.grading == item.id">
+                                  {{ item.name }}
+                                </div>
+                              </div>
+                              <div *ngIf="incentive.grading == 0">Ninguna</div>
+                            </span>
+                          </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                          <div class="mt-3">
+                            <span class="float-start">
+                              Estatus de Incentivo
+                            </span>
+                          </div>
+                          <div class="mt-3">
+                            <span class="float-end text-muted">
+                              <div
+                                *ngIf="incentive.status == true"
+                                class="badge-outline col-green"
+                              >
+                                Activo
+                              </div>
+                              <div
+                                *ngIf="incentive.status == false"
+                                class="badge-outline col-red"
+                              >
+                                Inactivo
+                              </div></span
+                            >
+                          </div>
+                        </div>
+                        <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                          <div class="mt-3">
+                            <span class="float-start"> Fecha de Creación </span>
+                          </div>
+                          <div class="mt-3">
+                            <span class="float-end text-muted">{{
+                              incentive.created_at
+                            }}</span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="2">
+              <a ngbNavLink>Evaluación de Compras</a>
+              <ng-template ngbNavContent>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start"> Compras Personales </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted">{{
+                          incentive.personal_purchases
+                        }}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start"> Compras de Red </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted">{{
+                          incentive.purchases_network
+                        }}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start"> Volumen Binario </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted">{{
+                          incentive.binary_volume
+                        }}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start"> Puntos para calificar</span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted">{{
+                          incentive.volume_points
+                        }}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start">
+                          Puntos de red para calificar
+                        </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted">{{
+                          incentive.volume_points_network
+                        }}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start"> Monto Exacto </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted"
+                          ><div
+                            *ngIf="incentive.personal_purchases_exact == 1"
+                            class="badge-outline col-green"
+                          >
+                            Activo
+                          </div>
+                          <div
+                            *ngIf="incentive.personal_purchases_exact == 0"
+                            class="badge-outline col-red"
+                          >
+                            Inactivo
+                          </div></span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="3">
+              <a ngbNavLink>Directos y Calificados</a>
+              <ng-template ngbNavContent>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start">
+                          Nº de Hijos Activos en Pierna Izquierda
+                        </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted">{{
+                          incentive.children_left_leg
+                        }}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start">
+                          Nº de hijos activos en pierna derecha
+                        </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted">{{
+                          incentive.children_right_leg
+                        }}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start">
+                          Frontales Calificados 1</span
+                        >
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted">{{
+                          incentive.front_score_1
+                        }}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start">
+                          Calificación de Frontales Calificados 1
+                        </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted">
+                          <div *ngFor="let item of calificationList">
+                            <div *ngIf="incentive.front_qualif_1 == item.id">
+                              {{ item.name }}
+                            </div>
+                          </div>
+                          <div *ngIf="incentive.front_qualif_2 == 0">
+                            Ninguna
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start">
+                          Frontales Calificados 2
+                        </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted">{{
+                          incentive.front_score_2
+                        }}</span>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start">
+                          Calificación de Frontales Calificados 2
+                        </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted">
+                          <div *ngFor="let item of calificationList">
+                            <div *ngIf="incentive.front_qualif_2 == item.id">
+                              {{ item.name }}
+                            </div>
+                          </div>
+                          <div *ngIf="incentive.front_qualif_2 == 0">
+                            Ninguna
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start">
+                          Frontales Calificados 3
+                        </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted">{{
+                          incentive.front_score_3
+                        }}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start">
+                          Calificación de Frontales Calificados 3
+                        </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted">
+                          <div *ngFor="let item of calificationList">
+                            <div *ngIf="incentive.front_qualif_3 == item.id">
+                              {{ item.name }}
+                            </div>
+                          </div>
+                          <div *ngIf="incentive.front_qualif_2 == 0">
+                            Ninguna
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start">
+                          Calificación Exacta (Frontales Calificados)
+                        </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted"
+                          ><div
+                            *ngIf="incentive.exact_front_ratings == true"
+                            class="badge-outline col-green"
+                          >
+                            Activo
+                          </div>
+                          <div
+                            *ngIf="incentive.exact_front_ratings == false"
+                            class="badge-outline col-red"
+                          >
+                            Inactivo
+                          </div></span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="4">
+              <a ngbNavLink>Productos y Afiliaciones</a>
+              <ng-template ngbNavContent>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start"> Productos </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted"
+                          ><div *ngFor="let item of productListData">
+                            <div *ngIf="incentive.products == item.id">
+                              {{ item.name }}
+                            </div>
+                          </div>
+                          <div *ngIf="incentive.products == 0">Ninguna</div>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start"> Pago por Afiliación </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted"
+                          ><div *ngFor="let item of membershipData">
+                            <div *ngIf="incentive.affiliations == item.id">
+                              {{ item.name }}
+                            </div>
+                          </div>
+                          <div *ngIf="incentive.affiliations == 0">Ninguna</div>
+                        </span>
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start"> Condición </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted"
+                          >Tener los seleccionados</span
+                        >
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+            <li [ngbNavItem]="5">
+              <a ngbNavLink>Lideres en Red</a>
+              <ng-template ngbNavContent>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start"> Nivel de Alcance </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted">{{
+                          incentive.scope_level
+                        }}</span>
+                      </div>
+                    </div>
+
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start"> Lideres en Red </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted">{{
+                          incentive.network_leaders
+                        }}</span>
+                      </div>
+                    </div>
+                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+                      <div class="mt-3">
+                        <span class="float-start"> Calificación lideres </span>
+                      </div>
+                      <div class="mt-3">
+                        <span class="float-end text-muted">
+                          <div *ngFor="let item of calificationList">
+                            <div
+                              *ngIf="
+                                incentive.network_leaders_qualifier == item.id
+                              "
+                            >
+                              {{ item.name }}
+                            </div>
+                          </div>
+                          <div *ngIf="incentive.network_leaders_qualifier == 0">
+                            Ninguna
+                          </div>
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </ng-template>
+            </li>
+          </ul>
+          <div [ngbNavOutlet]="nav" class="mt-2"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="modal-footer">
+    <button type="submit" class="btn btn-primary">Guardar</button>
+    <button
+      type="button"
+      class="btn btn-light"
+      (click)="modal.close('Close click')"
+    >
+      Cancelar
+    </button>
+  </div>
+</ng-template>

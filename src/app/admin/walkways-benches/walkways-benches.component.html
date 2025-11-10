@@ -1,0 +1,122 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style ">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">Configuraciones</h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main">
+        <i class="fas fa-home font-17"></i></a>
+    </li>
+    <li class="breadcrumb-item">Bancos</li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>
+              Bancos
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <ngx-datatable
+                  #table
+                  class="material"
+                  [rows]="rows"
+                  [loadingIndicator]="loadingIndicator"
+                  columnMode="force"
+                  [headerHeight]="50"
+                  [footerHeight]="50"
+                  rowHeight="auto"
+                  [limit]="10"
+                  [scrollbarH]="scrollBarHorizontal"
+                  [reorderable]="reorderable"
+                >
+                  <ngx-datatable-column
+                    name="Banco"
+                  >
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.bankName }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column
+                    name="Descripción"
+                  >
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.description }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column
+                    name="Activo"
+                  >
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.Status }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column
+                    name="{{ 'USERS-LIST-PAGE.COL-ACTIONS.TEXT' | translate }}"
+                    sortable="false"
+                  >
+                    <ng-template
+                      ngx-datatable-cell-template
+                    >
+                      <div ngbDropdown container="body">
+                        <button
+                          type="button"
+                          class="btn btn-outline-primary btn-sm"
+                          ngbDropdownToggle
+                        >
+                          {{ 'USERS-LIST-PAGE.COL-ACTIONS.TEXT' | translate }}
+                        </button>
+                        <div ngbDropdownMenu>
+                          <!--                          <a
+                                                      ngbDropdownItem
+                                                      id="btn-edit"
+                                                      (click)="
+                                                        modalChildEdit.editOpenModal(
+                                                          modalChildEdit['userEditModal'],
+                                                          row
+                                                        )
+                                                      "
+                                                    >
+                                                      <i class="fas fa-edit"></i>
+                                                      <span style="margin-left: 10px">{{
+                                                        'USERS-LIST-PAGE.BTN-EDIT.TEXT' | translate
+                                                        }}</span>
+                                                    </a>
+                                                    <a
+                                                      ngbDropdownItem
+                                                      id="btn-delete"
+                                                      (click)="deleteSingleRow(row.id)"
+                                                    >
+                                                      <i class="fas fa-trash-alt"></i>
+                                                      <span style="margin-left: 10px">Delete</span>
+                                                    </a>
+                                                    <a ngbDropdownItem id="btn-detail">
+                                                      <i class="fas fa-file-import"></i>
+                                                      <span
+                                                        style="margin-left: 10px"
+                                                        (click)="
+                                                          modalChildDetail.detailOpenModal(
+                                                            modalChildDetail['userDetailModal'],
+                                                            row
+                                                          )
+                                                        "
+                                                      >Details</span
+                                                      >
+                                                    </a>-->
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,134 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">
+        {{ 'MENUITEMS.COMMISSIONS.TEXT' | translate }}
+      </h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+    </li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>
+              {{
+              'COMMISSIONS-BALANCE-PAGE.COMMISSIONS-TITLE.TEXT' | translate
+              }}
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="table-search-area">
+                      <div>
+                        <div class="form-group">
+                          <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                              <div class="input-group-text">
+                                <i-feather name="search" style="color: #96a2b4;"></i-feather>
+                              </div>
+                            </div>
+                            <input style="background-color: white;" type="text" class="form-control"
+                              id="inlineFormInputGroup" (keyup)='updateFilter($event)' aria-label="Search box"
+                              placeholder="{{'INDUCEMENTS-PAGE.SEARCH.TEXT' | translate}}">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col align-self-end">
+                    <ul class="nav justify-content-end">
+                      <li class="nav-item">
+                        <button type="button" class="btn btn-outline-#BEEDE6 col-order-1">
+                          <i class="bi bi-clipboard-check"></i>
+                          {{ 'INDUCEMENTS-PAGE.BTN-COPY.TEXT' | translate }}
+                        </button>
+                      </li>
+                      <li class="nav-item">
+                        <button type="button" class="btn btn-outline-#BEEDE6 col-order-2">
+                          <i class="bi bi-printer"></i>
+                          CSV
+                        </button>
+                      </li>
+                      <li class="nav-item">
+                        <button type="button" class="btn btn-outline-#BEEDE6 col-order-3">
+                          <i class="bi bi-printer"></i>
+                          Excel
+                        </button>
+                      </li>
+                      <li class="nav-item">
+                        <button type="button" class="btn btn-outline-#BEEDE6 col-order-4">
+                          <i class="bi bi-printer"></i>
+                          PDF
+                        </button>
+                      </li>
+                      <li class="nav-item">
+                        <button type="button" class="btn btn-outline-#BEEDE6 col-order-5">
+                          <i class="bi bi-printer"></i>
+                          {{ 'INDUCEMENTS-PAGE.BTN-PRINT.TEXT' | translate }}
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator"
+                  columnMode="force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10"
+                  [scrollbarH]="scrollBarHorizontal" [reorderable]="reorderable">
+                  <ngx-datatable-column name="{{
+                      'COMMISSIONS-BALANCE-PAGE.ROW-DATE.TEXT' | translate
+                    }}">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.date }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="{{
+                      'COMMISSIONS-BALANCE-PAGE.ROW-CONCEPT.TEXT' | translate
+                    }}">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.concept }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="{{
+                      'COMMISSIONS-BALANCE-PAGE.ROW-CREDITS.TEXT' | translate
+                    }}">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <p class="text-success">{{ row.credits }}</p>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="{{
+                      'COMMISSIONS-BALANCE-PAGE.ROW-DEBITS.TEXT' | translate
+                    }}">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <p class="text-danger">{{ row.debits }}</p>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="{{
+                      'COMMISSIONS-BALANCE-PAGE.ROW-STATE.TEXT' | translate
+                    }}">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <p>{{ row.state }}</p>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="{{
+                      'COMMISSIONS-BALANCE-PAGE.ROW-RESIDUALS-PAID.TEXT'
+                        | translate
+                    }}">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <p>{{ row.residualsPaid }}</p>
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

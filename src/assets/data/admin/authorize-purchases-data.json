@@ -1,0 +1,32 @@
+[
+  {
+    "id": 0,
+    "affiliate": "1juanhc89",
+    "order": "20220517111752VM",
+    "date": "2022-05-17 11:17:52",
+    "paidMethod": "COINPAYMENTS",
+    "bank": "COINPAYMENTS",
+    "support": "ecojavier",
+    "transactionDate": "0000-00-00"
+  },
+  {
+    "id": 1,
+    "affiliate": "1juanhc89",
+    "order": "20220517121622TL",
+    "date": "2022-05-17 11:17:52",
+    "paidMethod": "COINPAYMENTS",
+    "bank": "COINPAYMENTS",
+    "support": "ecojavier",
+    "transactionDate": "0000-00-00"
+  },
+  {
+    "id": 2,
+    "affiliate": "nauzet",
+    "order": "20220517121622TL",
+    "date": "2022-05-17 11:17:52",
+    "paidMethod": "COINPAYMENTS",
+    "bank": "COINPAYMENTS",
+    "support": "ecojavier",
+    "transactionDate": "0000-00-00"
+  }
+]

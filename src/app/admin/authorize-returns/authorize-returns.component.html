@@ -1,0 +1,131 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">
+        {{ 'ADMIN-ITEMS.PURCHASES.TEXT' | translate }}
+      </h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+    </li>
+    <li class="breadcrumb-item">
+      Autorizar devoluciones
+    </li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>
+              Lista de devoluciones por autorizar
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-sm-3">
+                    <div class="table-search-area">
+                      <div class="form-group">
+                        <div class="input-group">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">
+                              <i-feather name="search" style="color: #0b4423"></i-feather>
+                            </div>
+                          </div>
+                          <input style="background-color: white" type="text" class="form-control"
+                                 id="inlineFormInputGroup" (keyup)="updateFilter($event)" aria-label="Search box"
+                                 placeholder="{{
+                              'AUTHORIZE-AFFILIATES.SEARCH.TEXT' | translate
+                            }}"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col align-self-end">
+                    <ul class="nav justify-content-end">
+                      <li class="nav-item m-2">
+                        <button type="button" class="btn btn-primary">
+                          <i class="bi bi-clipboard-check"></i>
+                          {{ 'AUTHORIZE-PURCHASES.BTN-COPY.TEXT' | translate }}
+                        </button>
+                      </li>
+
+                      <li class="nav-item m-2">
+                        <button type="button" class="btn btn-primary">
+                          <i class="bi bi-printer"></i>
+                          {{ 'AUTHORIZE-PURCHASES.BTN-PRINT.TEXT' | translate }}
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator"
+                               columnMode="force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto"
+                               [selectionType]="'checkbox'" [limit]="10" [scrollbarH]="scrollBarHorizontal"
+                               [reorderable]="reorderable">
+
+                  <ngx-datatable-column name="Afiliado">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.adminUserName }}
+                    </ng-template>
+                  </ngx-datatable-column>
+
+                  <ngx-datatable-column name="Monto">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.amount }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Concepto">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.concept }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Fecha solicitud" sortable="false">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.creationDate }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Status">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div *ngIf="row.status == 0" class="badge-outline col-yellow">
+                        Pendiente
+                      </div>
+                      <div *ngIf="row.status == 1" class="badge-outline col-green">
+                        Aprobada
+                      </div>
+                      <div *ngIf="row.status == 2" class="badge-outline col-red">
+                        Cancelada
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Acciones" sortable="false">
+                    <ng-template let-value="value" let-row="row" let-rowIndex="rowIndex" ngx-datatable-cell-template>
+                      <div ngbDropdown container="body">
+                        <button type="button" class="btn btn-outline-primary btn-sm" ngbDropdownToggle>
+                          Acciones
+                        </button>
+                        <div ngbDropdownMenu>
+                          <a ngbDropdownItem id="btn-approve" (click)="confirmTransaction(1,row)">
+                            <i class="bi bi-check"></i>
+                            <span style="margin-left: 10px">Aprobar solicitud</span>
+                          </a>
+                          <a ngbDropdownItem id="btn-deny" (click)="confirmTransaction(0,row)">
+                            <i class="bi bi-x-circle"></i>
+                            <span style="margin-left: 10px">Rechazar
+                              solicitud</span>
+                          </a>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

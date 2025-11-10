@@ -1,0 +1,96 @@
+$connectorHeight: 1em;
+$boxColor: #0f111d;
+$connectorColor: #96a2b4;
+
+$minBoxSize: 32px;
+$maxBoxSize: 100px;
+
+app-binary-genealogical-tree {
+    display: inline-flex;
+    position: relative;
+    flex-direction: column;
+    align-items: center;
+    flex-wrap: wrap;
+    padding-bottom: 5px;
+}
+
+.ng13-org-chart-entity {
+    margin: 0 1em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    transition: margin 250ms;
+}
+
+.ng13-org-chart-entity-border {
+    border-left: 2px solid $connectorColor;
+    border-top: 2px solid $connectorColor;
+}
+
+.ng13-org-chart-zoom-button-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.ng13-org-chart-sub-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.ng13-org-chart-container {
+    display: flex;
+    flex: 1;
+}
+
+.ng13-org-chart-connector {
+    flex: 1;
+}
+
+.ng13-org-chart-connector-container {
+    display: flex;
+}
+
+
+.ng13-org-chart-entity-connector {
+    height: $connectorHeight;
+    transition: height 250ms;
+}
+
+.ng13-org-chart-entity-box {
+    position: relative;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid $boxColor;
+    background-color: $boxColor;
+    border-radius: 8px;
+    box-shadow: 0 .5rem 1rem #5c53d9 !important;
+    max-width: $maxBoxSize;
+    max-height: $maxBoxSize;
+    min-width: $minBoxSize;
+    min-height: $minBoxSize;
+    overflow: hidden;
+    transition: max-width 250ms, max-height 250ms, border-radius 250ms, padding 250ms, margin 250ms;
+}
+
+.ng13-org-chart-zoom-out {
+    .ng13-org-chart-entity-box {
+        &:not(:hover) {
+            max-width: $minBoxSize;
+            max-height: $minBoxSize;
+            border-radius: 50%;
+            margin: 0;
+            padding: 0;
+        }
+    }
+
+    .ng13-org-chart-entity-connector {
+        height: 0.5em;
+    }
+
+    .ng13-org-chart-entity {
+        margin: 0 0.25em;
+    }
+}

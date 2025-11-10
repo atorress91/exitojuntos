@@ -1,0 +1,26 @@
+[
+  {
+    "id": 0,
+    "date": "2022-10-31 22:33:06",
+    "affiliate": "fortunamp",
+    "name": "Marcela Paiz Gutierrez",
+    "concept": "Comisión pasado a la billetera",
+    "amount": "657.36"
+  },
+  {
+    "id": 1,
+    "date": "2022-10-31 22:33:06",
+    "affiliate": "aliss1",
+    "name": "alicia flores madrigal",
+    "concept": "Comisión pasado a la billetera",
+    "amount": "10.00"
+  },
+  {
+    "id": 2,
+    "date": "2022-10-31 22:33:06",
+    "affiliate": "alexbh",
+    "name": "Alejandro Oscar Buenahora Moral",
+    "concept": "Comisión pasado a la billetera",
+    "amount": "15.00"
+  }
+]

@@ -1,0 +1,275 @@
+<ng-template #conceptDetailsModal let-modal>
+  <div class="modal-header editRowModal">
+    <h4 class="modal-title" id="modal-basic-title">
+      <div class="table-modal-header">
+        <div class="modal-about">
+          <div class="fw-bold p-t-10 font-17">
+            {{ 'CONCEPT-LIST-DETAILS-MODAL.TITLE.TEXT' | translate }}
+          </div>
+        </div>
+      </div>
+    </h4>
+    <button
+      type="button"
+      class="close"
+      aria-label="Close"
+      (click)="modal.dismiss()"
+    >
+      <span aria-hidden="true"><i class="material-icons">close</i></span>
+    </button>
+  </div>
+  <div class="modal-body">
+    <div class="row">
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+        <div class="mt-3">
+          <span class="float-start">
+            {{ 'CONCEPT-LIST-DETAILS-MODAL.LBL-CONCEPT-NAME.TEXT' | translate }}
+          </span>
+        </div>
+        <div class="mt-3">
+          <span class="float-end text-muted">
+            {{ conceptListModel.name }}
+          </span>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+        <div class="mt-3">
+          <span class="float-start">
+            {{
+              'CONCEPT-LIST-DETAILS-MODAL.LBL-CALCULATE-GROUP.TEXT' | translate
+            }}
+          </span>
+        </div>
+        <div class="mt-3">
+          <span class="float-end text-muted"
+            >{{ conceptListModel.paymentGroup.name }}
+          </span>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+        <div class="mt-3">
+          <span class="float-start">
+            {{ 'CONCEPT-LIST-DETAILS-MODAL.LBL-PAID-CONCEPT.TEXT' | translate }}
+          </span>
+        </div>
+        <div class="mt-3">
+          <span class="float-end text-muted">
+            <div *ngIf="conceptListModel.payConcept == 1">
+              Patrocinador Personal(Matrix Unilevel)
+            </div>
+            <div *ngIf="conceptListModel.payConcept == 2">
+              Patrocinador de Ubicación(Matrix Forzada)
+            </div>
+          </span>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+        <div class="mt-3">
+          <span class="float-start"
+            >{{
+              'CONCEPT-LIST-DETAILS-MODAL.LBL-CALCULATE-CONCEPT.TEXT'
+                | translate
+            }}
+          </span>
+        </div>
+        <div class="mt-3">
+          <span class="float-end text-muted">
+            <div *ngIf="conceptListModel.calculateBy == 1">
+              Calificación Igual (==)
+            </div>
+            <div *ngIf="conceptListModel.calculateBy == 2">
+              Calificación ó Mayor (>=)
+            </div>
+          </span>
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+        <div class="mt-3">
+          <span class="float-start">
+            {{
+              'CONCEPT-LIST-DETAILS-MODAL.LBL-COMPRESSION-POSITION.TEXT'
+                | translate
+            }}
+          </span>
+        </div>
+        <div class="mt-3">
+          <span class="float-end text-muted"
+            ><div
+              *ngIf="conceptListModel.compression == true"
+              class="badge-outline col-green"
+            >
+              Activo
+            </div>
+            <div
+              *ngIf="conceptListModel.compression == false"
+              class="badge-outline col-red"
+            >
+              Inactivo
+            </div></span
+          >
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+        <div class="mt-3">
+          <span class="float-start">
+            {{
+              'CONCEPT-LIST-DETAILS-MODAL.LBL-EQUALIZATION-BONO.TEXT'
+                | translate
+            }}</span
+          >
+        </div>
+        <div class="mt-3">
+          <span class="float-end text-muted"
+            ><div
+              *ngIf="conceptListModel.equalization == true"
+              class="badge-outline col-green"
+            >
+              Activo
+            </div>
+            <div
+              *ngIf="conceptListModel.equalization == false"
+              class="badge-outline col-red"
+            >
+              Inactivo
+            </div></span
+          >
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+        <div class="mt-3">
+          <span class="float-start">
+            {{ 'CONCEPT-LIST-DETAILS-MODAL.LBL-ACTIVE-DATE.TEXT' | translate }}
+          </span>
+        </div>
+        <div class="mt-3">
+          <span class="float-end text-muted"
+            ><div
+              *ngIf="conceptListModel.active == true"
+              class="badge-outline col-green"
+            >
+              Activo
+            </div>
+            <div
+              *ngIf="conceptListModel.active == false"
+              class="badge-outline col-red"
+            >
+              Inactivo
+            </div></span
+          >
+        </div>
+      </div>
+      <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 mb-2">
+        <div class="mt-3">
+          <span class="float-start">
+            {{ 'CONCEPT-LIST-DETAILS-MODAL.LBL-STATE.TEXT' | translate }}
+          </span>
+        </div>
+        <div class="mt-3">
+          <span class="float-end text-muted"
+            ><div
+              *ngIf="conceptListModel.status == true"
+              class="badge-outline col-green"
+            >
+              Activo
+            </div>
+            <div
+              *ngIf="conceptListModel.status == false"
+              class="badge-outline col-red"
+            >
+              Inactivo
+            </div></span
+          >
+        </div>
+      </div>
+    </div>
+
+    <hr />
+    <div class="row justify-content-center">
+      <div class="col-12">
+        <div class="card author-box">
+          <div class="card-body">
+            <div class="author-box-center">
+              <h4>
+                {{
+                  'CONCEPT-LIST-DETAILS-MODAL.LBL-CONCEPT-DETAILS.TEXT'
+                    | translate
+                }}
+              </h4>
+            </div>
+            <div class="row">
+              <div class="col">
+                <ngx-datatable
+                  #table
+                  class="material"
+                  [rows]="rows"
+                  [loadingIndicator]="loadingIndicator"
+                  columnMode="force"
+                  [headerHeight]="50"
+                  [footerHeight]="50"
+                  rowHeight="auto"
+                  [limit]="10"
+                  [scrollbarH]="scrollBarHorizontal"
+                  [reorderable]="reorderable"
+                >
+                  <ngx-datatable-column
+                    name="{{
+                      'CONCEPT-LIST-DETAILS-MODAL.COL-LEVEL.TEXT' | translate
+                    }}"
+                  >
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.level }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column
+                    name="{{
+                      'CONCEPT-LIST-DETAILS-MODAL.COL-PERCENTAGE.TEXT'
+                        | translate
+                    }}"
+                  >
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.percentage }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column
+                    name="{{
+                      'CONCEPT-LIST-DETAILS-MODAL.COL-CALIFICATION.TEXT'
+                        | translate
+                    }}"
+                  >
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div *ngFor="let item of calificationList">
+                        <div *ngIf="row.equalization == item.id">
+                          {{ item.name }}
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column
+                    name="{{
+                      'CONCEPT-LIST-DETAILS-MODAL.COL-STATE.TEXT' | translate
+                    }}"
+                  >
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div
+                        *ngIf="row.status == true"
+                        class="badge-outline col-green"
+                      >
+                        Activo
+                      </div>
+                      <div
+                        *ngIf="row.status == false"
+                        class="badge-outline col-red"
+                      >
+                        Inactivo
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</ng-template>

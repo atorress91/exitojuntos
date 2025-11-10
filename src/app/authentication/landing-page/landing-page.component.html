@@ -1,0 +1,279 @@
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-container">
+    <div class="navbar-logo">
+      <div class="logo-icon">
+        <img [src]="navbarIcon" alt="GoldTrade" />
+      </div>
+      <div class="logo-text">
+        <p>GoldTrade</p>
+      </div>
+    </div>
+
+    <div class="navbar-links">
+      <a href="#servicios" class="nav-link">Servicios</a>
+      <a href="#nosotros" class="nav-link">Nosotros</a>
+      <a href="#testimonios" class="nav-link">Testimonios</a>
+      <a href="#contacto" class="nav-link">Contacto</a>
+    </div>
+
+    <div class="navbar-actions">
+      <button class="btn-navbar-secondary" routerLink="/authentication/signin">Iniciar Sesión</button>
+      <button class="btn-navbar-primary" routerLink="/authentication/signup">Comenzar</button>
+    </div>
+  </div>
+</nav>
+
+<!-- App Container -->
+<div class="app-container">
+
+  <!-- Hero Section -->
+  <section class="hero-section" id="inicio">
+    <div class="hero-background">
+      <!-- Decorative particles -->
+      <div class="particle" *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20]"
+        [attr.data-index]="i"></div>
+    </div>
+
+    <div class="hero-glow">
+      <div class="glow-1"></div>
+      <div class="glow-2"></div>
+    </div>
+
+    <div class="hero-content">
+      <div class="hero-badge">
+        <img [src]="heroBadgeIcon" alt="Premium" class="badge-icon" />
+        <span>Trading Premium</span>
+      </div>
+
+      <h1 class="hero-title">ÉXITO JUNTOS</h1>
+
+      <p class="hero-subtitle">
+        Unidos en el camino al éxito. Inversiones inteligentes, rendimientos excepcionales y un futuro financiero
+        brillante.
+      </p>
+
+      <div class="hero-buttons">
+        <button class="btn-primary-gold" routerLink="/authentication/signup">
+          Comenzar a Invertir
+          <img [src]="primaryCtaArrow" alt="arrow" />
+        </button>
+        <button class="btn-secondary-gold">Agendar Consulta</button>
+      </div>
+
+      <div class="hero-metrics">
+        <div class="metric" *ngFor="let metric of heroMetrics">
+          <div class="metric-value">{{ metric.value }}</div>
+          <div class="metric-label">{{ metric.label }}</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="features-section" id="servicios">
+    <div class="section-divider"></div>
+
+    <div class="features-container">
+      <div class="section-header">
+        <p class="section-tag">NUESTROS SERVICIOS</p>
+        <h2 class="section-title">Inversión de Elite</h2>
+        <p class="section-description">Ofrecemos servicios premium diseñados para inversores que buscan excelencia</p>
+      </div>
+
+      <div class="features-grid">
+        <div class="feature-card" *ngFor="let card of featureCards">
+          <div class="feature-icon">
+            <img [src]="card.icon" alt="{{ card.title }}" />
+          </div>
+          <h3 class="feature-title">{{ card.title }}</h3>
+          <p class="feature-description">{{ card.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Trading Section -->
+  <section class="trading-section">
+    <div class="trading-glow"></div>
+
+    <div class="trading-container">
+      <div class="trading-content">
+        <p class="section-tag">TRADING PROFESIONAL</p>
+        <h2 class="trading-title">
+          Tecnología que<br />
+          <span class="text-gradient">Multiplica Resultados</span>
+        </h2>
+        <p class="trading-description">
+          Nuestra plataforma utiliza inteligencia artificial y análisis predictivo para identificar oportunidades antes
+          que el mercado.
+        </p>
+
+        <div class="trading-highlights">
+          <div class="highlight-item" *ngFor="let highlight of tradingHighlights">
+            <div class="highlight-icon">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <path d="M13.3334 4L6.00002 11.3333L2.66669 8" stroke="#d4af37" stroke-width="2" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </div>
+            <span>{{ highlight }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="trading-image-container">
+        <div class="trading-image">
+          <img [src]="tradingImage" alt="Trading Dashboard" />
+          <div class="image-overlay"></div>
+        </div>
+        <div class="trading-stat">
+          <p class="stat-label">Rendimiento Anual</p>
+          <p class="stat-value">+142.5%</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="how-it-works-section">
+    <div class="section-container">
+      <div class="section-header">
+        <p class="section-tag">PROCESO SIMPLE</p>
+        <h2 class="section-title">Cómo Funciona</h2>
+        <p class="section-description">En solo 4 pasos simples, estarás en camino hacia el éxito financiero</p>
+      </div>
+
+      <div class="steps-container">
+        <div class="steps-line"></div>
+        <div class="step" *ngFor="let step of processSteps">
+          <div class="step-icon-wrapper">
+            <div class="step-number">{{ step.number }}</div>
+            <div class="step-icon">
+              <img [src]="step.icon" alt="{{ step.title }}" />
+            </div>
+          </div>
+          <h3 class="step-title">{{ step.title }}</h3>
+          <p class="step-description">{{ step.description }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section" id="testimonios">
+    <div class="testimonials-glow"></div>
+
+    <div class="section-container">
+      <div class="section-header">
+        <p class="section-tag">TESTIMONIOS</p>
+        <h2 class="section-title">Historias de Éxito</h2>
+        <p class="section-description">Miles de inversores ya están alcanzando sus metas financieras</p>
+      </div>
+
+      <div class="testimonials-grid">
+        <div class="testimonial-card" *ngFor="let testimonial of testimonials">
+          <img [src]="testimonialQuoteIcon" alt="quote" class="quote-icon" />
+
+          <div class="testimonial-rating">
+            <img *ngFor="let i of [1,2,3,4,5]" [src]="testimonial.ratingIcon" alt="star" class="star-icon" />
+          </div>
+
+          <p class="testimonial-quote">{{ testimonial.quote }}</p>
+
+          <div class="testimonial-author">
+            <img [src]="testimonial.avatar" alt="{{ testimonial.name }}" class="author-avatar" />
+            <div class="author-info">
+              <p class="author-name">{{ testimonial.name }}</p>
+              <p class="author-role">{{ testimonial.role }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-glow"></div>
+
+    <div class="cta-card">
+      <img [src]="brandIcon" alt="icon" class="cta-icon" />
+
+      <h2 class="cta-title">
+        Comienza Tu<br />
+        <span class="text-gradient">Viaje al Éxito</span>
+      </h2>
+
+      <p class="cta-description">
+        Únete a miles de inversores que ya están construyendo su futuro financiero. La oportunidad es ahora.
+      </p>
+
+      <div class="cta-buttons">
+        <button class="btn-primary-gold" routerLink="/authentication/signup">
+          Abrir Cuenta Gratis
+          <img [src]="primaryCtaArrow" alt="arrow" />
+        </button>
+        <button class="btn-secondary-gold">Hablar con un Experto</button>
+      </div>
+
+      <div class="cta-stats">
+        <div class="cta-stat" *ngFor="let stat of ctaStats">
+          <p class="stat-value">{{ stat.value }}</p>
+          <p class="stat-label">{{ stat.label }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer-section" id="contacto">
+    <div class="footer-container">
+      <div class="footer-top">
+        <div class="footer-brand">
+          <div class="footer-logo">
+            <div class="logo-icon">
+              <img [src]="brandIcon" alt="GoldTrade" />
+            </div>
+            <p class="logo-text">GoldTrade</p>
+          </div>
+          <p class="footer-tagline">Inversiones inteligentes para un futuro brillante.</p>
+        </div>
+
+        <div class="footer-links" *ngFor="let linkGroup of footerLinks">
+          <h4 class="footer-heading">{{ linkGroup.heading }}</h4>
+          <ul class="footer-list">
+            <li *ngFor="let link of linkGroup.items">
+              <a [href]="link.href">{{ link.label }}</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer-contact">
+          <h4 class="footer-heading">Contacto</h4>
+          <ul class="footer-list">
+            <li class="contact-item">
+              <img [src]="contactIcons.mail" alt="email" />
+              <span>info@goldtrade.com</span>
+            </li>
+            <li class="contact-item">
+              <img [src]="contactIcons.phone" alt="phone" />
+              <span>+1 (555) 123-4567</span>
+            </li>
+            <li class="contact-item">
+              <img [src]="contactIcons.location" alt="location" />
+              <span>Wall Street, New York</span>
+            </li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p class="footer-copyright">© 2025 GoldTrade. Todos los derechos reservados.</p>
+        <p class="footer-disclaimer">Las inversiones conllevan riesgos. El rendimiento pasado no garantiza resultados
+          futuros.</p>
+      </div>
+    </div>
+  </footer>
+
+</div>

@@ -1,0 +1,593 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">
+        {{ 'ADMIN-ITEMS.PRODUCTS-SERVICES.TEXT' | translate }}
+      </h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main">
+        <i class="fas fa-home font-17"></i
+        >{{ 'PRODUCTS-SERVICES-CONFIGURATION.TITLE.TEXT' | translate }}</a
+      >
+    </li>
+    <li class="breadcrumb-item"></li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+            <h4>
+              {{ 'PRODUCTS-SERVICES-CONFIGURATION.SUBTITLE.TEXT' | translate }}
+            </h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col">
+                <div class="padding-20">
+                  <ul
+                    ngbNav
+                    #nav="ngbNav"
+                    [(activeId)]="active"
+                    class="nav-tabs"
+                  >
+                    <li [ngbNavItem]="1">
+                      <a ngbNavLink>Configuración de Tienda</a>
+                      <ng-template ngbNavContent>
+                        <form
+                          class="register-form"
+                          [formGroup]="productConfigurationForm"
+                          (ngSubmit)="onSaveProductConfiguration()"
+                        >
+                          <div class="tab-pane">
+                            <div class="card-body">
+                              <div class="row align-items-center mb-3">
+                                <div class="col-12 col-xl-4 text-center">
+                                  <span placement="bottom" ngbTooltip=""
+                                  >Activar sistema de envio</span
+                                  >
+                                  <div class="d-inline-block">
+                                    <input
+                                      class="form-check-input ms-2 me-2"
+                                      type="checkbox"
+                                      name="activate_shipping_system"
+                                      formControlName="activate_shipping_system"
+                                      id="activate_shipping_system"
+                                      value=""
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="activate_shipping_system"
+                                    >Activar</label
+                                    >
+                                  </div>
+                                </div>
+                                <div class="col-12 col-xl-4 text-center">
+                                  <span placement="bottom" ngbTooltip=""
+                                  >Activar modulo pagos pasivos</span
+                                  >
+                                  <div class="d-inline-block">
+                                    <input
+                                      class="form-check-input ms-2 me-2"
+                                      type="checkbox"
+                                      name="passive_payments_module"
+                                      formControlName="passive_payments_module"
+                                      id="passive_payments_module"
+                                      value=""
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="passive_payments_module"
+                                    >Activar</label
+                                    >
+                                  </div>
+                                </div>
+                                <div class="col-12 col-xl-4 text-center">
+                                  <span placement="bottom" ngbTooltip=""
+                                  >Activar tienda publica</span
+                                  >
+                                  <div class="d-inline-block">
+                                    <input
+                                      class="form-check-input ms-2 me-2"
+                                      type="checkbox"
+                                      formControlName="activate_public_store"
+                                      name="activate_public_store"
+                                      id="activate_public_store"
+                                      value=""
+                                    />
+                                    <label
+                                      class="form-check-label"
+                                      for="activate_public_store"
+                                    >Activar</label
+                                    >
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row align-items-center mb-3">
+                                <div
+                                  class="form-group col-12 col-xl-4 text-center"
+                                >
+                                  <label
+                                    for="days_product_label"
+                                    class="form-label"
+                                  >Un producto se etiquetara como NUEVO
+                                    durante:</label
+                                  >
+                                  <div class="input-group">
+                                    <input
+                                      type="number"
+                                      id="days_product_label"
+                                      min="0"
+                                      name="days_product_label"
+                                      formControlName="days_product_label"
+                                      placeholder="1 Día"
+                                      class="form-control"
+                                      value=""
+                                    />
+                                    <div
+                                      class="input-group-text"
+                                      id="btnGroupAddon"
+                                      placement="bottom"
+                                      ngbTooltip="Etiqueta producto nuevo: Se utiliza para colocarle una etiqueta de nuevo a los productos. Coloque los días para tomar en cuenta cuando un producto se tome como nuevo."
+                                    >
+                                      <i class="bi bi-book-half"></i>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  class="form-group col-12 col-xl-4 text-center"
+                                >
+                                  <label
+                                    class=""
+                                    for="currency_symbol"
+                                    class="form-label"
+                                  >Simbolo de moneda</label
+                                  >
+                                  <div class="input-group">
+                                    <input
+                                      type="text"
+                                      id="currency_symbol"
+                                      name="currency_symbol"
+                                      formControlName="currency_symbol"
+                                      class="form-control"
+                                      placeholder="USD"
+                                      value=""
+                                    />
+                                    <div
+                                      class="input-group-text"
+                                      id="btnGroupAddon"
+                                      placement="bottom"
+                                      ngbTooltip="Simbolo de Moneda: Es el simbolo que tendra la moneda ó algun prefijo personalizado que desee colocar."
+                                    >
+                                      <i class="bi bi-book-half"></i>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  class="form-group col-12 col-xl-4 text-center"
+                                >
+                                  <label
+                                    class=""
+                                    for="symbol_commissionable_value"
+                                    class="form-label"
+                                  >Simbolo de valor comisionable</label
+                                  >
+                                  <div class="input-group">
+                                    <input
+                                      type="text"
+                                      id="symbol_commissionable_value"
+                                      name="symbol_commissionable_value"
+                                      formControlName="symbol_commissionable_value"
+                                      class="form-control"
+                                      placeholder="COM"
+                                      value=""
+                                    />
+                                    <div
+                                      class="input-group-text"
+                                      id="btnGroupAddon"
+                                      placement="bottom"
+                                      ngbTooltip="Simbolo de Valor Comisionable: Es el simbolo que tendra el valor comisionable, como el tipo de moneda ó algun prefijo personalizado que desee colocar."
+                                    >
+                                      <i class="bi bi-book-half"></i>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                              <div class="row align-items-center mb-3">
+                                <div
+                                  class="form-group col-12 col-sm-5 text-center"
+                                >
+                                  <label
+                                    for="points_symbol_qualify"
+                                    class="form-label"
+                                  >Simbolo puntos para calificar</label
+                                  >
+                                  <div class="input-group">
+                                    <input
+                                      type="text"
+                                      id="points_symbol_qualify"
+                                      name="points_symbol_qualify"
+                                      formControlName="points_symbol_qualify"
+                                      placeholder="PNT"
+                                      class="form-control"
+                                      value=""
+                                    />
+                                    <div
+                                      class="input-group-text"
+                                      id="btnGroupAddon"
+                                      placement="bottom"
+                                      ngbTooltip="Simbolo de Puntos: Es la representación del simbolo de puntos en el sistema, este puede se personalizado."
+                                    >
+                                      <i class="bi bi-book-half"></i>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div
+                                  class="form-group col-12 col-sm-5 text-center"
+                                >
+                                  <label
+                                    class=""
+                                    for="binary_points_symbol"
+                                    class="form-label"
+                                  >Símbolo "Puntos Binarios"</label
+                                  >
+                                  <div class="input-group">
+                                    <input
+                                      type="text"
+                                      id="binary_points_symbol"
+                                      name="binary_points_symbol"
+                                      formControlName="binary_points_symbol"
+                                      class="form-control"
+                                      placeholder="PNTB"
+                                      value=""
+                                    />
+
+                                    <div
+                                      class="input-group-text"
+                                      id="btnGroupAddon"
+                                      placement="bottom"
+                                      ngbTooltip="Símbolo de puntos: Es la representación del simbolo de Puntos Binarios en el sistema, este puede se personalizado."
+                                    >
+                                      <i class="bi bi-book-half"></i>
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="col-12 col-sm-2 text-center">
+                                  <button type="submit" class="btn btn-primary">
+                                    Guardar
+                                  </button>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        </form>
+                      </ng-template>
+                    </li>
+                    <li [ngbNavItem]="2">
+                      <a ngbNavLink>Banner Publicitario</a>
+                      <ng-template ngbNavContent>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="d-flex justify-content-center">
+                              <button
+                                type="button"
+                                class="btn btn-success mx-2"
+                              >
+                                Agregar archivo
+                              </button>
+                              <button type="button" class="btn btn-info mx-2">
+                                Iniciar subida
+                              </button>
+                              <button
+                                type="button"
+                                class="btn btn-warning mx-2"
+                              >
+                                Cancelar subida
+                              </button>
+                              <button type="button" class="btn btn-danger mx-2">
+                                Eliminar
+                              </button>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </li>
+                    <li [ngbNavItem]="3">
+                      <a ngbNavLink>Preferencias de envío</a>
+                      <ng-template ngbNavContent>
+                        <div class="card-body">
+                          <div class="row">
+                            <div class="col">
+                              <ul
+                                ngbNav
+                                #nav="ngbNav"
+                                [(activeId)]="tab"
+                                class="nav-tabs"
+                              >
+                                <li [ngbNavItem]="1">
+                                  <a ngbNavLink>Preferencias</a>
+                                  <ng-template ngbNavContent>
+                                    <div class="tab-pane">
+                                      <div class="card-body">
+                                        <div
+                                          class="row align-items-center mb-3"
+                                        >
+                                          <div
+                                            class="col-12 col-xl-3 text-center"
+                                          >
+                                            <label
+                                              for="maintenance_costs"
+                                              class="form-label"
+                                            >Gastos de mantenimiento</label
+                                            >
+
+                                            <input
+                                              type="number"
+                                              id="maintenance_costs"
+                                              min="0"
+                                              name="maintenance_costs"
+                                              placeholder="0"
+                                              class="form-control"
+                                              value=""
+                                            />
+                                          </div>
+                                          <div
+                                            class="col-12 col-xl-3 text-center"
+                                          >
+                                            <label
+                                              for="free_shipping_$"
+                                              class="form-label"
+                                            >Envío gratuito a partir de
+                                              ($)</label
+                                            >
+
+                                            <input
+                                              type="number"
+                                              min="0"
+                                              id="free_shipping"
+                                              name="free_shipping"
+                                              class="form-control"
+                                              placeholder="0"
+                                              value=""
+                                            />
+                                          </div>
+                                          <div
+                                            class="col-12 col-xl-3 text-center"
+                                          >
+                                            <label
+                                              class=""
+                                              for="free_shipping_Kg"
+                                              class="form-label"
+                                            >Envío gratuito a partir de
+                                              (Kg)</label
+                                            >
+
+                                            <input
+                                              type="number"
+                                              min="0"
+                                              id="free_shipping_Kg"
+                                              name="free_shipping_Kg"
+                                              class="form-control"
+                                              placeholder="0"
+                                              value=""
+                                            />
+                                          </div>
+                                          <div
+                                            class="col-12 col-xl-3 text-center"
+                                          >
+                                            <label
+                                              class=""
+                                              for="default_carrier"
+                                              class="form-label"
+                                            >Transportista por defecto</label
+                                            >
+
+                                            <select
+                                              id="default_carrier"
+                                              name="default_carrier"
+                                              class="form-select form-control"
+                                            >
+                                              <option value="">
+                                                Seleccione una opción
+                                              </option>
+                                            </select>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col align-self-end">
+                                            <ul class="nav justify-content-end">
+                                              <li class="nav-item m-2">
+                                                <button
+                                                  type="button"
+                                                  class="btn btn-primary"
+                                                >
+                                                  <i class="bi bi-save"></i>
+                                                  Guardar
+                                                </button>
+                                              </li>
+                                            </ul>
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </ng-template>
+                                </li>
+                                <li [ngbNavItem]="2">
+                                  <a ngbNavLink>Transportista</a>
+                                  <ng-template ngbNavContent>
+                                    <div class="card-body">
+                                      <div class="row">
+                                        <div class="col-sm-3">
+                                          <div class="table-search-area">
+                                            <div class="form-group">
+                                              <div class="input-group mb-2">
+                                                <div
+                                                  class="input-group-prepend"
+                                                >
+                                                  <div class="input-group-text">
+                                                    <i-feather
+                                                      name="search"
+                                                      style="color: #96a2b4"
+                                                    ></i-feather>
+                                                  </div>
+                                                </div>
+                                                <input
+                                                  style="
+                                                    background-color: white;
+                                                  "
+                                                  type="text"
+                                                  class="form-control"
+                                                  id="inlineFormInputGroup"
+                                                  (keyup)="updateFilter($event)"
+                                                  aria-label="Search box"
+                                                  placeholder="Busqueda"
+                                                />
+                                              </div>
+                                            </div>
+                                          </div>
+                                        </div>
+                                        <div class="col-sm-1">
+                                          <div class="header-buttons-left">
+                                            <div class="tbl-btn-style">
+                                              <button
+                                                class="btn btn-icon icon-left btn-primary rounded-button"
+                                                (click)="
+                                                  createCarrierOpenModal(
+                                                    modalChildCreate[
+                                                      'carrierCreateModal'
+                                                    ]
+                                                  )
+                                                "
+                                              >
+                                                <i class="material-icons"
+                                                >add</i
+                                                >
+                                              </button>
+                                            </div>
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div class="row">
+                                        <ngx-datatable
+                                          #table
+                                          class="material"
+                                          [rows]="rows"
+                                          [loadingIndicator]="loadingIndicator"
+                                          columnMode="force"
+                                          [headerHeight]="50"
+                                          [footerHeight]="50"
+                                          rowHeight="auto"
+                                          [limit]="10"
+                                          [scrollbarH]="scrollBarHorizontal"
+                                          [reorderable]="reorderable"
+                                        >
+                                          <ngx-datatable-column name="Nombre">
+                                            <ng-template
+                                              let-row="row"
+                                              ngx-datatable-cell-template
+                                            >
+                                              {{ row }}
+                                            </ng-template>
+                                          </ngx-datatable-column>
+                                          <ngx-datatable-column
+                                            name="Retraso"
+                                            sortable="false"
+                                          >
+                                            <ng-template
+                                              let-row="row"
+                                              ngx-datatable-cell-template
+                                            >
+                                              {{ row }}
+                                            </ng-template>
+                                          </ngx-datatable-column>
+                                          <ngx-datatable-column name="Estado">
+                                            <ng-template
+                                              let-row="row"
+                                              ngx-datatable-cell-template
+                                            >
+                                              {{ row }}
+                                            </ng-template>
+                                          </ngx-datatable-column>
+                                          <ngx-datatable-column
+                                            name="Transportista gratuito"
+                                          >
+                                            <ng-template
+                                              let-row="row"
+                                              ngx-datatable-cell-template
+                                            >
+                                              {{ row }}
+                                            </ng-template>
+                                          </ngx-datatable-column>
+                                          <ngx-datatable-column
+                                            name="Fuera de gama"
+                                          >
+                                            <ng-template
+                                              let-row="row"
+                                              ngx-datatable-cell-template
+                                            >
+                                              {{ row }}
+                                            </ng-template>
+                                          </ngx-datatable-column>
+
+                                          <ngx-datatable-column name="Acciones">
+                                            <ng-template
+                                              let-row="row"
+                                              ngx-datatable-cell-template
+                                            >
+                                              <div ngbDropdown container="body">
+                                                <button
+                                                  type="button"
+                                                  class="btn btn-outline-primary btn-sm"
+                                                  ngbDropdownToggle
+                                                >
+                                                  Acciones
+                                                </button>
+                                                <div ngbDropdownMenu>
+                                                  <a
+                                                    ngbDropdownItem
+                                                    id="btn-edit"
+                                                  >
+                                                    <i
+                                                      class="bi bi-eye-fill"
+                                                    ></i>
+                                                    <span
+                                                      style="margin-left: 10px"
+                                                    >Ver Detalles</span
+                                                    >
+                                                  </a>
+                                                </div>
+                                              </div>
+                                            </ng-template>
+                                          </ngx-datatable-column>
+                                        </ngx-datatable>
+                                      </div>
+                                    </div>
+                                  </ng-template>
+                                </li>
+                                <li [ngbNavItem]="3">
+                                  <a ngbNavLink>Zona</a>
+                                  <ng-template ngbNavContent>
+                                    <div class="card-body"></div>
+                                  </ng-template>
+                                </li>
+                              </ul>
+                              <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </ng-template>
+                    </li>
+                  </ul>
+                  <div [ngbNavOutlet]="nav" class="mt-2"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <app-products-services-configurations-create-carrier-modal #modalChildCreate>
+  </app-products-services-configurations-create-carrier-modal>
+</section>

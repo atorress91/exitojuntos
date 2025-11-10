@@ -1,0 +1,29 @@
+[
+  {
+    "id": 0,
+    "affiliate": "beavp",
+    "nameAndLastName": "Beatriz Vasquez",
+    "noBill": "03119",
+    "date": "2022-10-31 20:00:10",
+    "billState": "Activa",
+    "paid": "Pagada"
+  },
+  {
+    "id": 1,
+    "affiliate": "mimi0525",
+    "nameAndLastName": "Marjorie Villalobos",
+    "noBill": "03112",
+    "date": "2022-10-31 18:03:10",
+    "billState": "Activa",
+    "paid": "Pagada"
+  },
+  {
+    "id": 2,
+    "affiliate": "lararodriguez",
+    "nameAndLastName": "lara rodriguez",
+    "noBill": "03114",
+    "date": "2022-10-31 11:47:07",
+    "billState": "Anulada",
+    "paid": "Pagada"
+  }
+]

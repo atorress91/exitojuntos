@@ -1,0 +1,126 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">
+        {{ 'ADMIN-ITEMS.COMPENSATION-PLANS.TEXT' | translate }}
+      </h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+    </li>
+    <li class="breadcrumb-item">
+      {{ 'COMPENSANTIONS-PLANS-CONFIGURATION.TITLE.TEXT' | translate }}
+    </li>
+  </ul>
+  <form class="register-form" [formGroup]="compesationPlansForm" (ngSubmit)="onSaveConfiguration()">
+  <div class="section-body">
+    <div class="row">
+      <div class="card">
+        <div class="card-header">
+          <h4>Configuraciones</h4>
+        </div>
+        <div class="card-body">
+          <div class="row align-items-center mb-3">
+            <div class="col-12 col-sm-3 text-center">
+              <span
+                placement="bottom"
+                ngbTooltip="Al activar esta casilla, se habilita al sistema para activar e inactivar a los afiliado automaticamente segun la configuracion del sistema. Para ejecutar este proceso de forma automáticamente se debe configurar un CronJob, si desconoce como configurarlo por favor contacte con soporte para realizar la configuración correspondiente en el hosting.
+              Ejemplo de comando: php /home/millemiun/public_html/admin/includes/cronjob_activacion.php
+              Su ruta de ejecución es /var/www/test-exitojuntosse/admin/plan_compensacion/configuracion_procesos.php"
+                >Activación / Inactivación automática:</span
+              >
+              <div class="d-inline-block">
+                <input
+                  class="form-check-input ms-2 me-2"
+                  type="checkbox"
+                  formControlName="automatic_activation"
+                  name="automatic_activation"
+                  id="automatic_activation"
+                  value=""
+                />
+                <label class="form-check-label" for="automatic_activation"
+                  >Activar</label
+                >
+              </div>
+            </div>
+            <div class="col-12 col-sm-3 text-center">
+              <span
+                placement="bottom"
+                ngbTooltip="Al activar esta casilla, se habilita al sistema para que cada vez que un afiliado realice una compra se corra el proceso de calificacion para dicho afiliado.
+                Nota: Este proceso de calificacion automatica no tendra incidencia sobre toda la red, pues solo se evaluara al afiliado que realizo la compra."
+                >Calificación automática:</span
+              >
+              <div class="d-inline-block">
+                <input
+                  class="form-check-input ms-2 me-2"
+                  type="checkbox"
+                  name="automatic_qualification"
+                  formControlName="automatic_qualification"
+                  id="automatic_qualification"
+                  value=""
+                />
+                <label class="form-check-label" for="automatic_qualification"
+                  >Activar</label
+                >
+              </div>
+            </div>
+            <div class="col-12 col-sm-3 text-center">
+              <span
+                placement="bottom"
+                ngbTooltip="Al activar esta casilla, se habilita al sistema para calcular automaticamente los incentivos configurados en el sistema. Los incentivos calculados puede encontralos en Comisiones  Incentivos por Entregar.
+                Para ejecutar este proceso de forma automáticamente se debe configurar un CronJob, si desconoce como configurarlo por favor contacte con soporte para realizar la configuración correspondiente en el hosting.
+                Ejemplo de comando: php /home/millemiun/public_html/admin/includes/cronjob_incentivos.php
+                Su ruta de ejecución es /var/www/test-exitojuntosse/admin/plan_compensacion/configuracion_procesos.php"
+                >Cálculo de incentivos automático:</span
+              >
+              <div class="d-inline-block">
+                <input
+                  class="form-check-input ms-2 me-2"
+                  type="checkbox"
+                  name="automatic_incentive_calculation"
+                  formControlName="automatic_incentive_calculation"
+                  id="automatic_incentive_calculation"
+                  value=""
+                />
+                <label class="form-check-label" for="automatic_incentive_calculation"
+                  >Activar</label
+                >
+              </div>
+            </div>
+            <div class="col-12 col-sm-3 text-center">
+              <span
+                placement="bottom"
+                ngbTooltip="Al activar esta casilla, se habilita al sistema para calcular automaticamente los incentivos configurados en el sistema. Los incentivos calculados puede encontralos en Comisiones  Comisiones Calculadas.
+                Para ejecutar este proceso de forma automáticamente se debe configurar un CronJob, si desconoce como configurarlo por favor contacte con soporte para realizar la configuración correspondiente en el hosting.
+                Ejemplo de comando: php /home/millemiun/public_html/admin/includes/cronjob_comisiones.php
+                Su ruta de ejecución es /var/www/test-exitojuntosse/admin/plan_compensacion/configuracion_procesos.php"
+                >Cálculo de comisiones automático:</span
+              >
+              <div class="d-inline-block">
+                <input
+                  class="form-check-input ms-2 me-2"
+                  type="checkbox"
+                  name="automatic_commission_calculation"
+                  formControlName="automatic_commission_calculation"
+                  id="automatic_commission_calculation"
+                  value=""
+                />
+                <label class="form-check-label" for="automatic_commission_calculation"
+                  >Activar</label
+                >
+              </div>
+            </div>
+          </div>
+          <div class="row mt-2">
+            <div class="col d-flex justify-content-center">
+              <button type="submit" class="btn btn-primary">
+                Guardar
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+</section>

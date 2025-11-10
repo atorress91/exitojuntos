@@ -1,0 +1,41 @@
+<div class="aurora-forgot-password-wrapper">
+  <div class="aurora-main d-flex align-items-center min-vh-100 py-3 py-md-0">
+    <div class="aurora-container">
+      <div class="aurora-forgot-password-card">
+        <img src="assets/images/yellow-logo.png" alt="Logo de exitojuntos" class="logo-title">
+        <form class="aurora-register-form" [formGroup]="forgotPassword" (ngSubmit)="sendPasswordRecovery()">
+          <div class="aurora-card-content">
+            <div class="aurora-card-header">
+              <h2 class="aurora-title aurora-neon-text">Olvidé mi contraseña</h2>
+            </div>
+            <div class="aurora-card-body">
+              <p class="aurora-text-muted">Te enviaremos un enlace para restablecer tu contraseña</p>
+              <div class="aurora-form-group">
+                <label for="email" class="aurora-label">Correo electrónico</label>
+                <input id="email" type="email" class="aurora-form-control" name="email" required autofocus
+                  formControlName="email" [ngClass]="{
+                    'aurora-is-invalid': submitted && forgotPassword.get('email').errors,
+                    'aurora-is-valid': forgotPassword.get('email').valid && forgotPassword.get('email').dirty
+                  }" (input)="validateEmail()">
+                <div *ngIf="submitted && forgotPassword.get('email').errors" class="aurora-invalid-feedback">
+                  <div *ngIf="forgotPassword.get('email').errors.required">
+                    Ingrese un correo electrónico.
+                  </div>
+                  <div *ngIf="forgotPassword.get('email').errors.email">
+                    Ingrese un correo electrónico válido.
+                  </div>
+                </div>
+              </div>
+              <div class="aurora-form-group">
+                <button type="submit"
+                  class="aurora-btn aurora-btn-primary aurora-btn-lg aurora-btn-block aurora-neon-button">
+                  Enviar enlace
+                </button>
+              </div>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

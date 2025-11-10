@@ -1,0 +1,78 @@
+[
+  {
+    "id": 1,
+    "name": "00 Pool_10"
+  },
+  {
+    "id": 2,
+    "name": "00 Pool_25"
+  },
+  {
+    "id": 3,
+    "name": "01 Pool_50"
+  },
+  {
+    "id": 4,
+    "name": "01 RecSoftware_30"
+  },
+  {
+    "id": 5,
+    "name": "02 Pool_100"
+  },
+  {
+    "id": 6,
+    "name": "02 RecSoftware_50"
+  },
+  {
+    "id": 7,
+    "name": "03 Pool_250"
+  },
+  {
+    "id": 8,
+    "name": "03 RecSoftware_100"
+  },
+  {
+    "id": 9,
+    "name": "04 Pool_500"
+  },
+  {
+    "id": 10,
+    "name": "04 RecSoftware_200"
+  },
+  {
+    "id": 11,
+    "name": "05 Pool_1000"
+  },
+  {
+    "id": 12,
+    "name": "05 RecSoftware_300"
+  },
+  {
+    "id": 13,
+    "name": "06 Pool_2500"
+  },
+  {
+    "id": 14,
+    "name": "07 Pool_5000"
+  },
+  {
+    "id": 15,
+    "name": "08 Pool_7500"
+  },
+  {
+    "id": 16,
+    "name": "09 Pool_10000"
+  },
+  {
+    "id": 17,
+    "name": "Soporte vehicular Plan Basic"
+  },
+  {
+    "id": 18,
+    "name": "Soporte vehicular Plan Pro"
+  },
+  {
+    "id": 19,
+    "name": "Soporte vehicular Plan Standard"
+  }
+]

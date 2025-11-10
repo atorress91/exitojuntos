@@ -1,0 +1,16 @@
+# This file is currently used by autoprefixer to adjust CSS to support the below specified browsers
+
+# For additional information regarding the format and rule options, please see:
+
+# https://github.com/browserslist/browserslist#queries
+
+#
+
+# Updated to support modern features like top-level await
+
+Chrome >= 89
+Firefox >= 89
+Safari >= 15
+Edge >= 89
+not dead
+not IE 11

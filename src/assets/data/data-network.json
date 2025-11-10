@@ -1,0 +1,21 @@
+[{
+  "id": 0,
+  "user":"Nemis",
+  "state":"Activo",
+  "qualification":"Activo",
+  "email":"nehemiasmo@gmail.com"
+},
+{
+  "id": 1,
+  "user":"Franco",
+  "state":"Inactivo",
+  "qualification":"Activo",
+  "email":"franco@gmail.com"
+},
+{
+  "id": 2,
+  "user":"Mendez",
+  "state":"Activo",
+  "qualification":"Activo",
+  "email":"mendezal@yahoo.com"
+}]

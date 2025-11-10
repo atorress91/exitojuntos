@@ -1,0 +1,153 @@
+<section class="main-content">
+  <ul class="breadcrumb breadcrumb-style">
+    <li class="breadcrumb-item">
+      <h5 class="page-title m-b-0">
+        Control de programas educativos
+      </h5>
+    </li>
+    <li class="breadcrumb-item bcrumb-1">
+      <a routerLink="/dashboard/main"> <i class="fas fa-home font-17"></i></a>
+    </li>
+    <li class="breadcrumb-item">
+    </li>
+  </ul>
+  <div class="section-body">
+    <div class="row">
+      <div class="col-12 col-md-12 col-lg-12">
+        <div class="card">
+          <div class="card-header">
+          </div>
+          <div class="card-body">
+            <!-- Add content here -->
+            <div class="row">
+              <div class="col-sm-12">
+                <div class="row">
+                  <div class="col-12">
+                    <div class="d-flex flex-wrap mb-2">
+                      <label class="ms-2"><input type="radio" name="searchField" value="userName"
+                                                 [(ngModel)]="searchField"> Usuario</label>
+                      <label class="ms-2"><input type="radio" name="searchField" value="invoiceId"
+                                                 [(ngModel)]="searchField"> N°. Factura</label>
+                      <label class="ms-2"><input type="radio" name="searchField" value="createdAt"
+                                                 [(ngModel)]="searchField"> Fecha de pago</label>
+                      <label class="ms-2"><input type="radio" name="searchField" value="endDay"
+                                                 [(ngModel)]="searchField"> Fecha de finalización</label>
+                    </div>
+                  </div>
+                  <div class="col-sm-3">
+                    <div class="table-search-area">
+                      <div class="form-group">
+                        <div class="input-group mb-2">
+                          <div class="input-group-prepend">
+                            <div class="input-group-text">
+                              <i-feather name="search" style="color: #96a2b4"></i-feather>
+                            </div>
+                          </div>
+                          <input style="background-color: white" type="text" class="form-control"
+                                 id="inlineFormInputGroup" (keyup)="updateFilter($event)" aria-label="Search box"
+                                 placeholder="Busqueda"/>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-1">
+                    <div class="header-buttons-left">
+                      <div class="tbl-btn-style">
+                        <button class="btn btn-icon icon-left btn-primary rounded-button">
+                          <i class="material-icons">add</i>
+                        </button>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col align-self-end">
+                    <ul class="nav justify-content-end">
+                      <li class="nav-item m-2">
+                        <button type="button" (click)="sendInvitations()" class="btn btn-primary">
+                          <i class="bi bi-box2-fill"></i>
+                          Enviar invitaciones del curso
+                        </button>
+                      </li>
+                      <li class="nav-item m-2">
+                        <button type="button" (click)="clipBoardCopy()" class="btn btn-primary">
+                          <i class="bi bi-clipboard-check"></i>
+                          Copiar
+                        </button>
+                      </li>
+
+                      <li class="nav-item m-2">
+                        <button type="button" (click)="onPrint()" class="btn btn-primary">
+                          <i class="bi bi-printer"></i>
+                          Imprimir
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+                <ngx-datatable #table class="material" [rows]="rows" [loadingIndicator]="loadingIndicator"
+                               columnMode="force" [headerHeight]="50" [footerHeight]="50" rowHeight="auto" [limit]="10"
+                               [scrollbarH]="scrollBarHorizontal" [reorderable]="reorderable">
+                  <ngx-datatable-column name="Usuario">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.userName }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="N°. Factura">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.invoiceId }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Nombre del Curso" sortable="false">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.productName }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Precio">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.productPrice }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Fecha de pago">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      {{ row.createdAt }}
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Inicia el curso">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div class="col-green">
+                        {{ row.startDay }}
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Finaliza el curso">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div class="col-red">
+                        {{ row.endDay }}
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                  <ngx-datatable-column name="Acciones">
+                    <ng-template let-row="row" ngx-datatable-cell-template>
+                      <div ngbDropdown container="body">
+                        <button type="button" class="btn btn-outline-primary btn-sm" ngbDropdownToggle>
+                          {{ 'CONCEPT-LIST-PAGE.COL-ACTIONS.TEXT' | translate }}
+                        </button>
+                        <div ngbDropdownMenu>
+                          <a ngbDropdownItem id="btn-delete" (click)="deleteSingleRow(row.id)">
+                            <i class="fas fa-trash-alt"></i>
+                            <span style="margin-left: 10px">{{
+                                'CONCEPT-LIST-PAGE.BTN-DELETE.TEXT' | translate
+                              }}</span>
+                          </a>
+                        </div>
+                      </div>
+                    </ng-template>
+                  </ngx-datatable-column>
+                </ngx-datatable>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
