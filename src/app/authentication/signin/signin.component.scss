@@ -238,9 +238,10 @@ $error-color: #ff4444;
   justify-content: center;
   margin-bottom: 24px;
 
-  svg {
-    width: 64px;
-    height: 64px;
+  .logo-svg {
+    height: 58px;
+    width: auto;
+    display: block;
   }
 }
 

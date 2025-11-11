@@ -39,6 +39,7 @@ export class SigninComponent implements OnInit {
     'La contraseña debe tener al menos 6 y un máximo de 15 caracteres';
   userNameErrorMessage = 'El nombre de usuario no es válido';
   showPassword: boolean = false;
+  readonly navbarIcon = 'assets/exito-logo.svg';
 
   constructor(
     private readonly router: Router,
