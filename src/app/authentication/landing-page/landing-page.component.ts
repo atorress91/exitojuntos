@@ -59,10 +59,8 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   };
   isPreviewHovered: boolean = false;
   user: UserAffiliate | null = null;
-  readonly heroBadgeIcon =
-    'http://localhost:3845/assets/3c401de71f800381f5c16ef34f995b986fd77e8a.svg';
-  readonly primaryCtaArrow =
-    'http://localhost:3845/assets/a7192e3012b5752bade6097f220689a7d2e51987.svg';
+  readonly heroBadgeIcon = 'fa-trophy';
+  readonly primaryCtaArrow = 'fa-arrow-right';
   readonly heroMetrics = [
     { value: '98%', label: 'Rentabilidad' },
     { value: '$500M+', label: 'Gestionados' },
@@ -70,75 +68,75 @@ export class LandingPageComponent implements OnInit, OnDestroy {
   ];
   readonly featureCards = [
     {
-      icon: 'http://localhost:3845/assets/80819031e76017bd517565cc42b826335cd6ee71.svg',
+      icon: 'fa-chart-line',
       title: 'Trading Avanzado',
       description:
         'Algoritmos de última generación para maximizar tus inversiones en tiempo real.',
     },
     {
-      icon: 'http://localhost:3845/assets/f0694d23ee7958f3a0e8434ac113f4f1352d8eec.svg',
+      icon: 'fa-shield-alt',
       title: 'Seguridad Total',
       description:
         'Tus activos protegidos con la más alta tecnología de seguridad bancaria.',
     },
     {
-      icon: 'http://localhost:3845/assets/fc033a589e0002eabc41938a863af3b62d8c4a12.svg',
+      icon: 'fa-chart-pie',
       title: 'Análisis Profundo',
       description:
         'Informes detallados y análisis de mercado para decisiones informadas.',
     },
     {
-      icon: 'http://localhost:3845/assets/7b82b2bbbc7c993d1074ef61287a1b8ddd78de3e.svg',
+      icon: 'fa-user-tie',
       title: 'Asesoría Personalizada',
       description:
         'Expertos dedicados a ayudarte a alcanzar tus objetivos financieros.',
     },
     {
-      icon: 'http://localhost:3845/assets/8fd443f91037a0a337782428f666cb19c33249bd.svg',
+      icon: 'fa-eye',
       title: 'Transparencia',
       description:
         'Total claridad en cada operación y movimiento de tu portafolio.',
     },
     {
-      icon: 'http://localhost:3845/assets/aa37dbe936e8d70fc5983981bcd5bb9717108ead.svg',
+      icon: 'fa-headset',
       title: '24/7 Soporte',
       description:
         'Atención continua para que nunca te pierdas una oportunidad.',
     },
   ];
-  readonly tradingImage =
-    'http://localhost:3845/assets/9bd020dd4ae51ecff92b1fb2f7dad9e3e183f38f.png';
+  readonly tradingImage = 'assets/images/TradingSection.png';
   readonly tradingHighlights = [
     'Rendimientos superiores al mercado',
     'Diversificación inteligente de portafolio',
     'Gestión de riesgos avanzada',
     'Acceso a mercados exclusivos',
   ];
+  readonly checkIcon = 'fa-check';
   readonly processSteps = [
     {
       number: '01',
-      icon: 'http://localhost:3845/assets/1c6a0e53dd2b43962f96c618836cd981da083d4b.svg',
+      icon: 'fa-user-plus',
       title: 'Registro',
       description:
         'Crea tu cuenta en minutos y verifica tu identidad de forma segura.',
     },
     {
       number: '02',
-      icon: 'http://localhost:3845/assets/131e0cea5495b97a18f68d4a3b29e4e2318c6b1d.svg',
+      icon: 'fa-clipboard-list',
       title: 'Planificación',
       description:
         'Nuestros expertos diseñan una estrategia personalizada para ti.',
     },
     {
       number: '03',
-      icon: 'http://localhost:3845/assets/d712dd98e4a997541db06fe96ceed1a1d55b03e1.svg',
+      icon: 'fa-coins',
       title: 'Inversión',
       description:
         'Comienza a invertir con el respaldo de tecnología de punta.',
     },
     {
       number: '04',
-      icon: 'http://localhost:3845/assets/8e9b89a2cde130a1f9941c2c621355c09d5edd39.svg',
+      icon: 'fa-chart-area',
       title: 'Crecimiento',
       description: 'Observa cómo tu patrimonio crece consistentemente.',
     },
@@ -147,46 +145,36 @@ export class LandingPageComponent implements OnInit, OnDestroy {
     {
       quote:
         '"La mejor decisión financiera que he tomado. En 6 meses, mi portafolio creció un 85%. El equipo es excepcional."',
-      avatar:
-        'http://localhost:3845/assets/2d702b4643fed9dee21ff4a592efd1c7f02aafea.png',
+      avatar: 'assets/images/user.png',
       name: 'Carlos Mendoza',
       role: 'CEO, TechVentures',
-      ratingIcon:
-        'http://localhost:3845/assets/ba5059ac525a3cfa66ce24590254d9acee795470.svg',
+      rating: 5,
     },
     {
       quote:
         '"Profesionalismo y resultados reales. La asesoría personalizada marca la diferencia. Altamente recomendado."',
-      avatar:
-        'http://localhost:3845/assets/179432017b8aa99523aa5b803b64a24cf225af37.png',
+      avatar: 'assets/images/user.png',
       name: 'María González',
       role: 'Emprendedora',
-      ratingIcon:
-        'http://localhost:3845/assets/9b9e0af306f726351a1a3758407ea439212559fc.svg',
+      rating: 5,
     },
     {
       quote:
         '"Transparencia total y rendimientos consistentes. Finalmente encontré una plataforma en la que puedo confiar."',
-      avatar:
-        'http://localhost:3845/assets/cfc1845553d5f5393389f2f566f5fbef7000f264.png',
+      avatar: 'assets/images/user.png',
       name: 'Roberto Silva',
       role: 'Inversor',
-      ratingIcon:
-        'http://localhost:3845/assets/d85a2477b3381e4b703b4cce290b87217dc41ed1.svg',
+      rating: 5,
     },
   ];
-  readonly testimonialQuoteIcon =
-    'http://localhost:3845/assets/2bbd6c1d8a13df267c1df36b0fdf75c37dcc0908.svg';
-  readonly brandIcon =
-    'http://localhost:3845/assets/8fba254d53d06879b6ce147ba562694df72be274.svg';
-  readonly navbarIcon =
-    'http://localhost:3845/assets/7a342e45483c9935e729a8ca91bab824f26fb7bf.svg';
+  readonly testimonialQuoteIcon = 'fa-quote-left';
+  readonly starIcon = 'fa-star';
+  readonly brandIcon = 'assets/exito-logo.svg';
+  readonly navbarIcon = 'assets/exito-logo.svg';
   readonly contactIcons = {
-    mail: 'http://localhost:3845/assets/0d4acf61cde196e73207d14cabcc538011f9b851.svg',
-    phone:
-      'http://localhost:3845/assets/f45c4b2bf363f4f1d7be27ae50d30670830fc5b6.svg',
-    location:
-      'http://localhost:3845/assets/edf8efb3efacd6bbc922dffca4687c1b1c1f8557.svg',
+    mail: 'fa-envelope',
+    phone: 'fa-phone',
+    location: 'fa-map-marker-alt',
   };
   readonly ctaStats = [
     { value: 'A+', label: 'Calificación' },

@@ -2,12 +2,7 @@
 <nav class="navbar">
   <div class="navbar-container">
     <div class="navbar-logo">
-      <div class="logo-icon">
-        <img [src]="navbarIcon" alt="GoldTrade" />
-      </div>
-      <div class="logo-text">
-        <p>GoldTrade</p>
-      </div>
+      <img [src]="navbarIcon" alt="Éxito Juntos" class="logo-svg" />
     </div>
 
     <div class="navbar-links">
@@ -42,7 +37,7 @@
 
     <div class="hero-content">
       <div class="hero-badge">
-        <img [src]="heroBadgeIcon" alt="Premium" class="badge-icon" />
+        <i class="fas {{ heroBadgeIcon }} badge-icon"></i>
         <span>Trading Premium</span>
       </div>
 
@@ -56,7 +51,7 @@
       <div class="hero-buttons">
         <button class="btn-primary-gold" routerLink="/authentication/signup">
           Comenzar a Invertir
-          <img [src]="primaryCtaArrow" alt="arrow" />
+          <i class="fas {{ primaryCtaArrow }}"></i>
         </button>
         <button class="btn-secondary-gold">Agendar Consulta</button>
       </div>
@@ -84,7 +79,7 @@
       <div class="features-grid">
         <div class="feature-card" *ngFor="let card of featureCards">
           <div class="feature-icon">
-            <img [src]="card.icon" alt="{{ card.title }}" />
+            <i class="fas {{ card.icon }}"></i>
           </div>
           <h3 class="feature-title">{{ card.title }}</h3>
           <p class="feature-description">{{ card.description }}</p>
@@ -112,10 +107,7 @@
         <div class="trading-highlights">
           <div class="highlight-item" *ngFor="let highlight of tradingHighlights">
             <div class="highlight-icon">
-              <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                <path d="M13.3334 4L6.00002 11.3333L2.66669 8" stroke="#d4af37" stroke-width="2" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg>
+              <i class="fas {{ checkIcon }}"></i>
             </div>
             <span>{{ highlight }}</span>
           </div>
@@ -150,7 +142,7 @@
           <div class="step-icon-wrapper">
             <div class="step-number">{{ step.number }}</div>
             <div class="step-icon">
-              <img [src]="step.icon" alt="{{ step.title }}" />
+              <i class="fas {{ step.icon }}"></i>
             </div>
           </div>
           <h3 class="step-title">{{ step.title }}</h3>
@@ -173,10 +165,10 @@
 
       <div class="testimonials-grid">
         <div class="testimonial-card" *ngFor="let testimonial of testimonials">
-          <img [src]="testimonialQuoteIcon" alt="quote" class="quote-icon" />
+          <i class="fas {{ testimonialQuoteIcon }} quote-icon"></i>
 
           <div class="testimonial-rating">
-            <img *ngFor="let i of [1,2,3,4,5]" [src]="testimonial.ratingIcon" alt="star" class="star-icon" />
+            <i *ngFor="let i of [1,2,3,4,5]" class="fas {{ starIcon }} star-icon"></i>
           </div>
 
           <p class="testimonial-quote">{{ testimonial.quote }}</p>
@@ -212,7 +204,7 @@
       <div class="cta-buttons">
         <button class="btn-primary-gold" routerLink="/authentication/signup">
           Abrir Cuenta Gratis
-          <img [src]="primaryCtaArrow" alt="arrow" />
+          <i class="fas {{ primaryCtaArrow }}"></i>
         </button>
         <button class="btn-secondary-gold">Hablar con un Experto</button>
       </div>
@@ -232,10 +224,8 @@
       <div class="footer-top">
         <div class="footer-brand">
           <div class="footer-logo">
-            <div class="logo-icon">
-              <img [src]="brandIcon" alt="GoldTrade" />
-            </div>
-            <p class="logo-text">GoldTrade</p>
+            <img [src]="navbarIcon" alt="Éxito Juntos" class="logo-svg" />
+            <p class="logo-text">Éxito Juntos</p>
           </div>
           <p class="footer-tagline">Inversiones inteligentes para un futuro brillante.</p>
         </div>
@@ -253,15 +243,15 @@
           <h4 class="footer-heading">Contacto</h4>
           <ul class="footer-list">
             <li class="contact-item">
-              <img [src]="contactIcons.mail" alt="email" />
+              <i class="fas {{ contactIcons.mail }}"></i>
               <span>info@goldtrade.com</span>
             </li>
             <li class="contact-item">
-              <img [src]="contactIcons.phone" alt="phone" />
+              <i class="fas {{ contactIcons.phone }}"></i>
               <span>+1 (555) 123-4567</span>
             </li>
             <li class="contact-item">
-              <img [src]="contactIcons.location" alt="location" />
+              <i class="fas {{ contactIcons.location }}"></i>
               <span>Wall Street, New York</span>
             </li>
           </ul>
