@@ -17,11 +17,11 @@ import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.
 import { RequestResetPassword } from '@app/core/models/user-affiliate-model/request-reset-password-model';
 
 @Component({
-    selector: 'app-reset',
-    templateUrl: './reset.component.html',
-    styleUrls: ['./reset.component.scss'],
-    standalone: true,
-    imports: [CommonModule, ReactiveFormsModule]
+  selector: 'app-reset',
+  templateUrl: './reset.component.html',
+  styleUrls: ['./reset.component.scss'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule],
 })
 export class ResetComponent implements OnInit {
   resetPassword: FormGroup;
@@ -178,7 +178,7 @@ export class ResetComponent implements OnInit {
   checkCodeTime(): boolean {
     let currentTimeUtc = new Date();
 
-    let userUpdateTime = new Date(this.user.updated_at + 'Z');
+    let userUpdateTime = new Date(this.user.updatedAt + 'Z');
 
     let differenceInMinutes =
       (currentTimeUtc.getTime() - userUpdateTime.getTime()) / (1000 * 60);

@@ -1,16 +1,29 @@
-import {UserAffiliate} from '@app/core/models/user-affiliate-model/user.affiliate.model';
-import {AfterViewInit, Component, OnInit, TemplateRef, ViewChild} from '@angular/core';
-import {NgbModal, NgbNav, NgbNavContent, NgbNavItem, NgbNavLink, NgbNavOutlet} from '@ng-bootstrap/ng-bootstrap';
+import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
+import {
+  AfterViewInit,
+  Component,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
+import {
+  NgbModal,
+  NgbNav,
+  NgbNavContent,
+  NgbNavItem,
+  NgbNavLink,
+  NgbNavOutlet,
+} from '@ng-bootstrap/ng-bootstrap';
 
-import {BalanceInformationModel1A} from '@app/core/models/wallet-model-1a/balance-information-1a.model';
-import {BalanceInformationModel1B} from '@app/core/models/wallet-model-1b/balance-information-1b.model';
-import {BalanceInformation} from '@app/core/models/wallet-model/balance-information.model';
-import {WalletModel1AService} from '@app/core/service/wallet-model-1a-service/wallet-model-1a.service';
-import {WalletModel1BService} from '@app/core/service/wallet-model-1b-service/wallet-model-1b.service';
-import {WalletService} from '@app/core/service/wallet-service/wallet.service';
-import {ChartComponent} from "ng-apexcharts";
-import {TruncateDecimalsPipe} from "@app/shared/pipes/truncate-decimals.pipe";
-import {TranslatePipe} from "@ngx-translate/core";
+import { BalanceInformationModel1A } from '@app/core/models/wallet-model-1a/balance-information-1a.model';
+import { BalanceInformationModel1B } from '@app/core/models/wallet-model-1b/balance-information-1b.model';
+import { BalanceInformation } from '@app/core/models/wallet-model/balance-information.model';
+import { WalletModel1AService } from '@app/core/service/wallet-model-1a-service/wallet-model-1a.service';
+import { WalletModel1BService } from '@app/core/service/wallet-model-1b-service/wallet-model-1b.service';
+import { WalletService } from '@app/core/service/wallet-service/wallet.service';
+import { ChartComponent } from 'ng-apexcharts';
+import { TruncateDecimalsPipe } from '@app/shared/pipes/truncate-decimals.pipe';
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-balance-information-modal',
@@ -25,40 +38,66 @@ import {TranslatePipe} from "@ngx-translate/core";
     NgbNavContent,
     TranslatePipe,
     NgbNavOutlet,
-    NgbNav
-  ]
+    NgbNav,
+  ],
 })
 export class BalanceInformationModalComponent implements OnInit, AfterViewInit {
   withdrawalBalance: number = 0;
   userName = '';
   balanceInformation: BalanceInformation = new BalanceInformation();
-  balanceInformationModel1A: BalanceInformationModel1A = new BalanceInformationModel1A();
-  balanceInformationModel1B: BalanceInformationModel1B = new BalanceInformationModel1B();
-  @ViewChild('balanceInformationModal') balanceInformationModal: TemplateRef<any>;
+  balanceInformationModel1A: BalanceInformationModel1A =
+    new BalanceInformationModel1A();
+  balanceInformationModel1B: BalanceInformationModel1B =
+    new BalanceInformationModel1B();
+  @ViewChild('balanceInformationModal')
+  balanceInformationModal: TemplateRef<any>;
 
   public pieChartOptions: any;
   public pieChartOptionsModel1A: any;
   public pieChartOptionsModel1B: any;
 
-  constructor(private modalService: NgbModal,
-              private walletModel1AService: WalletModel1AService,
-              private walletModel1BService: WalletModel1BService,
-              private walletService: WalletService,) {
-  }
+  constructor(
+    private modalService: NgbModal,
+    private walletModel1AService: WalletModel1AService,
+    private walletModel1BService: WalletModel1BService,
+    private walletService: WalletService,
+  ) {}
 
   ngOnInit() {
-    this.pieChartOptions = {series: [], chart: {}, labels: [], responsive: [], dataLabels: {}, legend: {}};
-    this.pieChartOptionsModel1A = {series: [], chart: {}, labels: [], responsive: [], dataLabels: {}, legend: {}};
-    this.pieChartOptionsModel1B = {series: [], chart: {}, labels: [], responsive: [], dataLabels: {}, legend: {}};
+    this.pieChartOptions = {
+      series: [],
+      chart: {},
+      labels: [],
+      responsive: [],
+      dataLabels: {},
+      legend: {},
+    };
+    this.pieChartOptionsModel1A = {
+      series: [],
+      chart: {},
+      labels: [],
+      responsive: [],
+      dataLabels: {},
+      legend: {},
+    };
+    this.pieChartOptionsModel1B = {
+      series: [],
+      chart: {},
+      labels: [],
+      responsive: [],
+      dataLabels: {},
+      legend: {},
+    };
   }
 
-  ngAfterViewInit(): void {
-
-  }
+  ngAfterViewInit(): void {}
 
   initModal(userAffiliate: UserAffiliate) {
-    this.modalService.open(this.balanceInformationModal, {size: 'lg', centered: true});
-    this.userName = userAffiliate.user_name;
+    this.modalService.open(this.balanceInformationModal, {
+      size: 'lg',
+      centered: true,
+    });
+    this.userName = userAffiliate.name;
     this.getBalanceInformationModel2(userAffiliate.id);
     this.getBalanceInformationModel1A(userAffiliate.id);
     this.getBalanceInformationModel1B(userAffiliate.id);
@@ -70,9 +109,9 @@ export class BalanceInformationModalComponent implements OnInit, AfterViewInit {
         this.balanceInformation = value;
         this.initChartReport3();
       },
-      error: (err) => {
+      error: err => {
         console.log(err);
-      }
+      },
     });
   }
 
@@ -82,9 +121,9 @@ export class BalanceInformationModalComponent implements OnInit, AfterViewInit {
         this.balanceInformationModel1A = value;
         this.initChartModel1A();
       },
-      error: (err) => {
+      error: err => {
         console.log(err);
-      }
+      },
     });
   }
 
@@ -94,9 +133,9 @@ export class BalanceInformationModalComponent implements OnInit, AfterViewInit {
         this.balanceInformationModel1B = value;
         this.initChartModel1B();
       },
-      error: (err) => {
+      error: err => {
         console.log(err);
-      }
+      },
     });
   }
 
@@ -107,7 +146,7 @@ export class BalanceInformationModalComponent implements OnInit, AfterViewInit {
         this.balanceInformation.availableBalance,
         Number(this.balanceInformation.totalCommissionsPaid),
         Number(this.balanceInformation.totalAcquisitions),
-        Number(this.balanceInformation.reverseBalance)
+        Number(this.balanceInformation.reverseBalance),
       ],
 
       colors: ['#f44336', '#2196f3', '#96a2b4', '#4caf50', '#9c27b0'],
@@ -126,7 +165,7 @@ export class BalanceInformationModalComponent implements OnInit, AfterViewInit {
         'Saldo Disponible',
         'Total Pagado',
         'Total Adquisiciones',
-        'Saldo revertido'
+        'Saldo revertido',
       ],
       responsive: [
         {
@@ -135,14 +174,14 @@ export class BalanceInformationModalComponent implements OnInit, AfterViewInit {
             dataLabels: {
               enabled: true,
               formatter: function (val) {
-                return val + "%"
+                return val + '%';
               },
               plotOptions: {
                 pie: {
-                  expandOnClick: false
-                }
-              }
-            }
+                  expandOnClick: false,
+                },
+              },
+            },
           },
         },
       ],
@@ -156,7 +195,7 @@ export class BalanceInformationModalComponent implements OnInit, AfterViewInit {
         this.balanceInformationModel1A.availableBalance,
         Number(this.balanceInformationModel1A.totalCommissionsPaid),
         Number(this.balanceInformationModel1A.totalAcquisitions),
-        Number(this.balanceInformationModel1A.reverseBalance)
+        Number(this.balanceInformationModel1A.reverseBalance),
       ],
 
       colors: ['#f44336', '#2196f3', '#96a2b4', '#4caf50', '#9c27b0'],
@@ -175,7 +214,7 @@ export class BalanceInformationModalComponent implements OnInit, AfterViewInit {
         'Saldo Disponible',
         'Total Pagado',
         'Total Adquisiciones',
-        'Saldo revertido'
+        'Saldo revertido',
       ],
       responsive: [
         {
@@ -184,14 +223,14 @@ export class BalanceInformationModalComponent implements OnInit, AfterViewInit {
             dataLabels: {
               enabled: true,
               formatter: function (val) {
-                return val + "%"
+                return val + '%';
               },
               plotOptions: {
                 pie: {
-                  expandOnClick: false
-                }
-              }
-            }
+                  expandOnClick: false,
+                },
+              },
+            },
           },
         },
       ],
@@ -205,7 +244,7 @@ export class BalanceInformationModalComponent implements OnInit, AfterViewInit {
         this.balanceInformationModel1B.availableBalance,
         Number(this.balanceInformationModel1B.totalCommissionsPaid),
         Number(this.balanceInformationModel1B.totalAcquisitions),
-        Number(this.balanceInformationModel1B.reverseBalance)
+        Number(this.balanceInformationModel1B.reverseBalance),
       ],
 
       colors: ['#f44336', '#2196f3', '#96a2b4', '#4caf50', '#9c27b0'],
@@ -224,7 +263,7 @@ export class BalanceInformationModalComponent implements OnInit, AfterViewInit {
         'Saldo Disponible',
         'Total Pagado',
         'Total Adquisiciones',
-        'Saldo revertido'
+        'Saldo revertido',
       ],
       responsive: [
         {
@@ -233,14 +272,14 @@ export class BalanceInformationModalComponent implements OnInit, AfterViewInit {
             dataLabels: {
               enabled: true,
               formatter: function (val) {
-                return val + "%"
+                return val + '%';
               },
               plotOptions: {
                 pie: {
-                  expandOnClick: false
-                }
-              }
-            }
+                  expandOnClick: false,
+                },
+              },
+            },
           },
         },
       ],

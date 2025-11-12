@@ -1,4 +1,4 @@
-import {MatrixQualificationService} from '@app/core/service/matrix-qualification-service/matrix-qualification.service';
+import { MatrixQualificationService } from '@app/core/service/matrix-qualification-service/matrix-qualification.service';
 import {
   Component,
   HostListener,
@@ -7,68 +7,65 @@ import {
   TemplateRef,
   ViewChild,
 } from '@angular/core';
-import {NavigationStart, Router} from '@angular/router';
-import {CreateChannelResponse} from '@app/core/models/coinpay-model/create-channel-response.model';
-import {
-  CreatePagaditoTransactionRequest
-} from '@app/core/models/pagadito-model/create-pagadito-transaction-request.model';
-import {ToastrService} from 'ngx-toastr';
+import { NavigationStart, Router } from '@angular/router';
+import { CreateChannelResponse } from '@app/core/models/coinpay-model/create-channel-response.model';
+import { CreatePagaditoTransactionRequest } from '@app/core/models/pagadito-model/create-pagadito-transaction-request.model';
+import { ToastrService } from 'ngx-toastr';
 import QRCode from 'qrcode';
-import {CartService} from 'src/app/core/service/cart.service/cart.service';
+import { CartService } from 'src/app/core/service/cart.service/cart.service';
 import Swal from 'sweetalert2';
 
-import {CreateTransactionResponse} from '@app/core/models/coinpay-model/create-transaction-response.model';
-import {RequestPayment} from '@app/core/models/coinpay-model/request-payment.model';
-import {ConpaymentTransaction} from '@app/core/models/coinpayment-model/conpayment-transaction.model';
+import { CreateTransactionResponse } from '@app/core/models/coinpay-model/create-transaction-response.model';
+import { RequestPayment } from '@app/core/models/coinpay-model/request-payment.model';
+import { ConpaymentTransaction } from '@app/core/models/coinpayment-model/conpayment-transaction.model';
 import {
   CreatePayment,
   ProductRequest,
 } from '@app/core/models/coinpayment-model/create-payment.model';
-import {UserAffiliate} from '@app/core/models/user-affiliate-model/user.affiliate.model';
+import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 import {
   ProductsRequests,
   WalletRequest,
 } from '@app/core/models/wallet-model/wallet-request.model';
-import {
-  WalletWithdrawalsConfiguration
-} from '@app/core/models/wallet-withdrawals-configuration-model/wallet-withdrawals-configuration.model';
-import {AuthService} from '@app/core/service/authentication-service/auth.service';
-import {CoinpayService} from '@app/core/service/coinpay-service/coinpay.service';
-import {CoinpaymentService} from '@app/core/service/coinpayment-service/coinpayment.service';
-import {ConfigurationService} from '@app/core/service/configuration-service/configuration.service';
-import {WalletService} from '@app/core/service/wallet-service/wallet.service';
+import { WalletWithdrawalsConfiguration } from '@app/core/models/wallet-withdrawals-configuration-model/wallet-withdrawals-configuration.model';
+import { AuthService } from '@app/core/service/authentication-service/auth.service';
+import { CoinpayService } from '@app/core/service/coinpay-service/coinpay.service';
+import { CoinpaymentService } from '@app/core/service/coinpayment-service/coinpayment.service';
+import { ConfigurationService } from '@app/core/service/configuration-service/configuration.service';
+import { WalletService } from '@app/core/service/wallet-service/wallet.service';
 
-import {
-  PagaditoTransactionDetailRequest
-} from '@app/core/models/pagadito-model/pagadito-transaction-detail-request.model';
-import {AffiliateService} from '@app/core/service/affiliate-service/affiliate.service';
-import {PagaditoService} from '@app/core/service/pagadito-service/pagadito.service';
-import {PdfViewerService} from '@app/core/service/pdf-viewer-service/pdf-viewer.service';
-import {WalletModel1AService} from '@app/core/service/wallet-model-1a-service/wallet-model-1a.service';
-import {WalletModel1BService} from '@app/core/service/wallet-model-1b-service/wallet-model-1b.service';
-import {Subscription, switchMap, timer} from 'rxjs';
-import {CommonModule} from '@angular/common';
-import {ReactiveFormsModule, FormsModule} from '@angular/forms';
-import {QrcodeModule} from 'qrcode-angular';
-import {NgbModule} from '@ng-bootstrap/ng-bootstrap';
-import {TranslateModule} from '@ngx-translate/core';
-import {CoinpayModalComponent} from "@app/client/cart/coinpay-modal/coinpay-modal.component";
-import {PdfViewerComponent} from "@app/shared/components/pdf-viewer/pdf-viewer.component";
-import {TruncateDecimalsPipe} from "@app/shared/pipes/truncate-decimals.pipe";
+import { PagaditoTransactionDetailRequest } from '@app/core/models/pagadito-model/pagadito-transaction-detail-request.model';
+import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.service';
+import { PagaditoService } from '@app/core/service/pagadito-service/pagadito.service';
+import { PdfViewerService } from '@app/core/service/pdf-viewer-service/pdf-viewer.service';
+import { WalletModel1AService } from '@app/core/service/wallet-model-1a-service/wallet-model-1a.service';
+import { WalletModel1BService } from '@app/core/service/wallet-model-1b-service/wallet-model-1b.service';
+import { Subscription, switchMap, timer } from 'rxjs';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { QrcodeModule } from 'qrcode-angular';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { TranslateModule } from '@ngx-translate/core';
+import { CoinpayModalComponent } from '@app/client/cart/coinpay-modal/coinpay-modal.component';
+import { PdfViewerComponent } from '@app/shared/components/pdf-viewer/pdf-viewer.component';
+import { TruncateDecimalsPipe } from '@app/shared/pipes/truncate-decimals.pipe';
 
 @Component({
   selector: 'app-cart',
   templateUrl: './cart.component.html',
   styleUrls: ['./cart.component.scss'],
   standalone: true,
-  imports: [CommonModule,
+  imports: [
+    CommonModule,
     ReactiveFormsModule,
     FormsModule,
     QrcodeModule,
     NgbModule,
     TranslateModule,
-    CoinpayModalComponent, PdfViewerComponent,
-    TruncateDecimalsPipe]
+    CoinpayModalComponent,
+    PdfViewerComponent,
+    TruncateDecimalsPipe,
+  ],
 })
 export class CartComponent implements OnInit, OnDestroy {
   today: Date;
@@ -115,8 +112,7 @@ export class CartComponent implements OnInit, OnDestroy {
     private pagaditoService: PagaditoService,
     private pdfViewerService: PdfViewerService,
     private matrixQualificationService: MatrixQualificationService,
-  ) {
-  }
+  ) {}
 
   ngOnInit(): void {
     this.user = this.auth.currentUserAffiliateValue;
@@ -247,8 +243,7 @@ export class CartComponent implements OnInit, OnDestroy {
         confirmButtonText: 'Sí, quiero realizar el pago',
         cancelButtonText: 'No',
         html: `Por favor, asegúrese de haber leído y aceptado los <a href="https://exitojuntosfx.com/wp-content/uploads/2024/01/exitojuntos-V3.pdf" target="_blank">términos y condiciones</a>.`,
-        preConfirm: () => {
-        },
+        preConfirm: () => {},
       });
       if (result.isConfirmed) {
         this.acceptTerms();
@@ -321,7 +316,7 @@ export class CartComponent implements OnInit, OnDestroy {
 
   createBalanceRequest(): WalletRequest {
     this.walletRequest.affiliateId = this.user.id;
-    this.walletRequest.affiliateUserName = this.user.user_name;
+    this.walletRequest.affiliateUserName = this.user.name;
     this.walletRequest.paymentMethod = 1;
 
     this.products.forEach(item => {
@@ -397,13 +392,13 @@ export class CartComponent implements OnInit, OnDestroy {
 
     request.amount = this.total;
     request.buyer_email = this.user.email;
-    request.buyer_name = `${this.user.name} ${this.user.last_name}`;
+    request.buyer_name = `${this.user.name} ${this.user.lastName}`;
     request.item_number = this.user.id.toString();
     request.ipn_url =
       'https://wallet.exitojuntos.net/api/v1/ConPayments/coinPaymentsIPN';
     request.currency1 = 'USDT.TRC20';
     request.currency2 = 'USDT.TRC20';
-    request.item_name = this.user.user_name;
+    request.item_name = this.user.name;
 
     request.products = this.products.map(item => ({
       productId: item.id,
@@ -448,7 +443,7 @@ export class CartComponent implements OnInit, OnDestroy {
   createCoinPayTransaction() {
     let request = new RequestPayment();
     request.affiliateId = this.user.id;
-    request.userName = this.user.user_name;
+    request.userName = this.user.name;
     request.amount = this.total;
     request.products = this.constructProductDetails();
 

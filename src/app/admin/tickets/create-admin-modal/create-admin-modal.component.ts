@@ -1,31 +1,44 @@
-import {Component, EventEmitter, OnInit, Output, TemplateRef, ViewChild} from '@angular/core';
-import {FormControl, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
-import {NgbModal} from "@ng-bootstrap/ng-bootstrap";
-import {getDownloadURL, ref, Storage, uploadBytesResumable} from "@angular/fire/storage";
+import {
+  Component,
+  EventEmitter,
+  OnInit,
+  Output,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule,
+  Validators,
+} from '@angular/forms';
+import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import {
+  getDownloadURL,
+  ref,
+  Storage,
+  uploadBytesResumable,
+} from '@angular/fire/storage';
 
-import {ToastrService} from "ngx-toastr";
-import {concatAll, from, Observable} from "rxjs";
-import {toArray} from "rxjs/operators";
-import {TicketCategories} from "../../../core/models/ticket-categories-model/ticket-categories.model";
-import {TicketRequest} from "../../../core/models/ticket-model/ticketRequest.model";
-import {UserAffiliate} from "../../../core/models/user-affiliate-model/user.affiliate.model";
-import {TicketCategoriesService} from "../../../core/service/ticket-categories-service/ticket-categories.service";
-import {TicketHubService} from "../../../core/service/ticket-service/ticket-hub.service";
-import {AffiliateService} from "../../../core/service/affiliate-service/affiliate.service";
-import {TicketImagesRequest} from "../../../core/models/ticket-model/ticket-images-request.model";
-import {NgClass} from "@angular/common";
-import {NgxDropzoneModule} from "ngx-dropzone";
+import { ToastrService } from 'ngx-toastr';
+import { concatAll, from, Observable } from 'rxjs';
+import { toArray } from 'rxjs/operators';
+import { TicketCategories } from '../../../core/models/ticket-categories-model/ticket-categories.model';
+import { TicketRequest } from '../../../core/models/ticket-model/ticketRequest.model';
+import { UserAffiliate } from '../../../core/models/user-affiliate-model/user.affiliate.model';
+import { TicketCategoriesService } from '../../../core/service/ticket-categories-service/ticket-categories.service';
+import { TicketHubService } from '../../../core/service/ticket-service/ticket-hub.service';
+import { AffiliateService } from '../../../core/service/affiliate-service/affiliate.service';
+import { TicketImagesRequest } from '../../../core/models/ticket-model/ticket-images-request.model';
+import { NgClass } from '@angular/common';
+import { NgxDropzoneModule } from 'ngx-dropzone';
 
 @Component({
   selector: 'app-create-admin-modal',
   templateUrl: './create-admin-modal.component.html',
   styleUrls: ['./create-admin-modal.component.scss'],
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    NgClass,
-    NgxDropzoneModule
-  ]
+  imports: [ReactiveFormsModule, NgClass, NgxDropzoneModule],
 })
 export class CreateAdminModalComponent implements OnInit {
   createTicketForm: FormGroup;
@@ -41,19 +54,19 @@ export class CreateAdminModalComponent implements OnInit {
   @Output() reloadRequested = new EventEmitter<void>();
   @ViewChild('createTicketModal') createTicketModal: TemplateRef<any>;
 
-  constructor(private modalService: NgbModal,
-              private ticketCategoriesService: TicketCategoriesService,
-              private storage: Storage,
-              private toast: ToastrService,
-              private ticketHubService: TicketHubService,
-              private affiliateService: AffiliateService,
-  ) {
-  }
+  constructor(
+    private modalService: NgbModal,
+    private ticketCategoriesService: TicketCategoriesService,
+    private storage: Storage,
+    private toast: ToastrService,
+    private ticketHubService: TicketHubService,
+    private affiliateService: AffiliateService,
+  ) {}
 
   ngOnInit() {
     this.initCreateTicketForm();
     this.getAllUsers();
-    this.getAllTicketCategories()
+    this.getAllTicketCategories();
     this.ticketHubService.startConnection().then();
   }
 
@@ -62,8 +75,11 @@ export class CreateAdminModalComponent implements OnInit {
       userSearch: new FormControl(''),
       userId: new FormControl('', Validators.required),
       subject_ticket: new FormControl('', Validators.required),
-      category: new FormControl("", Validators.required),
-      description: new FormControl("", [Validators.required, Validators.maxLength(255)]),
+      category: new FormControl('', Validators.required),
+      description: new FormControl('', [
+        Validators.required,
+        Validators.maxLength(255),
+      ]),
     });
   }
 
@@ -83,11 +99,14 @@ export class CreateAdminModalComponent implements OnInit {
       error: () => {
         this.showError('Error al cargar las categorías.');
       },
-    })
+    });
   }
 
   openModal() {
-    this.modalService.open(this.createTicketModal, {size: 'lg', centered: true});
+    this.modalService.open(this.createTicketModal, {
+      size: 'lg',
+      centered: true,
+    });
   }
 
   createTicket(): void {
@@ -98,7 +117,9 @@ export class CreateAdminModalComponent implements OnInit {
     this.ticket.affiliateId = this.createTicketForm.get('userId').value;
     this.ticket.subject = this.createTicketForm.get('subject_ticket').value;
     this.ticket.description = this.createTicketForm.get('description').value;
-    this.ticket.categoryId = parseInt(this.createTicketForm.get('category').value);
+    this.ticket.categoryId = parseInt(
+      this.createTicketForm.get('category').value,
+    );
 
     if (this.files.length > 0) {
       this.startTicketImageUpload();
@@ -108,49 +129,47 @@ export class CreateAdminModalComponent implements OnInit {
   }
 
   startTicketImageUpload(): void {
-    const filePathBase = `tickets/${this.user.user_name}/${this.user.id}/`;
+    const filePathBase = `tickets/${this.user.name}/${this.user.id}/`;
     const uploads = this.files.map(file => {
       const fileRef = ref(this.storage, `${filePathBase}${file.name}`);
       const uploadTask = uploadBytesResumable(fileRef, file);
 
-      return new Observable<TicketImagesRequest>((subscriber) => {
+      return new Observable<TicketImagesRequest>(subscriber => {
         uploadTask.on(
           'state_changed',
-          () => {
-          },
-          (error) => {
+          () => {},
+          error => {
             subscriber.error(error);
           },
           () => {
             getDownloadURL(uploadTask.snapshot.ref).then(
-              (downloadURL) => {
+              downloadURL => {
                 let imageRequest = new TicketImagesRequest();
                 imageRequest.imagePath = downloadURL;
                 subscriber.next(imageRequest);
                 subscriber.complete();
               },
-              (error) => {
+              error => {
                 subscriber.error(error);
-              }
+              },
             );
-          }
+          },
         );
       });
     });
 
-    from(uploads).pipe(
-      concatAll(),
-      toArray()
-    ).subscribe({
-      next: (imageRequests) => {
-        this.ticket.images.push(...imageRequests);
-        this.saveTicket(this.ticket);
-      },
-      error: () => {
-        this.showError('Error al cargar las imágenes.');
-        this.saveTicket(this.ticket);
-      }
-    });
+    from(uploads)
+      .pipe(concatAll(), toArray())
+      .subscribe({
+        next: imageRequests => {
+          this.ticket.images.push(...imageRequests);
+          this.saveTicket(this.ticket);
+        },
+        error: () => {
+          this.showError('Error al cargar las imágenes.');
+          this.saveTicket(this.ticket);
+        },
+      });
   }
 
   onFileSelected(event: any): void {
@@ -165,7 +184,8 @@ export class CreateAdminModalComponent implements OnInit {
   }
 
   private saveTicket(ticket: TicketRequest): void {
-    this.ticketHubService.createTicket(ticket)
+    this.ticketHubService
+      .createTicket(ticket)
       .then(() => {
         this.showSuccess('Ticket creado correctamente!');
         this.reloadRequested.emit();
@@ -181,14 +201,16 @@ export class CreateAdminModalComponent implements OnInit {
   getAllUsers() {
     this.affiliateService.getAll().subscribe((value: UserAffiliate[]) => {
       this.allUsers = value;
-    })
+    });
   }
 
   updateFilteredUsers() {
-    const searchTerm = this.createTicketForm.get('userSearch').value.toLowerCase();
+    const searchTerm = this.createTicketForm
+      .get('userSearch')
+      .value.toLowerCase();
     if (searchTerm) {
       this.filteredUsers = this.allUsers.filter(user =>
-        user.user_name.toLowerCase().includes(searchTerm)
+        user.name.toLowerCase().includes(searchTerm),
       );
     } else {
       this.filteredUsers = [];
@@ -196,13 +218,13 @@ export class CreateAdminModalComponent implements OnInit {
   }
 
   selectUser(user: UserAffiliate) {
-    this.createTicketForm.get('userSearch').setValue(user.user_name);
-    this.createTicketForm.get('userId').setValue(user.id);  // Asumiendo que también guardas el ID
+    this.createTicketForm.get('userSearch').setValue(user.name);
+    this.createTicketForm.get('userId').setValue(user.id); // Asumiendo que también guardas el ID
     this.showSuggestions = false;
   }
 
   hideSuggestions() {
     // Retrasa la ocultación para permitir la selección de un elemento
-    setTimeout(() => this.showSuggestions = false, 200);
+    setTimeout(() => (this.showSuggestions = false), 200);
   }
 }

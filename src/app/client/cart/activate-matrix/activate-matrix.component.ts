@@ -1,7 +1,10 @@
 import { TranslateService } from '@ngx-translate/core';
 import { Component, OnInit } from '@angular/core';
 
-import { PaymentDetails, PaymentTranslations } from './activate-matrix-interfaces';
+import {
+  PaymentDetails,
+  PaymentTranslations,
+} from './activate-matrix-interfaces';
 import { ConpaymentTransaction } from '@app/core/models/coinpayment-model/conpayment-transaction.model';
 import { CreatePayment } from '@app/core/models/coinpayment-model/create-payment.model';
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
@@ -15,11 +18,11 @@ import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
 
 @Component({
-    selector: 'app-activate-matrix',
-    templateUrl: './activate-matrix.component.html',
-    styleUrls: ['./activate-matrix.component.scss'],
-    standalone: true,
-    imports: [CommonModule, FormsModule, TranslateModule]
+  selector: 'app-activate-matrix',
+  templateUrl: './activate-matrix.component.html',
+  styleUrls: ['./activate-matrix.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, TranslateModule],
 })
 export class ActivateMatrixComponent implements OnInit {
   matrixConfigurations: any[] = [];
@@ -35,7 +38,7 @@ export class ActivateMatrixComponent implements OnInit {
     private authService: AuthService,
     private toastrService: ToastrService,
     private conpaymentService: CoinpaymentService,
-    private translateService: TranslateService
+    private translateService: TranslateService,
   ) {}
 
   ngOnInit(): void {
@@ -90,9 +93,10 @@ export class ActivateMatrixComponent implements OnInit {
 
     request.amount = this.selectedMatrixConfig.feeAmount;
     request.buyer_email = this.currentUser.email;
-    request.buyer_name = `${this.currentUser.name} ${this.currentUser.last_name}`;
+    request.buyer_name = `${this.currentUser.name} ${this.currentUser.lastName}`;
     request.item_number = this.currentUser.id.toString();
-    request.ipn_url = 'https://wallet.exitojuntos.net/api/v1/MatrixQualification/coinpayments_matrix_activation_confirmation';
+    request.ipn_url =
+      'https://wallet.exitojuntos.net/api/v1/MatrixQualification/coinpayments_matrix_activation_confirmation';
     request.currency1 = 'USDT.BEP20';
     request.currency2 = 'USDT.BEP20';
     request.item_name = `${this.selectedMatrixConfig.matrixName} - ${this.selectedMatrixConfig.matrixType}`;
@@ -159,17 +163,33 @@ export class ActivateMatrixComponent implements OnInit {
       activateMatrix: this.translateService.instant('ACTIVATE_MATRIX.TITLE'),
       matrixType: this.translateService.instant('ACTIVATE_MATRIX.MATRIX_TYPE'),
       totalCost: this.translateService.instant('ACTIVATE_MATRIX.TOTAL_COST'),
-      gatewayFee: this.translateService.instant('ACTIVATE_MATRIX.GATEWAY_FEE') || 'Fee de pasarela',
-      matrixCost: this.translateService.instant('ACTIVATE_MATRIX.MATRIX_COST') || 'Costo de matriz',
-      totalToPay: this.translateService.instant('ACTIVATE_MATRIX.TOTAL_TO_PAY') || 'Total a pagar',
-      paymentWarning: this.translateService.instant('ACTIVATE_MATRIX.PAYMENT_WARNING') || 'En caso de que no se confirme la totalidad de los fondos, su compra será revertida automáticamente.',
-      gatewayFeeInfo: this.translateService.instant('ACTIVATE_MATRIX.GATEWAY_FEE_INFO') || 'La pasarela de pago cobra un fee del 1% sobre el monto de la compra.',
-      confirmPayment: this.translateService.instant('ACTIVATE_MATRIX.CONFIRM_PAYMENT') || 'Sí, pagar',
-      cancel: this.translateService.instant('ACTIVATE_MATRIX.CANCEL') || 'Cancelar',
+      gatewayFee:
+        this.translateService.instant('ACTIVATE_MATRIX.GATEWAY_FEE') ||
+        'Fee de pasarela',
+      matrixCost:
+        this.translateService.instant('ACTIVATE_MATRIX.MATRIX_COST') ||
+        'Costo de matriz',
+      totalToPay:
+        this.translateService.instant('ACTIVATE_MATRIX.TOTAL_TO_PAY') ||
+        'Total a pagar',
+      paymentWarning:
+        this.translateService.instant('ACTIVATE_MATRIX.PAYMENT_WARNING') ||
+        'En caso de que no se confirme la totalidad de los fondos, su compra será revertida automáticamente.',
+      gatewayFeeInfo:
+        this.translateService.instant('ACTIVATE_MATRIX.GATEWAY_FEE_INFO') ||
+        'La pasarela de pago cobra un fee del 1% sobre el monto de la compra.',
+      confirmPayment:
+        this.translateService.instant('ACTIVATE_MATRIX.CONFIRM_PAYMENT') ||
+        'Sí, pagar',
+      cancel:
+        this.translateService.instant('ACTIVATE_MATRIX.CANCEL') || 'Cancelar',
     };
   }
 
-  private showPaymentDialog(paymentDetails: PaymentDetails, translations: PaymentTranslations): Promise<any> {
+  private showPaymentDialog(
+    paymentDetails: PaymentDetails,
+    translations: PaymentTranslations,
+  ): Promise<any> {
     return Swal.fire({
       title: `¿${translations.activateMatrix} ${paymentDetails.matrixName}?`,
       html: this.buildPaymentDialogHtml(paymentDetails, translations),
@@ -182,7 +202,10 @@ export class ActivateMatrixComponent implements OnInit {
     });
   }
 
-  private buildPaymentDialogHtml(paymentDetails: PaymentDetails, translations: PaymentTranslations): string {
+  private buildPaymentDialogHtml(
+    paymentDetails: PaymentDetails,
+    translations: PaymentTranslations,
+  ): string {
     return `
     ${this.buildPaymentSummaryHtml(paymentDetails, translations)}
     ${this.buildWarningAlertHtml(translations.paymentWarning)}
@@ -190,7 +213,10 @@ export class ActivateMatrixComponent implements OnInit {
   `;
   }
 
-  private buildPaymentSummaryHtml(paymentDetails: PaymentDetails, translations: PaymentTranslations): string {
+  private buildPaymentSummaryHtml(
+    paymentDetails: PaymentDetails,
+    translations: PaymentTranslations,
+  ): string {
     return `
     <div style="text-align: left; margin: 20px 0;">
       <p><strong>Matriz:</strong> ${paymentDetails.matrixName}</p>
@@ -237,8 +263,10 @@ export class ActivateMatrixComponent implements OnInit {
 
   private executePaymentTransaction(transactionRequest: CreatePayment): void {
     this.conpaymentService.createTransaction(transactionRequest).subscribe({
-      next: (response: ConpaymentTransaction) => this.handlePaymentSuccess(response),
-      error: error => this.handlePaymentError(error, 'Error creando transacción:'),
+      next: (response: ConpaymentTransaction) =>
+        this.handlePaymentSuccess(response),
+      error: error =>
+        this.handlePaymentError(error, 'Error creando transacción:'),
     });
   }
 
@@ -247,7 +275,9 @@ export class ActivateMatrixComponent implements OnInit {
     this.loading = false;
 
     if (response?.checkout_Url) {
-      this.successMessage(`Redirigiendo al pago de la matriz ${this.selectedMatrixConfig.matrixName}`);
+      this.successMessage(
+        `Redirigiendo al pago de la matriz ${this.selectedMatrixConfig.matrixName}`,
+      );
       this.redirectToPayment(response.checkout_Url);
     } else {
       this.errorMessage('Error: No se recibió la URL de pago');
@@ -263,6 +293,10 @@ export class ActivateMatrixComponent implements OnInit {
   private handlePaymentError(error: any, logMessage: string): void {
     this.loading = false;
     console.error(logMessage, error);
-    this.errorMessage(logMessage === 'Error creando transacción:' ? 'Error al crear la transacción de pago' : 'Error al preparar la transacción');
+    this.errorMessage(
+      logMessage === 'Error creando transacción:'
+        ? 'Error al crear la transacción de pago'
+        : 'Error al preparar la transacción',
+    );
   }
 }

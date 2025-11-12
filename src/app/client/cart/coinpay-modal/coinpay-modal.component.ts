@@ -1,6 +1,16 @@
-import { ChangeDetectorRef, Component, Input, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import {
+  ChangeDetectorRef,
+  Component,
+  Input,
+  OnInit,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ProductRequest, RequestPayment } from '../../../core/models/coinpay-model/request-payment.model';
+import {
+  ProductRequest,
+  RequestPayment,
+} from '../../../core/models/coinpay-model/request-payment.model';
 import { UserAffiliate } from '../../../core/models/user-affiliate-model/user.affiliate.model';
 import { CoinpayService } from '../../../core/service/coinpay-service/coinpay.service';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
@@ -12,11 +22,11 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { QrcodeModule } from 'qrcode-angular';
 
 @Component({
-    selector: 'app-coinpay-modal',
-    templateUrl: './coinpay-modal.component.html',
-    styleUrls: ['./coinpay-modal.component.scss'],
-    standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, QrcodeModule]
+  selector: 'app-coinpay-modal',
+  templateUrl: './coinpay-modal.component.html',
+  styleUrls: ['./coinpay-modal.component.scss'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, QrcodeModule],
 })
 export class CoinpayModalComponent implements OnInit {
   paymentGroup: FormGroup;
@@ -42,13 +52,13 @@ export class CoinpayModalComponent implements OnInit {
   private modalReference: NgbModalRef;
   @ViewChild('coinpayPaymentModal') coinpayPaymentModal: TemplateRef<any>;
   private readonly iconMap = {
-    'BTC': 'assets/images/crypto/bitcoin.png',
-    'USDT': 'assets/images/crypto/thether.png',
-    'ERC20': 'assets/images/crypto/erc20.png',
-    'BEP20': 'assets/images/crypto/bep20.png',
-    'PoS': 'assets/images/crypto/polygon.png',
-    'TRC20': 'assets/images/crypto/trc20.png',
-    'Solana': 'assets/images/crypto/solana.png'
+    BTC: 'assets/images/crypto/bitcoin.png',
+    USDT: 'assets/images/crypto/thether.png',
+    ERC20: 'assets/images/crypto/erc20.png',
+    BEP20: 'assets/images/crypto/bep20.png',
+    PoS: 'assets/images/crypto/polygon.png',
+    TRC20: 'assets/images/crypto/trc20.png',
+    Solana: 'assets/images/crypto/solana.png',
   };
 
   constructor(
@@ -56,8 +66,8 @@ export class CoinpayModalComponent implements OnInit {
     private modalService: NgbModal,
     private coinpayService: CoinpayService,
     private toastr: ToastrService,
-    private cdr: ChangeDetectorRef) {
-  }
+    private cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
     this.initControls();
@@ -82,19 +92,19 @@ export class CoinpayModalComponent implements OnInit {
   initControls() {
     this.paymentGroup = this.formBuilder.group({
       network: ['', Validators.required],
-      amount: ['', Validators.required]
-    })
+      amount: ['', Validators.required],
+    });
   }
 
   getNetworksById(id: number) {
     this.coinpayService.getNetworks(id).subscribe({
-      next: (response) => {
+      next: response => {
         if (response) {
           console.log(response);
           this.networks = response;
         }
       },
-      error: (err) => {
+      error: err => {
         console.error(err);
       },
     });
@@ -151,7 +161,7 @@ export class CoinpayModalComponent implements OnInit {
     return this.products.map(product => {
       return {
         productId: product.id,
-        quantity: product.quantity
+        quantity: product.quantity,
       };
     });
   }
@@ -162,11 +172,12 @@ export class CoinpayModalComponent implements OnInit {
     const request = this.createTransactionRequest(networkId);
 
     this.coinpayService.createChannel(request).subscribe({
-      next: async (response) => {
+      next: async response => {
         if (response.success) {
           const transactionData = response.data.data;
           this.walletAddress = transactionData.address;
-          this.transactionId = transactionData.idExternalIdentification.toString();
+          this.transactionId =
+            transactionData.idExternalIdentification.toString();
 
           console.log(response);
 
@@ -180,17 +191,17 @@ export class CoinpayModalComponent implements OnInit {
           } catch (error) {
             console.error('Error generating QR code:', error);
             this.isLoading = false;
-            this.showError("Error al generar el código QR");
+            this.showError('Error al generar el código QR');
           }
         } else {
           this.isLoading = false;
-          this.showError("Error al crear la transacción");
+          this.showError('Error al crear la transacción');
         }
       },
-      error: (err) => {
+      error: err => {
         this.isLoading = false;
         console.error(err);
-        this.showError("Error al crear la transacción");
+        this.showError('Error al crear la transacción');
       },
     });
   }
@@ -198,7 +209,7 @@ export class CoinpayModalComponent implements OnInit {
   createTransactionRequest(networkId: number): RequestPayment {
     const request = new RequestPayment();
     request.affiliateId = this.user.id;
-    request.userName = this.user.user_name;
+    request.userName = this.user.name;
     request.amount = this.total;
     request.products = this.constructProductDetails();
     request.networkId = this.selectedCrypto === 'BTC' ? 1 : networkId;
@@ -207,23 +218,26 @@ export class CoinpayModalComponent implements OnInit {
   }
 
   startTransactionStatusPolling(reference: string) {
-
-    this.pollingSubscription = timer(0, this.pollingInterval).pipe(
-      switchMap(() => this.coinpayService.getTransactionByReference(reference))
-    ).subscribe({
-      next: (response) => {
-        if (response.data === true) {
-          this.showSuccess('Pago confirmado');
+    this.pollingSubscription = timer(0, this.pollingInterval)
+      .pipe(
+        switchMap(() =>
+          this.coinpayService.getTransactionByReference(reference),
+        ),
+      )
+      .subscribe({
+        next: response => {
+          if (response.data === true) {
+            this.showSuccess('Pago confirmado');
+            this.stopTransactionStatusPolling();
+            this.cleanAndCloseModal();
+          }
+        },
+        error: error => {
+          console.error('Error al obtener el estado de la transacción:', error);
+          this.showError('Error al verificar el estado del pago');
           this.stopTransactionStatusPolling();
-          this.cleanAndCloseModal();
-        }
-      },
-      error: (error) => {
-        console.error('Error al obtener el estado de la transacción:', error);
-        this.showError('Error al verificar el estado del pago');
-        this.stopTransactionStatusPolling();
-      }
-    });
+        },
+      });
   }
 
   stopTransactionStatusPolling() {

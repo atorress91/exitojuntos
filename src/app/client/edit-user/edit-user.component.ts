@@ -98,24 +98,17 @@ export class EditUserComponent implements OnInit, OnDestroy {
   userValidations() {
     this.updateUserForm = this.formBuilder.group({
       identification: ['', Validators.required],
-      user_name: new FormControl({ value: '', disabled: true }),
       name: new FormControl({ value: '', disabled: true }),
-      last_name: new FormControl({ value: '', disabled: true }),
+      lastName: new FormControl({ value: '', disabled: true }),
       email: new FormControl({ value: '', disabled: true }),
       father: new FormControl({ value: '', disabled: true }),
       phone: ['', Validators.required],
       address: [],
       country: [],
-      tax_id: [],
-      zip_code: [],
-      created_at: new FormControl({ value: '', disabled: true }),
-      birthday: [],
-      beneficiary_name: [],
-      legal_authorized_first: [],
-      legal_authorized_second: [],
-      side: [],
-      beneficiary_email: [],
-      beneficiary_phone: [],
+      zipCode: [],
+      createdAt: new FormControl({ value: '', disabled: true }),
+      birtDate: [],
+      side: new FormControl({ value: '', disabled: true }),
     });
   }
 
@@ -136,28 +129,21 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
     this.updateUserForm.patchValue({
       identification: affiliate.identification ?? '',
-      user_name: '',
       name: affiliate.name ?? '',
-      last_name: affiliate.lastName ?? '',
+      lastName: affiliate.lastName ?? '',
       email: affiliate.email ?? '',
       side: affiliate.side?.toString() ?? '0',
       father: affiliate.father?.toString() ?? '',
       phone: affiliate.phone ?? '',
       address: affiliate.address ?? '',
-      tax_id: '',
-      country: affiliate.country?.name ?? '',
-      zip_code: affiliate.zipCode ?? '',
-      created_at: affiliate.createdAt ?? '',
-      birthday: formattedBirthday,
-      beneficiary_name: '',
-      legal_authorized_first: '',
-      legal_authorized_second: '',
-      beneficiary_email: '',
-      beneficiary_phone: '',
+      country: affiliate.country?.id ?? '',
+      zipCode: affiliate.zipCode ?? '',
+      createdAt: affiliate.createdAt ?? '',
+      birtDate: formattedBirthday,
     });
 
     if (affiliate.birtDate) {
-      this.updateUserForm.get('birthday').disable();
+      this.updateUserForm.get('birtDate').disable();
     }
 
     if (affiliate.identification) {
@@ -199,32 +185,26 @@ export class EditUserComponent implements OnInit, OnDestroy {
   onSaveUser() {
     let userUpdate = new UserAffiliate();
 
+    userUpdate.id = this.user.id;
     userUpdate.identification = this.updateUserForm.get('identification').value;
     userUpdate.phone = this.updateUserForm.get('phone').value;
-    userUpdate.binary_matrix_side = this.updateUserForm.get('side').value;
     userUpdate.address = this.updateUserForm.get('address').value;
-    userUpdate.zip_code = this.updateUserForm.get('zip_code').value;
-    userUpdate.country = this.updateUserForm.get('country').value;
-    userUpdate.birthday = this.updateUserForm.get('birthday').value;
-    userUpdate.tax_id = this.updateUserForm.get('tax_id').value;
-    userUpdate.beneficiary_name =
-      this.updateUserForm.get('beneficiary_name').value;
-    userUpdate.legal_authorized_first = this.updateUserForm.get(
-      'legal_authorized_first',
-    ).value;
-    userUpdate.legal_authorized_second = this.updateUserForm.get(
-      'legal_authorized_second',
-    ).value;
-    userUpdate.id = this.user.id;
-    userUpdate.beneficiary_email =
-      this.updateUserForm.get('beneficiary_email').value;
-    userUpdate.beneficiary_phone =
-      this.updateUserForm.get('beneficiary_phone').value;
+    userUpdate.zipCode = this.updateUserForm.get('zipCode').value;
+
+    const countryId = this.updateUserForm.get('country').value;
+    if (countryId) {
+      userUpdate.country = { id: countryId };
+    }
+
+    const birtDate = this.updateUserForm.get('birtDate').value;
+    if (birtDate) {
+      userUpdate.birtDate = birtDate;
+    }
 
     this.affiliateService
       .updateUserProfile(userUpdate)
       .subscribe((response: UserAffiliate) => {
-        if (response !== null) {
+        if (response) {
           this.showSuccess('La información se actualizó correctamente!');
           this.setValues(response);
         } else {

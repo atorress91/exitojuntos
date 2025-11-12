@@ -32,13 +32,6 @@
                                   </div>
                                   <hr />
                                   <div class="form-group">
-                                    <label for="user_name"> {{ 'EDIT-PROFILE.USERNAME' | translate }} </label>
-                                    <br />
-                                    <input id="user_name" class="form-control"
-                                      placeholder="{{ 'EDIT-PROFILE.USERNAME' | translate }}" type="text"
-                                      formControlName="user_name" />
-                                  </div>
-                                  <div class="form-group">
                                     <label for="email"> {{ 'EDIT-PROFILE.EMAIL' | translate }} </label>
                                     <br />
                                     <input id="email" class="form-control"
@@ -61,16 +54,16 @@
                                       formControlName="father" />
                                   </div>
                                   <div class="form-group">
-                                    <label for="created_at"> {{ 'EDIT-PROFILE.REGISTER_DATE' | translate }} </label>
+                                    <label for="createdAt"> {{ 'EDIT-PROFILE.REGISTER_DATE' | translate }} </label>
                                     <br />
-                                    <input id="created_at" placeholder="{{ 'EDIT-PROFILE.REGISTER_DATE' | translate }}"
-                                      class="form-control" name="created_at" type="text" formControlName="created_at" />
+                                    <input id="createdAt" placeholder="{{ 'EDIT-PROFILE.REGISTER_DATE' | translate }}"
+                                      class="form-control" name="createdAt" type="text" formControlName="createdAt" />
                                   </div>
                                   <div class="form-group">
-                                    <label for="birthday">{{ 'EDIT-PROFILE.BIRTHDAY' | translate }}:</label>
+                                    <label for="birtDate">{{ 'EDIT-PROFILE.BIRTHDAY' | translate }}:</label>
                                     <br />
                                     <div class="form-group" *ngIf="!displayBirthday">
-                                      <input type="date" id="birthday" formControlName="birthday"
+                                      <input type="date" id="birtDate" formControlName="birtDate"
                                         class="form-control" />
                                     </div>
                                     <div *ngIf="displayBirthday">
@@ -91,10 +84,10 @@
                                       class="form-control" name="name" type="text" formControlName="name" />
                                   </div>
                                   <div class="form-group">
-                                    <label for="last_name"> {{ 'EDIT-PROFILE.LAST_NAME' | translate }}: </label>
+                                    <label for="lastName"> {{ 'EDIT-PROFILE.LAST_NAME' | translate }}: </label>
                                     <br />
-                                    <input id="last_name" placeholder="{{ 'EDIT-PROFILE.LAST_NAME' | translate }}"
-                                      class="form-control" name="last_name" type="text" formControlName="last_name" />
+                                    <input id="lastName" placeholder="{{ 'EDIT-PROFILE.LAST_NAME' | translate }}"
+                                      class="form-control" name="lastName" type="text" formControlName="lastName" />
                                   </div>
                                   <div class="form-group">
                                     <label for="address"> {{ 'EDIT-PROFILE.ADDRESS' | translate }} </label>
@@ -110,10 +103,10 @@
                                       class="form-control" name="phone" type="text" formControlName="phone" />
                                   </div>
                                   <div class="form-group">
-                                    <label for="zip_code"> {{ 'EDIT-PROFILE.ZIP_CODE' | translate }} </label>
+                                    <label for="zipCode"> {{ 'EDIT-PROFILE.ZIP_CODE' | translate }} </label>
                                     <br />
-                                    <input id="zip_code" placeholder="{{ 'EDIT-PROFILE.ZIP_CODE' | translate }}"
-                                      class="form-control" formControlName="zip_code" type="text" />
+                                    <input id="zipCode" placeholder="{{ 'EDIT-PROFILE.ZIP_CODE' | translate }}"
+                                      class="form-control" formControlName="zipCode" type="text" />
                                   </div>
                                   <div class="form-group">
                                     <label for="country"> {{ 'EDIT-PROFILE.COUNTRY' | translate }} </label>
@@ -126,39 +119,6 @@
                                         {{ country.name }}
                                       </option>
                                     </select>
-                                  </div>
-                                </div>
-                                <div class="col-xl-4 col-lg-4 col-md-4 mb-2">
-                                  <div class="form-group">
-                                    <h6>{{ 'EDIT-PROFILE.ADDITIONAL_FIELDS' | translate }}</h6>
-                                  </div>
-                                  <hr />
-                                  <div class="form-group">
-                                    <label for="beneficiary_name">
-                                      {{ 'EDIT-PROFILE.BENEFICIARY_NAME' | translate }}
-                                    </label>
-                                    <br />
-                                    <input id="beneficiary_name"
-                                      placeholder=" {{ 'EDIT-PROFILE.BENEFICIARY_NAME' | translate }}"
-                                      class="form-control" type="text" formControlName="beneficiary_name" />
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="beneficiary_email">
-                                      {{ 'EDIT-PROFILE.BENEFICIARY_EMAIL' | translate }}
-                                    </label>
-                                    <br />
-                                    <input id="beneficiary_email"
-                                      placeholder="{{ 'EDIT-PROFILE.BENEFICIARY_EMAIL' | translate }}"
-                                      class="form-control" type="text" formControlName="beneficiary_email" />
-                                  </div>
-                                  <div class="form-group">
-                                    <label for="beneficiary_phone">
-                                      {{ 'EDIT-PROFILE.BENEFICIARY_PHONE' | translate }}
-                                    </label>
-                                    <br />
-                                    <input id="beneficiary_phone"
-                                      placeholder=" {{ 'EDIT-PROFILE.BENEFICIARY_PHONE' | translate }}"
-                                      class="form-control" type="text" formControlName="beneficiary_phone" />
                                   </div>
                                 </div>
                               </div>

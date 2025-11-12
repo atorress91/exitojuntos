@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
-import { ProductsRequests, WalletRequest } from '@app/core/models/wallet-model/wallet-request.model';
+import {
+  ProductsRequests,
+  WalletRequest,
+} from '@app/core/models/wallet-model/wallet-request.model';
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
 import { CartService } from '@app/core/service/cart.service/cart.service';
 import { WalletService } from '@app/core/service/wallet-service/wallet.service';
@@ -10,19 +13,23 @@ import Swal from 'sweetalert2';
 import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'app-conpayment-confirmation',
-    templateUrl: './conpayment-confirmation.component.html',
-    standalone: true,
-    imports: [CommonModule]
+  selector: 'app-conpayment-confirmation',
+  templateUrl: './conpayment-confirmation.component.html',
+  standalone: true,
+  imports: [CommonModule],
 })
 export class ConpaymentConfirmationComponent implements OnInit {
   walletRequest: WalletRequest = new WalletRequest();
   user: UserAffiliate = new UserAffiliate();
   public products: any = [];
 
-  constructor(private cartService: CartService, private walletService: WalletService, private router: Router, private toastr: ToastrService, private authService: AuthService) {
-
-  }
+  constructor(
+    private cartService: CartService,
+    private walletService: WalletService,
+    private router: Router,
+    private toastr: ToastrService,
+    private authService: AuthService,
+  ) {}
 
   ngOnInit(): void {
     this.user = this.authService.currentUserAffiliateValue;
@@ -39,17 +46,16 @@ export class ConpaymentConfirmationComponent implements OnInit {
       showCancelButton: false,
       confirmButtonColor: '#8963ff',
       confirmButtonText: 'Ok',
-    }).then((result) => {
+    }).then(result => {
       this.processPayment();
       this.router.navigateByUrl('/app/home');
     });
   }
 
   private processPayment() {
-
     this.cartService.getProducts().subscribe(products => {
       this.walletRequest.affiliateId = this.user.id;
-      this.walletRequest.affiliateUserName = this.user.user_name;
+      this.walletRequest.affiliateUserName = this.user.name;
       this.walletRequest.paymentMethod = 3;
       this.walletRequest.purchaseFor = 0;
 
@@ -76,6 +82,4 @@ export class ConpaymentConfirmationComponent implements OnInit {
       // });
     });
   }
-
-
 }

@@ -1,25 +1,33 @@
 import { Component, HostListener, OnInit, ViewChild } from '@angular/core';
-import {DataTableColumnCellDirective, DataTableColumnDirective, DatatableComponent} from '@swimlane/ngx-datatable';
+import {
+  DataTableColumnCellDirective,
+  DataTableColumnDirective,
+  DatatableComponent,
+} from '@swimlane/ngx-datatable';
 import { ClipboardService } from 'ngx-clipboard';
 import { ToastrService } from 'ngx-toastr';
 
-import {Router, RouterLink} from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import Swal from 'sweetalert2';
 import { BalanceInformationModalComponent } from './balance-information-modal/balance-information-modal.component';
-import {TranslatePipe} from "@ngx-translate/core";
-import {NgbDropdown, NgbDropdownItem, NgbDropdownMenu, NgbDropdownToggle} from "@ng-bootstrap/ng-bootstrap";
-import {MatrixActivationModalComponent} from "./matrix-activation/matrix-activation-modal.component";
-import {IconsModule} from "../../shared";
-import {MakePurchaseModalComponent} from "./make-purchase-modal/make-purchase-modal.component";
-import {AffiliatesListEditModalComponent} from "./affiliates-list-edit-modal/affiliates-list-edit-modal.component";
-import {AffiliateService} from "../../core/service/affiliate-service/affiliate.service";
-import {PrintService} from "../../core/service/print-service/print.service";
-import {WalletService} from "../../core/service/wallet-service/wallet.service";
-import {WalletModel1AService} from "../../core/service/wallet-model-1a-service/wallet-model-1a.service";
-import {WalletModel1BService} from "../../core/service/wallet-model-1b-service/wallet-model-1b.service";
-import {UserAffiliate} from "../../core/models/user-affiliate-model/user.affiliate.model";
-import {CreditTransactionAdminRequest} from "../../core/models/wallet-model/creditTransactionAdminRequest.mode";
-
+import { TranslatePipe } from '@ngx-translate/core';
+import {
+  NgbDropdown,
+  NgbDropdownItem,
+  NgbDropdownMenu,
+  NgbDropdownToggle,
+} from '@ng-bootstrap/ng-bootstrap';
+import { MatrixActivationModalComponent } from './matrix-activation/matrix-activation-modal.component';
+import { IconsModule } from '../../shared';
+import { MakePurchaseModalComponent } from './make-purchase-modal/make-purchase-modal.component';
+import { AffiliatesListEditModalComponent } from './affiliates-list-edit-modal/affiliates-list-edit-modal.component';
+import { AffiliateService } from '../../core/service/affiliate-service/affiliate.service';
+import { PrintService } from '../../core/service/print-service/print.service';
+import { WalletService } from '../../core/service/wallet-service/wallet.service';
+import { WalletModel1AService } from '../../core/service/wallet-model-1a-service/wallet-model-1a.service';
+import { WalletModel1BService } from '../../core/service/wallet-model-1b-service/wallet-model-1b.service';
+import { UserAffiliate } from '../../core/models/user-affiliate-model/user.affiliate.model';
+import { CreditTransactionAdminRequest } from '../../core/models/wallet-model/creditTransactionAdminRequest.mode';
 
 const header = [
   'Usuario',
@@ -34,10 +42,10 @@ const header = [
 ];
 
 @Component({
-    selector: 'app-affiliates-list',
-    templateUrl: './affiliates-list.component.html',
-    providers: [ToastrService],
-    standalone: true,
+  selector: 'app-affiliates-list',
+  templateUrl: './affiliates-list.component.html',
+  providers: [ToastrService],
+  standalone: true,
   imports: [
     BalanceInformationModalComponent,
     MatrixActivationModalComponent,
@@ -52,8 +60,8 @@ const header = [
     NgbDropdownMenu,
     NgbDropdown,
     DataTableColumnCellDirective,
-    NgbDropdownToggle
-  ]
+    NgbDropdownToggle,
+  ],
 })
 export class AffiliatesListComponent implements OnInit {
   rows = [];
@@ -82,7 +90,7 @@ export class AffiliatesListComponent implements OnInit {
     this.loadAffiliateList();
   }
 
-  @HostListener('window:resize', ['$event'])
+  @HostListener('window:resize')
   onResize() {
     this.scrollBarHorizontal = window.innerWidth < 1200;
     this.table.recalculate();
@@ -147,15 +155,11 @@ export class AffiliatesListComponent implements OnInit {
   onPrint() {
     const body = this.temp.map((items: UserAffiliate) => {
       return [
-        items.user_name,
+        items.name,
         items.status,
-        items.affiliate_mode,
-        items.external_grading_id,
         items.email,
-        items.created_at,
+        items.createdAt,
         items.father,
-        items.sponsor,
-        items.binary_sponsor,
       ];
     });
 
@@ -178,7 +182,7 @@ export class AffiliatesListComponent implements OnInit {
     Swal.fire({
       title: 'Acreditar Saldo',
       html: `
-        <label id="swal-input-label" class="col-red">Usuario: ${user.user_name}</label>
+        <label id="swal-input-label" class="col-red">Usuario: ${user.name}</label>
         <br>
         <label for="swal-input-amount">Monto a Acreditar:</label>
         <input id="swal-input-amount" type="number" class="swal2-input" placeholder="Ingrese el monto">
