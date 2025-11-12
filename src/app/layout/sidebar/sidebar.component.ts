@@ -166,7 +166,6 @@ export class SidebarComponent implements OnInit, OnDestroy {
     this.affiliateService.getAffiliateById(id).subscribe({
       next: value => {
         this.user = value.data;
-        this.getGradingInfo(this.user.external_grading_before_id);
       },
       error: () => {},
     });

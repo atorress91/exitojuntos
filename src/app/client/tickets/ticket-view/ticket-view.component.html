@@ -15,19 +15,18 @@
         <div class="card">
           <div class="chat">
             <div class="chat-header clearfix">
-              <img [src]="user.image_profile_url ? user.image_profile_url : 'assets/images/users/user-1.png'"
-                alt="avatar">
+              <img [src]="user.imageProfileUrl ? user.imageProfileUrl : 'assets/images/users/user-1.png'" alt="avatar">
               <div class="chat-about">
-                <div class="chat-with">{{ user.name }} {{ user.last_name }}</div>
+                <div class="chat-with">{{ user.name }} {{ user.lastName }}</div>
                 <button class="btn btn-info" (click)="showTicketDetails()">Detalles</button>
               </div>
             </div>
           </div>
           <div class="chat-box">
-            <div class="card-body chat-content" style="position: relative; max-height: 400px; overflow-y: auto;" #scrollMe
-              >
+            <div class="card-body chat-content" style="position: relative; max-height: 400px; overflow-y: auto;"
+              #scrollMe>
               <div *ngFor="let message of messages" class="chat-item"
-                   [ngClass]="{'chat-right': !isAdmin(message.userId), 'chat-left': isAdmin(message.userId)}">
+                [ngClass]="{'chat-right': !isAdmin(message.userId), 'chat-left': isAdmin(message.userId)}">
                 <img [src]="message.imageProfileUrl || 'assets/images/users/user-1.png'" alt="User avatar">
                 <div class="chat-details">
                   <div class="chat-text">{{ message.messageContent }}</div>

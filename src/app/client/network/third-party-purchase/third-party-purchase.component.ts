@@ -19,7 +19,7 @@ import { RequestPayment } from '@app/core/models/coinpay-model/request-payment.m
 import { Product } from '@app/core/models/product-model/product.model';
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 import { WalletRequest } from '@app/core/models/wallet-model/wallet-request.model';
-import {CommonModule, NgOptimizedImage} from '@angular/common';
+import { CommonModule, NgOptimizedImage } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { QrcodeModule } from 'qrcode-angular';
 import { CoinpayService } from '@app/core/service/coinpay-service/coinpay.service';
@@ -30,14 +30,21 @@ import { MatrixRequest } from '@app/core/interfaces/matrix-request';
 import Swal from 'sweetalert2';
 import { MatrixQualificationService } from '@app/core/service/matrix-qualification-service/matrix-qualification.service';
 import { NgxSpinnerService } from 'ngx-spinner';
-import {TranslatePipe} from "@ngx-translate/core";
+import { TranslatePipe } from '@ngx-translate/core';
 
 @Component({
-    selector: 'app-third-party-purchase',
-    templateUrl: './third-party-purchase.component.html',
-    styleUrls: ['./third-party-purchase.component.scss'],
-    standalone: true,
-  imports: [CommonModule, ReactiveFormsModule, FormsModule, QrcodeModule, TranslatePipe, NgOptimizedImage]
+  selector: 'app-third-party-purchase',
+  templateUrl: './third-party-purchase.component.html',
+  styleUrls: ['./third-party-purchase.component.scss'],
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    FormsModule,
+    QrcodeModule,
+    TranslatePipe,
+    NgOptimizedImage,
+  ],
 })
 export class ThirdPartyPurchaseComponent implements OnInit, OnDestroy {
   @ViewChild('thirdPartyPurchaseModal')
@@ -65,17 +72,17 @@ export class ThirdPartyPurchaseComponent implements OnInit, OnDestroy {
   walletBalance: number = 0;
 
   constructor(
-    private modalService: NgbModal,
-    private coinpayService: CoinpayService,
-    private toastr: ToastrService,
-    private cdr: ChangeDetectorRef,
-    private zone: NgZone,
-    private walletService: WalletService,
-    private authService: AuthService,
-    private matrixConfigurationService: MatrixConfigurationService,
-    private matrixQualificationService: MatrixQualificationService,
-    private spinnerService: NgxSpinnerService,
-    private toastrService: ToastrService,
+    private readonly modalService: NgbModal,
+    private readonly coinpayService: CoinpayService,
+    private readonly toastr: ToastrService,
+    private readonly cdr: ChangeDetectorRef,
+    private readonly zone: NgZone,
+    private readonly walletService: WalletService,
+    private readonly authService: AuthService,
+    private readonly matrixConfigurationService: MatrixConfigurationService,
+    private readonly matrixQualificationService: MatrixQualificationService,
+    private readonly spinnerService: NgxSpinnerService,
+    private readonly toastrService: ToastrService,
   ) {}
 
   ngOnInit(): void {
@@ -117,7 +124,9 @@ export class ThirdPartyPurchaseComponent implements OnInit, OnDestroy {
   }
 
   toggleSelection(exitojuntos: Product): void {
-    const index = this.selectedItems.findIndex(item => item.id === exitojuntos.id);
+    const index = this.selectedItems.findIndex(
+      item => item.id === exitojuntos.id,
+    );
     if (index > -1) this.selectedItems.splice(index, 1);
     else this.selectedItems.push(exitojuntos);
   }
@@ -136,6 +145,16 @@ export class ThirdPartyPurchaseComponent implements OnInit, OnDestroy {
   }
 
   getStepTitle(): string {
+    let step4Title: string;
+    if (this.selectedFlow === 'purchase') {
+      step4Title =
+        this.paymentMethod === 'coinpay'
+          ? 'THIRD_PARTY_PURCHASE.SCAN_QR'
+          : 'THIRD_PARTY_PURCHASE.WALLET_PAYMENT';
+    } else {
+      step4Title = 'THIRD_PARTY_PURCHASE.CONFIRM_MATRIX_ACTIVATION';
+    }
+
     const titles = [
       'THIRD_PARTY_PURCHASE.SELECT_FLOW',
       this.selectedFlow === 'purchase'
@@ -144,11 +163,7 @@ export class ThirdPartyPurchaseComponent implements OnInit, OnDestroy {
       this.selectedFlow === 'purchase'
         ? 'THIRD_PARTY_PURCHASE.SELECT_PAYMENT_METHOD'
         : 'THIRD_PARTY_PURCHASE.CONFIRM_MATRIX_ACTIVATION',
-      this.selectedFlow === 'purchase'
-        ? this.paymentMethod === 'coinpay'
-          ? 'THIRD_PARTY_PURCHASE.SCAN_QR'
-          : 'THIRD_PARTY_PURCHASE.WALLET_PAYMENT'
-        : 'THIRD_PARTY_PURCHASE.CONFIRM_MATRIX_ACTIVATION',
+      step4Title,
     ];
     return titles[this.currentStep - 1] || '';
   }
@@ -219,7 +234,7 @@ export class ThirdPartyPurchaseComponent implements OnInit, OnDestroy {
   private prepareCoinPayRequest(): RequestPayment {
     return {
       affiliateId: this.userReceivingPurchase.id,
-      userName: this.userReceivingPurchase.user_name,
+      userName: this.userReceivingPurchase.name,
       amount: this.getTotalAmount(),
       products: this.selectedItems.map(product => ({
         productId: product.id,
@@ -233,7 +248,7 @@ export class ThirdPartyPurchaseComponent implements OnInit, OnDestroy {
   private prepareWalletRequest(): WalletRequest {
     const request = new WalletRequest();
     request.affiliateId = this.currentUser.id;
-    request.affiliateUserName = this.currentUser.user_name;
+    request.affiliateUserName = this.currentUser.name;
     request.purchaseFor = this.userReceivingPurchase.id;
     request.productsList = this.selectedItems.map(product => ({
       idProduct: product.id,
@@ -243,7 +258,7 @@ export class ThirdPartyPurchaseComponent implements OnInit, OnDestroy {
   }
 
   private handleCoinPayResponse(response: any): void {
-    if (response.success && response.data && response.data.data) {
+    if (response.success && response.data?.data) {
       this.paymentAddress = response.data.data.address;
       this.coinpayTransactionId = response.data.data.id.toString();
       this.generateQRCode(this.paymentAddress);

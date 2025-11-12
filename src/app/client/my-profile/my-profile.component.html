@@ -64,35 +64,26 @@
                 <button type="button" class="profile-picture-btn" (click)="openImageProfileModal()"
                   aria-label="Cambiar foto de perfil">
                   <img alt="Foto de perfil del usuario"
-                    [src]="user.image_profile_url ? user.image_profile_url : 'assets/images/user.png'"
+                    [src]="user.imageProfileUrl ? user.imageProfileUrl : 'assets/images/user.png'"
                     class="profile-picture-modern" />
                 </button>
               </div> <!-- User Info -->
               <div class="profile-user-info">
                 <h2 class="profile-user-name">
-                  {{ user.name + ' ' + user.last_name }}
+                  {{ user.name + ' ' + user.lastName }}
                 </h2>
 
                 <div class="profile-username">
                   <i class="bi bi-person-circle"></i>
-                  <span>{{ '@' + user.user_name }}</span>
+                  <span>{{ '@' + user.name }}</span>
                 </div>
 
                 <!-- Status Badges -->
                 <div class="profile-badges">
-                  <span *ngIf="user.card_id_authorization == true" class="badge-modern badge-success">
-                    <i class="bi bi-check-circle-fill"></i>
-                    Autorizado
-                  </span>
-                  <span *ngIf="user.card_id_authorization == false" class="badge-modern badge-danger">
-                    <i class="bi bi-x-circle-fill"></i>
-                    No Autorizado
-                  </span>
-
-                  <span *ngIf="user.status == 1" class="badge-modern badge-active">
+                  <span *ngIf="user.status == true" class="badge-modern badge-active">
                     Activo
                   </span>
-                  <span *ngIf="user.status == 0" class="badge-modern badge-inactive">
+                  <span *ngIf="user.status == false" class="badge-modern badge-inactive">
                     Inactivo
                   </span>
 
@@ -158,8 +149,8 @@
                   </div>
                   <div class="profile-info-content">
                     <div class="profile-info-label">Fecha de Registro</div>
-                    <div class="profile-info-value">{{ user.created_at | date: 'dd \'de\' MMMM, yyyy' }}</div>
-                    <div class="profile-info-time">{{ user.created_at | date: 'HH:mm:ss' }}</div>
+                    <div class="profile-info-value">{{ user.createdAt | date: 'dd \'de\' MMMM, yyyy' }}</div>
+                    <div class="profile-info-time">{{ user.createdAt | date: 'HH:mm:ss' }}</div>
                   </div>
                 </div>
 
@@ -167,12 +158,6 @@
                 <div class="profile-info-item">
                   <div class="profile-info-icon">
                     <i class="bi bi-shield-check-fill"></i>
-                  </div>
-                  <div class="profile-info-content">
-                    <div class="profile-info-label">Estado de Autorización</div>
-                    <div class="profile-info-value">
-                      {{ user.card_id_authorization ? 'Autorizado' : 'No Autorizado' }}
-                    </div>
                   </div>
                 </div>
 

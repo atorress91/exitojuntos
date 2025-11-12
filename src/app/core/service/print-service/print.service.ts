@@ -130,11 +130,8 @@ export class PrintService {
                   ' ' +
                   user.name +
                   ' ' +
-                  user.last_name +
+                  user.lastName +
                   '\nPaís:' +
-                  ' ' +
-                  this.getCountryName(user.country) +
-                  '\nCiudad:' +
                   ' ' +
                   user.city,
                 styles: {
@@ -150,7 +147,7 @@ export class PrintService {
                   user.phone +
                   '\nNo de Identificación fiscal:' +
                   ' ' +
-                  user.user_name +
+                  user.name +
                   '\nCorreo:' +
                   ' ' +
                   user.email +

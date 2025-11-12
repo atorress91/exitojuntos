@@ -77,7 +77,7 @@ export class MyProfileEditPersonalInfoModalComponent implements OnInit {
   onSetValuesPersonalInfo(user: UserAffiliate) {
     this.editPersonalInfoForm.setValue({
       user_name: user.name,
-      last_name: user.last_name,
+      last_name: user.lastName,
       email: user.email,
       phone: user.phone,
       address: user.address,

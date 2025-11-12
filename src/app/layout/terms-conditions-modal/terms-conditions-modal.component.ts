@@ -1,4 +1,13 @@
-import { Component, ElementRef, OnDestroy, OnInit, Renderer2, TemplateRef, ViewChild } from '@angular/core';
+import {
+  AfterViewInit,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  Renderer2,
+  TemplateRef,
+  ViewChild,
+} from '@angular/core';
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.service';
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
@@ -9,34 +18,40 @@ import { Subject, takeUntil } from 'rxjs';
 import { CommonModule } from '@angular/common';
 
 @Component({
-    selector: 'app-terms-conditions-modal',
-    templateUrl: './terms-conditions-modal.component.html',
-    styleUrls: ['./terms-conditions-modal.component.scss'],
-    standalone: true,
-    imports: [CommonModule]
+  selector: 'app-terms-conditions-modal',
+  templateUrl: './terms-conditions-modal.component.html',
+  styleUrls: ['./terms-conditions-modal.component.scss'],
+  standalone: true,
+  imports: [CommonModule],
 })
-export class TermsConditionsModalComponent implements OnInit, OnDestroy {
+export class TermsConditionsModalComponent
+  implements OnInit, OnDestroy, AfterViewInit
+{
   @ViewChild('termsModal', { static: true }) termsModal: TemplateRef<any>;
   @ViewChild('acceptButton', { static: false }) acceptButton: ElementRef;
   showButton: boolean = false;
-  private destroy$ = new Subject<void>();
+  private readonly destroy$ = new Subject<void>();
   user: UserAffiliate = new UserAffiliate();
 
   constructor(
-    private termsConditionsService: TermsConditionsService,
-    private modalService: NgbModal,
-    private renderer: Renderer2,
-    private affiliateService: AffiliateService,
-    private authService: AuthService,
-    private toast: ToastrService
-  ) { }
+    private readonly termsConditionsService: TermsConditionsService,
+    private readonly modalService: NgbModal,
+    private readonly renderer: Renderer2,
+    private readonly affiliateService: AffiliateService,
+    private readonly authService: AuthService,
+    private readonly toast: ToastrService,
+  ) {}
 
   ngOnInit() {
     this.user = this.authService.currentUserAffiliateValue;
     this.termsConditionsService.showModal$
       .pipe(takeUntil(this.destroy$))
       .subscribe(() => {
-        this.modalService.open(this.termsModal, { backdrop: 'static', keyboard: false, centered: true });
+        this.modalService.open(this.termsModal, {
+          backdrop: 'static',
+          keyboard: false,
+          centered: true,
+        });
       });
   }
 
@@ -49,8 +64,7 @@ export class TermsConditionsModalComponent implements OnInit, OnDestroy {
   ngAfterViewInit() {
     const modalBodyScroll = document.querySelector('.modal-body');
     if (modalBodyScroll) {
-      this.renderer.listen(modalBodyScroll, 'scroll', (event) => {
-      });
+      this.renderer.listen(modalBodyScroll, 'scroll', event => {});
     }
   }
 
@@ -83,14 +97,14 @@ export class TermsConditionsModalComponent implements OnInit, OnDestroy {
   acceptTerms() {
     this.user.termsConditions = true;
     this.affiliateService.updateAffiliate(this.user).subscribe({
-      next: (value) => {
+      next: value => {
         this.showSuccess('Términos y condiciones actualizados correctamente');
         this.authService.setUserAffiliateValue(this.user);
         this.close();
       },
-      error: (err) => {
+      error: err => {
         this.showError('Error');
       },
-    })
+    });
   }
 }

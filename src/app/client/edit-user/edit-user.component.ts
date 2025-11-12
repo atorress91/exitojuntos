@@ -121,8 +121,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
 
   setValues(affiliate: UserAffiliate) {
     let formattedBirthday = null;
-    if (affiliate.birthday) {
-      const birthdayDate = new Date(affiliate.birthday);
+    if (affiliate.birtDate) {
+      const birthdayDate = new Date(affiliate.birtDate);
 
       const options: Intl.DateTimeFormatOptions = {
         year: 'numeric',
@@ -132,66 +132,37 @@ export class EditUserComponent implements OnInit, OnDestroy {
       this.displayBirthday = birthdayDate.toLocaleDateString('es-ES', options);
 
       formattedBirthday = birthdayDate.toISOString().split('T')[0];
-      this.updateUserForm.get('birthday').setValue(formattedBirthday);
+    }
+
+    this.updateUserForm.patchValue({
+      identification: affiliate.identification ?? '',
+      user_name: '',
+      name: affiliate.name ?? '',
+      last_name: affiliate.lastName ?? '',
+      email: affiliate.email ?? '',
+      side: affiliate.side?.toString() ?? '0',
+      father: affiliate.father?.toString() ?? '',
+      phone: affiliate.phone ?? '',
+      address: affiliate.address ?? '',
+      tax_id: '',
+      country: affiliate.country?.name ?? '',
+      zip_code: affiliate.zipCode ?? '',
+      created_at: affiliate.createdAt ?? '',
+      birthday: formattedBirthday,
+      beneficiary_name: '',
+      legal_authorized_first: '',
+      legal_authorized_second: '',
+      beneficiary_email: '',
+      beneficiary_phone: '',
+    });
+
+    if (affiliate.birtDate) {
       this.updateUserForm.get('birthday').disable();
     }
 
     if (affiliate.identification) {
-      this.updateUserForm
-        .get('identification')
-        .setValue(affiliate.identification);
       this.updateUserForm.get('identification').disable();
     }
-
-    if (affiliate.tax_id) {
-      this.updateUserForm.get('tax_id').setValue(affiliate.tax_id);
-      this.updateUserForm.get('tax_id').disable();
-    }
-
-    if (affiliate.beneficiary_name) {
-      this.updateUserForm
-        .get('beneficiary_name')
-        .setValue(affiliate.beneficiary_name);
-      // this.updateUserForm.get('beneficiary_name').disable();
-    }
-
-    if (affiliate.legal_authorized_first) {
-      this.updateUserForm
-        .get('legal_authorized_first')
-        .setValue(affiliate.legal_authorized_first);
-      this.updateUserForm.get('legal_authorized_first').disable();
-    }
-
-    if (affiliate.legal_authorized_second) {
-      this.updateUserForm
-        .get('legal_authorized_second')
-        .setValue(affiliate.legal_authorized_second);
-      this.updateUserForm.get('legal_authorized_second').disable();
-    }
-
-    this.updateUserForm.setValue({
-      identification: affiliate.identification,
-      user_name: affiliate.user_name,
-      name: affiliate.name,
-      last_name: affiliate.last_name,
-      email: affiliate.email,
-      side: affiliate.binary_matrix_side.toString() ?? 0,
-      father: affiliate.father_user_level
-        ? affiliate.father_user_level.user_name ?? ''
-        : '',
-      phone: affiliate.phone,
-      address: affiliate.address ?? '',
-      tax_id: affiliate.tax_id ?? '',
-      country: affiliate.country,
-      zip_code: affiliate.zip_code,
-      created_at: affiliate.created_at,
-      birthday: formattedBirthday,
-      beneficiary_name: affiliate.beneficiary_name ?? '',
-      legal_authorized_first: affiliate.legal_authorized_first ?? '',
-      legal_authorized_second: affiliate.legal_authorized_second ?? '',
-      beneficiary_email: affiliate.beneficiary_email ?? '',
-      beneficiary_phone: affiliate.beneficiary_phone ?? '',
-    });
   }
 
   checkAndDisableInput() {}
@@ -269,36 +240,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
       this.files.push(...files);
 
       if (this.files.length == 2) {
-        // this.faceApiService.verifyImagesWithSsdMobilenetv1(this.files)
-        //   .then(result => {
-        //     const canvasSelfieURL = result.canvasSelfie.toDataURL();
-        //     const canvasIdDocumentURL = result.canvasIdDocument.toDataURL();
-
-        //     const title = result.matched ? '¡Éxito! Las imágenes coinciden.' : 'Error: Las imágenes no coinciden.';
-
-        //     Swal.fire({
-        //       title: title,
-        //       html: `
-        //         <div style="display: flex; justify-content: space-between;">
-        //           <img src="${canvasSelfieURL}" alt="Selfie" style="max-width: 45%; margin-right: 5%;" />
-        //           <img src="${canvasIdDocumentURL}" alt="ID Document" style="max-width: 45%;" />
-        //         </div>
-        //         <div style="margin-top: 20px;">
-        //           Distancia Euclidiana: ${result.distance.toFixed(2)} <br>
-        //           Confianza mínima (minConfidence): 0.5
-        //         </div>
-        //       `,
-        //       icon: result.matched ? 'success' : 'error'
-        //     });
-
-        // if (result.matched) {
         this.updateCardIdAuthorization(1);
-        this.user.card_id_authorization = true;
         this.authService.setUserAffiliateValue(this.user);
-      } else {
-        // this.updateCardIdAuthorization(1);
-        // this.user.card_id_authorization = true;
-        // this.authService.setUserAffiliateValue(this.user);
       }
       // });
     } else {
@@ -306,8 +249,7 @@ export class EditUserComponent implements OnInit, OnDestroy {
       this.updateCardIdAuthorization(0);
     }
 
-    const filePath =
-      'affiliates/' + `${this.user.user_name}/` + `${this.user.id}`;
+    const filePath = 'affiliates/' + `${this.user.name}/` + `${this.user.id}`;
     this.fileRef = ref(this.storage, filePath);
   }
 
@@ -366,11 +308,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   deleteImage() {
-    const filePath =
-      'affiliates/' + `${this.user.user_name}/` + `${this.user.id}`;
-    this.user.image_id_path = '';
+    const filePath = 'affiliates/' + `${this.user.id}/` + `${this.user.id}`;
     this.updateImageIdPath.id = this.user.id;
-    this.updateImageIdPath.image_id_path = this.user.image_id_path;
     this.affiliateService.updateImageIdPath(this.updateImageIdPath).subscribe({
       next: () => {
         this.showSuccess('Image deleted successfully');

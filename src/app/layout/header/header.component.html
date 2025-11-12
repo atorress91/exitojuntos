@@ -74,12 +74,12 @@
     <li ngbDropdown>
       <a ngbDropdownToggle data-toggle="dropdown"
         class="nav-link dropdown-toggle nav-link-lg nav-link-user d-flex align-items-center">
-        <img alt="User profile" [src]="user.image_profile_url ? user.image_profile_url : 'assets/images/user.png'"
+        <img alt="User profile" [src]="user.imageProfileUrl ? user.imageProfileUrl : 'assets/images/user.png'"
           class="rounded flex-shrink-0 me-2" width="32" height="32" />
         <span class="d-sm-none d-lg-inline-block"></span>
       </a>
       <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right header-dropdown pullDown">
-        <div class="dropdown-title">Bienvenido {{ user?.name || user?.user_name }}
+        <div class="dropdown-title">Bienvenido {{ user?.name || user?.name }}
           ...</div>
         <a routerLink="app/my-profile" class="dropdown-item has-icon">
           <i class="far fa-user"></i>

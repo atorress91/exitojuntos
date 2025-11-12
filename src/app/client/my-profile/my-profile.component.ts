@@ -123,7 +123,6 @@ export class MyProfileComponent implements OnInit {
       .subscribe(response => {
         if (response.success) {
           this.user = response.data;
-          this.getGradingInfo(this.user.external_grading_before_id);
           this.loadLoginMovements();
         }
       });

@@ -1,30 +1,26 @@
 <div>
   <!-- Left Sidebar -->
-  <aside id="leftsidebar" class="sidebar main-sidebar" (mouseenter)="mouseHover()"
-    (mouseleave)="mouseOut()">
+  <aside id="leftsidebar" class="sidebar main-sidebar" (mouseenter)="mouseHover()" (mouseleave)="mouseOut()">
     <div class="sidebar-brand mt-3">
       <a routerLink="/dashboard/main"> <app-logo [logoClass]="'header-logo'"></app-logo>
       </a>
     </div>
     <!-- Menu -->
     <div class="menu">
-      <ul class="list" [ngStyle]="{'max-height': 'calc(100vh - 80px)', 'max-width': listMaxWidth+'px'}"
-
-      >
+      <ul class="list" [ngStyle]="{'max-height': 'calc(100vh - 80px)', 'max-width': listMaxWidth+'px'}">
         <li class="sidebar-user-panel">
-          <div role="button" class="user-panel" (click)="profileImgComponent.openProfileImgModal()">
+          <button type="button" class="user-panel" (click)="profileImgComponent.openProfileImgModal()">
             <div class=" image">
-              <img [src]="user?.image_profile_url ? user?.image_profile_url : 'assets/images/user.png'"
-                class="img-fluid img-circle user-img-circle" alt="User Image" />
+              <img [src]="user?.imageProfileUrl ? user?.imageProfileUrl : 'assets/images/user.png'"
+                class="img-fluid img-circle user-img-circle" alt="User" />
             </div>
-          </div>
+          </button>
           <div class="profile-usertitle">
-            <div class="sidebar-userpic-name">{{ user.name + ' '+user.last_name }}</div>
-            <div class="profile-usertitle-job ">{{ user.user_name}} </div>
+            <div class="sidebar-userpic-name">{{ user.name + ' '+user.lastName }}</div>
             <div class="profile-usertitle-job mt-2">
-              <div class="btn btn-sm badge-outline col-red" *ngIf="user.activation_date == null"><i
+              <div class="btn btn-sm badge-outline col-red" *ngIf="user.createdAt == null"><i
                   class="bi bi-person-exclamation"></i> Inactivo</div>
-              <div class="btn btn-sm badge-outline col-green" *ngIf="user.activation_date != null"><i
+              <div class="btn btn-sm badge-outline col-green" *ngIf="user.createdAt != null"><i
                   class="bi bi-person-fill-check"></i> {{ grading === null ? 'Activo' : grading.name }}</div>
             </div>
 

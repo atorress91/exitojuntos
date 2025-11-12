@@ -22,7 +22,7 @@ export class ModelsVisibilityService {
 
     if (config?.success && config.data && userAffiliate) {
       const cutoffDate = new Date(config.data.paymentModelCutoffDate);
-      return new Date(userAffiliate.created_at) < cutoffDate;
+      return new Date(userAffiliate.createdAt) < cutoffDate;
     }
     return true;
   });

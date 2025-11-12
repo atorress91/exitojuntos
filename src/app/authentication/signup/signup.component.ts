@@ -169,8 +169,6 @@ export class SignupComponent implements OnInit {
     user.email = this.registerForm.value.email;
     user.affiliate_type = this.registerForm.value.affiliate_type;
     user.father = this.user.id;
-    user.sponsor = this.user.id;
-    user.binary_sponsor = this.user.id;
     user.binary_matrix_side = +this.side;
     user.status = 1;
     this.affiliateService.createAffiliate(user).subscribe(response => {

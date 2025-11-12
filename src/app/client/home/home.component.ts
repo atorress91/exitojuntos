@@ -172,7 +172,7 @@ export class HomeComponent implements OnInit {
   }
 
   get registerUrl() {
-    return `https://www.exitojuntos.net/welcome/${this.user.user_name.toString()}`;
+    return `https://www.exitojuntos.net/welcome/${this.user.phone.toString()}`;
   }
 
   initializeAreaLineChart() {

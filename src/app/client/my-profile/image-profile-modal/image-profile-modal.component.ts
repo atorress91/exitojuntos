@@ -74,7 +74,7 @@ export class ImageProfileModalComponent implements OnInit {
     this.file = event.addedFiles[0];
 
     const filePath =
-      'affiliates/profile/' + `${this.user.user_name}/` + `${this.user.id}`;
+      'affiliates/profile/' + `${this.user.name}/` + `${this.user.id}`;
     this.fileRef = ref(this.storage, filePath);
     const uploadTask = uploadBytesResumable(this.fileRef, this.file);
 
@@ -94,7 +94,7 @@ export class ImageProfileModalComponent implements OnInit {
               next: (value: UserAffiliate) => {
                 if (value) {
                   this.authService.setUserAffiliateValue(value);
-                  this.user.image_profile_url = value.image_profile_url;
+                  this.user.imageProfileUrl = value.imageProfileUrl;
                   this.getInfo.emit();
                   this.showSuccess('Imagen actualizada correctamente');
                 }
@@ -111,7 +111,7 @@ export class ImageProfileModalComponent implements OnInit {
   removeImage(): void {
     let updateImage = new UpdateImageProfile();
     updateImage.image_profile_url = '';
-    this.user.image_profile_url = null;
+    this.user.imageProfileUrl = null;
     this.file = null;
 
     this.affiliateService

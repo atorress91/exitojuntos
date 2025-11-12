@@ -1,27 +1,34 @@
-import {ChangeDetectorRef, Component, ElementRef, OnDestroy, OnInit, ViewChild} from '@angular/core';
-import {takeUntil} from "rxjs/operators";
-import Swal from "sweetalert2";
-import {Subject, Subscription} from "rxjs";
+import {
+  ChangeDetectorRef,
+  Component,
+  ElementRef,
+  OnDestroy,
+  OnInit,
+  ViewChild,
+} from '@angular/core';
+import { takeUntil } from 'rxjs/operators';
+import Swal from 'sweetalert2';
+import { Subject, Subscription } from 'rxjs';
 
-import {UserAffiliate} from '@app/core/models/user-affiliate-model/user.affiliate.model';
-import {AuthService} from '@app/core/service/authentication-service/auth.service';
-import {TicketHubService} from '@app/core/service/ticket-service/ticket-hub.service';
-import {TicketMessageRequest} from '@app/core/models/ticket-model/ticket-message-request.model';
-import {Ticket} from '@app/core/models/ticket-model/ticket.model';
+import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
+import { AuthService } from '@app/core/service/authentication-service/auth.service';
+import { TicketHubService } from '@app/core/service/ticket-service/ticket-hub.service';
+import { TicketMessageRequest } from '@app/core/models/ticket-model/ticket-message-request.model';
+import { Ticket } from '@app/core/models/ticket-model/ticket.model';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import {RouterLink} from "@angular/router";
+import { RouterLink } from '@angular/router';
 
 @Component({
-    selector: 'app-ticket-view',
-    templateUrl: './ticket-view.component.html',
-    styleUrls: ['./ticket-view.component.scss'],
-    standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink]
+  selector: 'app-ticket-view',
+  templateUrl: './ticket-view.component.html',
+  styleUrls: ['./ticket-view.component.scss'],
+  standalone: true,
+  imports: [CommonModule, FormsModule, RouterLink],
 })
 export class TicketViewComponent implements OnInit, OnDestroy {
-  private destroy$ = new Subject<void>();
-  @ViewChild('scrollMe') private myScrollContainer: ElementRef;
+  private readonly destroy$ = new Subject<void>();
+  @ViewChild('scrollMe') private readonly myScrollContainer: ElementRef;
   ticket: Ticket;
   config = {
     wheelSpeed: 0.5,
@@ -35,10 +42,10 @@ export class TicketViewComponent implements OnInit, OnDestroy {
   messages: Set<TicketMessageRequest> = new Set();
 
   constructor(
-    private authService: AuthService,
-    private ticketHubService: TicketHubService,
-    private cdr: ChangeDetectorRef) {
-  }
+    private readonly authService: AuthService,
+    private readonly ticketHubService: TicketHubService,
+    private readonly cdr: ChangeDetectorRef,
+  ) {}
 
   ngOnInit(): void {
     this.user = this.authService.currentUserAffiliateValue;
@@ -55,12 +62,13 @@ export class TicketViewComponent implements OnInit, OnDestroy {
   }
 
   startConnection(ticketId: number) {
-    this.ticketHubService.startConnection().then(() => {
-      this.ticketHubService.joinRoom(ticketId).then();
-      this.getTicketById(ticketId);
-      this.receivedMessage();
-    },
-      error => console.error('Error al conectar o unirse a la sala:', error)
+    this.ticketHubService.startConnection().then(
+      () => {
+        this.ticketHubService.joinRoom(ticketId).then();
+        this.getTicketById(ticketId);
+        this.receivedMessage();
+      },
+      error => console.error('Error al conectar o unirse a la sala:', error),
     );
   }
 
@@ -69,7 +77,7 @@ export class TicketViewComponent implements OnInit, OnDestroy {
       title: `Detalles del Ticket ${this.ticket.id}`,
       text: this.ticket.description,
       icon: 'info',
-      confirmButtonText: 'Cerrar'
+      confirmButtonText: 'Cerrar',
     }).then();
   }
 
@@ -81,7 +89,9 @@ export class TicketViewComponent implements OnInit, OnDestroy {
           this.ticket = ticket;
 
           if (ticket.messages && ticket.messages.length > 0) {
-            ticket.messages.forEach(message => this.processMessageSender(message));
+            for (const message of ticket.messages) {
+              this.processMessageSender(message);
+            }
           } else {
             console.log('Ticket received without messages');
           }
@@ -89,34 +99,40 @@ export class TicketViewComponent implements OnInit, OnDestroy {
           console.log('No ticket received or connection not established');
         }
       },
-      error: (err) => {
+      error: err => {
         console.error('Error recibiendo ticket:', err);
-      }
+      },
     });
   }
 
   receivedMessage(): Subscription {
-    return this.ticketHubService.messageReceived.pipe(
-      takeUntil(this.destroy$)
-    ).subscribe({
-      next: (message: TicketMessageRequest) => this.processMessageSender(message),
-      error: (err) => console.error('Error recibiendo mensajes:', err)
-    });
+    return this.ticketHubService.messageReceived
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (message: TicketMessageRequest) =>
+          this.processMessageSender(message),
+        error: err => console.error('Error recibiendo mensajes:', err),
+      });
   }
 
   sendMessage(): void {
-    if (this.newMessage.trim() && this.ticketHubService.connectionEstablished.value) {
+    if (
+      this.newMessage.trim() &&
+      this.ticketHubService.connectionEstablished.value
+    ) {
       this.ticketMessage.id = this.user.id;
       this.ticketMessage.ticketId = this.ticket.id;
       this.ticketMessage.userId = this.user.id;
       this.ticketMessage.messageContent = this.newMessage;
-      this.ticketMessage.userName = this.user.user_name;
-      this.ticketMessage.imageProfileUrl = this.user.image_profile_url;
+      this.ticketMessage.userName = this.user.name;
+      this.ticketMessage.imageProfileUrl = this.user.imageProfileUrl;
 
       this.ticketHubService.sendMessage(this.ticketMessage);
       this.newMessage = '';
     } else {
-      console.error('Intento de enviar mensaje con la conexión no establecida.');
+      console.error(
+        'Intento de enviar mensaje con la conexión no establecida.',
+      );
     }
   }
 
@@ -136,7 +152,8 @@ export class TicketViewComponent implements OnInit, OnDestroy {
 
   private scrollToBottom(): void {
     try {
-      this.myScrollContainer.nativeElement.scrollTop = this.myScrollContainer.nativeElement.scrollHeight;
+      this.myScrollContainer.nativeElement.scrollTop =
+        this.myScrollContainer.nativeElement.scrollHeight;
     } catch (err) {
       console.error('Could not automatically scroll to the bottom', err);
     }

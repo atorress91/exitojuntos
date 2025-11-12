@@ -184,7 +184,7 @@ export class NetworkComponent implements OnInit {
 
   TransferBalanceForMembership(user) {
     this.transferBalance.fromAffiliateId = this.user.id;
-    this.transferBalance.fromUserName = this.user.user_name;
+    this.transferBalance.fromUserName = this.user.name;
     this.transferBalance.toUserName = user.userName || user.user_name;
 
     this.walletService
@@ -329,7 +329,7 @@ export class NetworkComponent implements OnInit {
 
   TransferBalance(user) {
     this.transferBalance.fromAffiliateId = this.user.id;
-    this.transferBalance.fromUserName = this.user.user_name;
+    this.transferBalance.fromUserName = this.user.name;
     this.transferBalance.toUserName = user.userName;
     if (user.userName == undefined) {
       this.transferBalance.toUserName = user.user_name;
