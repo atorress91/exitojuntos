@@ -1,31 +1,29 @@
-import {Component, OnInit} from '@angular/core';
+import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
   FormGroup,
   ReactiveFormsModule,
   ValidationErrors,
-  Validators
+  Validators,
 } from '@angular/forms';
-import {ActivatedRoute, Router, RouterLink} from '@angular/router';
-import {Country} from '@app/core/models/country-model/country.model';
-import {UserAffiliate} from '@app/core/models/user-affiliate-model/user.affiliate.model';
-import {AffiliateService} from '@app/core/service/affiliate-service/affiliate.service';
-import {LogoService} from '@app/core/service/logo-service/logo.service';
-import {PdfViewerService} from '@app/core/service/pdf-viewer-service/pdf-viewer.service';
-import {ToastrService} from 'ngx-toastr';
-import {CreateAffiliate} from '@app/core/models/user-affiliate-model/create-affiliate.model';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { Country } from '@app/core/models/country-model/country.model';
+import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
+import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.service';
+import { PdfViewerService } from '@app/core/service/pdf-viewer-service/pdf-viewer.service';
+import { ToastrService } from 'ngx-toastr';
+import { CreateAffiliate } from '@app/core/models/user-affiliate-model/create-affiliate.model';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 
 @Component({
-    selector: 'app-signup',
-    templateUrl: './signup.component.html',
-    styleUrls: ['./signup.component.scss'],
-    standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule],
-    schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.scss'],
+  standalone: true,
+  imports: [CommonModule, ReactiveFormsModule, RouterLink, TranslateModule],
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class SignupComponent implements OnInit {
   registerForm: FormGroup;
@@ -36,16 +34,15 @@ export class SignupComponent implements OnInit {
   sponsor = '';
   user: UserAffiliate = new UserAffiliate();
   listcountry: Country[] = [];
-  logoUrl = '';
+  readonly navbarIcon = 'assets/exito-logo.svg';
 
   constructor(
-    private activatedRoute: ActivatedRoute,
-    private router: Router,
-    private formBuilder: FormBuilder,
-    private affiliateService: AffiliateService,
-    private toastr: ToastrService,
-    private logoService: LogoService,
-    private pdfViewerService: PdfViewerService
+    private readonly activatedRoute: ActivatedRoute,
+    private readonly router: Router,
+    private readonly formBuilder: FormBuilder,
+    private readonly affiliateService: AffiliateService,
+    private readonly toastr: ToastrService,
+    private readonly pdfViewerService: PdfViewerService,
   ) {
     this.key = this.activatedRoute.snapshot.params.key || '';
     this.side = this.user.side?.toString() || '';
@@ -59,18 +56,21 @@ export class SignupComponent implements OnInit {
   }
 
   private fetchCountry() {
-    this.affiliateService.getCountries().subscribe((data) => {
+    this.affiliateService.getCountries().subscribe(data => {
       this.listcountry = data;
     });
   }
 
   ngOnInit(): void {
-    this.getLogoUrl();
     this.loadValidations();
   }
 
-  onCountrySelected(countryIso: any) {
-    let country = this.listcountry.find((c) => c.id == countryIso);
+  onCountrySelected(countryIso: string) {
+    const countryId = Number.parseInt(countryIso, 10);
+    if (Number.isNaN(countryId)) {
+      return;
+    }
+    const country = this.listcountry.find(c => c.id === countryId);
     if (!country) {
       return;
     }
@@ -78,7 +78,7 @@ export class SignupComponent implements OnInit {
       return;
     }
     this.registerForm.patchValue({
-      phone: country.phoneCode
+      phone: country.phoneCode,
     });
   }
 
@@ -91,46 +91,50 @@ export class SignupComponent implements OnInit {
           [
             Validators.required,
             Validators.minLength(8),
-            Validators.pattern(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/)
-          ]
+            Validators.pattern(
+              /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/,
+            ),
+          ],
         ],
         repitpassword: [
           '',
           [
             Validators.required,
             Validators.minLength(8),
-            Validators.pattern(/(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/)
-          ]
+            Validators.pattern(
+              /(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[@$!%*#?&^_-]).{8,}/,
+            ),
+          ],
         ],
         name: ['', Validators.required],
         last_name: ['', Validators.required],
         phone: ['', Validators.required],
         country: ['', Validators.required],
         email: ['', Validators.required],
-        terms_conditions: [false, Validators.requiredTrue]
+        terms_conditions: [false, Validators.requiredTrue],
       },
       {
-        validator: passwordMatchValidator
-      }
+        validator: passwordMatchValidator,
+      },
     );
   }
 
   getUserByUsername(key: string) {
     if (!key) return;
 
-    this.affiliateService.getAffiliateByUserName(key).subscribe(
-      (user: UserAffiliate) => {
-        if (user !== null) {
+    this.affiliateService.getAffiliateByUserName(key).subscribe({
+      next: (user: UserAffiliate) => {
+        if (user) {
           this.sponsor = user.user_name;
           this.user = user;
         } else {
           this.router.navigate(['/signin']).then();
         }
       },
-      () => {
+      error: () => {
         this.router.navigate(['/signin']).then();
-      }
-    );
+      },
+    });
   }
 
   get f(): { [key: string]: AbstractControl } {
@@ -142,7 +146,7 @@ export class SignupComponent implements OnInit {
     this.error = '';
 
     if (this.registerForm.invalid) {
-      this.showError("Formulario invalido.");
+      this.showError('Formulario invalido.');
       return;
     }
 
@@ -162,7 +166,7 @@ export class SignupComponent implements OnInit {
     user.binary_sponsor = this.user.id;
     user.binary_matrix_side = +this.side;
     user.status = 1;
-    this.affiliateService.createAffiliate(user).subscribe((response) => {
+    this.affiliateService.createAffiliate(user).subscribe(response => {
       if (response.success) {
         this.showSuccess(response.message);
         setTimeout(() => {
@@ -182,14 +186,10 @@ export class SignupComponent implements OnInit {
     this.toastr.error(message);
   }
 
-  getLogoUrl() {
-    this.logoUrl = this.logoService.getLogoSrc();
-  }
-
   showTermsAndConditions() {
     const doc = {
       url: '/assets/pdf/T&C exitojuntos V1.2.pdf',
-      title: 'Términos y condiciones'
+      title: 'Términos y condiciones',
     };
 
     this.pdfViewerService.showPdf(doc);
@@ -200,13 +200,15 @@ export class SignupComponent implements OnInit {
 export function passwordMatchValidator(formGroup: FormGroup) {
   const password = formGroup.get('password').value;
   const confirmPassword = formGroup.get('repitpassword').value;
-  return password === confirmPassword ? null : {passwordMismatch: true};
+  return password === confirmPassword ? null : { passwordMismatch: true };
 }
 
 // Validador para evitar espacios en blanco en el User name
-export function NoWhitespaceValidator(control: AbstractControl): ValidationErrors | null {
-  if (control.value.indexOf(' ') >= 0) {
-    return {whitespace: true};
+export function NoWhitespaceValidator(
+  control: AbstractControl,
+): ValidationErrors | null {
+  if (control.value.includes(' ')) {
+    return { whitespace: true };
   } else {
     return null;
   }
