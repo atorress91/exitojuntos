@@ -1,7 +1,7 @@
 import { UpdateImageProfile } from './../../models/user-affiliate-model/update-image-profile.model';
 import { UpdateImageIdPath } from './../../models/user-affiliate-model/update-image-id-path.model';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
 import { environment } from '@environments/environment';
 import { map, catchError } from 'rxjs/operators';
@@ -18,8 +18,6 @@ import { ContactUsRequest } from '@app/core/models/user-affiliate-model/contactU
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    Authorization: environment.tokens.accountService.toString(),
-    'X-Client-ID': environment.tokens.clientID.toString(),
   }),
 };
 
@@ -27,12 +25,13 @@ const httpOptions = {
   providedIn: 'root',
 })
 export class AffiliateService {
-  private urlApi: string;
-  private idSource = new BehaviorSubject<number>(null);
-  public currentId = this.idSource.asObservable();
+  private readonly urlApi: string;
+  private readonly idSource = new BehaviorSubject<number>(null);
+  public readonly currentId = this.idSource.asObservable();
+  public readonly http: HttpClient = inject(HttpClient);
 
-  constructor(private http: HttpClient) {
-    this.urlApi = environment.apis.accountService;
+  constructor() {
+    this.urlApi = environment.apis.exitojuntosService;
   }
 
   changeId(id: number) {
@@ -49,7 +48,7 @@ export class AffiliateService {
         map(response => {
           if (response.success) return response.data;
           else {
-            console.error('ERROR: ' + response);
+            console.error('ERROR: ', response);
             return null;
           }
         }),
@@ -66,7 +65,7 @@ export class AffiliateService {
         map(response => {
           if (response.success) return response.data;
           else {
-            console.error('ERROR: ' + response);
+            console.error('ERROR: ', response);
             return null;
           }
         }),
@@ -75,12 +74,12 @@ export class AffiliateService {
 
   getCountries() {
     return this.http
-      .get<Response>(this.urlApi.concat('/auth/countries'), httpOptions)
+      .get<Response>(this.urlApi.concat('/countries'), httpOptions)
       .pipe(
         map(response => {
           if (response.success) return response.data;
           else {
-            console.error('ERROR: ' + response);
+            console.error('ERROR: ', response);
             return null;
           }
         }),
@@ -98,7 +97,7 @@ export class AffiliateService {
         map(response => {
           if (response.success) return response.data;
           else {
-            console.error('ERROR: ' + response);
+            console.error('ERROR: ', response);
             return null;
           }
         }),
@@ -116,7 +115,7 @@ export class AffiliateService {
         map(response => {
           if (response.success) return response.data;
           else {
-            console.error('ERROR: ' + response);
+            console.error('ERROR: ', response);
             return null;
           }
         }),
@@ -166,12 +165,12 @@ export class AffiliateService {
         map(response => {
           if (response.success) return response.data;
           else {
-            console.error('ERROR: ' + response);
+            console.error('ERROR: ', response);
             return null;
           }
         }),
         catchError(error => {
-          return throwError(error);
+          return throwError(() => error);
         }),
       );
   }
@@ -186,12 +185,12 @@ export class AffiliateService {
         map(response => {
           if (response.success) return response;
           else {
-            console.error('ERROR: ' + response);
+            console.error('ERROR: ', response);
             return null;
           }
         }),
         catchError(error => {
-          return throwError(error);
+          return throwError(() => error);
         }),
       );
   }
@@ -206,12 +205,12 @@ export class AffiliateService {
         map(response => {
           if (response.success) return response.data;
           else {
-            console.error('ERROR: ' + response);
+            console.error('ERROR: ', response);
             return null;
           }
         }),
         catchError(error => {
-          return throwError(error);
+          return throwError(() => error);
         }),
       );
   }
@@ -285,7 +284,7 @@ export class AffiliateService {
       map(response => {
         if (response.success) return JSON.parse(response.data);
         else {
-          console.error('ERROR: ' + response);
+          console.error('ERROR: ', response);
           return null;
         }
       }),
@@ -302,7 +301,7 @@ export class AffiliateService {
       map(response => {
         if (response.success) return response.data;
         else {
-          console.error('ERROR: ' + response);
+          console.error('ERROR: ', response);
           return null;
         }
       }),
@@ -319,7 +318,7 @@ export class AffiliateService {
       map(response => {
         if (response.success) return response.data;
         else {
-          console.error('ERROR: ' + response);
+          console.error('ERROR: ', response);
           return null;
         }
       }),
@@ -333,7 +332,7 @@ export class AffiliateService {
       map(response => {
         if (response.success) return response.data;
         else {
-          console.error('ERROR: ' + response);
+          console.error('ERROR: ', response);
           return null;
         }
       }),
@@ -351,7 +350,7 @@ export class AffiliateService {
         map(response => {
           if (response.success) return response.data;
           else {
-            console.error('ERROR: ' + response);
+            console.error('ERROR: ', response);
             return null;
           }
         }),
@@ -395,12 +394,12 @@ export class AffiliateService {
         map(response => {
           if (response.success) return response;
           else {
-            console.error('ERROR: ' + response);
+            console.error('ERROR: ', response);
             return null;
           }
         }),
         catchError(error => {
-          return throwError(error);
+          return throwError(() => error);
         }),
       );
   }
@@ -416,7 +415,7 @@ export class AffiliateService {
         map(response => {
           if (response.success) return response.data;
           else {
-            console.error('ERROR: ' + response);
+            console.error('ERROR: ', response);
             return null;
           }
         }),
@@ -449,12 +448,12 @@ export class AffiliateService {
         map(response => {
           if (response.success) return response.data;
           else {
-            console.error('ERROR: ' + response);
+            console.error('ERROR: ', response);
             return null;
           }
         }),
         catchError(error => {
-          return throwError(error);
+          return throwError(() => error);
         }),
       );
   }
@@ -483,12 +482,12 @@ export class AffiliateService {
         map(response => {
           if (response.success) return response;
           else {
-            console.error('ERROR: ' + response);
+            console.error('ERROR: ', response);
             return null;
           }
         }),
         catchError(error => {
-          return throwError(error);
+          return throwError(() => error);
         }),
       );
   }
@@ -504,7 +503,7 @@ export class AffiliateService {
         map(response => {
           if (response.success) return response.data;
           else {
-            console.error('ERROR: ' + response);
+            console.error('ERROR: ', response);
             return null;
           }
         }),
@@ -522,7 +521,7 @@ export class AffiliateService {
         map(response => {
           if (response.success) return response.data;
           else {
-            console.error('ERROR: ' + response);
+            console.error('ERROR: ', response);
             return null;
           }
         }),
