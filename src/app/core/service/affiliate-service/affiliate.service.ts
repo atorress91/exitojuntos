@@ -72,20 +72,6 @@ export class AffiliateService {
       );
   }
 
-  getCountries() {
-    return this.http
-      .get<Response>(this.urlApi.concat('/countries'), httpOptions)
-      .pipe(
-        map(response => {
-          if (response.success) return response.data;
-          else {
-            console.error('ERROR: ', response);
-            return null;
-          }
-        }),
-      );
-  }
-
   updateAffiliate(affiliate: UserAffiliate) {
     return this.http
       .put<Response>(
@@ -159,6 +145,26 @@ export class AffiliateService {
     return this.http
       .get<Response>(
         this.urlApi.concat('/useraffiliateinfo/get_user_username/' + username),
+        httpOptions,
+      )
+      .pipe(
+        map(response => {
+          if (response.success) return response.data;
+          else {
+            console.error('ERROR: ', response);
+            return null;
+          }
+        }),
+        catchError(error => {
+          return throwError(() => error);
+        }),
+      );
+  }
+
+  getAffiliateByPhone(phone: string) {
+    return this.http
+      .get<Response>(
+        this.urlApi.concat('/auth/get_user_phone/' + phone),
         httpOptions,
       )
       .pipe(

@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { jsPDF } from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import { Observable, catchError, switchMap, throwError } from 'rxjs';
@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { AffiliateService } from '../affiliate-service/affiliate.service';
 import { Invoice } from '@app/core/models/invoice-model/invoice.model';
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
+import { CountryService } from '../country-service/country.service';
 
 const today = new Date();
 
@@ -16,13 +17,14 @@ const today = new Date();
 })
 export class PrintService {
   countries = [];
+  private readonly countryService: CountryService = inject(CountryService);
 
   constructor(
-    private http: HttpClient,
-    private affiliateService: AffiliateService,
-    private toastr: ToastrService,
+    private readonly http: HttpClient,
+    private readonly affiliateService: AffiliateService,
+    private readonly toastr: ToastrService,
   ) {
-    this.affiliateService.getCountries().subscribe({
+    this.countryService.getCountries().subscribe({
       next: resp => {
         this.countries = resp;
       },

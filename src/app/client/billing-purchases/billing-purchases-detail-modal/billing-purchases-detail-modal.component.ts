@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, inject, OnInit, ViewChild } from '@angular/core';
 import { Invoice } from '../../../core/models/invoice-model/invoice.model';
 import { UserAffiliate } from '../../../core/models/user-affiliate-model/user.affiliate.model';
 import { AffiliateService } from '../../../core/service/affiliate-service/affiliate.service';
@@ -6,6 +6,7 @@ import { AuthService } from '../../../core/service/authentication-service/auth.s
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
+import { CountryService } from '@app/core/service/country-service/country.service';
 
 @Component({
   selector: 'app-billing-purchases-detail-modal',
@@ -21,6 +22,7 @@ export class BillingPurchasesDetailModalComponent implements OnInit {
   totalDiscount: number;
   totalTax: number;
   Math = Math;
+  private readonly countryService: CountryService = inject(CountryService);
 
   @ViewChild('billingPurchasesDetailModal')
   billingPurchasesDetailModal: NgbModal;
@@ -38,7 +40,7 @@ export class BillingPurchasesDetailModalComponent implements OnInit {
   }
 
   getAllCountries() {
-    this.affiliateService.getCountries().subscribe({
+    this.countryService.getCountries().subscribe({
       next: resp => {
         this.countries = resp;
       },

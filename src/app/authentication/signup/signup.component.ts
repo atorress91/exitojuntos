@@ -1,4 +1,9 @@
-import { Component, OnInit, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  CUSTOM_ELEMENTS_SCHEMA,
+  inject,
+} from '@angular/core';
 import {
   AbstractControl,
   FormBuilder,
@@ -11,6 +16,7 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Country } from '@app/core/models/country-model/country.model';
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.service';
+import { CountryService } from '@app/core/service/country-service/country.service';
 import { PdfViewerService } from '@app/core/service/pdf-viewer-service/pdf-viewer.service';
 import { ToastrService } from 'ngx-toastr';
 import { CreateAffiliate } from '@app/core/models/user-affiliate-model/create-affiliate.model';
@@ -35,6 +41,7 @@ export class SignupComponent implements OnInit {
   user: UserAffiliate = new UserAffiliate();
   listcountry: Country[] = [];
   readonly navbarIcon = 'assets/exito-logo.svg';
+  private readonly countryService: CountryService = inject(CountryService);
 
   constructor(
     private readonly activatedRoute: ActivatedRoute,
@@ -49,14 +56,14 @@ export class SignupComponent implements OnInit {
 
     if (this.key) {
       this.loadValidations();
-      this.getUserByUsername(this.key);
+      this.getUserByPhone(this.key);
     }
 
     this.fetchCountry();
   }
 
   private fetchCountry() {
-    this.affiliateService.getCountries().subscribe(data => {
+    this.countryService.getCountries().subscribe(data => {
       this.listcountry = data;
     });
   }
@@ -119,13 +126,13 @@ export class SignupComponent implements OnInit {
     );
   }
 
-  getUserByUsername(key: string) {
-    if (!key) return;
+  getUserByPhone(phone: string) {
+    if (!phone) return;
 
-    this.affiliateService.getAffiliateByUserName(key).subscribe({
+    this.affiliateService.getAffiliateByPhone(phone).subscribe({
       next: (user: UserAffiliate) => {
         if (user) {
-          this.sponsor = user.user_name;
+          this.sponsor = user.phone;
           this.user = user;
         } else {
           this.router.navigate(['/signin']).then();

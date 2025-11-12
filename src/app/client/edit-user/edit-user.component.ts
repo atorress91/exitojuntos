@@ -1,9 +1,20 @@
 import { FaceApiService } from '@app/core/service/face-api-service/face-api.service';
-import { Component, ViewChild, OnInit, OnDestroy } from '@angular/core';
+import { Component, ViewChild, OnInit, OnDestroy, inject } from '@angular/core';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
-import { Storage, ref, uploadBytesResumable, getDownloadURL } from '@angular/fire/storage';
+import {
+  Storage,
+  ref,
+  uploadBytesResumable,
+  getDownloadURL,
+} from '@angular/fire/storage';
 import { ToastrService } from 'ngx-toastr';
-import { FormBuilder, FormControl, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
+import {
+  FormBuilder,
+  FormControl,
+  FormGroup,
+  Validators,
+  ReactiveFormsModule,
+} from '@angular/forms';
 
 import { Country } from '@app/core/models/country-model/country.model';
 import { UpdateImageIdPath } from '@app/core/models/user-affiliate-model/update-image-id-path.model';
@@ -15,18 +26,25 @@ import { CommonModule } from '@angular/common';
 import { NgxDropzoneModule } from 'ngx-dropzone';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbNavModule } from '@ng-bootstrap/ng-bootstrap';
+import { CountryService } from '@app/core/service/country-service/country.service';
 
 @Component({
-    selector: 'app-edit-user',
-    templateUrl: './edit-user.component.html',
-    standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, NgxDropzoneModule, TranslateModule, NgbNavModule]
+  selector: 'app-edit-user',
+  templateUrl: './edit-user.component.html',
+  standalone: true,
+  imports: [
+    CommonModule,
+    ReactiveFormsModule,
+    NgxDropzoneModule,
+    TranslateModule,
+    NgbNavModule,
+  ],
 })
 export class EditUserComponent implements OnInit, OnDestroy {
   public user: UserAffiliate = new UserAffiliate();
   public userCookie: UserAffiliate;
   updateImageIdPath: UpdateImageIdPath = new UpdateImageIdPath();
-  private ngUnsubscribe = new Subject<void>();
+  private readonly ngUnsubscribe = new Subject<void>();
   updateUserForm: FormGroup;
   listcountry: Country[] = [];
   loadingIndicator = true;
@@ -38,16 +56,17 @@ export class EditUserComponent implements OnInit, OnDestroy {
   private isUploadCompleted = false;
   progress = 0;
   displayBirthday: string | null = null;
+  private readonly countryService: CountryService = inject(CountryService);
 
   @ViewChild('table') table: DatatableComponent;
 
   constructor(
-    private toastr: ToastrService,
-    private authService: AuthService,
-    private affiliateService: AffiliateService,
-    private formBuilder: FormBuilder,
-    private storage: Storage,
-    private faceApiService: FaceApiService
+    private readonly toastr: ToastrService,
+    private readonly authService: AuthService,
+    private readonly affiliateService: AffiliateService,
+    private readonly formBuilder: FormBuilder,
+    private readonly storage: Storage,
+    private readonly faceApiService: FaceApiService,
   ) {}
 
   ngOnInit(): void {
@@ -105,7 +124,11 @@ export class EditUserComponent implements OnInit, OnDestroy {
     if (affiliate.birthday) {
       const birthdayDate = new Date(affiliate.birthday);
 
-      const options: Intl.DateTimeFormatOptions = { year: 'numeric', month: 'long', day: 'numeric' };
+      const options: Intl.DateTimeFormatOptions = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+      };
       this.displayBirthday = birthdayDate.toLocaleDateString('es-ES', options);
 
       formattedBirthday = birthdayDate.toISOString().split('T')[0];
@@ -114,7 +137,9 @@ export class EditUserComponent implements OnInit, OnDestroy {
     }
 
     if (affiliate.identification) {
-      this.updateUserForm.get('identification').setValue(affiliate.identification);
+      this.updateUserForm
+        .get('identification')
+        .setValue(affiliate.identification);
       this.updateUserForm.get('identification').disable();
     }
 
@@ -124,17 +149,23 @@ export class EditUserComponent implements OnInit, OnDestroy {
     }
 
     if (affiliate.beneficiary_name) {
-      this.updateUserForm.get('beneficiary_name').setValue(affiliate.beneficiary_name);
+      this.updateUserForm
+        .get('beneficiary_name')
+        .setValue(affiliate.beneficiary_name);
       // this.updateUserForm.get('beneficiary_name').disable();
     }
 
     if (affiliate.legal_authorized_first) {
-      this.updateUserForm.get('legal_authorized_first').setValue(affiliate.legal_authorized_first);
+      this.updateUserForm
+        .get('legal_authorized_first')
+        .setValue(affiliate.legal_authorized_first);
       this.updateUserForm.get('legal_authorized_first').disable();
     }
 
     if (affiliate.legal_authorized_second) {
-      this.updateUserForm.get('legal_authorized_second').setValue(affiliate.legal_authorized_second);
+      this.updateUserForm
+        .get('legal_authorized_second')
+        .setValue(affiliate.legal_authorized_second);
       this.updateUserForm.get('legal_authorized_second').disable();
     }
 
@@ -145,7 +176,9 @@ export class EditUserComponent implements OnInit, OnDestroy {
       last_name: affiliate.last_name,
       email: affiliate.email,
       side: affiliate.binary_matrix_side.toString() ?? 0,
-      father: affiliate.father_user_level ? affiliate.father_user_level.user_name ?? '' : '',
+      father: affiliate.father_user_level
+        ? affiliate.father_user_level.user_name ?? ''
+        : '',
       phone: affiliate.phone,
       address: affiliate.address ?? '',
       tax_id: affiliate.tax_id ?? '',
@@ -166,16 +199,18 @@ export class EditUserComponent implements OnInit, OnDestroy {
   getUserInfo() {
     this.userCookie = this.authService.currentUserAffiliateValue;
     this.setValues(this.userCookie);
-    this.affiliateService.getAffiliateById(this.userCookie.id).subscribe(response => {
-      if (response.success) {
-        this.user = response.data;
-        this.setValues(this.user);
-      }
-    });
+    this.affiliateService
+      .getAffiliateById(this.userCookie.id)
+      .subscribe(response => {
+        if (response.success) {
+          this.user = response.data;
+          this.setValues(this.user);
+        }
+      });
   }
 
   private fetchCountry() {
-    this.affiliateService.getCountries().subscribe(data => {
+    this.countryService.getCountries().subscribe(data => {
       this.listcountry = data;
     });
   }
@@ -201,21 +236,30 @@ export class EditUserComponent implements OnInit, OnDestroy {
     userUpdate.country = this.updateUserForm.get('country').value;
     userUpdate.birthday = this.updateUserForm.get('birthday').value;
     userUpdate.tax_id = this.updateUserForm.get('tax_id').value;
-    userUpdate.beneficiary_name = this.updateUserForm.get('beneficiary_name').value;
-    userUpdate.legal_authorized_first = this.updateUserForm.get('legal_authorized_first').value;
-    userUpdate.legal_authorized_second = this.updateUserForm.get('legal_authorized_second').value;
+    userUpdate.beneficiary_name =
+      this.updateUserForm.get('beneficiary_name').value;
+    userUpdate.legal_authorized_first = this.updateUserForm.get(
+      'legal_authorized_first',
+    ).value;
+    userUpdate.legal_authorized_second = this.updateUserForm.get(
+      'legal_authorized_second',
+    ).value;
     userUpdate.id = this.user.id;
-    userUpdate.beneficiary_email = this.updateUserForm.get('beneficiary_email').value;
-    userUpdate.beneficiary_phone = this.updateUserForm.get('beneficiary_phone').value;
+    userUpdate.beneficiary_email =
+      this.updateUserForm.get('beneficiary_email').value;
+    userUpdate.beneficiary_phone =
+      this.updateUserForm.get('beneficiary_phone').value;
 
-    this.affiliateService.updateUserProfile(userUpdate).subscribe((response: UserAffiliate) => {
-      if (response !== null) {
-        this.showSuccess('La información se actualizó correctamente!');
-        this.setValues(response);
-      } else {
-        this.showError('Error!');
-      }
-    });
+    this.affiliateService
+      .updateUserProfile(userUpdate)
+      .subscribe((response: UserAffiliate) => {
+        if (response !== null) {
+          this.showSuccess('La información se actualizó correctamente!');
+          this.setValues(response);
+        } else {
+          this.showError('Error!');
+        }
+      });
   }
 
   onFileSelected(event: any): void {
@@ -262,7 +306,8 @@ export class EditUserComponent implements OnInit, OnDestroy {
       this.updateCardIdAuthorization(0);
     }
 
-    const filePath = 'affiliates/' + `${this.user.user_name}/` + `${this.user.id}`;
+    const filePath =
+      'affiliates/' + `${this.user.user_name}/` + `${this.user.id}`;
     this.fileRef = ref(this.storage, filePath);
   }
 
@@ -285,7 +330,9 @@ export class EditUserComponent implements OnInit, OnDestroy {
     this.updateImageIdPath.id = this.user.id;
 
     try {
-      await this.affiliateService.updateImageIdPath(this.updateImageIdPath).toPromise();
+      await this.affiliateService
+        .updateImageIdPath(this.updateImageIdPath)
+        .toPromise();
       this.handleUpdateSuccess();
     } catch (err) {
       this.handleUpdateError(err);
@@ -314,12 +361,13 @@ export class EditUserComponent implements OnInit, OnDestroy {
       'state_changed',
       snapshot => this.updateProgress(snapshot),
       error => this.handleError(error),
-      () => this.handleComplete()
+      () => this.handleComplete(),
     );
   }
 
   deleteImage() {
-    const filePath = 'affiliates/' + `${this.user.user_name}/` + `${this.user.id}`;
+    const filePath =
+      'affiliates/' + `${this.user.user_name}/` + `${this.user.id}`;
     this.user.image_id_path = '';
     this.updateImageIdPath.id = this.user.id;
     this.updateImageIdPath.image_id_path = this.user.image_id_path;
@@ -341,17 +389,19 @@ export class EditUserComponent implements OnInit, OnDestroy {
   }
 
   updateCardIdAuthorization(option: number) {
-    this.affiliateService.updateCardIdAuthorization(this.user.id, option).subscribe({
-      next: value => {
-        if (value.card_id_authorization) {
-          this.showSuccess('Afiliado verificado correctamente');
-        } else {
-          this.showError('Su verificación se encuentra pendiente');
-        }
-      },
-      error: err => {
-        this.showError('No se pudo verificar el afiliado');
-      },
-    });
+    this.affiliateService
+      .updateCardIdAuthorization(this.user.id, option)
+      .subscribe({
+        next: value => {
+          if (value.card_id_authorization) {
+            this.showSuccess('Afiliado verificado correctamente');
+          } else {
+            this.showError('Su verificación se encuentra pendiente');
+          }
+        },
+        error: err => {
+          this.showError('No se pudo verificar el afiliado');
+        },
+      });
   }
 }
