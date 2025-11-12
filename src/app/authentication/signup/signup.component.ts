@@ -114,7 +114,7 @@ export class SignupComponent implements OnInit {
         terms_conditions: [false, Validators.requiredTrue],
       },
       {
-        validator: passwordMatchValidator,
+        validators: passwordMatchValidator,
       },
     );
   }
