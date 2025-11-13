@@ -68,29 +68,22 @@ export class AffiliatesListEditModalComponent implements OnInit {
     this.affiliate = affiliate;
 
     let birthdayFormatted: string;
-    const birthdayDate = new Date(affiliate.birthday);
+    const birthdayDate = new Date(affiliate.birtDate);
     birthdayFormatted = birthdayDate.toISOString().split('T')[0];
 
     this.editAffiliateForm.setValue({
       identification: affiliate.identification,
-      user_name: affiliate.user_name,
+      user_name: affiliate.name,
       name: affiliate.name,
-      last_name: affiliate.last_name,
+      last_name: affiliate.lastName,
       email: affiliate.email,
-      father: affiliate.father_user
-        ? affiliate.father_user.user_name ?? ''
-        : '',
       phone: affiliate.phone,
       address: affiliate.address ?? '',
-      status: affiliate.status !== 1,
-      tax_id: affiliate.tax_id ?? '',
+      status: affiliate.status !== true,
       country: affiliate.country,
-      zip_code: affiliate.zip_code,
-      created_at: affiliate.created_at,
+      zip_code: affiliate.zipCode,
+      created_at: affiliate.createdAt,
       birthday: birthdayFormatted,
-      beneficiary_name: affiliate.beneficiary_name ?? '',
-      legal_authorized_first: affiliate.legal_authorized_first ?? '',
-      legal_authorized_second: affiliate.legal_authorized_second ?? '',
     });
   }
 
@@ -151,19 +144,12 @@ export class AffiliatesListEditModalComponent implements OnInit {
     this.affiliate.identification = this.editAffiliateForm.value.identification;
     this.affiliate.phone = this.editAffiliateForm.value.phone;
     this.affiliate.address = this.editAffiliateForm.value.address;
-    this.affiliate.zip_code = this.editAffiliateForm.value.zip_code;
+    this.affiliate.zipCode = this.editAffiliateForm.value.zip_code;
     this.affiliate.email = this.editAffiliateForm.value.email;
     this.affiliate.country = this.editAffiliateForm.value.country;
-    this.affiliate.birthday = this.editAffiliateForm.value.birthday;
-    this.affiliate.tax_id = this.editAffiliateForm.value.tax_id;
-    this.affiliate.beneficiary_name =
-      this.editAffiliateForm.value.beneficiary_name;
-    this.affiliate.status =
-      this.editAffiliateForm.value.status === true ? 0 : 1;
-    this.affiliate.legal_authorized_first =
-      this.editAffiliateForm.value.legal_authorize_first;
-    this.affiliate.legal_authorized_second =
-      this.editAffiliateForm.value.legal_authorize_second;
+    this.affiliate.birtDate = this.editAffiliateForm.value.birthday;
+    this.affiliate.status = !this.editAffiliateForm.value.status;
+
     this.affiliateService
       .updateAffiliate(this.affiliate)
       .subscribe((response: UserAffiliate) => {
