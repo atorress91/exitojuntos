@@ -1,5 +1,5 @@
 export interface Role {
-  id: string;
+  id: number;
   name: string;
 }
 
@@ -30,9 +30,8 @@ export class UserAffiliate {
   createdAt: Date;
   updatedAt?: Date;
   deletedAt?: Date;
-  role: Role = {
-    id: '',
-    name: '',
-  };
+  role?: Role;
+  roleId: number;
+  countryId: number;
   country?: Country;
 }

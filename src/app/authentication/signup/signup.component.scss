@@ -138,6 +138,48 @@
   margin: 0;
 }
 
+// Password field with toggle
+.password-field {
+  position: relative;
+  display: flex;
+  align-items: center;
+
+  .form-input {
+    padding-right: 45px;
+    flex: 1;
+  }
+
+  .password-toggle {
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 36px;
+    width: 45px;
+    background: transparent;
+    border: none;
+    color: #8b7e3f;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s;
+    padding: 0;
+    outline: none;
+
+    i {
+      font-size: 16px;
+    }
+
+    &:hover {
+      color: #d4af37;
+    }
+
+    &:focus {
+      outline: none;
+    }
+  }
+}
+
 .form-input,
 .form-select {
   height: 36px;

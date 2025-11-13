@@ -230,11 +230,7 @@ export class AffiliateService {
 
   createAffiliate(user: UserAffiliate) {
     return this.http
-      .post<Response>(
-        this.urlApi.concat('/useraffiliateinfo'),
-        user,
-        httpOptions,
-      )
+      .post<Response>(this.urlApi.concat('/auth/register'), user, httpOptions)
       .pipe(
         map(data => {
           return data;

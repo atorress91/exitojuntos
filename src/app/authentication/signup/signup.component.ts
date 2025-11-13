@@ -40,6 +40,8 @@ export class SignupComponent implements OnInit {
   user: UserAffiliate = new UserAffiliate();
   listcountry: Country[] = [];
   readonly navbarIcon = 'assets/exito-logo.svg';
+  showPassword = false;
+  showConfirmPassword = false;
   private readonly countryService: CountryService = inject(CountryService);
 
   constructor(
@@ -138,7 +140,11 @@ export class SignupComponent implements OnInit {
         last_name: ['', Validators.required],
         phone: ['', Validators.required],
         country: ['', Validators.required],
-        email: ['', Validators.required],
+        email: ['', [Validators.required, Validators.email]],
+        city: ['', Validators.required],
+        state: ['', Validators.required],
+        address: ['', Validators.required],
+        birtDate: ['', Validators.required],
         terms_conditions: [false, Validators.requiredTrue],
       },
       {
@@ -190,14 +196,18 @@ export class SignupComponent implements OnInit {
     user.name = this.registerForm.value.name;
     user.lastName = this.registerForm.value.last_name;
     user.phone = cleanPhone;
-    user.country = { id: this.registerForm.value.country };
-    user.city = '';
-    user.state = '';
+    user.countryId = Number(this.registerForm.value.country);
+    user.city = this.registerForm.value.city;
+    user.state = this.registerForm.value.state;
+    user.address = this.registerForm.value.address;
+    user.birtDate = this.registerForm.value.birtDate;
     user.email = this.registerForm.value.email;
-    user.father = this.user.id;
+    user.father = Number(this.user.id);
     user.side = +this.side;
     user.status = true;
     user.termsConditions = this.registerForm.value.terms_conditions;
+    user.roleId = 2;
+
     this.affiliateService.createAffiliate(user).subscribe(response => {
       if (response.success) {
         this.showSuccess(response.message);
@@ -225,6 +235,14 @@ export class SignupComponent implements OnInit {
     };
 
     this.pdfViewerService.showPdf(doc);
+  }
+
+  togglePasswordVisibility() {
+    this.showPassword = !this.showPassword;
+  }
+
+  toggleConfirmPasswordVisibility() {
+    this.showConfirmPassword = !this.showConfirmPassword;
   }
 }
 

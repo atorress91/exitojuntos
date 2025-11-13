@@ -88,18 +88,56 @@
             [class.is-invalid]="submitted && f['phone'].errors" />
         </div>
 
+        <!-- Ciudad -->
+        <div class="form-field">
+          <label for="city" class="form-label">Ciudad</label>
+          <input id="city" type="text" formControlName="city" class="form-input"
+            [class.is-invalid]="submitted && f['city'].errors" />
+        </div>
+
+        <!-- Estado -->
+        <div class="form-field">
+          <label for="state" class="form-label">Estado/Provincia</label>
+          <input id="state" type="text" formControlName="state" class="form-input"
+            [class.is-invalid]="submitted && f['state'].errors" />
+        </div>
+
+        <!-- Dirección -->
+        <div class="form-field">
+          <label for="address" class="form-label">Dirección</label>
+          <input id="address" type="text" formControlName="address" class="form-input"
+            [class.is-invalid]="submitted && f['address'].errors" />
+        </div>
+
+        <!-- Fecha de nacimiento -->
+        <div class="form-field">
+          <label for="birtDate" class="form-label">Fecha de nacimiento</label>
+          <input id="birtDate" type="date" formControlName="birtDate" class="form-input"
+            [class.is-invalid]="submitted && f['birtDate'].errors" />
+        </div>
+
         <!-- Contraseña -->
         <div class="form-field">
           <label for="password" class="form-label">Contraseña</label>
-          <input id="password" type="password" formControlName="password" class="form-input"
-            [class.is-invalid]="submitted && f['password'].errors" />
+          <div class="password-field">
+            <input id="password" [type]="showPassword ? 'text' : 'password'" formControlName="password"
+              class="form-input" [class.is-invalid]="submitted && f['password'].errors" />
+            <button type="button" class="password-toggle" (click)="togglePasswordVisibility()" tabindex="-1">
+              <i [class]="showPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+            </button>
+          </div>
         </div>
 
         <!-- Confirmar contraseña -->
         <div class="form-field">
           <label for="repitpassword" class="form-label">Confirmar contraseña</label>
-          <input id="repitpassword" type="password" formControlName="repitpassword" class="form-input"
-            [class.is-invalid]="submitted && f['repitpassword'].errors" />
+          <div class="password-field">
+            <input id="repitpassword" [type]="showConfirmPassword ? 'text' : 'password'" formControlName="repitpassword"
+              class="form-input" [class.is-invalid]="submitted && f['repitpassword'].errors" />
+            <button type="button" class="password-toggle" (click)="toggleConfirmPasswordVisibility()" tabindex="-1">
+              <i [class]="showConfirmPassword ? 'fas fa-eye-slash' : 'fas fa-eye'"></i>
+            </button>
+          </div>
         </div>
 
         <!-- Términos y condiciones -->
