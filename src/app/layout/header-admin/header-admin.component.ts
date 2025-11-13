@@ -1,6 +1,6 @@
-import {RightSidebarService} from 'src/app/core/service/rightsidebar-service/rightsidebar.service';
-import {AuthService} from 'src/app/core/service/authentication-service/auth.service';
-import {DOCUMENT, CommonModule} from '@angular/common';
+import { RightSidebarService } from 'src/app/core/service/rightsidebar-service/rightsidebar.service';
+import { AuthService } from 'src/app/core/service/authentication-service/auth.service';
+import { DOCUMENT, CommonModule } from '@angular/common';
 import {
   Component,
   Inject,
@@ -9,13 +9,10 @@ import {
   Renderer2,
   AfterViewInit,
 } from '@angular/core';
-import {Router, RouterLink} from '@angular/router';
-import {ConfigService} from 'src/app/config/config.service';
-import {LanguageService} from 'src/app/core/service/language-service/language.service';
-import {User} from '@app/core/models/user-model/user.model';
-import {TicketHubService} from "@app/core/service/ticket-service/ticket-hub.service";
-import {map, Observable} from "rxjs";
-import {TicketSummary} from "@app/core/models/ticket-model/ticket-summary.model";
+import { Router, RouterLink } from '@angular/router';
+import { ConfigService } from 'src/app/config/config.service';
+import { LanguageService } from 'src/app/core/service/language-service/language.service';
+import { User } from '@app/core/models/user-model/user.model';
 import { IconsModule } from '@app/shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -23,11 +20,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 const document: any = window.document;
 
 @Component({
-    selector: 'app-header-admin',
-    templateUrl: './header-admin.component.html',
-    styleUrls: ['./header-admin.component.sass'],
-    standalone: true,
-    imports: [CommonModule, RouterLink, IconsModule, TranslateModule, NgbModule]
+  selector: 'app-header-admin',
+  templateUrl: './header-admin.component.html',
+  styleUrls: ['./header-admin.component.sass'],
+  standalone: true,
+  imports: [CommonModule, RouterLink, IconsModule, TranslateModule, NgbModule],
 })
 export class HeaderAdminComponent implements OnInit, AfterViewInit {
   public user: User = new User();
@@ -38,8 +35,6 @@ export class HeaderAdminComponent implements OnInit, AfterViewInit {
   langStoreValue: string;
   defaultFlag: string;
   isOpenSidebar: boolean;
-  ticketSummaries$: Observable<TicketSummary[]>;
-  public unreadCount$: Observable<number>;
 
   constructor(
     @Inject(DOCUMENT) private document: Document,
@@ -50,38 +45,25 @@ export class HeaderAdminComponent implements OnInit, AfterViewInit {
     private authService: AuthService,
     private router: Router,
     public languageService: LanguageService,
-    private ticketHubService: TicketHubService,
-  ) {
-    this.ticketHubService.connectionEstablished.subscribe((isConnected) => {
-      if (isConnected) {
-        this.ticketSummaries$ = this.ticketHubService.ticketSummaries.asObservable();
-        this.unreadCount$ = this.ticketSummaries$.pipe(
-          map(summaries => summaries.reduce((acc, summary) => acc + summary.unreadMessagesCount, 0))
-        );
-        this.onLoadAllTickets();
-      } else {
-        console.error('Waiting for connection to be established...');
-      }
-    });
-  }
+  ) {}
 
   listLang = [
-    {text: 'English', flag: 'assets/images/flags/us.jpg', lang: 'en'},
-    {text: 'Spanish', flag: 'assets/images/flags/spain.jpg', lang: 'es'},
+    { text: 'English', flag: 'assets/images/flags/us.jpg', lang: 'en' },
+    { text: 'Spanish', flag: 'assets/images/flags/spain.jpg', lang: 'es' },
   ];
 
   ngOnInit() {
     this.config = this.configService.configData;
 
     this.langStoreValue = localStorage.getItem('lang');
-    const val = this.listLang.filter((x) => x.lang === this.langStoreValue);
-    this.countryName = val.map((element) => element.text);
+    const val = this.listLang.filter(x => x.lang === this.langStoreValue);
+    this.countryName = val.map(element => element.text);
     if (val.length === 0) {
       if (this.flagvalue === undefined) {
         this.defaultFlag = 'assets/images/flags/us.jpg';
       }
     } else {
-      this.flagvalue = val.map((element) => element.flag);
+      this.flagvalue = val.map(element => element.flag);
     }
 
     this.getCurrentUser();
@@ -99,12 +81,12 @@ export class HeaderAdminComponent implements OnInit, AfterViewInit {
     if (localStorage.getItem('menuOption')) {
       this.renderer.addClass(
         this.document.body,
-        localStorage.getItem('menuOption')
+        localStorage.getItem('menuOption'),
       );
     } else {
       this.renderer.addClass(
         this.document.body,
-        this.config.layout.sidebar.backgroundColor + '-sidebar'
+        this.config.layout.sidebar.backgroundColor + '-sidebar',
       );
     }
 
@@ -154,17 +136,17 @@ export class HeaderAdminComponent implements OnInit, AfterViewInit {
   }
 
   public toggleRightSidebar(): void {
-    this.rightSidebarService.sidebarState.subscribe((isRunning) => {
+    this.rightSidebarService.sidebarState.subscribe(isRunning => {
       this.isOpenSidebar = isRunning;
     });
 
     this.rightSidebarService.setRightSidebar(
-      (this.isOpenSidebar = !this.isOpenSidebar)
+      (this.isOpenSidebar = !this.isOpenSidebar),
     );
   }
 
   logout() {
-    this.authService.logoutUser().subscribe((res) => {
+    this.authService.logoutUser().subscribe(res => {
       if (!res.success) {
         this.router.navigate(['/signin']).then();
       }
@@ -173,25 +155,5 @@ export class HeaderAdminComponent implements OnInit, AfterViewInit {
 
   getCurrentUser() {
     this.user = this.authService.currentUserAdminValue;
-  }
-
-  onTicketClick(ticketId: number) {
-    this.ticketHubService.connectionEstablished.subscribe({
-      next: (e) => {
-        this.ticketHubService.markTicketMessagesAsRead(ticketId)
-          .then(() => {
-            this.ticketHubService.setTicket(ticketId);
-            this.router.navigate(['admin/ticket-for-admin/message']).then();
-          })
-          .catch(error => console.error('Error al marcar mensajes:', error));
-      }, error: () => {
-
-      }
-    })
-  }
-
-  onLoadAllTickets() {
-    this.ticketHubService.getAllTicketSummaries()
-      .catch(error => console.error('Error al cargar tickets:', error));
   }
 }

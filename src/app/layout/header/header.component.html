@@ -12,13 +12,6 @@
   </div>
   <ul class="navbar-nav navbar-right">
 
-    <div class="d-flex align-items-center">
-      <a *ngIf="totalItem > 0" routerLink="/app/cart">
-        <i style="font-size: 15px" class="fas fa-cart-plus"></i>
-        <div style="font-size: 10px" class="badge bg-danger">{{totalItem}}</div>
-      </a>
-    </div>
-
     <li class="dropdown dropdown-list-toggle" ngbDropdown>
       <a data-toggle="dropdown" class="nav-link nav-link-lg lang-toggle remove-caret" ngbDropdownToggle>
         <img *ngIf="flagvalue !== undefined" src="{{ flagvalue }}" alt="Header Language" height="16" />
@@ -33,44 +26,6 @@
       </div>
     </li>
 
-
-    <li ngbDropdown class="dropdown dropdown-list-toggle">
-      <a ngbDropdownToggle data-toggle="dropdown" class="nav-link nav-link-lg message-toggle remove-caret">
-        <i-feather name="bell" class="bell collapse-btn"></i-feather>
-
-        <span *ngIf="(unreadCount$ | async) as unreadCount" class="badge badge-danger"
-          [class.d-none]="unreadCount === 0">
-          {{ unreadCount }}
-        </span>
-      </a>
-      <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right dropdown-list header-dropdown pullDown">
-        <div class="dropdown-header">
-          Messages
-        </div>
-        <div class="dropdown-list-content dropdown-list-icons"
-          style="position: relative; max-width: 600px; max-height: 250px; overflow-y: auto;">
-          <ng-container *ngIf="ticketSummaries$ | async as ticketSummaries">
-            <a *ngFor="let summary of ticketSummaries" href="#"
-              (click)="$event.preventDefault(); onTicketClick(summary.ticketId)" class="dropdown-item"
-              [ngClass]="{'dropdown-item-unread': !summary.isRead}">
-              <span class="dropdown-item-icon l-bg-orange text-white">
-                <i class="far fa-envelope"></i>
-
-                <span class="badge badge-info">{{ summary.unreadMessagesCount }}</span>
-              </span>
-              <span class="dropdown-item-desc">
-                {{ summary.title }}
-                <span class="time">{{ summary.lastUpdated | date:'short' }}</span>
-              </span>
-            </a>
-          </ng-container>
-          <div *ngIf="(ticketSummaries$ | async)?.length === 0" class="text-center p-3">
-            <span>No unread messages</span>
-          </div>
-        </div>
-      </div>
-    </li>
-
     <li ngbDropdown>
       <a ngbDropdownToggle data-toggle="dropdown"
         class="nav-link dropdown-toggle nav-link-lg nav-link-user d-flex align-items-center">
@@ -79,19 +34,10 @@
         <span class="d-sm-none d-lg-inline-block"></span>
       </a>
       <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right header-dropdown pullDown">
-        <div class="dropdown-title">Bienvenido {{ user?.name || user?.name }}
-          ...</div>
+        <div class="dropdown-title">Bienvenido {{ user?.name || user?.name }}</div>
         <a routerLink="app/my-profile" class="dropdown-item has-icon">
           <i class="far fa-user"></i>
           {{ 'HEADER.PROFILE.TEXT' | translate }}
-        </a>
-        <a routerLink="app/edit-user" class="dropdown-item has-icon">
-          <i class="far fa-edit"></i>
-          {{ 'HEADER.USER-EDIT.TEXT' | translate }}
-        </a>
-        <a href="#" class="dropdown-item has-icon" (click)="$event.preventDefault(); openConfigureWalletModal()">
-          <i class="bi bi-wallet"></i>
-          Configurar billetera
         </a>
         <div class="dropdown-divider"></div>
         <a href="javascript:void(0);" class="dropdown-item has-icon text-danger" (click)="logout()">
@@ -101,5 +47,4 @@
       </div>
     </li>
   </ul>
-  <app-configure-wallet></app-configure-wallet>
 </nav>

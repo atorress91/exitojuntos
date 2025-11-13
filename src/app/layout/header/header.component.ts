@@ -24,21 +24,13 @@ import { TicketSummary } from '@app/core/models/ticket-model/ticket-summary.mode
 import { IconsModule } from '@app/shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { ConfigureWalletComponent } from '@app/client/configure-wallet/configure-wallet.component';
 
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
   styleUrls: ['./header.component.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterLink,
-    IconsModule,
-    TranslateModule,
-    NgbModule,
-    ConfigureWalletComponent,
-  ],
+  imports: [CommonModule, RouterLink, IconsModule, TranslateModule, NgbModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class HeaderComponent implements OnInit, AfterViewInit, OnDestroy {
