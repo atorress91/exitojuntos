@@ -8,6 +8,7 @@ import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affili
 import { environment } from '@environments/environment';
 import { Response } from '@app/core/models/response-model/response.model';
 import { ToastrService } from 'ngx-toastr';
+import { JwtHelperService } from '../jwt-helper/jwt-helper.service';
 
 import { CartService } from '../cart.service/cart.service';
 
@@ -51,6 +52,7 @@ export class AuthService {
     private readonly http: HttpClient,
     private readonly toastr: ToastrService,
     private readonly cartService: CartService,
+    private readonly jwtHelper: JwtHelperService,
   ) {
     // Inicializar desde localStorage
     const storedAffiliate = this.getFromLocalStorage('currentUserAffiliate');
@@ -114,6 +116,36 @@ export class AuthService {
     });
   }
 
+  /**
+   * Verifica si el token actual es válido
+   */
+  isTokenValid(): boolean {
+    const token =
+      this.currentUserAffiliateValue?.access_token ||
+      this.currentUserAdminValue?.access_token;
+
+    if (!token) {
+      return false;
+    }
+
+    return !this.jwtHelper.isTokenExpired(token);
+  }
+
+  /**
+   * Obtiene el ID del usuario desde el token
+   */
+  getUserIdFromToken(): string | null {
+    const token =
+      this.currentUserAffiliateValue?.access_token ||
+      this.currentUserAdminValue?.access_token;
+
+    if (!token) {
+      return null;
+    }
+
+    return this.jwtHelper.getUserIdFromToken(token);
+  }
+
   loginUser(userCredentials: Signin) {
     return this.http
       .post<Response>(
@@ -123,20 +155,35 @@ export class AuthService {
       )
       .pipe(
         map((response: Response) => {
-          if (response.success) {
-            this.valiteUserType(response);
+          if (response.success && response.data?.user) {
+            this.validateUserType(response);
           }
           return response;
         }),
       );
   }
 
-  valiteUserType(response: Response) {
-    let isUserAffiliate = response.data.is_affiliate;
-    if (isUserAffiliate) {
-      this.setUserAffiliateValue(response.data);
+  validateUserType(response: Response) {
+    const userData = response.data.user;
+    const accessToken = response.data.access_token;
+
+    // Determinar el tipo de usuario por el rol
+    const roleName = userData.role?.name?.toLowerCase();
+
+    if (roleName === 'admin') {
+      // Es un administrador
+      const adminUser: User = {
+        ...userData,
+        access_token: accessToken,
+      };
+      this.setUserAdminValue(adminUser);
     } else {
-      this.setUserAdminValue(response.data);
+      // Es un afiliado o cliente
+      const affiliateUser: UserAffiliate = {
+        ...userData,
+        access_token: accessToken,
+      };
+      this.setUserAffiliateValue(affiliateUser);
     }
   }
 

@@ -34,4 +34,5 @@ export class UserAffiliate {
   roleId: number;
   countryId: number;
   country?: Country;
+  access_token?: string;
 }

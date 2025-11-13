@@ -15,7 +15,8 @@ export class User {
   created_at: Date;
   updated_at: Date;
   token: string;
-  image_profile_url:string;
+  image_profile_url: string;
+  access_token?: string;
 
   constructor() {
     this.id = 0;
@@ -34,6 +35,6 @@ export class User {
     this.created_at = new Date();
     this.updated_at = new Date();
     this.token = '';
-    this.image_profile_url='';
+    this.image_profile_url = '';
   }
 }

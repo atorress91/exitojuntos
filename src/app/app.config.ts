@@ -5,7 +5,11 @@ import {
   inject,
 } from '@angular/core';
 import { provideRouter, withComponentInputBinding } from '@angular/router';
-import { provideHttpClient, HttpClient } from '@angular/common/http';
+import {
+  provideHttpClient,
+  HttpClient,
+  HTTP_INTERCEPTORS,
+} from '@angular/common/http';
 import { LocationStrategy, PathLocationStrategy } from '@angular/common';
 
 // Firebase
@@ -27,6 +31,9 @@ import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 // Toastr
 import { provideToastr } from 'ngx-toastr';
 
+// Interceptor
+import { JwtInterceptor } from './core/interceptors/jwt.interceptor';
+
 // Routes
 import { routes } from './app.routes';
 
@@ -40,6 +47,7 @@ export const appConfig: ApplicationConfig = {
     // Note: Animations are now handled through animate.enter/animate.leave APIs in components
     // No global provider needed in Angular 20+
     provideHttpClient(),
+    { provide: HTTP_INTERCEPTORS, useClass: JwtInterceptor, multi: true },
     provideToastr({
       timeOut: 3000,
       positionClass: 'toast-top-right',
