@@ -83,23 +83,21 @@
         <p class="login-subtitle">Accede a tu cuenta de trading</p>
 
         <form [formGroup]="authLogin" (ngSubmit)="loginSubmitted()" class="login-form">
-          <!-- Email Field -->
+          <!-- Phone Field -->
           <div class="form-group">
-            <label class="form-label" for="email-input">Correo Electrónico</label>
+            <label class="form-label" for="phone-input">Número de Teléfono</label>
             <div class="input-wrapper">
               <svg class="input-icon" width="20" height="20" viewBox="0 0 20 20" fill="none"
                 xmlns="http://www.w3.org/2000/svg">
                 <path
-                  d="M3 4H17C17.55 4 18 4.45 18 5V15C18 15.55 17.55 16 17 16H3C2.45 16 2 15.55 2 15V5C2 4.45 2.45 4 3 4Z"
-                  stroke="#999" stroke-width="1.5" />
-                <path d="M18 5L10 11L2 5" stroke="#999" stroke-width="1.5" stroke-linecap="round"
-                  stroke-linejoin="round" />
+                  d="M3 3H6L8 8L6 9.5C7.5 12.5 10 15 13 16.5L14.5 14.5L19 16.5V19C19 19.5523 18.5523 20 18 20C10.8203 20 5 14.1797 5 7C5 6.44772 5.44772 6 6 6H9"
+                  stroke="#999" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
               </svg>
-              <input type="email" id="email-input" formControlName="email" class="form-input" placeholder="tu@email.com"
-                [class.error]="submitted && f['email'].errors" />
+              <input type="tel" id="phone-input" formControlName="phone" class="form-input" placeholder="+1 1234 5678"
+                [class.error]="submitted && f['phone'].errors" />
             </div>
-            <div *ngIf="submitted && f['email'].errors" class="error-message">
-              <span *ngIf="f['email'].errors['required']">{{ userNameIsRequerid }}</span>
+            <div *ngIf="submitted && f['phone'].errors" class="error-message">
+              <span *ngIf="f['phone'].errors['required']">{{ userNameIsRequerid }}</span>
             </div>
           </div>
 

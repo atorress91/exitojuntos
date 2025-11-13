@@ -28,7 +28,7 @@ export class SigninComponent implements OnInit {
   loading = false;
   hide = true;
   logoUrl: string;
-  username: string = 'Usuario';
+  phone: string = 'Teléfono';
   password: string = 'Contraseña';
   remember: string = 'Recordar';
   forgot: string = 'Cambiar contraseña';
@@ -69,7 +69,7 @@ export class SigninComponent implements OnInit {
 
   authLogin = new FormGroup({
     remeber: new FormControl('', []),
-    email: new FormControl('', [Validators.required]),
+    phone: new FormControl('', [Validators.required]),
     pwd: new FormControl('', [
       Validators.required,
       Validators.minLength(6),
@@ -79,7 +79,7 @@ export class SigninComponent implements OnInit {
 
   setLabels() {
     if (this.translate.getCurrentLang() != undefined) {
-      this.username = this.translate.instant('SIGNIN.USER-NAME.TEXT');
+      this.phone = this.translate.instant('SIGNIN.PHONE.TEXT');
       this.password = this.translate.instant('SIGNIN.PASSWORD.TEXT');
       this.remember = this.translate.instant('SIGNIN.REMEMBER-ME.TEXT');
       this.forgot = this.translate.instant('SIGNIN.FORGOT-PASS.TEXT');
@@ -108,33 +108,29 @@ export class SigninComponent implements OnInit {
     let signin = new Signin();
     this.submitted = true;
     this.error = '';
-    signin.userName = this.authLogin.value.email;
+    signin.phone = this.authLogin.value.phone;
     signin.password = this.authLogin.value.pwd;
 
-    signin.browserInfo = this.deviceService.getDeviceInfo().browser;
-    signin.operatingSystem = this.deviceService.getDeviceInfo().os;
+    if (signin.phone === '' || signin.password === '') {
+      return;
+    }
+    this.loading = true;
 
-    this.authService.fetchIpAddress().subscribe(ip => {
-      signin.ipAddress = ip;
-      console.log(signin);
+    this.authService.loginUser(signin).subscribe((response: Response) => {
+      if (response.success) {
+        // Determinar ruta según el rol del usuario
+        const roleName = response.data.user?.role?.name?.toLowerCase();
 
-      if (signin.userName === '' || signin.password === '') {
-        return;
-      }
-      this.loading = true;
-
-      this.authService.loginUser(signin).subscribe((response: Response) => {
-        if (response.success) {
-          if (response.data.is_affiliate) {
-            this.router.navigate(['/app/home']).then();
-          } else {
-            this.router.navigate(['admin/home-admin']).then();
-          }
+        if (roleName === 'admin') {
+          this.router.navigate(['/admin/home-admin']).then();
         } else {
-          this.showError(response.message);
+          // Cliente o afiliado
+          this.router.navigate(['/app/home']).then();
         }
-        this.loading = false;
-      });
+      } else {
+        this.showError(response.message);
+      }
+      this.loading = false;
     });
   }
 
@@ -150,8 +146,8 @@ export class SigninComponent implements OnInit {
     return this.authLogin.controls;
   }
 
-  get Email(): FormControl {
-    return this.authLogin.get('email') as FormControl;
+  get Phone(): FormControl {
+    return this.authLogin.get('phone') as FormControl;
   }
 
   get Pwd(): FormControl {

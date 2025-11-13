@@ -15,8 +15,6 @@ import { CartService } from '../cart.service/cart.service';
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    Authorization: environment.tokens.accountService.toString(),
-    'X-Client-ID': environment.tokens.clientID.toString(),
   }),
 };
 @Injectable({
@@ -69,7 +67,7 @@ export class AuthService {
     this.currentUserAffiliateObs =
       this.currentUserAffiliateSubject.asObservable();
     this.currentUserAdminObs = this.currentUserAdminSubject.asObservable();
-    this.urlApi = environment.apis.accountService;
+    this.urlApi = environment.apis.exitojuntosService;
 
     // Escuchar cambios en localStorage desde otras pestañas
     this.setupStorageListener();
