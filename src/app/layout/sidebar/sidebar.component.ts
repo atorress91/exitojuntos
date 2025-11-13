@@ -21,7 +21,6 @@ import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affili
 import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.service';
 import { GradingService } from '@app/core/service/grading-service/grading.service';
 import { Grading } from '@app/core/models/grading-model/grading.model';
-import { LogoComponent } from '../logo/logo.component';
 import { ImgProfileComponent } from '../img-profile/img-profile.component';
 import { IconsModule } from '@app/shared';
 import { TranslatePipe } from '@ngx-translate/core';
@@ -29,12 +28,11 @@ import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-sidebar',
   templateUrl: './sidebar.component.html',
-  styleUrls: ['./sidebar.component.sass'],
+  styleUrls: ['./sidebar.component.scss'],
   standalone: true,
   imports: [
     CommonModule,
     RouterLink,
-    LogoComponent,
     ImgProfileComponent,
     IconsModule,
     TranslatePipe,

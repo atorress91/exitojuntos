@@ -1,15 +1,13 @@
-// Sidebar Admin Component Styles
+// Sidebar Component Styles with Golden Theme
 .sidebar-brand {
   .logo-svg {
     height: 50px;
     width: auto;
     max-width: 180px;
     transition: all 0.3s ease;
-    box-shadow: none !important;
-    filter: none !important;
   }
 
-  &:hover .logo-svg {
+  a:hover .logo-svg {
     transform: scale(1.05);
   }
 }
@@ -43,4 +41,14 @@
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.5px;
+}
+
+.logo-svg {
+  box-shadow: none !important;
+  filter: none !important;
+}
+
+.user-img-circle {
+  border: 2px solid #ffd700 !important;
+  box-shadow: 0 0 15px rgba(255, 215, 0, 0.3) !important;
 }
