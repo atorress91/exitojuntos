@@ -77,6 +77,34 @@
   margin: 0;
 }
 
+// Referrer info
+.referrer-info {
+  margin-top: 16px;
+  padding: 12px 16px;
+  background-color: rgba(212, 175, 55, 0.1);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  border-radius: 8px;
+  text-align: center;
+}
+
+.referrer-text {
+  font-family: Arial, sans-serif;
+  font-size: 14px;
+  line-height: 20px;
+  color: #d4af37;
+  margin: 0;
+
+  strong {
+    color: #d4af37;
+    font-weight: 600;
+  }
+}
+
+.referrer-phone {
+  font-size: 13px;
+  color: #8b7e3f;
+}
+
 // Form container
 .signup-form-container {
   background-color: #0a0a0a;

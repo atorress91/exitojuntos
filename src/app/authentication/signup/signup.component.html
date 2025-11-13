@@ -34,6 +34,15 @@
 
       <h1 class="signup-title">REGISTRO</h1>
       <p class="signup-subtitle">Únete al éxito</p>
+
+      <!-- Referrer info -->
+      <div class="referrer-info" *ngIf="sponsor">
+        <p class="referrer-text">
+          <strong>Referido por:</strong> {{ user.name }} {{ user.last_name }}
+          <br>
+          <span class="referrer-phone">Tel: {{ sponsor }}</span>
+        </p>
+      </div>
     </div>
 
     <!-- Form container -->
@@ -77,13 +86,6 @@
           <label for="phone" class="form-label">Número de teléfono</label>
           <input id="phone" type="tel" formControlName="phone" class="form-input"
             [class.is-invalid]="submitted && f['phone'].errors" />
-        </div>
-
-        <!-- Nombre de usuario -->
-        <div class="form-field">
-          <label for="user_name" class="form-label">Nombre de usuario</label>
-          <input id="user_name" type="text" formControlName="user_name" class="form-input"
-            [class.is-invalid]="submitted && f['user_name'].errors" />
         </div>
 
         <!-- Contraseña -->

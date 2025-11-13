@@ -98,15 +98,23 @@ export class SignupComponent implements OnInit {
     if (country.phoneCode === '1') {
       return;
     }
+    // Remove + symbol from phone code
+    const phoneCode = country.phoneCode.split('+').join('');
     this.registerForm.patchValue({
-      phone: country.phoneCode,
+      phone: phoneCode,
     });
+  }
+
+  // Helper function to clean phone number
+  private cleanPhoneNumber(phone: string): string {
+    if (!phone) return '';
+    // Remove all + symbols and trim whitespace
+    return phone.split('+').join('').trim();
   }
 
   loadValidations() {
     this.registerForm = this.formBuilder.group(
       {
-        user_name: ['', [Validators.required, NoWhitespaceValidator]],
         password: [
           '',
           [
@@ -178,11 +186,12 @@ export class SignupComponent implements OnInit {
     }
 
     let user = new CreateAffiliate();
-    user.user_name = this.registerForm.value.user_name;
+    const cleanPhone = this.cleanPhoneNumber(this.registerForm.value.phone);
+    user.user_name = cleanPhone;
     user.password = this.registerForm.value.password;
     user.name = this.registerForm.value.name;
     user.last_name = this.registerForm.value.last_name;
-    user.phone = this.registerForm.value.phone;
+    user.phone = cleanPhone;
     user.country = this.registerForm.value.country;
     user.state_place = '';
     user.city = '';
