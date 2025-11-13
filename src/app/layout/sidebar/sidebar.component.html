@@ -15,15 +15,14 @@
                 class="img-fluid img-circle user-img-circle" alt="User" />
             </div>
           </button>
-          <div class="profile-usertitle">
-            <div class="sidebar-userpic-name">{{ user.name + ' '+user.lastName }}</div>
-            <div class="profile-usertitle-job mt-2">
-              <div class="btn btn-sm badge-outline col-red" *ngIf="user.createdAt == null"><i
-                  class="bi bi-person-exclamation"></i> Inactivo</div>
-              <div class="btn btn-sm badge-outline col-green" *ngIf="user.createdAt != null"><i
-                  class="bi bi-person-fill-check"></i> {{ grading === null ? 'Activo' : grading.name }}</div>
-            </div>
-
+          <div class="profile-usertitle"></div>
+          <div class="sidebar-userpic-name">{{ user.name + ' '+user.lastName }}</div>
+          <div class="profile-usertitle-job mt-2">
+            @if (user.createdAt != null) {
+            <div class="btn btn-sm badge-outline col-red"><i class="bi bi-person-exclamation"></i> Inactivo</div>
+            } @else {
+            <div class="btn btn-sm badge-outline col-green"><i class="bi bi-person-fill-check"></i> Activo</div>
+            }
           </div>
         </li>
         <!-- Top Most level menu -->
