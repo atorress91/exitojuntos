@@ -1,142 +1,225 @@
+// PDF Viewer with consistent theme (gold and black)
 .modal-overlay {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.8);
+  background: rgba(0, 0, 0, 0.95);
   display: none;
   justify-content: center;
   align-items: center;
   z-index: 1000;
+  backdrop-filter: blur(8px);
 }
 
 .modal-overlay.show {
   display: flex;
+  animation: fadeIn 0.3s ease-in-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 .modal-content {
-  background: #003637;
+  background: #0a0a0a;
   width: 90%;
   max-width: 1200px;
   height: 90vh;
   border-radius: 12px;
-  box-shadow: 0 0 20px rgba(255, 255, 0, 0.3);
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.8), 0 0 60px rgba(212, 175, 55, 0.15);
   display: flex;
   flex-direction: column;
+  animation: slideUp 0.3s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(30px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
 }
 
 .modal-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem;
-  border-bottom: 1px solid #00bd6b;
+  padding: 1.5rem 2rem;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.2);
+  background: #000000;
+  border-radius: 12px 12px 0 0;
 }
 
 .modal-title {
-  color: #fff;
+  color: #d4af37;
   margin: 0;
   font-size: 1.5rem;
+  font-family: Arial, sans-serif;
+  font-weight: 400;
+  letter-spacing: 0.5px;
 }
 
 .close-button {
   background: none;
-  border: none;
-  color: #fff;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #d4af37;
   font-size: 1.5rem;
   cursor: pointer;
-  padding: 0.5rem;
-  transition: color 0.3s;
-}
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  transition: all 0.3s;
+  font-weight: 300;
+  min-width: 40px;
+  min-height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 
-.close-button:hover {
-  color: #ffff00;
+  &:hover {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: #d4af37;
+    box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+  }
 }
 
 .pdf-container {
   flex: 1;
   display: flex;
   flex-direction: column;
-  background: #2a2a2a;
+  background: #1a1a1a;
   border-radius: 0 0 12px 12px;
+  overflow: hidden;
 }
 
 .pdf-toolbar {
   display: flex;
   align-items: center;
+  justify-content: center;
   padding: 1rem;
-  background: #003637;
-  border-radius: 8px 8px 0 0;
+  background: #0a0a0a;
+  border-bottom: 1px solid rgba(212, 175, 55, 0.1);
+  gap: 0.5rem;
 }
 
 .toolbar-button {
-  background: none;
-  border: 1px solid #c5ff2b;
-  color: #c5ff2b;
+  background: transparent;
+  border: 1px solid rgba(212, 175, 55, 0.3);
+  color: #d4af37;
   padding: 0.5rem 1rem;
-  margin: 0 0.25rem;
-  border-radius: 4px;
+  min-width: 40px;
+  border-radius: 6px;
   cursor: pointer;
   transition: all 0.2s;
-}
+  font-family: Arial, sans-serif;
+  font-size: 1rem;
 
-.toolbar-button:hover:not(:disabled) {
-  background: #c5ff2b;
-  color: #000;
-  box-shadow: 0 0 10px rgba(255, 255, 0, 0.5);
-}
+  &:hover:not(:disabled) {
+    background: rgba(212, 175, 55, 0.1);
+    border-color: #d4af37;
+    box-shadow: 0 0 10px rgba(212, 175, 55, 0.2);
+  }
 
-.toolbar-button:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    border-color: rgba(212, 175, 55, 0.1);
+  }
 }
 
 .page-info {
   margin: 0 1rem;
-  color: #fff;
-}
-
-::ng-deep pdf-viewer {
-  background: #2a2a2a !important;
-}
-
-.pdf-container {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  background: #003637;
-  border-radius: 0 0 12px 12px;
-  overflow: auto;
+  color: #d4af37;
+  font-family: Arial, sans-serif;
+  font-size: 0.9rem;
+  min-width: 80px;
+  text-align: center;
 }
 
 ::ng-deep {
-  .ng2-pdf-viewer-container {
-    background: #003637 !important;
-    height: calc(100vh - 200px) !important;
-  }
-
   pdf-viewer {
+    background: #1a1a1a !important;
     display: block;
     height: 100%;
+  }
+
+  .ng2-pdf-viewer-container {
+    background: #1a1a1a !important;
+    height: calc(100vh - 200px) !important;
   }
 
   .save-notification {
     position: fixed;
     top: 20px;
     right: 20px;
-    background-color: #4CAF50;
-    color: white;
-    padding: 16px;
-    border-radius: 4px;
-    z-index: 1000;
+    background: linear-gradient(135deg, #d4af37 0%, #ffb800 100%);
+    color: #000000;
+    padding: 16px 24px;
+    border-radius: 8px;
+    z-index: 1001;
+    font-family: Arial, sans-serif;
+    font-weight: 500;
+    box-shadow: 0 4px 20px rgba(212, 175, 55, 0.4);
     animation: fadeInOut 3s ease-in-out;
   }
 
   @keyframes fadeInOut {
-    0% { opacity: 0; transform: translateY(-20px); }
-    10% { opacity: 1; transform: translateY(0); }
-    90% { opacity: 1; transform: translateY(0); }
-    100% { opacity: 0; transform: translateY(-20px); }
+    0% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+    10% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    90% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    100% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  }
+}
+
+// Responsive
+@media (max-width: 768px) {
+  .modal-content {
+    width: 95%;
+    height: 95vh;
+  }
+
+  .modal-header {
+    padding: 1rem;
+  }
+
+  .modal-title {
+    font-size: 1.2rem;
+  }
+
+  .pdf-toolbar {
+    flex-wrap: wrap;
+    gap: 0.25rem;
+  }
+
+  .toolbar-button {
+    padding: 0.4rem 0.8rem;
+    font-size: 0.9rem;
+  }
+
+  .page-info {
+    font-size: 0.8rem;
+    min-width: 60px;
   }
 }
