@@ -1,0 +1,116 @@
+// Footer Component Styles with Golden Theme
+.main-footer {
+  color: rgba(255, 255, 255, 0.9) !important;
+
+  .footer-left,
+  .footer-right {
+    color: rgba(255, 255, 255, 0.9) !important;
+    letter-spacing: 0.5px;
+  }
+
+  .bullet {
+    display: inline-block;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    background-color: #ffd700;
+    margin: 0 8px;
+    vertical-align: middle;
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+    animation: pulse-gold 2s ease-in-out infinite;
+  }
+
+  a {
+    color: #ffd700;
+    text-decoration: none;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    position: relative;
+
+    &::after {
+      content: '';
+      position: absolute;
+      bottom: -2px;
+      left: 0;
+      width: 0;
+      height: 1px;
+      background: linear-gradient(90deg, #ffd700, transparent);
+      transition: width 0.3s ease;
+    }
+
+    &:hover {
+      color: #ffffff;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.6);
+
+      &::after {
+        width: 100%;
+      }
+    }
+  }
+
+  .footer-icon {
+    color: #ffd700;
+    filter: drop-shadow(0 0 5px rgba(255, 215, 0, 0.5));
+    animation: heart-beat 1.5s ease-in-out infinite;
+  }
+}
+
+@keyframes pulse-gold {
+  0%,
+  100% {
+    box-shadow: 0 0 8px rgba(255, 215, 0, 0.6);
+    transform: scale(1);
+  }
+  50% {
+    box-shadow: 0 0 12px rgba(255, 215, 0, 0.8);
+    transform: scale(1.2);
+  }
+}
+
+@keyframes heart-beat {
+  0%,
+  100% {
+    transform: scale(1);
+  }
+  25% {
+    transform: scale(1.1);
+  }
+  50% {
+    transform: scale(1);
+  }
+  75% {
+    transform: scale(1.15);
+  }
+}
+
+// Responsive styles
+@media (max-width: 1024px) {
+  .main-footer {
+    padding-left: 30px !important;
+    padding-right: 30px !important;
+    flex-direction: column;
+    text-align: center;
+    gap: 10px;
+
+    .footer-left,
+    .footer-right {
+      float: none !important;
+      width: 100%;
+    }
+
+    .bullet {
+      margin: 0 5px;
+    }
+  }
+}
+
+@media (max-width: 576px) {
+  .main-footer {
+    padding: 15px 20px !important;
+    font-size: 10px;
+
+    .bullet {
+      display: none;
+    }
+  }
+}

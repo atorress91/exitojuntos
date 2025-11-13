@@ -8,7 +8,7 @@ $color-font: #96a2b4;
 }
 
 .dark {
-  background-color: #0f111d;
+  background-color: #0a0a0a;
 
   .card {
     background-color: $color-dark-primary;
@@ -18,7 +18,7 @@ $color-font: #96a2b4;
     .card-header {
       border-bottom-color: $color-dark-primary;
 
-      h4+.card-header-action .btn {
+      h4 + .card-header-action .btn {
         color: #fff;
         box-shadow: none;
 
@@ -211,7 +211,10 @@ $color-font: #96a2b4;
       }
     }
 
-    &.fixed-header .datatable-header .datatable-header-inner .datatable-header-cell {
+    &.fixed-header
+      .datatable-header
+      .datatable-header-inner
+      .datatable-header-cell {
       color: #bbb;
     }
 
@@ -286,8 +289,13 @@ $color-font: #96a2b4;
   }
 
   .main-footer {
-    border-top: 1px solid $color-dark-primary;
-    background: $color-dark-primary;
+    border-top: 1px solid rgba(255, 215, 0, 0.3);
+    background: linear-gradient(
+      135deg,
+      rgba(20, 20, 20, 0.98) 0%,
+      rgba(10, 10, 10, 0.98) 100%
+    );
+    color: rgba(255, 255, 255, 0.9);
   }
 
   .btn-outline-primary {
@@ -466,7 +474,7 @@ $color-font: #96a2b4;
       color: $color-font;
     }
 
-    #mail-folders>li a:hover {
+    #mail-folders > li a:hover {
       background-color: #313131;
     }
 
@@ -653,7 +661,7 @@ $color-font: #96a2b4;
   }
 
   &.main-sidebar .sidebar-menu li ul.dropdown-menu li {
-    &.active>a {
+    &.active > a {
       color: #f1d065;
 
       &:before {
@@ -692,11 +700,11 @@ $color-font: #96a2b4;
     box-shadow: none;
   }
 
-  .btn-group>.btn {
+  .btn-group > .btn {
     box-shadow: none;
   }
 
-  .btn-group-vertical>.btn {
+  .btn-group-vertical > .btn {
     box-shadow: none;
   }
 
@@ -724,11 +732,11 @@ $color-font: #96a2b4;
     }
   }
 
-  .custom-switch-input:checked~.custom-switch-description {
+  .custom-switch-input:checked ~ .custom-switch-description {
     color: #f5f7f9;
   }
 
-  .form-group>label {
+  .form-group > label {
     color: $color-font;
   }
 
@@ -758,7 +766,7 @@ $color-font: #96a2b4;
     border-color: #979da6;
   }
 
-  .fc-view>table td {
+  .fc-view > table td {
     color: #fff;
   }
 
@@ -778,7 +786,7 @@ $color-font: #96a2b4;
     color: $color-font;
   }
 
-  .wizard>.steps .disabled a {
+  .wizard > .steps .disabled a {
     background: #0b0c15;
     color: $color-font;
   }
@@ -986,7 +994,7 @@ $color-font: #96a2b4;
       color: $color-font;
       border: 1px solid #979da6;
 
-      .ng-value-container .ng-input>input {
+      .ng-value-container .ng-input > input {
         color: $color-font;
       }
     }
