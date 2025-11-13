@@ -27,14 +27,9 @@ import { EChartsOption } from 'echarts';
 import { ToastrService } from 'ngx-toastr';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { TruncateDecimalsPipe } from '@app/shared/pipes/truncate-decimals.pipe';
 import { NgxEchartsModule, provideEchartsCore } from 'ngx-echarts';
 import { ShareModalComponent } from '@app/client/home/share-modal/share-modal.component';
 import { RouterLink } from '@angular/router';
-import {
-  WorldMapChartComponent,
-  CountryData,
-} from '@app/shared/components/world-map-chart/world-map-chart.component';
 
 @Component({
   selector: 'app-main',
@@ -45,11 +40,9 @@ import {
     CommonModule,
     NgApexchartsModule,
     TranslateModule,
-    TruncateDecimalsPipe,
     NgxEchartsModule,
     ShareModalComponent,
     RouterLink,
-    WorldMapChartComponent,
   ],
   providers: [
     provideEchartsCore({
@@ -65,10 +58,11 @@ export class HomeComponent implements OnInit {
     new BalanceInformationModel1A();
   balanceInformationModel1B: BalanceInformationModel1B =
     new BalanceInformationModel1B();
-  maps: CountryData[] = [];
+  maps: any[] = [];
   currentYearPurchases: PurchasePerMonthDto[] = [];
   previousYearPurchases: PurchasePerMonthDto[] = [];
   area_line_chart: EChartsOption;
+  volumeChart: EChartsOption;
   currentYear: number;
   previousYear: number;
   @ViewChild('chart') chart1: ChartComponent;
@@ -83,7 +77,7 @@ export class HomeComponent implements OnInit {
   };
 
   information: StatisticsInformation = new StatisticsInformation();
-  public pieChartOptions: any;
+  public portfolioChartOptions: any;
   public pieChartOptionsModel1A: any;
   public pieChartOptionsModel1B: any;
 
@@ -99,7 +93,7 @@ export class HomeComponent implements OnInit {
     private readonly cdr: ChangeDetectorRef,
     private readonly affiliateBtService: AffiliateBtcService,
   ) {
-    this.pieChartOptions = {
+    this.portfolioChartOptions = {
       series: [],
       chart: {},
       labels: [],
@@ -145,6 +139,7 @@ export class HomeComponent implements OnInit {
     this.getPurchasesInMyNetwork();
     this.loadInformation();
     this.loadBnbAddress();
+    this.initVolumeChart();
   }
 
   loadUserData(userId: number) {
@@ -165,9 +160,9 @@ export class HomeComponent implements OnInit {
 
   initializeBalanceCharts() {
     try {
-      this.initChartModel2();
+      this.initPortfolioChart();
     } catch (error) {
-      console.error('Error initializing Model 2 Chart:', error);
+      console.error('Error initializing Portfolio Chart:', error);
     }
   }
 
@@ -282,24 +277,11 @@ export class HomeComponent implements OnInit {
     );
   }
 
-  private initChartModel2() {
-    if (
-      !this.balanceInformation ||
-      !this.isBalanceInformationValid(this.balanceInformation)
-    ) {
-      console.error('Invalid balance information for Model 2');
-      return;
-    }
-    this.pieChartOptions = {
-      series: [
-        this.balanceInformation.serviceBalance,
-        this.balanceInformation.availableBalance,
-        this.balanceInformation.totalCommissionsPaid,
-        this.balanceInformation.totalAcquisitions,
-        this.balanceInformation.reverseBalance,
-      ],
-
-      colors: ['#f44336', '#2196f3', '#96a2b4', '#4caf50', '#9c27b0'],
+  private initPortfolioChart() {
+    // Datos quemados para portfolio de trading
+    this.portfolioChartOptions = {
+      series: [21293.61, 11172.8, 3124.5, 5782.54],
+      colors: ['#f7931a', '#627eea', '#f3ba2f', '#00d4aa'],
       chart: {
         type: 'donut',
         width: 200,
@@ -310,13 +292,7 @@ export class HomeComponent implements OnInit {
       dataLabels: {
         enabled: false,
       },
-      labels: [
-        'Saldo de servicios',
-        'Saldo Disponible',
-        'Total Pagado',
-        'Total Adquisiciones',
-        'Saldo balance',
-      ],
+      labels: ['Bitcoin', 'Ethereum', 'BNB', 'Others'],
       responsive: [
         {
           breakpoint: 480,
@@ -324,7 +300,7 @@ export class HomeComponent implements OnInit {
             dataLabels: {
               enabled: true,
               formatter: function (val: any) {
-                return val + '%';
+                return val.toFixed(1) + '%';
               },
             },
             plotOptions: {
@@ -475,7 +451,7 @@ export class HomeComponent implements OnInit {
     this.balanceInformation = new BalanceInformation();
     this.balanceInformationModel1A = new BalanceInformationModel1A();
     this.balanceInformationModel1B = new BalanceInformationModel1B();
-    this.pieChartOptions = {
+    this.portfolioChartOptions = {
       series: [],
       chart: {},
       labels: [],
@@ -498,6 +474,68 @@ export class HomeComponent implements OnInit {
       responsive: [],
       dataLabels: {},
       legend: {},
+    };
+  }
+
+  initVolumeChart() {
+    this.volumeChart = {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+          type: 'shadow',
+        },
+      },
+      legend: {
+        data: ['Buy Volume', 'Sell Volume'],
+        textStyle: {
+          color: '#9aa0ac',
+        },
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true,
+      },
+      xAxis: [
+        {
+          type: 'category',
+          data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+          axisLabel: {
+            color: '#9aa0ac',
+          },
+        },
+      ],
+      yAxis: [
+        {
+          type: 'value',
+          axisLabel: {
+            color: '#9aa0ac',
+            formatter: '${value}K',
+          },
+        },
+      ],
+      series: [
+        {
+          name: 'Buy Volume',
+          type: 'bar',
+          stack: 'volume',
+          emphasis: {
+            focus: 'series',
+          },
+          data: [120, 132, 101, 134, 190, 230, 210],
+        },
+        {
+          name: 'Sell Volume',
+          type: 'bar',
+          stack: 'volume',
+          emphasis: {
+            focus: 'series',
+          },
+          data: [220, 182, 191, 234, 290, 330, 310],
+        },
+      ],
+      color: ['#10b981', '#ef4444'],
     };
   }
 
