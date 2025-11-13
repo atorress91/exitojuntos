@@ -11,7 +11,6 @@ import { SecretQuestion } from '@app/core/models/secret-question-model/secret.qu
 
 import { Response } from '@app/core/models/response-model/response.model';
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
-import { CreateAffiliate } from '@app/core/models/user-affiliate-model/create-affiliate.model';
 import { RequestResetPassword } from '@app/core/models/user-affiliate-model/request-reset-password-model';
 import { ContactUsRequest } from '@app/core/models/user-affiliate-model/contactUsRequest.model';
 
@@ -229,7 +228,7 @@ export class AffiliateService {
       );
   }
 
-  createAffiliate(user: CreateAffiliate) {
+  createAffiliate(user: UserAffiliate) {
     return this.http
       .post<Response>(
         this.urlApi.concat('/useraffiliateinfo'),

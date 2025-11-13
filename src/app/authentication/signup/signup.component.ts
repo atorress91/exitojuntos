@@ -19,7 +19,6 @@ import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.
 import { CountryService } from '@app/core/service/country-service/country.service';
 import { PdfViewerService } from '@app/core/service/pdf-viewer-service/pdf-viewer.service';
 import { ToastrService } from 'ngx-toastr';
-import { CreateAffiliate } from '@app/core/models/user-affiliate-model/create-affiliate.model';
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -185,21 +184,20 @@ export class SignupComponent implements OnInit {
       return;
     }
 
-    let user = new CreateAffiliate();
+    const user = new UserAffiliate();
     const cleanPhone = this.cleanPhoneNumber(this.registerForm.value.phone);
-    user.user_name = cleanPhone;
     user.password = this.registerForm.value.password;
     user.name = this.registerForm.value.name;
-    user.last_name = this.registerForm.value.last_name;
+    user.lastName = this.registerForm.value.last_name;
     user.phone = cleanPhone;
-    user.country = this.registerForm.value.country;
-    user.state_place = '';
+    user.country = { id: this.registerForm.value.country };
     user.city = '';
+    user.state = '';
     user.email = this.registerForm.value.email;
-    user.affiliate_type = this.registerForm.value.affiliate_type;
     user.father = this.user.id;
-    user.binary_matrix_side = +this.side;
-    user.status = 1;
+    user.side = +this.side;
+    user.status = true;
+    user.termsConditions = this.registerForm.value.terms_conditions;
     this.affiliateService.createAffiliate(user).subscribe(response => {
       if (response.success) {
         this.showSuccess(response.message);

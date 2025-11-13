@@ -1,38 +1,18 @@
 export class CreateAffiliate {
-
-  user_name: string;
-  name: string;
-  password: string;
-  last_name: string;
-  email: string;
-  country: number;
-  affiliate_type: string;
-  father: number;
-  sponsor: number;
-  binary_sponsor: number;
-  phone: string;
-  state_place: string;
-  city: string;
-  binary_matrix_side: number;
-  status: number;
-
-  constructor() {
-    this.user_name = '';
-    this.name = '';
-    this.password = '';
-    this.last_name = '';
-    this.email = '';
-    this.country = 0;
-    this.affiliate_type = '';
-    this.father = 0;
-    this.sponsor = 0;
-    this.binary_sponsor = 0;
-
-    this.phone = '';
-    this.state_place = '';
-    this.city = ''
-    this.binary_matrix_side = 0;
-    this.status = 0;
-  }
+  user_name = '';
+  name = '';
+  password = '';
+  last_name = '';
+  email = '';
+  country = 0;
+  affiliate_type = '';
+  father = 0;
+  sponsor = 0;
+  binary_sponsor = 0;
+  phone = '';
+  state_place = '';
+  city = '';
+  binary_matrix_side = 0;
+  status = 0;
+  termsConditions = false;
 }
-
