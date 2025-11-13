@@ -14,14 +14,13 @@ export class ConfigService {
   setConfigData() {
     this.configData = {
       layout: {
-        variant: 'light', // options:  light & dark
+        variant: 'dark', // options:  light & dark - Changed to dark for golden theme
         theme_color: 'green', // Aquí defines el tema verde
         sidebar: {
           collapsed: false, // options:  true & false
-          backgroundColor: 'light', // options:  light & dark
+          backgroundColor: 'dark', // options:  light & dark - Changed to dark for golden theme
         },
       },
     };
   }
-
 }

@@ -26,7 +26,7 @@ import { TranslatePipe } from '@ngx-translate/core';
 @Component({
   selector: 'app-sidebar-admin',
   templateUrl: './sidebar-admin.component.html',
-  styleUrls: ['./sidebar-admin.component.sass'],
+  styleUrls: ['./sidebar-admin.component.scss'],
   standalone: true,
   imports: [
     CommonModule,

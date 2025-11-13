@@ -2,6 +2,8 @@
   @include shadow;
   @include main-sidebar;
   left: 0;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
+  border-right: 1px solid rgba(212, 175, 55, 0.2);
 }
 
 .main-sidebar,
@@ -711,30 +713,39 @@ body.layout-3 {
   width: 100%;
   min-height: 100vh;
   position: relative;
+  background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #0a0a0a 100%);
 }
 
 .main-footer {
   padding: 20px 30px 20px 280px;
   margin-top: 40px;
-  color: #98a6ad;
-  border-top: 1px solid #e3eaef;
+  color: rgba(255, 255, 255, 0.7);
+  border-top: 1px solid rgba(212, 175, 55, 0.2);
   display: flex;
-  background: #33363e;
+  background: linear-gradient(
+    135deg,
+    rgba(20, 20, 20, 0.95) 0%,
+    rgba(10, 10, 10, 0.95) 100%
+  );
+  backdrop-filter: blur(10px);
   font-weight: 600;
   text-transform: uppercase;
   font-size: 11px;
   width: 100%;
   justify-content: space-between;
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
 
   .footer-left {
     float: left;
+    color: rgba(255, 255, 255, 0.7);
   }
 
   .footer-right {
     float: right;
+    color: rgba(255, 255, 255, 0.7);
   }
   .footer-icon {
-    color: #ff00b0;
+    color: #d4af37;
     height: 20px;
     width: 20px;
   }

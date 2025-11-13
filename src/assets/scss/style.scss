@@ -16,7 +16,6 @@
 /*                 [1. External Import ]                   			*/
 /* Importing Bootstrap SCSS file. */
 
-
 /*                 [2. Fonts]                   				*/
 // @import "fonts/_material.scss";
 @import 'fonts/pangram';
@@ -28,6 +27,8 @@
 /*                 [3. Common ]                   			*/
 /* Variable */
 @import '_variable';
+/* Theme Variables */
+@import '_theme-variables';
 /* Mixin */
 @import '_mixin';
 /* Helper classes */

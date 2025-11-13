@@ -1,10 +1,9 @@
 <div>
   <!-- Left Sidebar -->
-  <aside id="leftsidebar" class="sidebar main-sidebar" (mouseenter)="mouseHover()"
-    (mouseleave)="mouseOut()">
+  <aside id="leftsidebar" class="sidebar main-sidebar" (mouseenter)="mouseHover()" (mouseleave)="mouseOut()">
     <div class="sidebar-brand">
       <a routerLink="/dashboard/main">
-
+        <img src="assets/exito-logo.svg" alt="Éxito Juntos" class="logo-svg" />
       </a>
     </div>
     <!-- Menu -->
@@ -14,14 +13,15 @@
           'max-height': listMaxHeight + 'px',
           'max-width': listMaxWidth + 'px',
           'overflow-y': 'auto'
-        }" >
+        }">
         <li class="sidebar-user-panel">
           <div role="button" class="user-panel" (click)="profileImgComponent.openProfileImgModal()">
-          <div class="user-panel">
-            <div class=" image">
-              <img [src]="user?.image_profile_url ? user?.image_profile_url : 'assets/images/user.png'" class="img-circle user-img-circle" alt="User Image" />
+            <div class="user-panel">
+              <div class=" image">
+                <img [src]="user?.image_profile_url ? user?.image_profile_url : 'assets/images/user.png'"
+                  class="img-circle user-img-circle" alt="User Image" />
+              </div>
             </div>
-          </div>
           </div>
           <div class="profile-usertitle">
             <div class="sidebar-userpic-name" *ngIf="user">{{ user.name + ' '+user.last_name }}</div>

@@ -1,4 +1,10 @@
-$color-dark: #16192a;
+$color-dark: #0a0a0a;
+$color-darker: #000000;
+$primary-gold: #ffd700;
+$secondary-gold: #d4af37;
+$border-gold: rgba(255, 215, 0, 0.3);
+$text-primary: rgba(255, 255, 255, 0.95);
+$text-secondary: rgba(255, 255, 255, 0.85);
 
 .dark-sidebar {
   &:not(.sidebar-mini) {
@@ -16,28 +22,45 @@ $color-dark: #16192a;
       li {
         &.active {
           a {
-            box-shadow: none;
-            color: #fff;
+            box-shadow: 0 0 15px rgba(212, 175, 55, 0.2);
+            color: $primary-gold;
+            background: linear-gradient(
+              135deg,
+              rgba(212, 175, 55, 0.1) 0%,
+              transparent 100%
+            );
+            border-left: 3px solid $primary-gold;
             margin: 0px;
             border-radius: 3px;
           }
         }
 
         ul.dropdown-menu {
-          background-color: #16192a;
+          background-color: rgba(10, 10, 10, 0.95);
+          border: 1px solid $border-gold;
+          backdrop-filter: blur(10px);
 
           li {
             a {
-              background-color: $color-dark;
+              background-color: transparent;
               padding-left: 30px;
+              color: $text-primary;
+              transition: all 0.3s ease;
 
               &::before {
                 left: 10px;
+                color: $primary-gold;
+              }
+
+              &:hover {
+                background: rgba(255, 215, 0, 0.15);
+                color: #ffffff;
+                font-weight: 500;
               }
             }
 
             &:hover a {
-              background-color: $color-dark;
+              background: rgba(212, 175, 55, 0.1);
             }
           }
         }
@@ -45,94 +68,172 @@ $color-dark: #16192a;
         .has-dropdown:hover {
           margin: 0px;
           border-radius: 3px;
+          background: rgba(212, 175, 55, 0.05);
         }
       }
     }
 
     .sidebar-user {
-      background-color: $color-dark;
+      background: linear-gradient(
+        135deg,
+        rgba(212, 175, 55, 0.1) 0%,
+        transparent 100%
+      );
+      border-bottom: 1px solid $border-gold;
     }
 
     .dropdown-title {
       background-color: $color-dark;
-      color: #fff !important;
+      color: $primary-gold !important;
+      font-weight: 600;
     }
 
     &:after {
-      background-color: $color-dark;
+      background: linear-gradient(180deg, $color-dark 0%, $color-darker 100%);
     }
   }
 
   .navbar {
     &.active {
-      background-color: #fff;
+      background: linear-gradient(
+        135deg,
+        rgba(20, 20, 20, 0.95) 0%,
+        rgba(10, 10, 10, 0.95) 100%
+      );
+      border-bottom: 1px solid $border-gold;
+      backdrop-filter: blur(10px);
     }
 
     .form-inline {
       .form-control {
-        background-color: #f2f2f2;
+        background-color: rgba(20, 20, 20, 0.6);
+        border: 1px solid $border-gold;
+        color: white;
+
+        &:focus {
+          border-color: $primary-gold;
+          box-shadow: 0 0 0 0.2rem rgba(212, 175, 55, 0.15);
+        }
       }
 
       .btn {
-        background-color: #f2f2f2;
+        background-color: rgba(20, 20, 20, 0.6);
+        border: 1px solid $border-gold;
+        color: $text-secondary;
+
+        &:hover {
+          background-color: rgba(212, 175, 55, 0.1);
+          color: $primary-gold;
+        }
       }
     }
   }
 
   .sidebar {
-    background-color: $color-dark;
-    box-shadow: none;
-    border-right: none;
+    background: linear-gradient(180deg, #1a1a1a 0%, $color-dark 100%);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.8);
+    border-right: 1px solid $border-gold;
 
     .sidebar-brand {
-      background-color: $color-dark;
+      background: linear-gradient(
+        135deg,
+        rgba(212, 175, 55, 0.1) 0%,
+        transparent 100%
+      );
+      border-bottom: 1px solid $border-gold;
+      padding: 1.5rem 1rem;
 
       a {
-        color: #fff;
+        color: $primary-gold;
+        font-weight: 700;
+        font-size: 1.5rem;
+        text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
       }
     }
 
     .menu .list li {
       a {
-        color: #dadada;
+        color: $text-primary;
+        transition: all 0.3s ease;
+        padding: 0.875rem 1rem;
+        border-radius: 8px;
+        margin: 0.25rem 0.5rem;
+
+        &:hover {
+          background: rgba(255, 215, 0, 0.15);
+          color: #ffffff;
+          transform: translateX(5px);
+          font-weight: 500;
+        }
+
         span {
-          color: #dadada;
+          color: $text-primary;
+          font-weight: 500;
+
+          &:hover {
+            color: #ffffff;
+          }
         }
       }
 
       &.header {
-        color: #ebecf1;
+        color: $primary-gold;
+        font-weight: 600;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
       }
 
       &.active {
+        > a {
+          background: linear-gradient(
+            135deg,
+            rgba(212, 175, 55, 0.15) 0%,
+            rgba(212, 175, 55, 0.05) 100%
+          );
+          color: $primary-gold;
+          border-left: 3px solid $primary-gold;
+        }
+
         ul.dropdown-menu {
-          background-color: #16192a;
+          background-color: rgba(10, 10, 10, 0.95);
+          border: 1px solid $border-gold;
         }
+
         .menu-top {
-          background-color: rgba(0, 0, 0, 0.5);
-        }
-      }
-      &.active-top {
-        ul.dropdown-menu {
-          background-color: #16192a;
-        }
-        .menu-top {
-          background-color: rgba(0, 0, 0, 0.5);
+          background: rgba(212, 175, 55, 0.1);
         }
       }
 
-      a:hover {
-        background-color: rgba(0, 0, 0, 0.2);
+      &.active-top {
+        > a {
+          background: rgba(212, 175, 55, 0.1);
+          color: $primary-gold;
+        }
+
+        ul.dropdown-menu {
+          background-color: rgba(10, 10, 10, 0.95);
+        }
+
+        .menu-top {
+          background: rgba(212, 175, 55, 0.1);
+        }
       }
     }
 
     .sidebar-user-panel .profile-usertitle {
       .sidebar-userpic-name,
       .profile-usertitle-job {
-        color: #dadada;
+        color: $text-primary;
+        font-weight: 500;
       }
       .sidebar-userpic-btn a {
-        color: #dadada;
+        color: $primary-gold;
+        font-weight: 500;
+
+        &:hover {
+          color: #ffffff;
+          text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
       }
     }
   }

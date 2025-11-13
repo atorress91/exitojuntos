@@ -3,6 +3,13 @@
  *  Author     : RedStar Template
  *  Description: This scss file for left side bar style classes
  */
+$primary-gold: #ffd700;
+$secondary-gold: #d4af37;
+$border-gold: rgba(255, 215, 0, 0.3);
+$text-primary: rgba(255, 255, 255, 0.95);
+$text-secondary: rgba(255, 255, 255, 0.85);
+$card-bg: rgba(20, 20, 20, 0.95);
+
 .overlay {
   position: fixed;
   cursor: pointer;
@@ -10,7 +17,8 @@
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(5px);
   z-index: 10;
 }
 
@@ -23,24 +31,61 @@
 
 .sidebar {
   @include transition(all 0.5s);
-  background: #ffffff;
+  background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
   width: 260px;
   overflow: hidden;
   display: inline-block;
-  // height: calc(100vh - 60px);
   height: 100vh;
   position: fixed;
   left: 0;
-  border-right: 1px solid #f2f4f9;
-  -webkit-box-shadow: 0 8px 10px 0 rgba(183, 192, 206, 0.2);
-  box-shadow: 0 8px 10px 0 rgba(183, 192, 206, 0.2);
+  border-right: 1px solid $border-gold;
+  -webkit-box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.8);
+  box-shadow: 0 8px 30px 0 rgba(0, 0, 0, 0.8);
   z-index: 999 !important;
+
+  .sidebar-brand {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 215, 0, 0.15) 0%,
+      rgba(212, 175, 55, 0.05) 100%
+    );
+    border-bottom: 1px solid $border-gold;
+    padding: 1.5rem 1rem;
+    text-align: center;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    a {
+      display: inline-block;
+      width: 100%;
+
+      .logo-svg {
+        height: 50px;
+        width: auto;
+        max-width: 180px;
+        filter: drop-shadow(0 0 15px rgba(255, 215, 0, 0.4));
+        transition: all 0.3s ease;
+      }
+
+      &:hover .logo-svg {
+        filter: drop-shadow(0 0 20px rgba(255, 215, 0, 0.6));
+        transform: scale(1.05);
+      }
+    }
+  }
 
   .user-info {
     padding: 13px 15px 12px 15px;
     white-space: nowrap;
     position: relative;
-    border-bottom: 1px solid #e9e9e9;
+    border-bottom: 1px solid $border-gold;
+    background: linear-gradient(
+      135deg,
+      rgba(212, 175, 55, 0.1) 0%,
+      transparent 100%
+    );
     height: 135px;
 
     .image {
@@ -50,6 +95,8 @@
       img {
         @include border-radius(50%);
         vertical-align: bottom !important;
+        border: 2px solid $primary-gold;
+        box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
       }
     }
 
@@ -63,14 +110,17 @@
         @include three-dots-overflow();
         font-size: 14px;
         max-width: 200px;
-        color: #fff;
+        color: #ffffff;
+        font-weight: 700;
+        text-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
       }
 
       .email {
         @include three-dots-overflow();
         font-size: 12px;
         max-width: 200px;
-        color: #fff;
+        color: $text-primary;
+        font-weight: 500;
       }
 
       .user-helper-dropdown {
@@ -78,7 +128,7 @@
         right: -3px;
         bottom: -12px;
         cursor: pointer;
-        color: #fff;
+        color: $primary-gold;
       }
     }
   }
@@ -95,17 +145,27 @@
       li {
         &.active {
           .menu-top {
-            background-color: #f0f3fb;
+            background: linear-gradient(
+              135deg,
+              rgba(212, 175, 55, 0.15) 0%,
+              transparent 100%
+            );
+            border-left: 3px solid $primary-gold;
           }
           > :first-child {
             span {
-              font-weight: 500;
+              font-weight: 600;
+              color: $primary-gold;
             }
           }
         }
         &.active-top {
           .menu-top {
-            background-color: #f0f3fb;
+            background: linear-gradient(
+              135deg,
+              rgba(212, 175, 55, 0.1) 0%,
+              transparent 100%
+            );
           }
         }
 
@@ -119,7 +179,7 @@
               position: absolute;
               transition: 0.5s;
               left: 25px;
-              color: #868e96;
+              color: $primary-gold;
             }
             a:hover:before {
               font-weight: 600;

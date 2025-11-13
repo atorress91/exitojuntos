@@ -1,0 +1,140 @@
+// Theme Variables - Golden Trading Theme
+// Author: Custom Theme
+// Description: Variables for consistent golden theme across the application
+
+// Primary Colors
+$primary-gold: #d4af37;
+$secondary-gold: #ffd700;
+$gold-light: #f5e8c7;
+$gold-dark: #b8941f;
+
+// Background Colors
+$bg-darker: #000000;
+$bg-dark: #0a0a0a;
+$bg-dark-secondary: #1a1a1a;
+$bg-card: rgba(20, 20, 20, 0.95);
+$bg-overlay: rgba(0, 0, 0, 0.8);
+
+// Border Colors
+$border-gold: rgba(212, 175, 55, 0.2);
+$border-gold-light: rgba(212, 175, 55, 0.3);
+$border-gold-medium: rgba(212, 175, 55, 0.4);
+
+// Text Colors
+$text-primary: #ffffff;
+$text-gold: #d4af37;
+$text-secondary: rgba(255, 255, 255, 0.7);
+$text-muted: rgba(255, 255, 255, 0.5);
+$text-disabled: rgba(255, 255, 255, 0.3);
+
+// State Colors
+$success-color: #10b981;
+$success-light: rgba(16, 185, 129, 0.15);
+$danger-color: #ef4444;
+$danger-light: rgba(239, 68, 68, 0.15);
+$warning-color: #f59e0b;
+$warning-light: rgba(245, 158, 11, 0.15);
+$info-color: #3b82f6;
+$info-light: rgba(59, 130, 246, 0.15);
+
+// Crypto Colors
+$bitcoin-color: #f7931a;
+$ethereum-color: #627eea;
+$bnb-color: #f3ba2f;
+$crypto-alt-color: #00d4aa;
+
+// Shadows
+$shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+$shadow-md: 0 4px 20px rgba(0, 0, 0, 0.5);
+$shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.8);
+$shadow-gold: 0 0 15px rgba(212, 175, 55, 0.3);
+$shadow-gold-lg: 0 0 30px rgba(212, 175, 55, 0.4);
+
+// Spacing
+$spacer: 1rem;
+$spacer-sm: 0.5rem;
+$spacer-lg: 1.5rem;
+$spacer-xl: 2rem;
+
+// Border Radius
+$border-radius-sm: 8px;
+$border-radius: 10px;
+$border-radius-lg: 12px;
+$border-radius-xl: 16px;
+
+// Transitions
+$transition-base: all 0.3s ease;
+$transition-fast: all 0.2s ease;
+$transition-slow: all 0.5s ease;
+
+// Z-index
+$z-overlay: 10;
+$z-navbar: 890;
+$z-sidebar: 999;
+$z-dropdown: 1000;
+$z-modal: 1050;
+$z-tooltip: 1060;
+
+// Mixins
+@mixin gradient-gold {
+  background: linear-gradient(135deg, $primary-gold 0%, $secondary-gold 100%);
+}
+
+@mixin gradient-dark-bg {
+  background: linear-gradient(
+    135deg,
+    rgba(20, 20, 20, 0.95) 0%,
+    rgba(10, 10, 10, 0.95) 100%
+  );
+}
+
+@mixin gradient-card {
+  background: linear-gradient(135deg, $bg-card 0%, rgba(20, 20, 20, 0.8) 100%);
+}
+
+@mixin gradient-gold-overlay {
+  background: linear-gradient(
+    135deg,
+    rgba(212, 175, 55, 0.1) 0%,
+    transparent 100%
+  );
+}
+
+@mixin text-gradient-gold {
+  background: linear-gradient(to right, $primary-gold 0%, $secondary-gold 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+@mixin card-hover {
+  transition: $transition-base;
+
+  &:hover {
+    border-color: $border-gold-light;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 30px rgba(212, 175, 55, 0.15);
+  }
+}
+
+@mixin blur-backdrop {
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+@mixin gold-glow {
+  box-shadow: $shadow-gold;
+}
+
+@mixin gold-border {
+  border: 1px solid $border-gold;
+}
+
+// Export for JavaScript usage
+:export {
+  primaryGold: $primary-gold;
+  secondaryGold: $secondary-gold;
+  bgDark: $bg-dark;
+  borderGold: $border-gold;
+  textSecondary: $text-secondary;
+}

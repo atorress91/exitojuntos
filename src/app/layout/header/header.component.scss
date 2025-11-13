@@ -1,4 +1,100 @@
+$primary-gold: #d4af37;
+$secondary-gold: #ffd700;
+$border-gold: rgba(212, 175, 55, 0.2);
+$text-secondary: rgba(255, 255, 255, 0.7);
+$card-bg: rgba(20, 20, 20, 0.95);
+
+:host ::ng-deep {
+  .navbar {
+    background: linear-gradient(
+      135deg,
+      rgba(20, 20, 20, 0.95) 0%,
+      rgba(10, 10, 10, 0.95) 100%
+    ) !important;
+    border-bottom: 1px solid $border-gold !important;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+
+    .nav-link {
+      color: $text-secondary !important;
+      transition: all 0.3s ease;
+
+      &:hover {
+        color: $primary-gold !important;
+        transform: translateY(-2px);
+      }
+
+      i {
+        color: $text-secondary;
+      }
+
+      &:hover i {
+        color: $primary-gold;
+      }
+    }
+
+    .badge {
+      background: linear-gradient(
+        135deg,
+        $primary-gold 0%,
+        $secondary-gold 100%
+      );
+      color: #000;
+      font-weight: 600;
+      box-shadow: 0 2px 8px rgba(212, 175, 55, 0.4);
+    }
+
+    .dropdown-menu {
+      background: $card-bg;
+      border: 1px solid $border-gold;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5);
+
+      .dropdown-item {
+        color: $text-secondary;
+        transition: all 0.3s ease;
+
+        &:hover {
+          background: rgba(212, 175, 55, 0.1);
+          color: $primary-gold;
+        }
+      }
+
+      .dropdown-divider {
+        border-color: $border-gold;
+      }
+
+      .dropdown-title {
+        color: $primary-gold;
+        font-weight: 600;
+        border-bottom: 1px solid $border-gold;
+      }
+    }
+
+    .user-img-radious-style {
+      border: 2px solid $primary-gold;
+      box-shadow: 0 0 15px rgba(212, 175, 55, 0.3);
+    }
+  }
+
+  .lang-dropdown-list {
+    .dropdown-item {
+      &.active {
+        background: linear-gradient(
+          135deg,
+          rgba(212, 175, 55, 0.2) 0%,
+          transparent 100%
+        );
+        color: $primary-gold;
+        border-left: 3px solid $primary-gold;
+      }
+    }
+  }
+}
 
 .toast {
   max-width: 800px !important;
+  background: $card-bg;
+  border: 1px solid $border-gold;
+  color: $text-secondary;
 }
