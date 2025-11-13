@@ -162,10 +162,18 @@ export class AffiliateService {
   }
 
   getAffiliateByPhone(phone: string) {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        Pragma: 'no-cache',
+        Expires: '0',
+      }),
+    };
     return this.http
       .get<Response>(
         this.urlApi.concat('/auth/get_user_phone/' + phone),
-        httpOptions,
+        options,
       )
       .pipe(
         map(response => {

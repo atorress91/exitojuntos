@@ -63,8 +63,22 @@ export class SignupComponent implements OnInit {
   }
 
   private fetchCountry() {
-    this.countryService.getCountries().subscribe(data => {
-      this.listcountry = data;
+    this.countryService.getCountries().subscribe({
+      next: data => {
+        console.log('Countries loaded:', data);
+        if (data && Array.isArray(data)) {
+          this.listcountry = data;
+        } else {
+          console.error('Invalid countries data:', data);
+          this.toastr.warning('No se pudieron cargar los países');
+          this.listcountry = [];
+        }
+      },
+      error: error => {
+        console.error('Error loading countries:', error);
+        this.toastr.error('Error al cargar los países');
+        this.listcountry = [];
+      },
     });
   }
 
@@ -131,14 +145,20 @@ export class SignupComponent implements OnInit {
 
     this.affiliateService.getAffiliateByPhone(phone).subscribe({
       next: (user: UserAffiliate) => {
-        if (user) {
+        console.log('getUserByPhone received user:', user);
+        if (user?.id) {
           this.sponsor = user.phone;
           this.user = user;
+          console.log('User loaded successfully:', this.user);
         } else {
+          console.error('User not found or invalid data for phone:', phone);
+          this.toastr.error('Usuario no encontrado');
           this.router.navigate(['/signin']).then();
         }
       },
-      error: () => {
+      error: error => {
+        console.error('Error fetching user by phone:', error);
+        this.toastr.error('Error al buscar el usuario');
         this.router.navigate(['/signin']).then();
       },
     });

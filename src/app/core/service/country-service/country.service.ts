@@ -22,13 +22,23 @@ export class CountryService {
   }
 
   getCountries() {
+    const options = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Cache-Control': 'no-cache, no-store, must-revalidate',
+        Pragma: 'no-cache',
+        Expires: '0',
+      }),
+    };
     return this.http
-      .get<Response>(this.urlApi.concat('/countries'), httpOptions)
+      .get<Response>(this.urlApi.concat('/countries'), options)
       .pipe(
         map(response => {
-          if (response.success) return response.data;
-          else {
-            console.error('ERROR: ', response);
+          console.log('getCountries response:', response);
+          if (response && response.success && response.data) {
+            return response.data;
+          } else {
+            console.error('ERROR - Invalid countries response:', response);
             return null;
           }
         }),
