@@ -10,8 +10,6 @@ import { Response } from '@app/core/models/response-model/response.model';
 import { ToastrService } from 'ngx-toastr';
 import { JwtHelperService } from '../jwt-helper/jwt-helper.service';
 
-import { CartService } from '../cart.service/cart.service';
-
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
@@ -38,7 +36,6 @@ export class AuthService {
   constructor(
     private readonly http: HttpClient,
     private readonly toastr: ToastrService,
-    private readonly cartService: CartService,
     private readonly jwtHelper: JwtHelperService,
   ) {
     // Inicializar desde localStorage
@@ -162,7 +159,6 @@ export class AuthService {
   }
 
   logoutUser() {
-    this.cartService.removeAllCart();
     localStorage.removeItem('currentUserAffiliate');
 
     // Actualizar signals

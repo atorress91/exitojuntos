@@ -2,10 +2,10 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class LogoService {
-  private isDarkTheme = new BehaviorSubject<boolean>(false);
+  private readonly isDarkTheme = new BehaviorSubject<boolean>(false);
   isDarkTheme$ = this.isDarkTheme.asObservable();
 
   constructor() {
@@ -19,6 +19,8 @@ export class LogoService {
   }
 
   getLogoSrc(): string {
-    return this.isDarkTheme.value ? 'assets/images/logo-dark.png' : 'assets/images/logo-white.png';
+    return this.isDarkTheme.value
+      ? 'assets/images/logo-dark.png'
+      : 'assets/images/logo-white.png';
   }
 }
