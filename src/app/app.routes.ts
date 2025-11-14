@@ -18,9 +18,9 @@ export const routes: Routes = [
   {
     path: 'app',
     loadComponent: () =>
-      import(
-        './layout/app-layout/unified-layout/unified-layout.component'
-      ).then(m => m.UnifiedLayoutComponent),
+      import('./layout/app-layout/main-layout/main-layout.component').then(
+        m => m.MainLayoutComponent,
+      ),
     canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'home', pathMatch: 'full' },
@@ -36,9 +36,9 @@ export const routes: Routes = [
   {
     path: 'admin',
     loadComponent: () =>
-      import(
-        './layout/app-layout/unified-layout/unified-layout.component'
-      ).then(m => m.UnifiedLayoutComponent),
+      import('./layout/app-layout/main-layout/main-layout.component').then(
+        m => m.MainLayoutComponent,
+      ),
     canActivate: [authGuard],
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
