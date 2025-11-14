@@ -17,9 +17,14 @@ export class AdminGuard {
   ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
-    // Usar signal para verificar si el usuario admin está logueado
-    if (this.authService.isAdminLoggedIn()) {
-      return true;
+    // Verificar si el usuario está logueado y es admin
+    if (this.authService.isLoggedIn()) {
+      const currentUser = this.authService.currentUserAffiliateValue;
+      const roleName = currentUser?.role?.name?.toLowerCase();
+
+      if (roleName === 'admin' || roleName === 'super_admin') {
+        return true;
+      }
     }
 
     // Redirigir si no es admin

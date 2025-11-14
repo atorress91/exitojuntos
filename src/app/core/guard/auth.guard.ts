@@ -18,7 +18,7 @@ export class AuthGuard {
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     // Usar signal para verificar si el usuario está logueado
-    if (this.authService.isAffiliateLoggedIn()) {
+    if (this.authService.isLoggedIn()) {
       return true;
     }
 

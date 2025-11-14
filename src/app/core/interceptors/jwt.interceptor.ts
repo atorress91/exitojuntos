@@ -37,12 +37,9 @@ export class JwtInterceptor implements HttpInterceptor {
       );
     }
 
-    // Obtener el token del usuario actual (afiliado o admin)
-    const currentUserAffiliate = this.authService.currentUserAffiliateValue;
-    const currentUserAdmin = this.authService.currentUserAdminValue;
-
-    const token =
-      currentUserAffiliate?.access_token || currentUserAdmin?.access_token;
+    // Obtener el token del usuario actual (sistema unificado con roles)
+    const currentUser = this.authService.currentUserAffiliateValue;
+    const token = currentUser?.access_token;
 
     // Si existe un token, agregarlo al header Authorization
     if (token) {

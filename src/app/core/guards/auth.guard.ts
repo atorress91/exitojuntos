@@ -44,12 +44,13 @@ export const adminGuard: CanActivateFn = (route, state) => {
     return false;
   }
 
-  // Verificar si es administrador
-  if (authService.isAdminLoggedIn()) {
-    const admin = authService.currentUserAdminValue;
-    if (admin?.rol_name?.toLowerCase() === 'admin') {
-      return true;
-    }
+  // Verificar si es administrador por el rol
+  const currentUser = authService.currentUserAffiliateValue;
+  if (
+    currentUser?.role?.name?.toLowerCase() === 'admin' ||
+    currentUser?.role?.name?.toLowerCase() === 'super_admin'
+  ) {
+    return true;
   }
 
   // No es administrador, redirigir a página no autorizada
@@ -71,8 +72,10 @@ export const affiliateGuard: CanActivateFn = (route, state) => {
     return false;
   }
 
-  // Verificar si es afiliado
-  if (authService.isAffiliateLoggedIn()) {
+  // Verificar si es afiliado (cualquier rol que no sea admin)
+  const currentUser = authService.currentUserAffiliateValue;
+  const roleName = currentUser?.role?.name?.toLowerCase();
+  if (roleName && roleName !== 'admin' && roleName !== 'super_admin') {
     return true;
   }
 

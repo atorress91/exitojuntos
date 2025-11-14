@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { BehaviorSubject, Observable, of, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs/operators';
 import { Signin } from '@app/core/models/signin-model/signin.model';
-import { User } from '@app/core/models/user-model/user.model';
+
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 import { environment } from '@environments/environment';
 import { Response } from '@app/core/models/response-model/response.model';
@@ -23,27 +23,16 @@ const httpOptions = {
 export class AuthService {
   // Signals para el estado del usuario
   private readonly currentUserAffiliate = signal<UserAffiliate | null>(null);
-  private readonly currentUserAdmin = signal<User | null>(null);
 
   // Computed signals para acceso reactivo
   public userAffiliate = this.currentUserAffiliate.asReadonly();
-  public userAdmin = this.currentUserAdmin.asReadonly();
 
   // Computed signals para verificar si está logueado
-  public isAffiliateLoggedIn = computed(
-    () => this.currentUserAffiliate() !== null,
-  );
-  public isAdminLoggedIn = computed(() => this.currentUserAdmin() !== null);
-  public isLoggedIn = computed(
-    () => this.isAffiliateLoggedIn() || this.isAdminLoggedIn(),
-  );
+  public isLoggedIn = computed(() => this.currentUserAffiliate() !== null);
 
   // Mantener BehaviorSubjects para compatibilidad (deprecated)
   private readonly currentUserAffiliateSubject: BehaviorSubject<UserAffiliate>;
   public currentUserAffiliateObs: Observable<UserAffiliate>;
-
-  private readonly currentUserAdminSubject: BehaviorSubject<User>;
-  public currentUserAdminObs: Observable<User>;
   private readonly urlApi: string;
 
   constructor(
@@ -54,19 +43,15 @@ export class AuthService {
   ) {
     // Inicializar desde localStorage
     const storedAffiliate = this.getFromLocalStorage('currentUserAffiliate');
-    const storedAdmin = this.getFromLocalStorage('currentUserAdmin');
 
     this.currentUserAffiliate.set(storedAffiliate);
-    this.currentUserAdmin.set(storedAdmin);
 
     // Mantener BehaviorSubjects para compatibilidad
     this.currentUserAffiliateSubject = new BehaviorSubject<UserAffiliate>(
       storedAffiliate,
     );
-    this.currentUserAdminSubject = new BehaviorSubject<User>(storedAdmin);
     this.currentUserAffiliateObs =
       this.currentUserAffiliateSubject.asObservable();
-    this.currentUserAdminObs = this.currentUserAdminSubject.asObservable();
     this.urlApi = environment.apis.exitojuntosService;
 
     // Escuchar cambios en localStorage desde otras pestañas
@@ -76,19 +61,11 @@ export class AuthService {
     effect(() => {
       this.currentUserAffiliateSubject.next(this.currentUserAffiliate());
     });
-
-    effect(() => {
-      this.currentUserAdminSubject.next(this.currentUserAdmin());
-    });
   }
 
   // Compatibilidad con código existente
   public get currentUserAffiliateValue(): UserAffiliate {
     return this.currentUserAffiliate();
-  }
-
-  public get currentUserAdminValue(): User {
-    return this.currentUserAdmin();
   }
 
   private getFromLocalStorage(key: string): any {
@@ -107,9 +84,6 @@ export class AuthService {
       if (event.key === 'currentUserAffiliate') {
         const newValue = event.newValue ? JSON.parse(event.newValue) : null;
         this.currentUserAffiliate.set(newValue);
-      } else if (event.key === 'currentUserAdmin') {
-        const newValue = event.newValue ? JSON.parse(event.newValue) : null;
-        this.currentUserAdmin.set(newValue);
       }
     });
   }
@@ -118,9 +92,7 @@ export class AuthService {
    * Verifica si el token actual es válido
    */
   isTokenValid(): boolean {
-    const token =
-      this.currentUserAffiliateValue?.access_token ||
-      this.currentUserAdminValue?.access_token;
+    const token = this.currentUserAffiliateValue?.access_token;
 
     if (!token) {
       return false;
@@ -133,9 +105,7 @@ export class AuthService {
    * Obtiene el ID del usuario desde el token
    */
   getUserIdFromToken(): string | null {
-    const token =
-      this.currentUserAffiliateValue?.access_token ||
-      this.currentUserAdminValue?.access_token;
+    const token = this.currentUserAffiliateValue?.access_token;
 
     if (!token) {
       return null;
@@ -165,24 +135,12 @@ export class AuthService {
     const userData = response.data.user;
     const accessToken = response.data.access_token;
 
-    // Determinar el tipo de usuario por el rol
-    const roleName = userData.role?.name?.toLowerCase();
-
-    if (roleName === 'admin') {
-      // Es un administrador
-      const adminUser: User = {
-        ...userData,
-        access_token: accessToken,
-      };
-      this.setUserAdminValue(adminUser);
-    } else {
-      // Es un afiliado o cliente
-      const affiliateUser: UserAffiliate = {
-        ...userData,
-        access_token: accessToken,
-      };
-      this.setUserAffiliateValue(affiliateUser);
-    }
+    // Todos los usuarios usan el modelo UserAffiliate unificado
+    const affiliateUser: UserAffiliate = {
+      ...userData,
+      access_token: accessToken,
+    };
+    this.setUserAffiliateValue(affiliateUser);
   }
 
   UserAffiliateEmailConfirmation(userName: string) {
@@ -205,12 +163,10 @@ export class AuthService {
 
   logoutUser() {
     this.cartService.removeAllCart();
-    localStorage.removeItem('currentUserAdmin');
     localStorage.removeItem('currentUserAffiliate');
 
     // Actualizar signals
     this.currentUserAffiliate.set(null);
-    this.currentUserAdmin.set(null);
 
     this.toastr.clear();
 
@@ -222,13 +178,6 @@ export class AuthService {
 
     // Actualizar signal
     this.currentUserAffiliate.set(user);
-  }
-
-  public setUserAdminValue(user: User) {
-    localStorage.setItem('currentUserAdmin', JSON.stringify(user));
-
-    // Actualizar signal
-    this.currentUserAdmin.set(user);
   }
 
   getLoginMovementsByAffiliatedId(affiliateId: number) {

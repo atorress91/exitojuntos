@@ -1,4 +1,3 @@
-import { UserService } from '@app/core/service/user-service/user.service';
 import {
   NavigationEnd,
   Router,
@@ -17,11 +16,11 @@ import {
 } from '@angular/core';
 import { ROUTESADMIN } from './sidebar-admin-items';
 import { AuthService } from 'src/app/core/service/authentication-service/auth.service';
-import { User } from '@app/core/models/user-model/user.model';
 import { RouteInfo } from './sidebar-admin.metadata';
 import { ImgProfileComponent } from '../img-profile/img-profile.component';
 import { IconsModule } from '@app/shared';
 import { TranslatePipe } from '@ngx-translate/core';
+import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 
 @Component({
   selector: 'app-sidebar-admin',
@@ -38,8 +37,6 @@ import { TranslatePipe } from '@ngx-translate/core';
   ],
 })
 export class SidebarAdminComponent implements OnInit, OnDestroy {
-  public user: User = new User();
-  public userCookie: User;
   public sidebarItems: any[];
   public innerHeight: any;
   public bodyTag: any;
@@ -47,6 +44,7 @@ export class SidebarAdminComponent implements OnInit, OnDestroy {
   listMaxWidth: string;
   headerHeight = 60;
   routerObj = null;
+  public user: UserAffiliate = new UserAffiliate();
 
   constructor(
     @Inject(DOCUMENT) private readonly document: Document,
@@ -54,7 +52,6 @@ export class SidebarAdminComponent implements OnInit, OnDestroy {
     public elementRef: ElementRef,
     private readonly authService: AuthService,
     private readonly router: Router,
-    private readonly userService: UserService,
   ) {
     this.routerObj = this.router.events.subscribe(event => {
       if (event instanceof NavigationEnd) {
@@ -97,20 +94,16 @@ export class SidebarAdminComponent implements OnInit, OnDestroy {
 
   ngOnInit() {
     // Usar signal para obtener el usuario admin
-    const user = this.authService.userAdmin();
+    const user = this.authService.userAffiliate();
     if (user) {
       this.user = user;
-      this.getUserInfo();
     }
 
-    if (this.authService.currentUserAdminValue) {
-      this.user = this.authService.currentUserAdminValue;
+    if (this.user?.id) {
       this.initializeSidebar();
     }
     this.initLeftSidebar();
     this.bodyTag = this.document.body;
-    this.getCurrentUser();
-    this.getUserInfo();
   }
 
   ngOnDestroy() {
@@ -118,10 +111,10 @@ export class SidebarAdminComponent implements OnInit, OnDestroy {
   }
 
   initializeSidebar() {
-    if (this.user?.rol_name) {
+    if (this.user?.role?.name) {
       this.sidebarItems = this.filterRoutesByRole(
         ROUTESADMIN,
-        this.user.rol_name,
+        this.user.role.name,
       );
     } else {
       this.sidebarItems = [];
@@ -170,19 +163,6 @@ export class SidebarAdminComponent implements OnInit, OnDestroy {
     if (window.innerWidth < 1025) {
       this.renderer.addClass(this.document.body, 'sidebar-gone');
     }
-  }
-
-  getCurrentUser() {
-    let result = localStorage.getItem('currentUserAdmin');
-    this.userCookie = JSON.parse(result);
-  }
-
-  getUserInfo() {
-    this.userService.getUser(this.user).subscribe(response => {
-      if (response.success) {
-        this.user = response.data;
-      }
-    });
   }
 
   filterRoutesByRole(routes: RouteInfo[], userRole: string): RouteInfo[] {

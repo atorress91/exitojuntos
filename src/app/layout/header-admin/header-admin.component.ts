@@ -12,7 +12,7 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { ConfigService } from 'src/app/config/config.service';
 import { LanguageService } from 'src/app/core/service/language-service/language.service';
-import { User } from '@app/core/models/user-model/user.model';
+import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 import { IconsModule } from '@app/shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -27,7 +27,7 @@ const document: any = window.document;
   imports: [CommonModule, RouterLink, IconsModule, TranslateModule, NgbModule],
 })
 export class HeaderAdminComponent implements OnInit, AfterViewInit {
-  public user: User = new User();
+  public user: UserAffiliate = new UserAffiliate();
   public config: any = {};
   isNavbarCollapsed = true;
   flagvalue;
@@ -154,6 +154,6 @@ export class HeaderAdminComponent implements OnInit, AfterViewInit {
   }
 
   getCurrentUser() {
-    this.user = this.authService.currentUserAdminValue;
+    this.user = this.authService.currentUserAffiliateValue;
   }
 }

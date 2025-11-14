@@ -6,7 +6,6 @@ import { inject, Injectable } from '@angular/core';
 import { environment } from '@environments/environment';
 import { map, catchError } from 'rxjs/operators';
 import { BehaviorSubject, Observable, throwError } from 'rxjs';
-import { UpdatePassword } from '@app/core/models/user-model/update.password.model';
 import { SecretQuestion } from '@app/core/models/secret-question-model/secret.question.model';
 
 import { Response } from '@app/core/models/response-model/response.model';
@@ -231,37 +230,6 @@ export class AffiliateService {
   createAffiliate(user: UserAffiliate) {
     return this.http
       .post<Response>(this.urlApi.concat('/auth/register'), user, httpOptions)
-      .pipe(
-        map(data => {
-          return data;
-        }),
-      );
-  }
-
-  updatePassword(user: UpdatePassword) {
-    return this.http
-      .put<Response>(
-        this.urlApi.concat(
-          '/useraffiliateinfo/update_password_user/',
-          user.id.toString(),
-        ),
-        user,
-        httpOptions,
-      )
-      .pipe(
-        map(data => {
-          return data;
-        }),
-      );
-  }
-
-  updatePin(user: UpdatePassword) {
-    return this.http
-      .put<Response>(
-        `${this.urlApi}/useraffiliateinfo/update_pin/${user.id})`,
-        user,
-        httpOptions,
-      )
       .pipe(
         map(data => {
           return data;

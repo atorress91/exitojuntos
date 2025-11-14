@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import {
   NgbDropdown,
   NgbDropdownItem,
@@ -21,11 +21,7 @@ import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affili
 const header = ['Movimientos', 'IP', 'Fecha'];
 import { CommonModule } from '@angular/common';
 import { TranslateModule } from '@ngx-translate/core';
-import { MyProfileEditPasswordModalComponent } from './my-profile-edit-password-modal/my-profile-edit-password-modal.component';
-import { MyProfileEditPersonalInfoModalComponent } from './my-profile-edit-personal-info-modal/my-profile-edit-personal-info-modal.component';
-import { EditSecurityPinModalComponent } from './edit-security-pin-modal/edit-security-pin-modal.component';
-import { SecretQuestionModalComponent } from './secret-question-modal/secret-question-modal.component';
-import { ImageProfileModalComponent } from './image-profile-modal/image-profile-modal.component';
+
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -36,11 +32,6 @@ import { RouterLink } from '@angular/router';
   imports: [
     CommonModule,
     TranslateModule,
-    MyProfileEditPasswordModalComponent,
-    MyProfileEditPersonalInfoModalComponent,
-    EditSecurityPinModalComponent,
-    SecretQuestionModalComponent,
-    ImageProfileModalComponent,
     RouterLink,
     NgbDropdownItem,
     NgbDropdown,
@@ -57,15 +48,6 @@ export class MyProfileComponent implements OnInit {
   loadingIndicator = true;
   reorderable = true;
 
-  @ViewChild('modalChildChangePassword')
-  modalChildChangePassword: MyProfileEditPasswordModalComponent;
-  @ViewChild('modalChildEditPersonalInfo')
-  modalChildEditPersonalInfo: MyProfileEditPersonalInfoModalComponent;
-  @ViewChild('modalChildSecretQuestion')
-  modalChildSecretQuestion: SecretQuestionModalComponent;
-  @ViewChild('modalChildImageProfile')
-  modalChildImageProfile: ImageProfileModalComponent;
-
   constructor(
     private readonly modalService: NgbModal,
     private readonly printService: PrintService,
@@ -78,42 +60,6 @@ export class MyProfileComponent implements OnInit {
 
   ngOnInit(): void {
     this.getUserInfo();
-  }
-
-  openPasswordModal() {
-    if (this.modalChildChangePassword) {
-      this.modalChildChangePassword.openPasswordModal(
-        this.modalChildChangePassword['changePasswordModal'],
-        this.user,
-      );
-    }
-  }
-
-  openSecretQuestionModal() {
-    if (this.modalChildSecretQuestion) {
-      this.modalChildSecretQuestion.openSecretQuestionModal(
-        this.modalChildSecretQuestion['secretQuestionModal'],
-        this.user,
-      );
-    }
-  }
-
-  openEditPersonalInfoModal() {
-    if (this.modalChildEditPersonalInfo) {
-      this.modalChildEditPersonalInfo.openEditPersonalInfoModal(
-        this.modalChildEditPersonalInfo['editPersonalInfoModal'],
-        this.user,
-      );
-    }
-  }
-
-  openImageProfileModal() {
-    if (this.modalChildImageProfile) {
-      this.modalChildImageProfile.openImageProfileModal(
-        this.modalChildImageProfile['imageProfileModal'],
-        this.user,
-      );
-    }
   }
 
   getUserInfo() {

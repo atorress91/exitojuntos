@@ -18,15 +18,15 @@
           <div role="button" class="user-panel" (click)="profileImgComponent.openProfileImgModal()">
             <div class="user-panel">
               <div class=" image">
-                <img [src]="user?.image_profile_url ? user?.image_profile_url : 'assets/images/user.png'"
+                <img [src]="user?.imageProfileUrl ? user?.imageProfileUrl : 'assets/images/user.png'"
                   class="img-circle user-img-circle" alt="User Image" />
               </div>
             </div>
           </div>
           <div class="profile-usertitle">
-            <div class="sidebar-userpic-name" *ngIf="user">{{ user.name + ' '+user.last_name }}</div>
+            <div class="sidebar-userpic-name" *ngIf="user">{{ user.name + ' ' + user.lastName }}</div>
             <div class="profile-usertitle-job">
-              {{user?.user_name}}
+              {{user?.email}}
             </div>
           </div>
         </li>

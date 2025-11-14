@@ -11,13 +11,9 @@ export class ImageProfileService {
   imageURL$ = this.imageURLSubject.asObservable();
 
   constructor(private readonly authService: AuthService) {
-    const imageUrl =
-      (this.authService.currentUserAffiliateValue
-        ? this.authService.currentUserAffiliateValue.imageProfileUrl
-        : null) ||
-      (this.authService.currentUserAdminValue
-        ? this.authService.currentUserAdminValue.image_profile_url
-        : null);
+    const imageUrl = this.authService.currentUserAffiliateValue
+      ? this.authService.currentUserAffiliateValue.imageProfileUrl
+      : null;
 
     this.setImageURL(imageUrl);
   }
