@@ -4,10 +4,6 @@ import { CommonModule } from '@angular/common';
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 
-// Admin layout components
-import { HeaderAdminComponent } from '@app/layout/header-admin/header-admin.component';
-import { SidebarAdminComponent } from '@app/layout/sidebar-admin/sidebar-admin.component';
-
 // Shared components
 import { RightSidebarComponent } from '@app/layout/right-sidebar/right-sidebar.component';
 import { FooterComponent } from '@app/layout/footer/footer.component';
@@ -17,14 +13,7 @@ import { FooterComponent } from '@app/layout/footer/footer.component';
   templateUrl: './unified-layout.component.html',
   styleUrls: ['./unified-layout.component.scss'],
   standalone: true,
-  imports: [
-    CommonModule,
-    RouterOutlet,
-    HeaderAdminComponent,
-    SidebarAdminComponent,
-    RightSidebarComponent,
-    FooterComponent,
-  ],
+  imports: [CommonModule, RouterOutlet, RightSidebarComponent, FooterComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
 })
 export class UnifiedLayoutComponent implements OnInit {

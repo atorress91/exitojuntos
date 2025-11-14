@@ -11,17 +11,18 @@ import {
 } from '@angular/core';
 
 import { RightSidebarService } from 'src/app/core/service/rightsidebar-service/rightsidebar.service';
-import { ConfigService } from '@app/config/config.service';
+
 import { LogoService } from '@app/core/service/logo-service/logo.service';
 import { FormsModule } from '@angular/forms';
+import { ConfigService } from '@app/core/service/config/config.service';
 
 @Component({
-    changeDetection: ChangeDetectionStrategy.OnPush,
-    selector: 'app-right-sidebar',
-    templateUrl: './right-sidebar.component.html',
-    styleUrls: ['./right-sidebar.component.sass'],
-    standalone: true,
-    imports: [CommonModule, FormsModule]
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  selector: 'app-right-sidebar',
+  templateUrl: './right-sidebar.component.html',
+  styleUrls: ['./right-sidebar.component.sass'],
+  standalone: true,
+  imports: [CommonModule, FormsModule],
 })
 export class RightSidebarComponent implements OnInit, AfterViewInit {
   selectedBgColor = 'white';
@@ -35,62 +36,60 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
   public config: any = {};
 
   constructor(
-    @Inject(DOCUMENT) private document: Document,
-    private renderer: Renderer2,
-    public elementRef: ElementRef,
-    private rightSidebarService: RightSidebarService,
-    private configService: ConfigService,
-    private logoService: LogoService
-  ) { }
+    @Inject(DOCUMENT) private readonly document: Document,
+    private readonly renderer: Renderer2,
+    public readonly elementRef: ElementRef,
+    private readonly rightSidebarService: RightSidebarService,
+    private readonly configService: ConfigService,
+    private readonly logoService: LogoService,
+  ) {}
 
   ngOnInit() {
     this.config = this.configService.configData;
-    this.rightSidebarService.sidebarState.subscribe((isRunning) => {
+    this.rightSidebarService.sidebarState.subscribe(isRunning => {
       this.isOpenSidebar = isRunning;
     });
     this.setMenuHeight();
   }
 
   ngAfterViewInit() {
-    // set header color on startup
+    this.initializeThemeColor();
+    this.initializeSidebarMode();
+    this.initializeThemeMode();
+  }
+
+  private initializeThemeColor(): void {
     if (localStorage.getItem('choose_skin')) {
       this.renderer.addClass(
         this.document.body,
-        localStorage.getItem('choose_skin')
+        localStorage.getItem('choose_skin'),
       );
       this.selectedBgColor = localStorage.getItem('choose_skin_active');
     } else {
       this.renderer.addClass(
         this.document.body,
-        'theme-' + this.config.layout.theme_color
+        'theme-' + this.config.layout.theme_color,
       );
       this.selectedBgColor = this.config.layout.theme_color;
     }
+  }
 
-    if (localStorage.getItem('menuOption')) {
-      if (localStorage.getItem('menuOption') === 'dark-sidebar') {
-        this.isDarkSidebar = true;
-      } else if (localStorage.getItem('menuOption') === 'light-sidebar') {
-        this.isDarkSidebar = false;
-      } else {
-        this.isDarkSidebar =
-          this.config.layout.sidebar.backgroundColor === 'dark' ? true : false;
-      }
+  private initializeSidebarMode(): void {
+    const menuOption = localStorage.getItem('menuOption');
+    if (menuOption) {
+      this.isDarkSidebar = menuOption === 'dark-sidebar';
     } else {
       this.isDarkSidebar =
-        this.config.layout.sidebar.backgroundColor === 'dark' ? true : false;
+        this.config.layout.sidebar.backgroundColor === 'dark';
     }
+  }
 
-    if (localStorage.getItem('theme')) {
-      if (localStorage.getItem('theme') === 'dark') {
-        this.isDarTheme = true;
-      } else if (localStorage.getItem('theme') === 'light') {
-        this.isDarTheme = false;
-      } else {
-        this.isDarTheme = this.config.layout.variant === 'C' ? true : false;
-      }
+  private initializeThemeMode(): void {
+    const theme = localStorage.getItem('theme');
+    if (theme) {
+      this.isDarTheme = theme === 'dark';
     } else {
-      this.isDarTheme = this.config.layout.variant === 'dark' ? true : false;
+      this.isDarTheme = this.config.layout.variant === 'dark';
     }
   }
   @HostListener('window:resize', ['$event'])
@@ -104,9 +103,9 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
 
   selectTheme(e) {
     this.selectedBgColor = e;
-    const prevTheme = this.elementRef.nativeElement
-      .querySelector('.choose-theme li.active')
-      .getAttribute('data-theme');
+    const prevTheme = this.elementRef.nativeElement.querySelector(
+      '.choose-theme li.active',
+    ).dataset.theme;
     this.renderer.removeClass(this.document.body, 'theme-' + prevTheme);
     this.renderer.addClass(this.document.body, 'theme-' + this.selectedBgColor);
     localStorage.setItem('choose_skin', 'theme-' + this.selectedBgColor);
@@ -132,12 +131,12 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
     if (localStorage.getItem('choose_skin')) {
       this.renderer.removeClass(
         this.document.body,
-        localStorage.getItem('choose_skin')
+        localStorage.getItem('choose_skin'),
       );
     } else {
       this.renderer.removeClass(
         this.document.body,
-        'theme-' + this.config.layout.theme_color
+        'theme-' + this.config.layout.theme_color,
       );
     }
 
@@ -160,12 +159,12 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
     if (localStorage.getItem('choose_skin')) {
       this.renderer.removeClass(
         this.document.body,
-        localStorage.getItem('choose_skin')
+        localStorage.getItem('choose_skin'),
       );
     } else {
       this.renderer.removeClass(
         this.document.body,
-        'theme-' + this.config.layout.theme_color
+        'theme-' + this.config.layout.theme_color,
       );
     }
 
@@ -181,8 +180,7 @@ export class RightSidebarComponent implements OnInit, AfterViewInit {
     localStorage.setItem('menuOption', menuOption);
   }
   toggleRightSidebar(): void {
-    this.rightSidebarService.setRightSidebar(
-      (this.isOpenSidebar = !this.isOpenSidebar)
-    );
+    this.isOpenSidebar = !this.isOpenSidebar;
+    this.rightSidebarService.setRightSidebar(this.isOpenSidebar);
   }
 }
