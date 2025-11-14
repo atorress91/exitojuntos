@@ -10,10 +10,16 @@
 
   // Dark theme support
   :host-context(.dark) & {
-    background: #16192a;
+    background: #0a0a0a;
     border-color: rgba(151, 157, 166, 0.2);
     box-shadow: none;
   }
+}
+
+:host ::ng-deep .profile-page {
+  background: #0a0a0a;
+  min-height: 100vh;
+  padding-bottom: 2rem;
 }
 
 // Gradient Header

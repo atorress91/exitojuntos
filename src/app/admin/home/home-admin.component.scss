@@ -9,6 +9,12 @@
   color: rgba(255, 255, 255, 0.95);
 }
 
+:host ::ng-deep .dashboard-section {
+  background: #0a0a0a;
+  min-height: 100vh;
+  padding-bottom: 2rem;
+}
+
 .card {
   background: rgba(20, 20, 20, 0.95);
   border: 1px solid rgba(255, 215, 0, 0.3);

@@ -709,11 +709,11 @@ body.layout-3 {
 .main-content {
   padding-left: 285px;
   padding-right: 29px;
-  padding-top: 70px;
+  padding-top: calc(70px + 1.5rem);
   width: 100%;
   min-height: 100vh;
   position: relative;
-  background: radial-gradient(circle at 50% 50%, #1a1a1a 0%, #0a0a0a 100%);
+  background: #0a0a0a;
 }
 
 .main-footer {
@@ -722,11 +722,7 @@ body.layout-3 {
   color: rgba(255, 255, 255, 0.9);
   border-top: none;
   display: flex;
-  background: linear-gradient(
-    135deg,
-    rgba(20, 20, 20, 0.98) 0%,
-    rgba(10, 10, 10, 0.98) 100%
-  );
+  background: #0a0a0a;
   backdrop-filter: blur(10px);
   font-weight: 600;
   text-transform: uppercase;
