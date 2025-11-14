@@ -1,0 +1,19 @@
+<!-- Layout unificado -->
+<div class="page-wrapper">
+
+  <!-- Header (funciona para todos los roles) -->
+  <app-header-admin />
+
+  <!-- Sidebar (funciona para todos los roles) -->
+  <app-sidebar-admin />
+
+  <!-- Contenido principal -->
+  <div class="page-content">
+    <router-outlet />
+  </div>
+
+  <!-- Componentes compartidos -->
+  <app-right-sidebar />
+  <app-footer />
+
+</div>

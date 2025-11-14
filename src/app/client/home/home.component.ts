@@ -7,11 +7,6 @@ import {
 import { ChartComponent, NgApexchartsModule } from 'ng-apexcharts';
 
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
-import { BalanceInformationModel1A } from '@app/core/models/wallet-model-1a/balance-information-1a.model';
-import { BalanceInformationModel1B } from '@app/core/models/wallet-model-1b/balance-information-1b.model';
-import { BalanceInformation } from '@app/core/models/wallet-model/balance-information.model';
-import { PurchasePerMonthDto } from '@app/core/models/wallet-model/network-purchases.model';
-import { StatisticsInformation } from '@app/core/models/wallet-model/statisticsInformation';
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
 
 import { EChartsOption } from 'echarts';
@@ -42,14 +37,6 @@ import { RouterLink } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
   public user: UserAffiliate;
-  balanceInformation: BalanceInformation = new BalanceInformation();
-  balanceInformationModel1A: BalanceInformationModel1A =
-    new BalanceInformationModel1A();
-  balanceInformationModel1B: BalanceInformationModel1B =
-    new BalanceInformationModel1B();
-  maps: any[] = [];
-  currentYearPurchases: PurchasePerMonthDto[] = [];
-  previousYearPurchases: PurchasePerMonthDto[] = [];
   area_line_chart: EChartsOption;
   volumeChart: EChartsOption;
   currentYear: number;
@@ -65,7 +52,6 @@ export class HomeComponent implements OnInit {
     bnbAddress: '',
   };
 
-  information: StatisticsInformation = new StatisticsInformation();
   public portfolioChartOptions: any;
   public pieChartOptionsModel1A: any;
   public pieChartOptionsModel1B: any;

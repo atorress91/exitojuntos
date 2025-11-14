@@ -11,7 +11,10 @@ import { AuthService } from '../service/authentication-service/auth.service';
   providedIn: 'root',
 })
 export class AuthGuardAdmin {
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(
+    private readonly authService: AuthService,
+    private readonly router: Router,
+  ) {}
 
   canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot) {
     const currentUser = this.authService.currentUserAffiliateValue;

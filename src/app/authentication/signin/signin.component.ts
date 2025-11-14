@@ -53,15 +53,8 @@ export class SigninComponent implements OnInit {
   ngOnInit() {
     // Verificar si el usuario ya está logueado usando signals
     if (this.authService.isLoggedIn()) {
-      // Redirigir según el rol del usuario
-      const currentUser = this.authService.currentUserAffiliateValue;
-      const roleName = currentUser?.role?.name?.toLowerCase();
-
-      if (roleName === 'admin' || roleName === 'super_admin') {
-        this.router.navigate(['/admin/home-admin']);
-      } else {
-        this.router.navigate(['/app/home']);
-      }
+      // Redirigir al dashboard unificado
+      this.router.navigate(['/dashboard']);
       return;
     }
 

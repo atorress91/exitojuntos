@@ -85,11 +85,6 @@
                   <span *ngIf="user.status == false" class="badge-modern badge-inactive">
                     Inactivo
                   </span>
-
-                  <span class="badge-modern badge-warning">
-                    <i class="bi bi-star-fill"></i>
-                    {{ grading?.name || 'Cliente' }}
-                  </span>
                 </div>
               </div>
             </div>
@@ -157,17 +152,6 @@
                 <div class="profile-info-item">
                   <div class="profile-info-icon">
                     <i class="bi bi-shield-check-fill"></i>
-                  </div>
-                </div>
-
-                <!-- Grading -->
-                <div class="profile-info-item">
-                  <div class="profile-info-icon">
-                    <i class="bi bi-award-fill"></i>
-                  </div>
-                  <div class="profile-info-content">
-                    <div class="profile-info-label">Calificación</div>
-                    <div class="profile-info-value">{{ grading?.name || 'Cliente' }}</div>
                   </div>
                 </div>
               </div>

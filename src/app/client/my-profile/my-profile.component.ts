@@ -4,18 +4,15 @@ import {
   NgbDropdownItem,
   NgbDropdownMenu,
   NgbDropdownToggle,
-  NgbModal,
 } from '@ng-bootstrap/ng-bootstrap';
 import { LoginMovements } from '@app/core/models/signin-model/login-movements.model';
 
 import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.service';
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
-import { GradingService } from '@app/core/service/grading-service/grading.service';
-import { PrintService } from '@app/core/service/print-service/print.service';
+
 import { ClipboardService } from 'ngx-clipboard';
 import { ToastrService } from 'ngx-toastr';
 
-import { Grading } from '@app/core/models/grading-model/grading.model';
 import { UserAffiliate } from '@app/core/models/user-affiliate-model/user.affiliate.model';
 
 const header = ['Movimientos', 'IP', 'Fecha'];
@@ -41,7 +38,6 @@ import { RouterLink } from '@angular/router';
 })
 export class MyProfileComponent implements OnInit {
   public user: UserAffiliate = new UserAffiliate();
-  public grading: Grading = new Grading();
   public userCookie: UserAffiliate;
   rows = [];
   temp = [];
@@ -49,12 +45,9 @@ export class MyProfileComponent implements OnInit {
   reorderable = true;
 
   constructor(
-    private readonly modalService: NgbModal,
-    private readonly printService: PrintService,
     private readonly clipboardService: ClipboardService,
     private readonly toastr: ToastrService,
     private readonly authService: AuthService,
-    private readonly gradingService: GradingService,
     private readonly affiliateService: AffiliateService,
   ) {}
 
@@ -72,23 +65,6 @@ export class MyProfileComponent implements OnInit {
           this.loadLoginMovements();
         }
       });
-  }
-
-  getGradingInfo(id: number) {
-    this.gradingService.getGradingById(id).subscribe(response => {
-      if (response.success) {
-        this.grading = response.data;
-      }
-    });
-  }
-
-  onPrintPdf() {
-    const body = this.temp.map((items: any) => {
-      const data = [items.movements, items.ip, items.date];
-      return data;
-    });
-
-    this.printService.print(header, body, 'Últimos Movimientos', false);
   }
 
   clipBoardCopy() {

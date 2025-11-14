@@ -17,14 +17,12 @@ import { IconsModule } from '@app/shared';
 import { TranslateModule } from '@ngx-translate/core';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
-const document: any = window.document;
-
 @Component({
   selector: 'app-header-admin',
   templateUrl: './header-admin.component.html',
   styleUrls: ['./header-admin.component.sass'],
   standalone: true,
-  imports: [CommonModule, RouterLink, IconsModule, TranslateModule, NgbModule],
+  imports: [CommonModule, IconsModule, TranslateModule, NgbModule],
 })
 export class HeaderAdminComponent implements OnInit, AfterViewInit {
   public user: UserAffiliate = new UserAffiliate();
@@ -37,13 +35,13 @@ export class HeaderAdminComponent implements OnInit, AfterViewInit {
   isOpenSidebar: boolean;
 
   constructor(
-    @Inject(DOCUMENT) private document: Document,
-    private renderer: Renderer2,
+    @Inject(DOCUMENT) private readonly document: Document,
+    private readonly renderer: Renderer2,
     public elementRef: ElementRef,
-    private rightSidebarService: RightSidebarService,
-    private configService: ConfigService,
-    private authService: AuthService,
-    private router: Router,
+    private readonly rightSidebarService: RightSidebarService,
+    private readonly configService: ConfigService,
+    private readonly authService: AuthService,
+    private readonly router: Router,
     public languageService: LanguageService,
   ) {}
 

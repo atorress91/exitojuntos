@@ -1,7 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ConfigurationService } from '../service/configuration-service/configuration.service';
 
 @Injectable({
   providedIn: 'root',
@@ -9,8 +8,6 @@ import { ConfigurationService } from '../service/configuration-service/configura
 export class MaintenanceGuard {
   isUnderMaintenance: boolean = false;
   private readonly router: Router = inject(Router);
-  private readonly configurationService: ConfigurationService =
-    inject(ConfigurationService);
 
   constructor() {
     // Temporalmente desactivado para desarrollo

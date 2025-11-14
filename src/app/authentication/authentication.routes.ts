@@ -12,92 +12,71 @@ export const AUTHENTICATION_ROUTES: Routes = [
     path: 'maintenance',
     loadComponent: () =>
       import('./maintenance-page/maintenance-page.component').then(
-        (m) => m.MaintenancePageComponent
+        m => m.MaintenancePageComponent,
       ),
   },
   {
     path: 'user_confirm/:userName',
     loadComponent: () =>
       import('./email-confirmation/email.confirmation.component').then(
-        (m) => m.EmailConfirmationComponent
+        m => m.EmailConfirmationComponent,
       ),
   },
   {
     path: 'signin',
     loadComponent: () =>
-      import('./signin/signin.component').then((m) => m.SigninComponent),
+      import('./signin/signin.component').then(m => m.SigninComponent),
     canActivate: [MaintenanceGuard],
   },
   {
     path: 'signup/:key',
     loadComponent: () =>
-      import('./signup/signup.component').then((m) => m.SignupComponent),
+      import('./signup/signup.component').then(m => m.SignupComponent),
   },
   {
     path: 'forgot',
     loadComponent: () =>
-      import('./forgot/forgot.component').then((m) => m.ForgotComponent),
+      import('./forgot/forgot.component').then(m => m.ForgotComponent),
   },
   {
     path: 'reset/:verificationCode',
     loadComponent: () =>
-      import('./reset/reset.component').then((m) => m.ResetComponent),
+      import('./reset/reset.component').then(m => m.ResetComponent),
   },
   {
     path: 'page404',
     loadComponent: () =>
-      import('./page404/page404.component').then((m) => m.Page404Component),
+      import('./page404/page404.component').then(m => m.Page404Component),
   },
   {
     path: 'page500',
     loadComponent: () =>
-      import('./page500/page500.component').then((m) => m.Page500Component),
-  },
-  {
-    path: 'conpayment-confirmation',
-    loadComponent: () =>
-      import('./conpayment-confirmation/conpayment-confirmation.component').then(
-        (m) => m.ConpaymentConfirmationComponent
-      ),
-    canActivate: [AuthGuard],
+      import('./page500/page500.component').then(m => m.Page500Component),
   },
   {
     path: 'welcome',
     loadComponent: () =>
       import('./landing-page/landing-page.component').then(
-        (m) => m.LandingPageComponent
+        m => m.LandingPageComponent,
       ),
   },
   {
     path: 'welcome/:key',
     loadComponent: () =>
       import('./landing-page/landing-page.component').then(
-        (m) => m.LandingPageComponent
+        m => m.LandingPageComponent,
       ),
-  },
-  {
-    path: 'products-preview',
-    loadComponent: () =>
-      import('./products-preview/products-preview.component').then(
-        (m) => m.ProductsPreviewComponent
-      ),
-  },
-  {
-    path: 'team',
-    loadComponent: () =>
-      import('./team/team.component').then((m) => m.TeamComponent),
   },
   {
     path: 'contact',
     loadComponent: () =>
-      import('./contact/contact.component').then((m) => m.ContactComponent),
+      import('./contact/contact.component').then(m => m.ContactComponent),
   },
   {
     path: 'testimonials',
     loadComponent: () =>
       import('./testimonials/testimonials.component').then(
-        (m) => m.TestimonialsComponent
+        m => m.TestimonialsComponent,
       ),
   },
 ];
-

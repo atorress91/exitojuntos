@@ -1,7 +1,6 @@
 import { AuthService } from '@app/core/service/authentication-service/auth.service';
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { EChartsOption } from 'echarts';
-import { WalletService } from '@app/core/service/wallet-service/wallet.service';
 import { AffiliateService } from '@app/core/service/affiliate-service/affiliate.service';
 import { ToastrService } from 'ngx-toastr';
 import {
@@ -70,7 +69,6 @@ export class HomeAdminComponent implements OnInit {
   lastRegisteredUsers: UserAffiliate[] = [];
 
   constructor(
-    private walletService: WalletService,
     private affiliateService: AffiliateService,
     private toastr: ToastrService,
     private authService: AuthService,
@@ -91,7 +89,6 @@ export class HomeAdminComponent implements OnInit {
       },
       responsive: [],
     };
-    this.getBalanceInformationAdmin();
   }
 
   ngOnInit() {
@@ -343,23 +340,6 @@ export class HomeAdminComponent implements OnInit {
     ],
     color: ['#9f78ff', '#fa626b', '#32cafe'],
   };
-
-  getBalanceInformationAdmin() {
-    this.walletService.getBalanceInformationAdmin().subscribe({
-      next: value => {
-        this.adminCommissions = value.data.totalCommissionsEarned;
-        this.totalMembers = value.data.enabledAffiliates;
-        this.calculatedCommissions = value.data.calculatedCommissions;
-        this.commissionsPaid = value.data.commissionsPaid;
-        this.walletProfit = value.data.walletProfit;
-        this.totalReverseBalance = value.data.totalReverseBalance;
-        this.initChartReport3();
-      },
-      error: err => {
-        console.log(err);
-      },
-    });
-  }
 
   getLastRegisteredUsers() {
     this.affiliateService.getLastRegisteredAffiliates().subscribe({
