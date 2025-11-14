@@ -3,7 +3,7 @@
   @include main-sidebar;
   left: 0;
   background: linear-gradient(180deg, #1a1a1a 0%, #0a0a0a 100%);
-  border-right: 1px solid rgba(212, 175, 55, 0.2);
+  border-right: none;
 }
 
 .main-sidebar,
@@ -720,7 +720,7 @@ body.layout-3 {
   padding: 20px 30px 20px 280px;
   margin-top: 40px;
   color: rgba(255, 255, 255, 0.9);
-  border-top: 1px solid rgba(255, 215, 0, 0.3);
+  border-top: none;
   display: flex;
   background: linear-gradient(
     135deg,
@@ -733,7 +733,7 @@ body.layout-3 {
   font-size: 11px;
   width: 100%;
   justify-content: space-between;
-  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5), 0 -1px 0 rgba(255, 215, 0, 0.2);
+  box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
 
   .footer-left {
     float: left;

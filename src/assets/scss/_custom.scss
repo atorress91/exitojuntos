@@ -6,4 +6,17 @@
  */
 body {
   font-family: 'Pangram', sans-serif;
+  background-color: #0a0a0a !important;
+  min-height: 100vh;
+}
+
+html {
+  background-color: #0a0a0a !important;
+}
+
+// Asegurar que todos los contenedores tengan el fondo oscuro
+* {
+  &:not(.btn):not(.badge):not(.alert):not(.modal-content):not(.dropdown-menu) {
+    background-color: transparent;
+  }
 }
